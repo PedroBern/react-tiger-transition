@@ -1,7 +1,7 @@
 {
   "name": "react-tiger-transition",
   "version": "1.0.0",
-  "description": "Painless transitions for react router!",
+  "description": "Ease transitions for react router!",
   "main": "lib/react-tiger-transition.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

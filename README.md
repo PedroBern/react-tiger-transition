@@ -1,6 +1,6 @@
 # react-tiger-transition
 
-Painless transitions for react router!
+Ease transitions for react router!
 
 ## Installation
 
