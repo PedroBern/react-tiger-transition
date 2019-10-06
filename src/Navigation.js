@@ -11,8 +11,8 @@ const NavigationProvider = withRouter(({
   children,
   defaultTransition,
   defaultRoute,
-  bodyClassName,
-  rootClassName,
+  disableBodyStyle,
+  disableRootStyle,
   rootNodeId,
 
   match,
@@ -31,13 +31,12 @@ const NavigationProvider = withRouter(({
   }
 
   useEffect(() => {
-    document.body.classList.add(bodyClassName);
-    document.getElementById(rootNodeId).classList.add(rootClassName);
-
-    return () => {
-      document.body.classList.remove(bodyClassName);
-      document.getElementById(rootNodeId).classList.remove(rootClassName);
-    };
+    if (!disableBodyStyle){
+      document.body.classList.add('react-tiger-transition--body');
+    }
+    if (!disableRootStyle){
+      document.getElementById(rootNodeId).classList.add('react-tiger-transition--root');
+    }
   }, []);
 
   const matched = useMemo(() => (
@@ -71,23 +70,47 @@ const Navigation = ({
 )
 
 Navigation.defaultProps = {
-  defaultTransition: () => fade({backgroundColor: 'white'}),
+  defaultTransition: fade,
   defaultRoute: <Redirect to='/' />,
-  bodyClassName: 'react-tiger-transition--body',
+  disableBodyStyle: false,
+  disableRootStyle: false,
   rootNodeId: 'root',
-  rootClassName: 'react-tiger-transition--root',
 };
 
 Navigation.propTypes = {
+  /**
+   *  Root node id, used to apply style to it.
+   */
+  rootNodeId: PropTypes.string,
+
+  /**
+   * Disable default style applied to body.
+   */
+  disableBodyStyle: PropTypes.bool,
+
+  /**
+   * Disable default style applied to root node.
+   */
+  disableRootStyle: PropTypes.bool,
+
+  /**
+   * The default transition to be consumed by every <Link /> component that
+   * transition prop is not specified. Good if you want the same transition for
+   * all routes, or most of them. Use string if you have your own css animation,
+   * or an object or function returning an object to be passed to <Transition />
+   * component from react-transition-group.
+   */
   defaultTransition: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
     PropTypes.func,
-  ]),
+  ]).isRequired,
+
+  /**
+   * A route that matches when all routes do not. Default is
+   * Redirect component from react-router-dom.
+   */
   defaultRoute: PropTypes.element,
-  bodyClassName: PropTypes.string,
-  rootNodeId: PropTypes.string,
-  rootClassName: PropTypes.string
 }
 
 export default Navigation

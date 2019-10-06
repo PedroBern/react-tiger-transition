@@ -2,15 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route as RouterRoute } from "react-router-dom";
 
+import { computeClassName } from './utils';
 import Transition from './Transition';
 
 const Route = ({
   children,
   timeout,
   className,
+  disableStyle,
   containerProps,
   ...other,
 }) => {
+
+  const _className = computeClassName(
+    disableStyle,
+    className,
+    'react-tiger-transition--route'
+  )
 
   return (
     <RouterRoute {...other}>
@@ -18,7 +26,7 @@ const Route = ({
         <Transition
           match={props.match}
           timeout={timeout}
-          className={className}
+          className={_className}
           containerProps={containerProps}
         >
           {children}
@@ -30,7 +38,7 @@ const Route = ({
 
 Route.defaultProps = {
   timeout: 600,
-  className: 'react-tiger-transition--route',
+  disableStyle: false,
 };
 
 Route.propTypes = {
@@ -42,16 +50,31 @@ Route.propTypes = {
     PropTypes.func,
     PropTypes.node,
   ]).isRequired,
+
   /**
-   *  Transition timeout in milliseconds. Used only on CSS transitions. If using an object or
-   *  a function for 'transition' prop from <Link />, should return the
+   *  Transition timeout in milliseconds. Used only on CSS transitions.
+   *  If using an object or a function for 'transition' prop from
+   *  <Link />, should return the
    *  timeout there.
    */
   timeout: PropTypes.number,
+
   /**
-   * Div container className.
+   *  Disable default styles applied to div container. You can
+   *  still use className to set your own styles.
    */
-  className: PropTypes.string,
+  disableStyle: PropTypes.bool,
+
+  /**
+   *  Div container className. A string or a function returning a string.
+   *  If not disableStyle, this className will be chained to
+   *  'react-tiger-transition--route'.
+   */
+   className: PropTypes.oneOfType([
+     PropTypes.string,
+     PropTypes.func,
+   ]),
+
   /**
    *  Props passed to div container.
    */

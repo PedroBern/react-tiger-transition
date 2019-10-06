@@ -1,25 +1,24 @@
 /**
-
-  Copy of the Original CSSTransition
-
-  https://github.com/reactjs/react-transition-group/blob/master/src/CSSTransition.js
-
-  The difference is it accepts 'css' bool prop
-  true: return CSSTransition
-  false: return Transition
-
-  Why?
-
-  In order to allow smooth back and forth between 'string' and 'object/function'
-  types for 'animation' prop of Link component, we need a single Transition
-  component to handle both cases. If we use something like:
-
-  string ? CSSTransition : Transition
-
-  Would not work because CSSTransition is child of Transition, inserting
-  one more node and breaking the Link animation cycle when changing from
-  string to object/function or vice versa.
-
+ *  Copy of the Original CSSTransition
+ *
+ *  https://github.com/reactjs/react-transition-group/blob/master/src/CSSTransition.js
+ *
+ *  The difference is it accepts 'css' bool prop
+ *  true: return CSSTransition
+ *  false: return Transition
+ *
+ *  Why?
+ *
+ *  In order to allow smooth back and forth between 'string' and 'object/function'
+ *  types for 'transition' prop of Link component, we need a single Transition
+ *  component to handle both cases. If we use something like:
+ *
+ *  string ? CSSTransition : Transition
+ *
+ *  Would not work because CSSTransition is child of Transition, inserting
+ *  one more node and breaking the Link animation cycle when changing from
+ *  string to object/function or vice versa.
+ *
  */
 
 import PropTypes from 'prop-types';
