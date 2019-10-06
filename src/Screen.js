@@ -1,23 +1,15 @@
 import React from 'react';
 
-import classNames from 'classnames';
-
-const Screen = React.forwardRef((props, ref) => {
-
-  const {
-    children,
-    className,
-    disableCSS,
-    ...other
-  } = props;
+const Screen = React.forwardRef(({
+  children,
+  className,
+  ...other
+}, ref) => {
 
   return (
     <div
       ref={ref}
-      className={classNames(
-        {'react-tiger-transition--screen': !disableCSS},
-        className
-      )}
+      className={className}
       {...other}
     >
       {children}
@@ -27,8 +19,7 @@ const Screen = React.forwardRef((props, ref) => {
 
 
 Screen.defaultProps = {
-  className: null,
-  disableCSS: false,
+  className: 'react-tiger-transition--screen',
 }
 
 export default Screen

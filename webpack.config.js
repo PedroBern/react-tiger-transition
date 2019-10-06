@@ -5,14 +5,14 @@ module.exports = {
     devtool: 'sourcemap',
 
     entry: {
-      "react-animated-navigation": path.join(src, 'index.js'),
+      "react-tiger-transition": path.join(src, 'index.js'),
     },
 
     output: {
       path: path.join(__dirname, 'lib'),
       filename: '[name].js',
       sourceMapFilename: '[name].map',
-      library: 'ReactAnimatedNavigation',
+      library: 'ReactTigerTransition',
       libraryTarget: 'umd',
     },
 
@@ -39,6 +39,14 @@ module.exports = {
             commonjs2: "react-router-dom",
             amd: "ReactRouterDOM",
             root: "ReactRouterDOM"
+        }
+      },
+      {
+        "react-transition-group": {
+            commonjs: "react-transition-group",
+            commonjs2: "react-transition-group",
+            amd: "ReactTransitionGroup",
+            root: "ReactTransitionGroup"
         }
       }
     ],
