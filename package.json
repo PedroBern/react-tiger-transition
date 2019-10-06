@@ -1,5 +1,5 @@
 {
-  "name": "react-animated-navigation",
+  "name": "react-tiger-transition",
   "version": "1.0.0",
   "description": "Painless transitions for react router!",
   "main": "lib/react-tiger-transition.js",
