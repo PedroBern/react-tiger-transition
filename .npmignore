@@ -1,3 +1,5 @@
 /.*
 example/
 /webpack.*
+.docz/
+docs/
