@@ -38,7 +38,7 @@ export const base = (
      enter,
      exit,
      ...args
-   }) => {
+   }={}) => {
 
     enter = {...enterInit, ...enter};
     exit = {...exitInit, ...exit};
