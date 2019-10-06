@@ -1,0 +1,509 @@
+{
+  "config": {
+    "title": "React Animated Navigation",
+    "description": "Animations between routes with react-router! Configuration is optional!",
+    "menu": [],
+    "version": "1.0.0",
+    "repository": "https://github.com/pedrobern/react-animated-navigation",
+    "native": false,
+    "codeSandbox": true,
+    "themeConfig": {},
+    "separator": "-"
+  },
+  "entries": [
+    {
+      "key": "docs/Link.mdx",
+      "value": {
+        "name": "Link",
+        "route": "/link",
+        "menu": "Components",
+        "id": "13cefbd16e1eb1227ad9acf06710f019",
+        "filepath": "docs/Link.mdx",
+        "link": "https://github.com/pedrobern/react-animated-navigation/edit/master/docs/Link.mdx",
+        "slug": "docs-link",
+        "headings": [
+          {
+            "slug": "link",
+            "depth": 1,
+            "value": "Link"
+          },
+          {
+            "slug": "props",
+            "depth": 2,
+            "value": "Props"
+          },
+          {
+            "slug": "usage",
+            "depth": 2,
+            "value": "Usage"
+          }
+        ]
+      }
+    },
+    {
+      "key": "docs/Route.mdx",
+      "value": {
+        "name": "Route",
+        "route": "/route",
+        "menu": "Components",
+        "id": "b0bc59479b3352176fc6e0147d9db4bd",
+        "filepath": "docs/Route.mdx",
+        "link": "https://github.com/pedrobern/react-animated-navigation/edit/master/docs/Route.mdx",
+        "slug": "docs-route",
+        "headings": [
+          {
+            "slug": "route",
+            "depth": 1,
+            "value": "Route"
+          },
+          {
+            "slug": "props",
+            "depth": 2,
+            "value": "Props"
+          },
+          {
+            "slug": "usage",
+            "depth": 2,
+            "value": "Usage"
+          }
+        ]
+      }
+    }
+  ],
+  "props": [
+    {
+      "key": "src/BoolCSSTransition.jsx",
+      "value": [
+        {
+          "description": "",
+          "displayName": "BoolCSSTransition",
+          "methods": [
+            {
+              "name": "onEnter",
+              "docblock": null,
+              "modifiers": [],
+              "params": [
+                {
+                  "name": "node",
+                  "type": null
+                },
+                {
+                  "name": "appearing",
+                  "type": null
+                }
+              ],
+              "returns": null
+            },
+            {
+              "name": "onEntering",
+              "docblock": null,
+              "modifiers": [],
+              "params": [
+                {
+                  "name": "node",
+                  "type": null
+                },
+                {
+                  "name": "appearing",
+                  "type": null
+                }
+              ],
+              "returns": null
+            },
+            {
+              "name": "onEntered",
+              "docblock": null,
+              "modifiers": [],
+              "params": [
+                {
+                  "name": "node",
+                  "type": null
+                },
+                {
+                  "name": "appearing",
+                  "type": null
+                }
+              ],
+              "returns": null
+            },
+            {
+              "name": "onExit",
+              "docblock": null,
+              "modifiers": [],
+              "params": [
+                {
+                  "name": "node",
+                  "type": null
+                }
+              ],
+              "returns": null
+            },
+            {
+              "name": "onExiting",
+              "docblock": null,
+              "modifiers": [],
+              "params": [
+                {
+                  "name": "node",
+                  "type": null
+                }
+              ],
+              "returns": null
+            },
+            {
+              "name": "onExited",
+              "docblock": null,
+              "modifiers": [],
+              "params": [
+                {
+                  "name": "node",
+                  "type": null
+                }
+              ],
+              "returns": null
+            },
+            {
+              "name": "getClassNames",
+              "docblock": null,
+              "modifiers": [],
+              "params": [
+                {
+                  "name": "type",
+                  "type": null
+                }
+              ],
+              "returns": null
+            },
+            {
+              "name": "addClass",
+              "docblock": null,
+              "modifiers": [],
+              "params": [
+                {
+                  "name": "node",
+                  "type": null
+                },
+                {
+                  "name": "type",
+                  "type": null
+                },
+                {
+                  "name": "phase",
+                  "type": null
+                }
+              ],
+              "returns": null
+            },
+            {
+              "name": "removeClasses",
+              "docblock": null,
+              "modifiers": [],
+              "params": [
+                {
+                  "name": "node",
+                  "type": null
+                },
+                {
+                  "name": "type",
+                  "type": null
+                }
+              ],
+              "returns": null
+            }
+          ],
+          "actualName": "BoolCSSTransition",
+          "props": {
+            "onEnter": {
+              "type": {
+                "name": "func"
+              },
+              "required": false,
+              "description": ""
+            },
+            "onEntering": {
+              "type": {
+                "name": "func"
+              },
+              "required": false,
+              "description": ""
+            },
+            "onEntered": {
+              "type": {
+                "name": "func"
+              },
+              "required": false,
+              "description": ""
+            },
+            "onExit": {
+              "type": {
+                "name": "func"
+              },
+              "required": false,
+              "description": ""
+            },
+            "onExiting": {
+              "type": {
+                "name": "func"
+              },
+              "required": false,
+              "description": ""
+            },
+            "onExited": {
+              "type": {
+                "name": "func"
+              },
+              "required": false,
+              "description": ""
+            },
+            "css": {
+              "type": {
+                "name": "bool"
+              },
+              "required": false,
+              "description": "",
+              "defaultValue": {
+                "value": "false",
+                "computed": false
+              }
+            }
+          },
+          "composes": [
+            "react-transition-group"
+          ]
+        }
+      ]
+    },
+    {
+      "key": "src/Link.js",
+      "value": [
+        {
+          "description": "",
+          "methods": [],
+          "actualName": "",
+          "props": {
+            "transition": {
+              "type": {
+                "name": "union",
+                "value": [
+                  {
+                    "name": "string"
+                  },
+                  {
+                    "name": "object"
+                  },
+                  {
+                    "name": "func"
+                  }
+                ]
+              },
+              "required": false,
+              "description": "Transition/animation to be applied when changing route.\nString if using CSS animations.\nObject or a function returning an object with props to be\npassed to <Transition /> component from react-transition-group.\nDefault value comes from context, defined in <Navigation /> component."
+            },
+            "onClick": {
+              "type": {
+                "name": "func"
+              },
+              "required": false,
+              "description": "Function fired on link click."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "src/Navigation.js",
+      "value": [
+        {
+          "description": "",
+          "displayName": "Navigation",
+          "methods": [],
+          "actualName": "Navigation",
+          "props": {
+            "defaultTransition": {
+              "type": {
+                "name": "union",
+                "value": [
+                  {
+                    "name": "string"
+                  },
+                  {
+                    "name": "object"
+                  },
+                  {
+                    "name": "func"
+                  }
+                ]
+              },
+              "required": false,
+              "description": "",
+              "defaultValue": {
+                "value": "() => fade({backgroundColor: 'white'})",
+                "computed": false
+              }
+            },
+            "defaultRoute": {
+              "type": {
+                "name": "element"
+              },
+              "required": false,
+              "description": "",
+              "defaultValue": {
+                "value": "<Redirect to='/' />",
+                "computed": false
+              }
+            },
+            "bodyClassName": {
+              "type": {
+                "name": "string"
+              },
+              "required": false,
+              "description": "",
+              "defaultValue": {
+                "value": "'react-tiger-transition--body'",
+                "computed": false
+              }
+            },
+            "rootNodeId": {
+              "type": {
+                "name": "string"
+              },
+              "required": false,
+              "description": "",
+              "defaultValue": {
+                "value": "'root'",
+                "computed": false
+              }
+            },
+            "rootClassName": {
+              "type": {
+                "name": "string"
+              },
+              "required": false,
+              "description": "",
+              "defaultValue": {
+                "value": "'react-tiger-transition--root'",
+                "computed": false
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "src/Route.js",
+      "value": [
+        {
+          "description": "",
+          "displayName": "Route",
+          "methods": [],
+          "actualName": "Route",
+          "props": {
+            "children": {
+              "type": {
+                "name": "union",
+                "value": [
+                  {
+                    "name": "func"
+                  },
+                  {
+                    "name": "node"
+                  }
+                ]
+              },
+              "required": true,
+              "description": "Propably your 'page' component. I recommend you to use <Screen />\n to wrap your pages."
+            },
+            "timeout": {
+              "type": {
+                "name": "number"
+              },
+              "required": false,
+              "description": "Transition timeout in milliseconds. Used only on CSS transitions. If using an object or\n a function for 'transition' prop from <Link />, should return the\n timeout there.",
+              "defaultValue": {
+                "value": "600",
+                "computed": false
+              }
+            },
+            "className": {
+              "type": {
+                "name": "string"
+              },
+              "required": false,
+              "description": "Div container className.",
+              "defaultValue": {
+                "value": "'react-tiger-transition--route'",
+                "computed": false
+              }
+            },
+            "containerProps": {
+              "type": {
+                "name": "object"
+              },
+              "required": false,
+              "description": "Props passed to div container."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "src/Screen.js",
+      "value": [
+        {
+          "description": "",
+          "methods": [],
+          "actualName": "",
+          "props": {
+            "className": {
+              "defaultValue": {
+                "value": "null",
+                "computed": false
+              },
+              "required": false
+            },
+            "disableCSS": {
+              "defaultValue": {
+                "value": "false",
+                "computed": false
+              },
+              "required": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "key": "src/Transition.js",
+      "value": [
+        {
+          "description": "",
+          "displayName": "Transition",
+          "methods": [],
+          "actualName": "Transition"
+        }
+      ]
+    },
+    {
+      "key": "example/src/pages/PageA.jsx",
+      "value": [
+        {
+          "description": "",
+          "displayName": "PageA",
+          "methods": [],
+          "actualName": "PageA"
+        }
+      ]
+    },
+    {
+      "key": "example/src/pages/PageB.jsx",
+      "value": [
+        {
+          "description": "",
+          "displayName": "PageB",
+          "methods": [],
+          "actualName": "PageB"
+        }
+      ]
+    }
+  ]
+}
