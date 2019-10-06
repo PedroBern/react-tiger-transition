@@ -1,0 +1,54 @@
+{
+  "name": "react-animated-navigation",
+  "version": "1.0.0",
+  "description": "Animations between routes with react-router! Configuration is optional!",
+  "main": "lib/react-animated-navigation.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode=production",
+    "prepublish": "rm -rf ./lib && npm run build",
+    "docz:dev": "docz dev",
+    "docz:build": "docz build"
+  },
+  "author": "Pedro Bernardino Alves Moreira",
+  "homepage": "https://github.com/pedrobern/react-animated-navigation",
+  "bugs": {
+    "url": "https://github.com/pedrobern/react-animated-navigation/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pedrobern/react-animated-navigation.git"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.6.0",
+    "@babel/core": "^7.6.0",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.6.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
+    "docz": "^1.3.2",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-router-dom": "^5.0.1",
+    "react-transition-group": "^4.3.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.1"
+  },
+  "peerDependencies": {
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-router-dom": "^5.0.1",
+    "react-transition-group": "^4.3.0"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "docz-theme-default": "^1.2.0"
+  }
+}
