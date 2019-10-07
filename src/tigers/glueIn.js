@@ -17,7 +17,7 @@ export const glueIn = base(
     fillMode: 'both',
     angle: 15,
     depth: 200,
-    delay: 200,
+    delay: 0,
   },
   glueInRules,
 

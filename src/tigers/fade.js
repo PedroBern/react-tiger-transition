@@ -10,8 +10,8 @@ export const fade = base(
   // enter
   {
     duration: 700,
-    easing: 'ease',
-    opacity: 0,
+    easing: 'ease-out',
+    opacity: 0.3,
     zIndex: 2,
     fillMode: 'both',
     delay: 0,
@@ -21,8 +21,8 @@ export const fade = base(
   // exit
   {
     duration: 700,
-    easing: 'ease',
-    opacity: 0,
+    easing: 'ease-out',
+    opacity: 0.3,
     zIndex: 1,
     fillMode: 'both',
   },
