@@ -20,6 +20,7 @@ export const baseIn = ({
       removeClass(node, className)
       rules.style.remove();
       rules.animation.remove()
+      if (isAppearing && replaceBackground) replaceBackground.original();
     },
 })
 

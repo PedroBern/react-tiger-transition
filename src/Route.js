@@ -11,6 +11,7 @@ const Route = ({
   className,
   disableStyle,
   containerProps,
+  transitionProps,
   ...other,
 }) => {
 
@@ -28,6 +29,7 @@ const Route = ({
           timeout={timeout}
           className={_className}
           containerProps={containerProps}
+          transitionProps={transitionProps}
         >
           {children}
         </Transition>
@@ -74,6 +76,14 @@ Route.propTypes = {
      PropTypes.string,
      PropTypes.func,
    ]),
+
+ /**
+  *  Props passed to <Transition /> or <CSSTransition /> from
+  *  react-transition-group. Usually you don't need to worry about this.
+  *  If you pass appear=true, the appearing animation is the default one defined
+  *  in <Navigation />
+  */
+ transitionProps: PropTypes.object,
 
   /**
    *  Props passed to div container.
