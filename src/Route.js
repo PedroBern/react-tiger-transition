@@ -81,7 +81,8 @@ Route.propTypes = {
   *  Props passed to <Transition /> or <CSSTransition /> from
   *  react-transition-group. Usually you don't need to worry about this.
   *  If you pass appear=true, the appearing animation is the default one defined
-  *  in <Navigation />
+  *  in <Navigation />. Props defined here have higher priority than
+  *  globalTransitionProps defined in <Navigation />.
   */
  transitionProps: PropTypes.object,
 

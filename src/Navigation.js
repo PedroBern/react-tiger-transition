@@ -10,6 +10,7 @@ export const NavigationContext = React.createContext();
 const NavigationProvider = withRouter(({
   children,
   defaultTransition,
+  globalTransitionProps,
   defaultRoute,
   disableBodyStyle,
   disableRootStyle,
@@ -27,7 +28,8 @@ const NavigationProvider = withRouter(({
     setTransition: string => new Promise(function(resolve, reject) {
         resolve(setTransition(string))
     }),
-    defaultTransition: defaultTransition
+    defaultTransition: defaultTransition,
+    globalTransitionProps: globalTransitionProps,
   }
 
   useEffect(() => {
@@ -75,6 +77,7 @@ Navigation.defaultProps = {
   disableBodyStyle: false,
   disableRootStyle: false,
   rootNodeId: 'root',
+  globalTransitionProps: {}
 };
 
 Navigation.propTypes = {
@@ -105,6 +108,14 @@ Navigation.propTypes = {
     PropTypes.object,
     PropTypes.func,
   ]).isRequired,
+
+  /**
+   *  Props passed to <Transition /> or <CSSTransition /> from
+   *  react-transition-group. Usually you don't need to worry about this.
+   *  If you pass appear=true, the appearing animation is the defaultTransition
+   *  prop.
+   */
+  globalTransitionProps: PropTypes.object,
 
   /**
    * A route that matches when all routes do not. Default is

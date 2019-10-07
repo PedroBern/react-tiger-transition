@@ -9,9 +9,10 @@ const Transition = ({
   match,
   className,
   containerProps,
+  transitionProps
 }) => {
 
-  const { transition } = useContext(NavigationContext)
+  const { transition, globalTransitionProps } = useContext(NavigationContext)
 
   let css = false;
   let props = {};
@@ -35,6 +36,8 @@ const Transition = ({
       unmountOnExit
       css={css}
       {...props}
+      {...globalTransitionProps}
+      {...transitionProps}
     >
       <div className={className} {...containerProps}>
         {children}
