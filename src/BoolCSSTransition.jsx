@@ -33,7 +33,10 @@ import {
 const addClass = (node, classes) => node && classes && classes.split(' ').forEach(c => addOneClass(node, c));
 const removeClass = (node, classes) => node && classes && classes.split(' ').forEach(c => removeOneClass(node, c));
 
-
+/**
+ * @docIgnore
+ *
+ */
 class BoolCSSTransition extends React.Component {
 
   appliedClasses = {

@@ -3,6 +3,10 @@ import React, {useContext} from 'react';
 import BoolCSSTransition from './BoolCSSTransition'
 import { NavigationContext } from './Navigation';
 
+/**
+ * @docIgnore
+ *
+ */
 const Transition = ({
   children,
   timeout,

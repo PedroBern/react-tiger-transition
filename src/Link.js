@@ -3,9 +3,32 @@ import PropTypes from 'prop-types';
 import {Link as RouterLink} from "react-router-dom";
 
 import { NavigationContext } from './Navigation';
+
 /**
+ * @description
+ * Change transitions on the fly.
  *
- * Link desc
+ * @afterProps
+ * \*Ref and other props are passed to [react router `<Link />`](https://reacttraining.com/react-router/web/api/Link).
+ *
+ * @example
+ * import { Link, glide } from "react-tiger-transition";
+ *
+ * <Link to='/a' transition={glide}>
+ *   A
+ * </Link>
+ *
+ * <Link to='/b' transition={() => glide({...args})}>
+ *   B
+ * </Link>
+ *
+ * <Link to='/c' transition='my-css-animation'>
+ *   C
+ * </Link>
+ *
+ * @footer
+ * \*Refer to [transitions API](transitions), for more details about transitions.
+ *
  */
 const Link = React.forwardRef(({
   transition,
@@ -35,8 +58,8 @@ Link.propTypes = {
    * Transition/animation to be applied when changing route.
    * String if using CSS animations.
    * Object or a function returning an object with props to be
-   * passed to <Transition /> component from react-transition-group.
-   * Default value comes from context, defined in <Navigation /> component.
+   * passed to `<Transition />` component from react-transition-group.
+   * Default value comes from context, defined in `<Navigation />` component.
    */
   transition: PropTypes.oneOfType([
     PropTypes.string,
