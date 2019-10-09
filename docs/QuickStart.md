@@ -50,59 +50,66 @@ const screenStyle = {
   justifyContent: 'center',
 }
 
-const App = () => (
+const App = () => {
 
-  <Router>{/* BrowserRouter from react-router-dom */}
+  // you will need to set the height of  <Navigation /> wrapper,
+  // in this case, it is the root node,
+  // you'd probably want to do this on a different way.
+  document.getElementById('root').style.height = '100%';
 
-    {/* Context provider for transitions */}
-    <Navigation>
+  return (
+    <Router>{/* BrowserRouter from react-router-dom */}
 
-        {/* Use Route the same way you use
-            react-router Route with children */}
-        <Route exact path="/" >
+      {/* Context provider for transitions */}
+      <Navigation>
 
-          {/* Screen is just a div container
-              with some basic style */}
-          <Screen
-            style={{
-              backgroundColor: '#4EDC9F',
-              ...screenStyle
-            }}
-          >
+          {/* Use Route the same way you use
+              react-router Route with children */}
+          <Route exact path="/" >
 
-            {/* Use Link the same way you use
-                react-router Link, but
-                add transition */}
-            <Link
-              to='/a'
-              transition={glide}
-              style={{...linkStyle}}
+            {/* Screen is just a div container
+                with some basic style */}
+            <Screen
+              style={{
+                backgroundColor: '#4EDC9F',
+                ...screenStyle
+              }}
             >
-              Check out the page A
-            </Link>
-          </Screen>
-        </Route>
 
-        <Route exact path="/a" >
-          <Screen
-            style={{
-              backgroundColor: '#D4429F',
-              ...screenStyle
-            }}
-          >
-            <Link
-              to='/'
-              transition={() => glide({direction: 'right'})}
-              style={{...linkStyle}}
+              {/* Use Link the same way you use
+                  react-router Link, but
+                  add transition */}
+              <Link
+                to='/a'
+                transition={glide}
+                style={{...linkStyle}}
+              >
+                Check out the page A
+              </Link>
+            </Screen>
+          </Route>
+
+          <Route exact path="/a" >
+            <Screen
+              style={{
+                backgroundColor: '#D4429F',
+                ...screenStyle
+              }}
             >
-              Back to home page
-            </Link>
-          </Screen>
-        </Route>
+              <Link
+                to='/'
+                transition={() => glide({direction: 'right'})}
+                style={{...linkStyle}}
+              >
+                Back to home page
+              </Link>
+            </Screen>
+          </Route>
 
-    </Navigation>
-  </Router>
-);
+      </Navigation>
+    </Router>
+  );
+};
 
 ReactDOM.render(<App />, document.getElementById('root'))
 
