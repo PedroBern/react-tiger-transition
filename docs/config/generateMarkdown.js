@@ -4,17 +4,8 @@
  *
  */
 
-function stringOfLength(string, length) {
-  let newString = '';
-  for (let i = 0; i < length; i++) {
-    newString += string;
-  }
-  return newString;
-}
-
 function generateTitle(name) {
   const title = '# ' + name ;
-  // return title + '\n' + stringOfLength('=', title.length) + '\n';
   return title + '\n';
 }
 
@@ -62,10 +53,6 @@ function generateProp(propName, prop) {
 function generateProps(props) {
   if (!props) return '\n';
   const title = '## Props';
-
-  // stringOfLength('-', title.length) +
-  // '\n' +
-
   return (
     title +
     '\n' +
@@ -87,8 +74,6 @@ function generateExample(example) {
   if (!example) return '';
   else {
     const title = '## Example';
-    // stringOfLength('-', title.length) +
-    // '\n' +
     return (
       title +
       '\n' +

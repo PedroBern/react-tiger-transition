@@ -56,13 +56,6 @@ function addDesriptionTags(api) {
 function buildDocs(api) {
   api = addDesriptionTags(api);
   for (var filepath in api) {
-    // console.log('\n');
-    // console.log('\n');
-    // console.log('\n');
-    // console.log('\n');
-    // console.log(filepath);
-    // console.log(api[filepath].docTags);
-
     if (api[filepath].description.indexOf('@docIgnore') === -1){
       var name = getComponentName(filepath);
       var markdown = generateMarkdown(name, api[filepath]);
