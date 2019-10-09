@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { withRouter, matchPath, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import { computeClassName } from './utils';
 import { fade } from './tigers';
 
 export const NavigationContext = React.createContext();
@@ -12,8 +13,6 @@ const NavigationProvider = withRouter(({
   globalTransitionProps,
   defaultRoute,
   disableBodyStyle,
-  disableRootStyle,
-  rootNodeId,
 
   match,
   location,
@@ -34,9 +33,6 @@ const NavigationProvider = withRouter(({
   useEffect(() => {
     if (!disableBodyStyle){
       document.body.classList.add('react-tiger-transition--body');
-    }
-    if (!disableRootStyle){
-      document.getElementById(rootNodeId).classList.add('react-tiger-transition--root');
     }
   }, []);
 
@@ -112,37 +108,54 @@ const NavigationProvider = withRouter(({
  */
 const Navigation = ({
   children,
+  className,
+  disableStyle,
   ...other,
-}) => (
-  <NavigationProvider {...other}>
-    {children}
-  </NavigationProvider>
-)
+}) => {
+
+  const _className = computeClassName(
+    disableStyle,
+    className,
+    'react-tiger-transition--container'
+  )
+
+  return (
+    <div className={_className}>
+      <NavigationProvider {...other}>
+          {children}
+      </NavigationProvider>
+    </div>
+  )
+}
 
 Navigation.defaultProps = {
   defaultTransition: fade,
   defaultRoute: <Redirect to='/' />,
   disableBodyStyle: false,
-  disableRootStyle: false,
-  rootNodeId: 'root',
+  disableStyle: false,
   globalTransitionProps: {}
 };
 
 Navigation.propTypes = {
-  /**
-   *  Root node id, used to apply style to it.
-   */
-  rootNodeId: PropTypes.string,
-
   /**
    * Disable default style applied to body.
    */
   disableBodyStyle: PropTypes.bool,
 
   /**
-   * Disable default style applied to root node.
+   * Disable default style applied to container.
    */
-  disableRootStyle: PropTypes.bool,
+  disableStyle: PropTypes.bool,
+
+  /**
+   * Div container className. A string or a function returning a string.
+   * If not disableStyle, this className will be chained to
+   * 'react-tiger-transition--container'.
+   */
+   className: PropTypes.oneOfType([
+     PropTypes.string,
+     PropTypes.func,
+   ]),
 
   /**
    * The default transition to be consumed by every `<Link />` component that
