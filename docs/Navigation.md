@@ -1,17 +1,19 @@
 # Navigation
 
-Route uses the original
-[react-router `<Route />`](https://reacttraining.com/react-router/web/api/Route).
-It wraps the children with a transition component based on
-`<Transition />` and `<CSSTransition />` from
-[react-transition-group](https://github.com/reactjs/react-transition-group).
-
-Must be used inside [`<Navigation />`](/navigation) to consume context.
-
-Comes with some default css class that you can disable or chain with
-your custom classes.
+The context provider for `<Link />`. Allow link to change transition on
+click, before the routing. This makes possible to build as many different
+transitions for the same route as possible, all evaluated on the fly.
 
 ## Props
+### `className`
+
+Div container className. A string or a function returning a string.
+If not disableStyle, this className will be chained to
+'react-tiger-transition--container'.
+
+type: `union(string|func)`
+
+
 ### `defaultRoute`
 
 A route that matches when all routes do not. Default is
@@ -41,9 +43,9 @@ type: `bool`
 defaultValue: `false`
 
 
-### `disableRootStyle`
+### `disableStyle`
 
-Disable default style applied to root node.
+Disable default style applied to container.
 
 type: `bool`
 defaultValue: `false`
@@ -61,21 +63,13 @@ type: `object`
 defaultValue: `{}`
 
 
-### `rootNodeId`
-
-Root node id, used to apply style to it.
-
-type: `string`
-defaultValue: `'root'`
-
-
 
 ## Example
 ```javascript
 import { BrowserRouter as Router} from "react-router-dom";
 
 import {
-  Navigation, // Route needs context from Navigation
+  Navigation,
   Route,
   Screen,
   Link,
@@ -85,17 +79,11 @@ import {
 import "react-tiger-transition/style.css";
 
 ...
-<div id='root'>
+<div id='root' style={{height: '100vh'}}>
   <Router>
     <Navigation>
-      <Route exact path="/a" >
-        <Screen>
-          ... my page component goes here ...
-          ... here is where I use <Link /> ...
-        </Screen>
-      </Route>
 
-      ... more routes ...
+      ... my routes ...
 
     </Navigation>
   </Router>
@@ -103,4 +91,3 @@ import "react-tiger-transition/style.css";
 ...
 ```
 
-\*Refer to [transitions API](transitions), for more details about transitions.

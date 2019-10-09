@@ -60,22 +60,15 @@ const NavigationProvider = withRouter(({
 /**
  *
  * @description
- * Route uses the original
- * [react-router `<Route />`](https://reacttraining.com/react-router/web/api/Route).
- * It wraps the children with a transition component based on
- * `<Transition />` and `<CSSTransition />` from
- * [react-transition-group](https://github.com/reactjs/react-transition-group).
- *
- * Must be used inside [`<Navigation />`](/navigation) to consume context.
- *
- * Comes with some default css class that you can disable or chain with
- * your custom classes.
+ * The context provider for `<Link />`. Allow link to change transition on
+ * click, before the routing. This makes possible to build as many different
+ * transitions for the same route as possible, all evaluated on the fly.
  *
  * @example
  * import { BrowserRouter as Router} from "react-router-dom";
  *
  * import {
- *   Navigation, // Route needs context from Navigation
+ *   Navigation,
  *   Route,
  *   Screen,
  *   Link,
@@ -85,25 +78,17 @@ const NavigationProvider = withRouter(({
  * import "react-tiger-transition/style.css";
  *
  * ...
- * <div id='root'>
+ * <div id='root' style={{height: '100vh'}}>
  *   <Router>
  *     <Navigation>
- *       <Route exact path="/a" >
- *         <Screen>
- *           ... my page component goes here ...
- *           ... here is where I use <Link /> ...
- *         </Screen>
- *       </Route>
  *
- *       ... more routes ...
+ *       ... my routes ...
  *
  *     </Navigation>
  *   </Router>
  * </div>
  * ...
  *
- * @footer
- * \*Refer to [transitions API](transitions), for more details about transitions.
  *
  */
 const Navigation = ({

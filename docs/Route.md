@@ -6,7 +6,8 @@ It wraps the children with a transition component based on
 `<Transition />` and `<CSSTransition />` from
 [react-transition-group](https://github.com/reactjs/react-transition-group).
 
-Must be used inside [`<Navigation />`](/navigation) to consume context.
+Must be used inside [`<Navigation />`](/navigation) to allow [`<Link />`](/link)
+to consume context.
 
 Comes with some default css class that you can disable or chain with
 your custom classes.
