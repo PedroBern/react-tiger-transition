@@ -5,8 +5,8 @@ import { computeClassName } from './utils';
 
 /**
  * @description
- * Div container for your pages. Designed to be child of `<Route />`, but
- * you can always use your own page component wrapper.
+ * A div with some default css applied to it. Designed to be child of `routes`,
+ * or parent if passed the `container` prop.
  *
  * @afterProps
  * \*Ref and other props are passed to div container.
@@ -23,13 +23,14 @@ const Screen = React.forwardRef(({
   children,
   className,
   disableStyle,
+  container,
   ...other
 }, ref) => {
 
   const _className = computeClassName(
     disableStyle,
     className,
-    'react-tiger-transition--screen'
+    `react-tiger-transition--${container ? 'container' : 'screen'}`
   )
 
   return (
@@ -46,9 +47,16 @@ const Screen = React.forwardRef(({
 
 Screen.defaultProps = {
   disableStyle: false,
+  container: false,
 }
 
 Screen.propTypes = {
+  /**
+   * Transform it into a container to wrap routes. `<Navigation />` already
+   * does that, but maybe you want it to create an extra container.
+   */
+  container: PropTypes.bool,
+
   /**
    * Disable default styles applied to div container. You can
    * still use className to set your own styles.
