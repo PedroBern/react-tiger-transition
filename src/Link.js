@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import {Link as RouterLink, withRouter} from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 import { NavigationContext } from './Navigation';
+
+import { withRouterAndRef } from './utils';
 
 /**
  * @description
@@ -83,4 +85,4 @@ Link.propTypes = {
   onClick: PropTypes.func,
 }
 
-export default withRouter(Link)
+export default withRouterAndRef(Link)
