@@ -66,13 +66,14 @@ const Route = ({
   transitionProps,
   screen,
   screenProps,
+  fixed,
   ...other,
 }) => {
 
   const _className = computeClassName(
     disableStyle,
     className,
-    'react-tiger-transition--route'
+    `react-tiger-transition--${fixed ? 'fixed' : 'route'}`
   )
 
   return (
@@ -104,6 +105,7 @@ Route.defaultProps = {
   disableStyle: false,
   screen: false,
   screenProps: {},
+  fixed: false,
 };
 
 Route.propTypes = {
@@ -129,6 +131,14 @@ Route.propTypes = {
    * still use className to set your own styles.
    */
   disableStyle: PropTypes.bool,
+
+  /**
+   * In case you want a route to render only a component, like appbars, footers,
+   * etc, propably will be the case of keeping the component while transitioning
+   * the page. `fixed` does that. **You will need to set absolute positioning and
+   * height on your own**.
+   */
+  fixed: PropTypes.bool,
 
  /**
   * Div container className. A string or a function returning a string.

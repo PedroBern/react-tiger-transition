@@ -6,6 +6,8 @@ import { computeClassName } from './utils';
 import { fade } from './tigers';
 import Screen from './Screen';
 
+import './style.css';
+
 export const NavigationContext = React.createContext();
 
 const NavigationProvider = withRouter(({
