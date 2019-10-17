@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import {Link as RouterLink} from "react-router-dom";
+import {Link as RouterLink, withRouter} from "react-router-dom";
 
 import { NavigationContext } from './Navigation';
 
@@ -31,13 +31,23 @@ import { NavigationContext } from './Navigation';
  *
  */
 const Link = React.forwardRef(({
+  match,
+  location,
+  history,
+  staticContext,
+
   transition,
   children,
   onClick,
+  to,
   ...other,
 },ref) => {
 
-  const { setTransition, defaultTransition } = useContext(NavigationContext)
+  const {
+    setTransition,
+    defaultTransition,
+    onTransition
+  } = useContext(NavigationContext)
 
   return (
     <RouterLink
@@ -46,6 +56,7 @@ const Link = React.forwardRef(({
         if (typeof onClick === 'function') onClick();
       }}
       ref={ref}
+      to={onTransition ? location.pathname : to}
       {...other}
     >
       {children}
@@ -72,4 +83,4 @@ Link.propTypes = {
   onClick: PropTypes.func,
 }
 
-export default Link
+export default withRouter(Link)

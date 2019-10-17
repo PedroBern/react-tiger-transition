@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import { computeClassName } from './utils';
 import { fade } from './tigers';
+import Screen from './Screen';
 
 export const NavigationContext = React.createContext();
 
@@ -19,22 +20,20 @@ const NavigationProvider = withRouter(({
   history,
 }) => {
 
-  const [transition, setTransition] = useState(defaultTransition)
+  const [transition, setTransition] = useState(defaultTransition);
+
+  const [onTransition, setOnTransition] = useState(false);
 
   const context = {
     transition: transition,
-    setTransition: string => new Promise(function(resolve, reject) {
-        resolve(setTransition(string))
+    setTransition: tiger => new Promise(function(resolve, reject) {
+      resolve(setTransition(tiger), setOnTransition(true))
     }),
     defaultTransition: defaultTransition,
     globalTransitionProps: globalTransitionProps,
+    onTransition: onTransition,
+    setOnTransition: setOnTransition,
   }
-
-  useEffect(() => {
-    if (!disableBodyStyle){
-      document.body.classList.add('react-tiger-transition--body');
-    }
-  }, []);
 
   const matched = useMemo(() => (
     children.some((child, i) => {
@@ -93,54 +92,27 @@ const NavigationProvider = withRouter(({
  */
 const Navigation = ({
   children,
-  className,
-  disableStyle,
+  containerProps,
   ...other,
-}) => {
-
-  const _className = computeClassName(
-    disableStyle,
-    className,
-    'react-tiger-transition--container'
-  )
-
-  return (
-    <div className={_className}>
-      <NavigationProvider {...other}>
-          {children}
-      </NavigationProvider>
-    </div>
-  )
-}
+}) => (
+  <Screen container {...containerProps}>
+    <NavigationProvider {...other}>
+        {children}
+    </NavigationProvider>
+  </Screen>
+)
 
 Navigation.defaultProps = {
   defaultTransition: fade,
   defaultRoute: <Redirect to='/' />,
-  disableBodyStyle: false,
-  disableStyle: false,
   globalTransitionProps: {}
 };
 
 Navigation.propTypes = {
   /**
-   * Disable default style applied to body.
+   * Props passed to `<Screen container />` (that wraps the routes).
    */
-  disableBodyStyle: PropTypes.bool,
-
-  /**
-   * Disable default style applied to container.
-   */
-  disableStyle: PropTypes.bool,
-
-  /**
-   * Div container className. A string or a function returning a string.
-   * If not disableStyle, this className will be chained to
-   * 'react-tiger-transition--container'.
-   */
-   className: PropTypes.oneOfType([
-     PropTypes.string,
-     PropTypes.func,
-   ]),
+   containerProps: PropTypes.object,
 
   /**
    * The default transition to be consumed by every `<Link />` component that

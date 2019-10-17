@@ -16,7 +16,12 @@ const Transition = ({
   transitionProps
 }) => {
 
-  const { transition, globalTransitionProps } = useContext(NavigationContext)
+  const {
+    transition,
+    globalTransitionProps,
+    setOnTransition,
+    onTransition
+  } = useContext(NavigationContext)
 
   let css = false;
   let props = {};
@@ -31,6 +36,10 @@ const Transition = ({
   }
   else if (typeof(transition) === 'function'){
     props = {...transition()}
+  }
+
+  if (onTransition) {
+    window.setTimeout(() => setOnTransition(false), props.timeout);
   }
 
   return (
