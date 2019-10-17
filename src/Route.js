@@ -4,6 +4,7 @@ import { Route as RouterRoute } from "react-router-dom";
 
 import { computeClassName } from './utils';
 import Transition from './Transition';
+import Screen from './Screen';
 
 /**
  *
@@ -16,7 +17,7 @@ import Transition from './Transition';
  *
  * Must be used inside [`<Navigation />`](/navigation) to allow [`<Link />`](/link)
  * to consume context.
- * 
+ *
  * Comes with some default css class that you can disable or chain with
  * your custom classes.
  *
@@ -63,6 +64,8 @@ const Route = ({
   disableStyle,
   containerProps,
   transitionProps,
+  screen,
+  screenProps,
   ...other,
 }) => {
 
@@ -82,7 +85,14 @@ const Route = ({
           containerProps={containerProps}
           transitionProps={transitionProps}
         >
-          {children}
+          {
+            screen ?
+            <Screen {...screenProps}>
+              {children}
+            </Screen>
+            :
+            children
+          }
         </Transition>
       )}
     </RouterRoute>
@@ -92,6 +102,8 @@ const Route = ({
 Route.defaultProps = {
   timeout: 600,
   disableStyle: false,
+  screen: false,
+  screenProps: {},
 };
 
 Route.propTypes = {
@@ -118,15 +130,25 @@ Route.propTypes = {
    */
   disableStyle: PropTypes.bool,
 
-  /**
-   * Div container className. A string or a function returning a string.
-   * If not disableStyle, this className will be chained to
-   * 'react-tiger-transition--route'.
-   */
-   className: PropTypes.oneOfType([
-     PropTypes.string,
-     PropTypes.func,
-   ]),
+ /**
+  * Div container className. A string or a function returning a string.
+  * If not disableStyle, this className will be chained to
+  * 'react-tiger-transition--route'.
+  */
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func,
+  ]),
+
+ /**
+  * Autimatically wraps route child with `<Screen />`.
+  */
+  screen: PropTypes.bool,
+
+ /**
+  * If `screen` prop is true, you can pass props to it.
+  */
+  screenProps: PropTypes.object,
 
  /**
   * Props passed to `<Transition />` or `<CSSTransition />` from
