@@ -1,9 +1,8 @@
-.react-tiger-transition--body {
-  overflow: hidden;
-  margin: 0px;
-  padding: 0px;
-  background-color: #282c34;
-  height: 100vh;
+body {
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px;
+	background-color: black;
 }
 
 .react-tiger-transition--container {
