@@ -1,0 +1,11 @@
+#root {
+  height: 100vh;
+}
+
+.home-screen {
+  background: url('./tiger-walking.gif') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
