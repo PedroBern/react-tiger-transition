@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 
 import BoolCSSTransition from './BoolCSSTransition'
 import { NavigationContext } from './Navigation';
@@ -38,9 +38,19 @@ const Transition = ({
     props = {...transition()}
   }
 
-  if (onTransition) {
-    window.setTimeout(() => setOnTransition(false), props.timeout);
-  }
+  // useEffect(() => {
+  //   if (onTransition) {
+  //     window.setTimeout(function() {
+  //       // console.log(document.head.children)
+  //       // const garbage = document.querySelectorAll('style[data-meta="tiger-transition"]');
+  //       // if (garbage.length > 0){
+  //       //   garbage.forEach(g => document.head.removeChild(g))
+  //       // }
+  //       setOnTransition(false);
+  //     },
+  //     props.timeout);
+  //   }
+  // }, [onTransition])
 
   return (
     <BoolCSSTransition
