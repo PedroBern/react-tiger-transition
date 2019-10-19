@@ -33,29 +33,26 @@ import {
   glide
 } from 'react-tiger-transition';
 
-// Don't forget to import this tiny style file!
-import 'react-tiger-transition/dist/style.css'
-
 // basic styling to not hurt eyes
 const linkStyle = {
   fontSize: 30,
   textDecoration: 'none',
   color: 'black',
   fontFamily: 'Arial',
-}
+};
 
 const screenStyle = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-}
+};
 
 const App = () => {
 
   // you will need to set the height of  <Navigation /> wrapper,
   // in this case, it is the root node,
   // you'd probably want to do this on a different way.
-  document.getElementById('root').style.height = '100%';
+  document.getElementById('root').style.height = '100vh';
 
   return (
     <Router>{/* BrowserRouter from react-router-dom */}
@@ -89,21 +86,24 @@ const App = () => {
             </Screen>
           </Route>
 
-          <Route exact path="/a" >
-            <Screen
-              style={{
+          <Route
+            exact
+            path="/a"
+            screen  // shorthand to wrap children with screen
+            screenProps={{
+              style: {
                 backgroundColor: '#D4429F',
                 ...screenStyle
-              }}
+              }
+            }}
+          >
+            <Link
+              to='/'
+              transition={() => glide({direction: 'right'})}
+              style={{...linkStyle}}
             >
-              <Link
-                to='/'
-                transition={() => glide({direction: 'right'})}
-                style={{...linkStyle}}
-              >
-                Back to home page
-              </Link>
-            </Screen>
+              Back to home page
+            </Link>
           </Route>
 
       </Navigation>
@@ -111,8 +111,8 @@ const App = () => {
   );
 };
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<App />, document.getElementById('root'));
 
 ```
 
-[Keep reading!](/navigation)
+[Keep reading!](/docs/navigation)

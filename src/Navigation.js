@@ -93,9 +93,13 @@ const NavigationProvider = withRouter(({
 /**
  *
  * @description
- * The context provider for `<Link />`. Allow link to change transition on
- * click, before the routing. This makes possible to build as many different
- * transitions for the same route as possible, all evaluated on the fly.
+ * The context provider for [`<Link />`](/docs/link). Allow link to change
+ * transition on click, before the routing. This makes possible to build as
+ * many different transitions for the same route as possible, all evaluated
+ * on the fly.
+ *
+ * You must provide at least one **direct** [`<Route />`](/docs/route) child
+ * for `<Navigation />`.
  *
  * @example
  * import { BrowserRouter as Router} from "react-router-dom";
@@ -107,20 +111,15 @@ const NavigationProvider = withRouter(({
  *   Link,
  * } from "react-tiger-transition";
  *
- * // Don't forget to import styles!
- * import "react-tiger-transition/style.css";
- *
- * ...
  * <div id='root' style={{height: '100vh'}}>
  *   <Router>
  *     <Navigation>
  *
- *       ... my routes ...
+ *       { MyRoutes }
  *
  *     </Navigation>
  *   </Router>
  * </div>
- * ...
  *
  *
  */
@@ -161,16 +160,18 @@ Navigation.defaultProps = {
 
 Navigation.propTypes = {
   /**
-   * Props passed to `<Screen container />` (that wraps the routes).
+   * Props passed to [`<Screen container />`](/docs/screen) (that wraps the
+   * routes).
    */
    containerProps: PropTypes.object,
 
   /**
-   * The default transition to be consumed by every `<Link />` component that
-   * transition prop is not specified. Good if you want the same transition for
-   * all routes, or most of them. Use string if you have your own css animation,
-   * or an object or function returning an object to be passed to <Transition />
-   * component from react-transition-group.
+   * The default transition to be consumed by every [`<Link />`](/docs/link)
+   * component that transition prop is not defined. Good if you want the same
+   * transition for all routes, or most of them. Use string if you have your
+   * own css animation, or an object or function returning an object to be
+   * passed to [`<Transition />`](https://reactcommunity.org/react-transition-group/transition)
+   * and [`<CSSTransition />`](https://reactcommunity.org/react-transition-group/css-transition).
    */
   defaultTransition: PropTypes.oneOfType([
     PropTypes.string,
@@ -179,24 +180,23 @@ Navigation.propTypes = {
   ]).isRequired,
 
   /**
-   * Props passed to `<Transition />` or `<CSSTransition />` from
-   * [react-transition-group](https://github.com/reactjs/react-transition-group).
-   * Usually you don't need to worry about this.
-   * If you pass `appear={true}`, the appearing animation is the defaultTransition
-   * prop.
+   * Props passed to [`<Transition />`](https://reactcommunity.org/react-transition-group/transition)
+   * and [`<CSSTransition />`](https://reactcommunity.org/react-transition-group/css-transition).
+   * Usually you don't need to worry about this. If you pass `appear`, the
+   * appearing animation is the `defaultTransition` prop.
    */
   globalTransitionProps: PropTypes.object,
 
   /**
    * A route that matches when all routes do not. Default is
-   * Redirect component from react-router-dom.
+   * [`<Redirect to='/' />`](https://reacttraining.com/react-router/web/api/Redirect).
    */
   defaultRoute: PropTypes.element,
 
   /**
    * First transition timeout in milliseconds. Used only on appearing (if set),
    * and only if you are using a css transition. If you are using an object
-   * or function returning an transition with timeout, this firstTimeout is
+   * or function returning an transition with timeout, this `firstTimeout` is
    * ignored.
    */
   firstTimeout: PropTypes.number,

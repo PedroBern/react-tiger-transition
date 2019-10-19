@@ -10,14 +10,14 @@ component from [`react-transition-group`](https://reactcommunity.org/react-trans
 
 ```javascript
 const myWildTiger = {
-  timeout: number,
-  onEnter: (node, isAppearing) => {...},
-  onEntering: (node, isAppearing) => {...},
-  onEntered: (node, isAppearing) => {...},
-  onExit: (node, isAppearing) => {...},
-  onEexiting: (node, isAppearing) => {...},
-  onExited: (node, isAppearing) => {...},
-}
+  timeout: timeout, // milliseconds
+  onEnter: (node, isAppearing) => {},
+  onEntering: (node, isAppearing) => {},
+  onEntered: (node, isAppearing) => {},
+  onExit: (node, isAppearing) => {},
+  onEexiting: (node, isAppearing) => {},
+  onExited: (node, isAppearing) => {},
+};
 
 <Link to='/' transition={myWildTiger}>
   Home

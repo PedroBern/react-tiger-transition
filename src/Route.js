@@ -12,10 +12,10 @@ import Screen from './Screen';
  * Route uses the original
  * [react-router `<Route />`](https://reacttraining.com/react-router/web/api/Route).
  * It wraps the children with a transition component based on
- * `<Transition />` and `<CSSTransition />` from
- * [react-transition-group](https://github.com/reactjs/react-transition-group).
+ * [`<Transition />`](https://reactcommunity.org/react-transition-group/transition)
+   and [`<CSSTransition />`](https://reactcommunity.org/react-transition-group/css-transition).
  *
- * Must be used inside [`<Navigation />`](/navigation) to allow [`<Link />`](/link)
+ * Must be used inside [`<Navigation />`](/docs/navigation) to allow [`<Link />`](/docs/link)
  * to consume context.
  *
  * Comes with some default css class that you can disable or chain with
@@ -35,27 +35,24 @@ import Screen from './Screen';
  *   Link,
  * } from "react-tiger-transition";
  *
- * // Don't forget to import styles!
- * import "react-tiger-transition/style.css";
- *
- * ...
  * <Router>
  *   <Navigation>
  *     <Route exact path="/a" >
  *       <Screen>
- *         ... my page component goes here ...
- *         ... here is where I use <Link /> ...
+ *         <PageA />
  *       </Screen>
  *     </Route>
  *
- *     ... more routes ...
+ *     <Route exact path="/b" screen children={<PageB />} />
+ *
+ *     { moreRoutes }
  *
  *   </Navigation>
  * </Router>
- * ...
  *
  * @footer
- * \*Refer to [transitions API](transitions), for more details about transitions.
+ * \*Refer to [transitions API](/docs/transitions), for more details about
+ * transitions.
  */
 const Route = ({
   children,
@@ -107,8 +104,9 @@ Route.defaultProps = {
 
 Route.propTypes = {
   /**
-   * Propably your 'page' component. I recommend you to use <Screen />
-   * to wrap your pages.
+   * Propably your 'page' component. I recommend you to use [`<Screen />`](/docs/screen)
+   * to wrap your pages. Or pass in the `screen` prop to automatically
+   * wrap.
    */
   children: PropTypes.oneOfType([
     PropTypes.func,
@@ -116,23 +114,23 @@ Route.propTypes = {
   ]).isRequired,
 
   /**
-   * Disable default styles applied to div container. You can
+   * Disable default styles applied to the div container. You can
    * still use className to set your own styles.
    */
   disableStyle: PropTypes.bool,
 
   /**
-   * In case you want a route to render only a component, like appbars, footers,
-   * etc, propably will be the case of keeping the component while transitioning
-   * the page. `fixed` does that. **You will need to set absolute positioning and
-   * height on your own**.
+   * In case you want a route to render only a component like appbars,
+   * this is a shorthand, but you still need to set positioning and height.
+   * The only thing `fixed` does is not setting your `<route />` to fullscreen,
+   * like a regular route page.
    */
   fixed: PropTypes.bool,
 
  /**
   * Div container className. A string or a function returning a string.
-  * If not disableStyle, this className will be chained to
-  * 'react-tiger-transition--route'.
+  * If not `disableStyle`, this className will be chained to
+  * `react-tiger-transition--route` or `react-tiger-transition--fixed`.
   */
   className: PropTypes.oneOfType([
     PropTypes.string,
@@ -150,12 +148,12 @@ Route.propTypes = {
   screenProps: PropTypes.object,
 
  /**
-  * Props passed to `<Transition />` or `<CSSTransition />` from
-  * [react-transition-group](https://github.com/reactjs/react-transition-group).
-  * Usually you don't need to worry about this.
-  * If you pass `appear={true}`, the appearing animation is the default one defined
-  * in `<Navigation />`. Props defined here have higher priority than
-  * globalTransitionProps defined in `<Navigation />`.
+  * Props passed to [`<Transition />`](https://reactcommunity.org/react-transition-group/transition)
+  * or [`<CSSTransition />`](https://reactcommunity.org/react-transition-group/css-transition).
+  * Usually you don't need to worry about this. If you pass `appear`, the
+  * appearing animation is the default one defined in [`<Navigation />`](/docs/navigation).
+  * Props defined here have higher priority than `globalTransitionProps`
+  * defined in [`<Navigation />`](/docs/navigation).
   */
  transitionProps: PropTypes.object,
 

@@ -8,7 +8,9 @@ import { withRouterAndRef } from './utils';
 
 /**
  * @description
- * Change transitions on the fly.
+ * Change transitions on the fly. The next transition is evaluated before
+ * the route change, allowing to go or arrive to with different transitions
+ * for the same routes.
  *
  * @afterProps
  * \*Ref and other props are passed to [react router `<Link />`](https://reacttraining.com/react-router/web/api/Link).
@@ -16,20 +18,24 @@ import { withRouterAndRef } from './utils';
  * @example
  * import { Link, glide } from "react-tiger-transition";
  *
+ * // default transition
  * <Link to='/a' transition={glide}>
  *   A
  * </Link>
  *
+ * // default transition with custom args
  * <Link to='/b' transition={() => glide({...args})}>
  *   B
  * </Link>
  *
+ * // your custom css classname for transitions
  * <Link to='/c' transition='my-css-animation'>
  *   C
  * </Link>
  *
  * @footer
- * \*Refer to [transitions API](transitions), for more details about transitions.
+ * \*Refer to [transitions API](/docs/transitions), for more details about
+ * transitions.
  *
  */
 const Link = React.forwardRef(({
@@ -75,11 +81,11 @@ Link.defaultProps = {
 
 Link.propTypes = {
   /**
-   * Transition/animation to be applied when changing route.
-   * String if using CSS animations.
-   * Object or a function returning an object with props to be
-   * passed to `<Transition />` component from react-transition-group.
-   * Default value comes from context, defined in `<Navigation />` component.
+   * Transition/animation to be applied when changing route. String if using
+   * CSS animations. Object or a function returning an object with props to be
+   * passed to [`<Transition />`](https://reactcommunity.org/react-transition-group/transition) or
+   * [`CSSTransition />`](https://reactcommunity.org/react-transition-group/css-transition).
+   * Default value comes from context, defined in [`<Navigation />`](/docs/navigation) component.
    */
   transition: PropTypes.oneOfType([
     PropTypes.string,
@@ -94,7 +100,7 @@ Link.propTypes = {
 
   /**
    * Transition timeout in milliseconds. Used as fallback if not provided on
-   * transition object / function.
+   * transition object / function. Used on css transitions.
    */
   timeout: PropTypes.number,
 }

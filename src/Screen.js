@@ -5,7 +5,7 @@ import { computeClassName } from './utils';
 
 /**
  * @description
- * A div with some default css applied to it. Designed to be child of `routes`,
+ * A div with some default css applied to it. Designed to be child of [`<route />`](/docs/route),
  * or parent if passed the `container` prop.
  *
  * @afterProps
@@ -15,7 +15,7 @@ import { computeClassName } from './utils';
  * import { Screen } from 'react-tiger-transition';
  *
  * <Screen>
- *  ...my page...
+ *  <MyPage />
  * </Screen>
  *
  */
@@ -59,13 +59,13 @@ Screen.propTypes = {
 
   /**
    * Disable default styles applied to div container. You can
-   * still use className to set your own styles.
+   * still use `className` to set your own styles.
    */
   disableStyle: PropTypes.bool,
 
   /**
-   * Div container className. A string or a function returning a string.
-   * If not disableStyle, this className will be chained to
+   * Div container `className`. A string or a function returning a string.
+   * If not `disableStyle`, this `className` will be chained to
    * `react-tiger-transition--screen`.
    */
   className: PropTypes.oneOfType([
