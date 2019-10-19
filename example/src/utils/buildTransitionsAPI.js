@@ -15,7 +15,7 @@ const buildTransitionsAPI = transitions => {
     `const ${t.name}DefaultArgs = ` +
     stringify(t.args, null, '\t') +
     "\n" +
-    `const ${t.name}Default = () => ${t.name}({...default${t.name}Args});` +
+    `const ${t.name}Default = () => ${t.name}({...${t.name}DefaultArgs});` +
     "\n```" +
     "\n\n"
 
