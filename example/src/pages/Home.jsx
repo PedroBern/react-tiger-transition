@@ -25,9 +25,6 @@ const useStyles = makeStyles({
   grid: {
     height: '100%',
   },
-  tigerRoar: {
-    borderRadius: '50%',
-  },
   h2: {
     lineHeight: 1.1,
   },
@@ -92,7 +89,7 @@ const Home = props => {
                   size='large'
                   to={b.to}
                   variant={b.variant}
-                  
+
                 >
                   {b.text}
                 </Button>

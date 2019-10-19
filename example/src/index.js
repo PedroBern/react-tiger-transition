@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import { Route, Navigation, fade, Screen } from 'react-tiger-transition';
 
-import { Home, Docs, Demo, DemoNext } from './pages';
+import { Home, Docs, Demo, DemoNext, Guides } from './pages';
 
 import { Nav } from './components';
 
@@ -63,9 +63,10 @@ const App = () => {
           <Route exact path="/demo" children={<Demo />} className={classes.route}/>
           <Route exact path="/demo-a" children={<DemoNext a />} />
           <Route exact path="/demo-b" children={<DemoNext b />} />
+          <Route exact path="/guides" children={<Guides />} className={classes.route}/>
           <Route
             fixed
-            path={['/docs', '/demo']}
+            path={['/docs', '/demo', '/guides']}
             className={classes.nav}
             children={<Nav />}
           />

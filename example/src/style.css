@@ -2,6 +2,10 @@
   height: 100vh;
 }
 
+body {
+  background-color: #333;
+}
+
 .home-screen {
   background: url('./tiger-walking.gif') no-repeat center center fixed;
   -webkit-background-size: cover;
