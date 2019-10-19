@@ -1,5 +1,4 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 // import { prism } from "../../node_modules/react-syntax-highlighter/dist/esm/styles/prism";
 

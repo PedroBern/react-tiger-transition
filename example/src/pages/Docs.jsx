@@ -4,19 +4,12 @@ import ReactMarkdown from 'react-markdown';
 import { withRouter, Redirect } from "react-router-dom";
 
 import { Tabs, AppBar } from '../components';
-import { Code } from '../utils';
+import { CodeRender, LinkRender, docs, docsPaths } from '../utils';
 
 import Container from '@material-ui/core/Container';
 import Tab from '@material-ui/core/Tab';
 
 import { Screen, Route, Link, flip, glide } from 'react-tiger-transition';
-
-import quickStartDocs from '../../../docs/QuickStart.md';
-import navigationDocs from '../../../docs/Navigation.md';
-import routeDocs from '../../../docs/Route.md';
-import linkDocs from '../../../docs/Link.md';
-import screenDocs from '../../../docs/Screen.md';
-import transitionsDocs from '../../../docs/CustomTransitions.md';
 
 
 const useStyles = makeStyles({
@@ -34,46 +27,14 @@ const useStyles = makeStyles({
   },
 });
 
-const docs = [
-  {
-    path: '/docs/quick-start',
-    text: 'Quick Start',
-    doc: quickStartDocs,
-  },
-  {
-    path: '/docs/navigation',
-    text: 'Navigation',
-    doc: navigationDocs,
-  },
-  {
-    path: '/docs/route',
-    text: 'Route',
-    doc: routeDocs,
-  },
-  {
-    path: '/docs/link',
-    text: 'Link',
-    doc: linkDocs,
-  },
-  {
-    path: '/docs/screen',
-    text: 'Screen',
-    doc: screenDocs,
-  },
-  {
-    path: '/docs/transitions',
-    text: 'Transitions',
-    doc: transitionsDocs,
-  },
-]
-
-const docsPaths = docs.map(d => d.path.slice(6))
-
 const RenderDoc = ({doc}) => (
   <div className='markdown-body'>
     <ReactMarkdown
       source={doc}
-      renderers={{code: Code}}
+      renderers={{
+        code: CodeRender,
+        link: LinkRender
+      }}
     />
   </div>
 )
