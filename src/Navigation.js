@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useMemo, useReducer } from 'react';
 import { withRouter, matchPath, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -10,31 +10,63 @@ import './style.css';
 
 export const NavigationContext = React.createContext();
 
+const evalTransition = ({transition, timeout}) => (
+  typeof(transition) === 'function' ?
+  { timeout, ...transition(), css: false } :
+  Object.prototype.toString.call(transition) === '[object Object]' ?
+  { timeout, ...transition, css: false } :
+  { timeout, classNames: transition, css: true}
+)
+
+function reducer(state, action) {
+  switch (action.type) {
+
+    case 'setTransition':
+      const transition = evalTransition({...action.value});
+      window.setTimeout(function() {
+        action.dispatch({type: 'endTransition'})
+      }, transition.timeout + 200);
+      return {
+        ...state,
+        transition,
+        onTransition: true,
+      };
+
+    case 'endTransition':
+      return {
+        ...state,
+        onTransition: false,
+      };
+
+    default:
+      return { ...state };
+  }
+}
+
 const NavigationProvider = withRouter(({
   children,
-  defaultTransition,
-  globalTransitionProps,
   defaultRoute,
-  disableBodyStyle,
+  initialState,
 
   match,
   location,
   history,
 }) => {
 
-  const [transition, setTransition] = useState(defaultTransition);
-
-  const [onTransition, setOnTransition] = useState(false);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const context = {
-    transition: transition,
-    setTransition: tiger => new Promise(function(resolve, reject) {
-      resolve(setTransition(tiger), setOnTransition(true))
-    }),
-    defaultTransition: defaultTransition,
-    globalTransitionProps: globalTransitionProps,
-    onTransition: onTransition,
-    setOnTransition: setOnTransition,
+    ...state,
+    setTransition: (transition, timeout) => new Promise(
+      function(resolve, reject) {
+        resolve(dispatch({
+          type: 'setTransition',
+          value: { transition, timeout },
+          dispatch
+        }))
+      }
+    ),
+    endTransition: () => dispatch({type: 'endTransition'})
   }
 
   const matched = useMemo(() => (
@@ -95,10 +127,26 @@ const NavigationProvider = withRouter(({
 const Navigation = ({
   children,
   containerProps,
+
+  defaultTransition,
+  firstTimeout,
+  globalTransitionProps,
   ...other,
 }) => (
   <Screen container {...containerProps}>
-    <NavigationProvider {...other}>
+    <NavigationProvider
+      {...other}
+      initialState={{
+          transition: evalTransition({
+            transition: defaultTransition,
+            timeout: firstTimeout
+          }),
+          currentTransition: null,
+          onTransition: false,
+          defaultTransition,
+          globalTransitionProps,
+      }}
+    >
         {children}
     </NavigationProvider>
   </Screen>
@@ -107,7 +155,8 @@ const Navigation = ({
 Navigation.defaultProps = {
   defaultTransition: fade,
   defaultRoute: <Redirect to='/' />,
-  globalTransitionProps: {}
+  globalTransitionProps: {},
+  firstTimeout: 600,
 };
 
 Navigation.propTypes = {
@@ -143,6 +192,14 @@ Navigation.propTypes = {
    * Redirect component from react-router-dom.
    */
   defaultRoute: PropTypes.element,
+
+  /**
+   * First transition timeout in milliseconds. Used only on appearing (if set),
+   * and only if you are using a css transition. If you are using an object
+   * or function returning an transition with timeout, this firstTimeout is
+   * ignored.
+   */
+  firstTimeout: PropTypes.number,
 }
 
 export default Navigation

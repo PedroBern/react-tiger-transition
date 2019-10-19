@@ -59,7 +59,6 @@ import Screen from './Screen';
  */
 const Route = ({
   children,
-  timeout,
   className,
   disableStyle,
   containerProps,
@@ -81,7 +80,6 @@ const Route = ({
       {props => (
         <Transition
           match={props.match}
-          timeout={timeout}
           className={_className}
           containerProps={containerProps}
           transitionProps={transitionProps}
@@ -101,7 +99,6 @@ const Route = ({
 }
 
 Route.defaultProps = {
-  timeout: 600,
   disableStyle: false,
   screen: false,
   screenProps: {},
@@ -117,14 +114,6 @@ Route.propTypes = {
     PropTypes.func,
     PropTypes.node,
   ]).isRequired,
-
-  /**
-   * Transition timeout in milliseconds. Used only on CSS transitions.
-   * If using an object or a function for 'transition' prop from
-   * <Link />, should return the
-   * timeout there.
-   */
-  timeout: PropTypes.number,
 
   /**
    * Disable default styles applied to div container. You can

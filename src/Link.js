@@ -42,6 +42,7 @@ const Link = React.forwardRef(({
   children,
   onClick,
   to,
+  timeout,
   ...other,
 },ref) => {
 
@@ -54,8 +55,10 @@ const Link = React.forwardRef(({
   return (
     <RouterLink
       onClick={() => {
-        setTransition(transition || defaultTransition)
-        if (typeof onClick === 'function') onClick();
+        if (!onTransition){
+          setTransition(transition || defaultTransition, timeout)
+          if (typeof onClick === 'function') onClick();
+        }
       }}
       ref={ref}
       to={onTransition ? location.pathname : to}
@@ -65,6 +68,10 @@ const Link = React.forwardRef(({
     </RouterLink>
   )
 })
+
+Link.defaultProps = {
+  timeout: 600,
+};
 
 Link.propTypes = {
   /**
@@ -79,10 +86,17 @@ Link.propTypes = {
     PropTypes.object,
     PropTypes.func,
   ]),
+
   /**
    * Function fired on link click.
    */
   onClick: PropTypes.func,
+
+  /**
+   * Transition timeout in milliseconds. Used as fallback if not provided on
+   * transition object / function.
+   */
+  timeout: PropTypes.number,
 }
 
 export default withRouterAndRef(Link)

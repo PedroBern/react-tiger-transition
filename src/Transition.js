@@ -9,7 +9,6 @@ import { NavigationContext } from './Navigation';
  */
 const Transition = ({
   children,
-  timeout,
   match,
   className,
   containerProps,
@@ -19,46 +18,16 @@ const Transition = ({
   const {
     transition,
     globalTransitionProps,
-    setOnTransition,
+    endTransition,
     onTransition
-  } = useContext(NavigationContext)
-
-  let css = false;
-  let props = {};
-
-  if (typeof(transition) === 'string'){
-    props.classNames = transition;
-    props.timeout = timeout;
-    css = true;
-  }
-  else if (Object.prototype.toString.call(transition) === '[object Object]'){
-    props = {...transition};
-  }
-  else if (typeof(transition) === 'function'){
-    props = {...transition()}
-  }
-
-  // useEffect(() => {
-  //   if (onTransition) {
-  //     window.setTimeout(function() {
-  //       // console.log(document.head.children)
-  //       // const garbage = document.querySelectorAll('style[data-meta="tiger-transition"]');
-  //       // if (garbage.length > 0){
-  //       //   garbage.forEach(g => document.head.removeChild(g))
-  //       // }
-  //       setOnTransition(false);
-  //     },
-  //     props.timeout);
-  //   }
-  // }, [onTransition])
+  } = useContext(NavigationContext);
 
   return (
     <BoolCSSTransition
       in={match != null}
-      mountOnEnter={!css}
+      mountOnEnter={!transition.css}
       unmountOnExit
-      css={css}
-      {...props}
+      {...transition}
       {...globalTransitionProps}
       {...transitionProps}
     >
