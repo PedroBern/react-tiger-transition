@@ -69,7 +69,6 @@ const Demo = props => {
 
           <Tabs
             value={tiger.name}
-            indicatorColor="primary"
             variant="scrollable"
             scrollButtons="auto"
             onChange={(event, value) => updateTiger(value)}

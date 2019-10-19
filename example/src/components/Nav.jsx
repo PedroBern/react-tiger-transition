@@ -34,12 +34,16 @@ const paths = [
     text: 'demo',
   },
   {
+    path: '/guides',
+    text: 'guides',
+  },
+  {
     path: '/github',
     text: 'github',
   },
 ]
 
-const pathsAbs = ['/', '/docs', '/demo']
+const pathsAbs = ['/', '/docs', '/demo', '/guides']
 
 const Nav = ({match, location, history}) => {
 
@@ -56,7 +60,6 @@ const Nav = ({match, location, history}) => {
               pathsAbs.indexOf(match.path)
             : 0
           }
-          indicatorColor="secondary"
           textColor="inherit"
           indicatorTop
           classes={{

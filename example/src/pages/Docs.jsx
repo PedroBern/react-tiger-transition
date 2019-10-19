@@ -72,7 +72,6 @@ const Docs = ({
 
           <Tabs
             value={match ? docsPaths.indexOf(match.params.doc) : 0}
-            indicatorColor="primary"
             variant="scrollable"
             scrollButtons="auto"
             classes={{
