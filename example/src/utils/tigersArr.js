@@ -2,6 +2,8 @@
 // allow finding the default values
 // used to start the demo for each tiger.
 
+import extractArgs from './extractArgs';
+
 import glideRaw from '!raw-loader!../../../src/tigers/glide';
 import glideInRaw from '!raw-loader!../../../src/tigers/glideIn';
 import glideOutRaw from '!raw-loader!../../../src/tigers/glideOut';
@@ -43,96 +45,105 @@ import {
 
 } from 'react-tiger-transition';
 
+const rawTigers = {
+  glide: glideRaw,
+  glideIn: glideInRaw,
+  glideOut: glideOutRaw,
+  fold: foldRaw,
+  unfold: unfoldRaw,
+  push: pushRaw,
+  pull: pullRaw,
+  pushPull: pushPullRaw,
+  fade: fadeRaw,
+  scale: scaleRaw,
+  flip: flipRaw,
+  slide: slideRaw,
+  cube: cubeRaw,
+  room: roomRaw,
+  carousel: carouselRaw,
+  side: sideRaw,
+  glueOut: glueOutRaw,
+  glueIn: glueInRaw,
+}
 
-export default [
+// console.log(extractArgs(glideRaw));
+
+const tigersArr = [
   {
     name: 'glide',
     func: glide,
-    raw: glideRaw,
   },
   {
     name: 'glideIn',
     func: glideIn,
-    raw: glideInRaw,
   },
   {
     name: 'glideOut',
     func: glideOut,
-    raw: glideOutRaw,
   },
   {
     name: 'fold',
     func: fold,
-    raw: foldRaw,
   },
   {
     name: 'unfold',
     func: unfold,
-    raw: unfoldRaw,
   },
   {
     name: 'push',
     func: push,
-    raw: pushRaw,
   },
   {
     name: 'pull',
     func: pull,
-    raw: pullRaw,
   },
   {
     name: 'pushPull',
     func: pushPull,
-    raw: pushPullRaw,
   },
   {
     name: 'fade',
     func: fade,
-    raw: fadeRaw,
   },
   {
     name: 'scale',
     func: scale,
-    raw: scaleRaw,
   },
   {
     name: 'flip',
     func: flip,
-    raw: flipRaw,
   },
   {
     name: 'slide',
     func: slide,
-    raw: slideRaw,
   },
   {
     name: 'cube',
     func: cube,
-    raw: cubeRaw,
   },
   {
     name: 'room',
     func: room,
-    raw: roomRaw,
   },
   {
     name: 'carousel',
     func: carousel,
-    raw: carouselRaw,
   },
   {
     name: 'side',
     func: side,
-    raw: sideRaw,
   },
   {
     name: 'glueOut',
     func: glueOut,
-    raw: glueOutRaw,
   },
   {
     name: 'glueIn',
     func: glueIn,
-    raw: glueInRaw,
   },
-]
+].map(tiger => ({
+  ...tiger,
+  args: {...extractArgs(rawTigers[tiger.name])}
+}))
+
+export default tigersArr;

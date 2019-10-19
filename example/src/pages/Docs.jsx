@@ -4,7 +4,8 @@ import ReactMarkdown from 'react-markdown';
 import { withRouter, Redirect } from "react-router-dom";
 
 import { Tabs, AppBar } from '../components';
-import { CodeRender, LinkRender, docs, docsPaths } from '../utils';
+import { docs, docsPaths } from '../utils';
+import { CodeRender, LinkRender } from '../renderers';
 
 import Container from '@material-ui/core/Container';
 import Tab from '@material-ui/core/Tab';
@@ -29,13 +30,27 @@ const useStyles = makeStyles({
 
 const RenderDoc = ({doc}) => (
   <div className='markdown-body'>
-    <ReactMarkdown
-      source={doc}
-      renderers={{
-        code: CodeRender,
-        link: LinkRender
-      }}
-    />
+    {
+      Array.isArray(doc) ?
+        doc.map((d,i) => (
+          <ReactMarkdown
+            key={i}
+            source={d}
+            renderers={{
+              code: CodeRender,
+              link: LinkRender
+            }}
+          />
+        ))
+        :
+        <ReactMarkdown
+          source={doc}
+          renderers={{
+            code: CodeRender,
+            link: LinkRender
+          }}
+        />
+    }
   </div>
 )
 

@@ -3,7 +3,9 @@ import navigationDocs from '../../../docs/Navigation.md';
 import routeDocs from '../../../docs/Route.md';
 import linkDocs from '../../../docs/Link.md';
 import screenDocs from '../../../docs/Screen.md';
-import transitionsDocs from '../../../docs/CustomTransitions.md';
+import customTransitionsDocs from '../../../docs/CustomTransitions.md';
+import transitionsDocs from '../../../docs/Transitions.md';
+import transitionsAPI from './buildTransitionsAPI';
 
 export const docs = [
   {
@@ -34,7 +36,7 @@ export const docs = [
   {
     path: '/docs/transitions',
     text: 'Transitions',
-    doc: transitionsDocs,
+    doc: [transitionsDocs, customTransitionsDocs, transitionsAPI],
   },
 ]
 

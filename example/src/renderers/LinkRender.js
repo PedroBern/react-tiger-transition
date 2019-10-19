@@ -5,7 +5,7 @@ import React from "react";
 import { withRouter } from 'react-router-dom';
 import { Link, flip } from 'react-tiger-transition';
 
-import { docsPathsAbs } from './Docs';
+import { docsPathsAbs } from '../utils/Docs';
 
 const LinkRender = ({
   href,

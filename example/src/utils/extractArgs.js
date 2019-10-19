@@ -1,6 +1,6 @@
 // extract tigers default args from raw js file
 
-export default raw => {
+const extractArgs = raw => {
   let common = raw.split('common')[1]
   let enter = common.split('enter')[1]
   let exit = enter.split('exit')[1]
@@ -36,3 +36,5 @@ export default raw => {
     exit: {...args.exit}
   }
 }
+
+export default extractArgs;

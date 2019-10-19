@@ -1,12 +1,10 @@
 import { stringify } from "javascript-stringify";
 
-import tigersArr from './tigersArr';
-import extractArgs from './extractArgs';
-import getArgs from './getArgs';
+import { getArgs, tigersArr } from '../utils';
 
-tigersArr.map(tiger => {
-  tiger.args = extractArgs(tiger.raw);
-})
+// tigersArr.map(tiger => {
+//   tiger.args = extractArgs(tiger.raw);
+// })
 
 export const initialState = {
   tiger: tigersArr[0],

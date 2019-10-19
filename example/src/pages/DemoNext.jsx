@@ -56,7 +56,7 @@ const DemoA = ({a, b}) => {
     args,
   } = useContext(DemoContext)
 
-  const hasDirection = tiger.raw.indexOf('direction') > -1;
+  const hasDirection = tiger.args.direction !== undefined;
 
   return (
     <Screen className={classNames(classes.screen, a ? classes.a : classes.b)}>
