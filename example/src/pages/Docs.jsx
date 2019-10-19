@@ -110,7 +110,7 @@ const Docs = ({
                 component={Link}
                 key={d.path}
                 to={d.path}
-                transition={() => () => flip({
+                transition={() => flip({
                   duration: 300,
                   direction:
                     docsPaths.indexOf(match.params.doc) < index ?
