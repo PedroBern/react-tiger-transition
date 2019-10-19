@@ -6,7 +6,7 @@ import { Route, Navigation, fade, Screen } from 'react-tiger-transition';
 
 import { Home, Docs, Demo, DemoNext } from './pages';
 
-import { AppBar } from './components';
+import { Nav } from './components';
 
 import { DemoProvider } from './provider';
 
@@ -18,7 +18,7 @@ import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
 
 const useStyles = makeStyles({
-  appbar: {
+  nav: {
     top: 'auto',
     height: 64,
     bottom: 0,
@@ -66,8 +66,8 @@ const App = () => {
           <Route
             fixed
             path={['/docs', '/demo']}
-            className={classes.appbar}
-            children={<AppBar />}
+            className={classes.nav}
+            children={<Nav />}
           />
 
         </Navigation>

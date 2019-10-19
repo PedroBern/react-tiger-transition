@@ -4,7 +4,9 @@ import { makeStyles } from '@material-ui/styles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
+
+import { Button } from '../components';
 
 import {
   Screen,
@@ -26,8 +28,8 @@ const useStyles = makeStyles({
   tigerRoar: {
     borderRadius: '50%',
   },
-  colorPrimary: {
-    color: 'white'
+  h2: {
+    lineHeight: 1.1,
   },
   outlined: {
     borderColor: 'white',
@@ -72,9 +74,11 @@ const Home = props => {
             <Typography
               variant='h2'
               color='primary'
+              className='tiger-gradient-text'
               classes={{
-                colorPrimary: classes.colorPrimary
-              }}>
+                h2: classes.h2
+              }}
+            >
               React Tiger Transition
             </Typography>
           </Grid>
@@ -88,9 +92,7 @@ const Home = props => {
                   size='large'
                   to={b.to}
                   variant={b.variant}
-                  classes={b.classes ? {
-                    outlined: classes.outlined
-                  } : null}
+                  
                 >
                   {b.text}
                 </Button>

@@ -4,9 +4,6 @@ import {Controlled as CodeMirror} from 'react-codemirror2';
 import 'codemirror/mode/javascript/javascript';
 
 import { makeStyles } from '@material-ui/core/styles';
-// import Container from '@material-ui/core/Container';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
@@ -15,6 +12,7 @@ import MuiLink from '@material-ui/core/Link';
 
 import { Screen, Link, glide } from 'react-tiger-transition';
 
+import { Tabs, AppBar } from '../components';
 import { DemoContext } from '../provider';
 
 const useStyles = makeStyles({
@@ -38,9 +36,8 @@ const useStyles = makeStyles({
     marginBottom: 16,
     '& .CodeMirror': {
       borderRadius: 8,
-      // border: '1px solid lightGrey',
     }
-  },
+  }
 });
 
 const codeMirrorOptions = {
@@ -67,13 +64,12 @@ const Demo = props => {
 
     <Screen className={classes.screen}>
 
-      <AppBar position="fixed" color="default">
+      <AppBar position="fixed">
         <Container maxWidth='lg'>
 
           <Tabs
             value={tiger.name}
             indicatorColor="primary"
-            textColor="primary"
             variant="scrollable"
             scrollButtons="auto"
             onChange={(event, value) => updateTiger(value)}

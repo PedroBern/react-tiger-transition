@@ -3,11 +3,10 @@ import { makeStyles } from '@material-ui/styles';
 import ReactMarkdown from 'react-markdown';
 import { withRouter, Redirect } from "react-router-dom";
 
+import { Tabs, AppBar } from '../components';
 import { Code } from '../utils';
 
 import Container from '@material-ui/core/Container';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
 import { Screen, Route, Link, flip, glide } from 'react-tiger-transition';
@@ -92,17 +91,16 @@ const Docs = ({
     :
     <Screen className={classes.screen}>
 
-      <AppBar position="fixed" color="default">
+      <AppBar position="fixed">
         <Container maxWidth='lg'>
 
           <Tabs
             value={match ? docsPaths.indexOf(match.params.doc) : 0}
             indicatorColor="primary"
-            textColor="primary"
             variant="scrollable"
             scrollButtons="auto"
             classes={{
-              flexContainer: classes.tabsFlexContainer
+              flexContainer: classes.tabsFlexContainer,
             }}
           >
             {docs.map((d, index) => (
