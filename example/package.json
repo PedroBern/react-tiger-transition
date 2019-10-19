@@ -17,7 +17,7 @@
     "@material-ui/styles": "^4.5.0",
     "classnames": "^2.2.6",
     "codemirror": "^5.49.0",
-    "highlight.js": "^9.15.10",
+    "file-loader": "^4.2.0",
     "javascript-stringify": "^2.0.0",
     "object-string-to-object": "^1.0.1",
     "parse-strings-in-object": "^1.2.0",
@@ -28,6 +28,7 @@
     "react-lowlight": "^2.0.0",
     "react-markdown": "^4.2.2",
     "react-router-dom": "^5.0.1",
+    "react-syntax-highlighter": "^11.0.2",
     "react-transition-group": "^4.3.0",
     "url-loader": "^2.2.0"
   },
