@@ -1,26 +1,30 @@
 import React from 'react';
+import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+
+import themeColor from './themeColor';
+
 
 const useStyles = makeStyles({
   root: {
     background: props =>
       props.variant === 'contained'
-        ? 'linear-gradient(120deg, rgba(247,192,111,1) 0%, rgba(212,137,75,1) 100%)'
+        ? themeColor
         : 'transparent',
   },
   outlined: {
-    borderColor: 'rgba(212,137,75,1)',
-    color: 'rgba(212,137,75,1)'
+    borderColor: themeColor,
+    color: themeColor
   }
 });
 
 function MyButton(props) {
-  const {variant, ...other} = props;
+  const {variant, className, ...other} = props;
   const classes = useStyles(props);
   return (
     <Button
-      className={classes.root}
+      className={classNames(classes.root, className)}
       variant={variant}
       classes={{
         outlined: classes.outlined

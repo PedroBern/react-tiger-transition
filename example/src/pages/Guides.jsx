@@ -15,13 +15,16 @@ const useStyles = makeStyles({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  screen: {
+    backgroundColor: 'white',
+  }
 });
 
 const Guides = () => {
   const classes = useStyles();
 
   return (
-    <Screen>
+    <Screen className={classes.screen}>
 
       <Container maxWidth='md' className={classes.container}>
         <Typography variant='h2'>

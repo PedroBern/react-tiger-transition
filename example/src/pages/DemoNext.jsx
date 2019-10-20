@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import classNames from 'classnames';
-
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
+import { indigo, amber } from '@material-ui/core/colors';
+
 
 import { Screen, Link } from 'react-tiger-transition';
 
+import { Button } from '../components'
 import { DemoContext } from '../provider';
 
 const useStyles = makeStyles({
@@ -15,6 +16,7 @@ const useStyles = makeStyles({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
+    backgroundColor: props => props.a ? amber[500] : indigo[500]
   },
   paper: {
     display: 'inherit',
@@ -25,19 +27,12 @@ const useStyles = makeStyles({
     paddingBottom: 16,
     paddingLeft: 40,
     paddingRight: 40,
+    // backgroundColor: '#333'
   },
   button: {
     margin: 8,
     minWidth: 200,
   },
-  a: {
-    // backgroundColor: 'yellow',
-    background: 'linear-gradient(45deg, orange 30%, yellow 90%)',
-  },
-  b: {
-    // backgroundColor: 'blue',
-    background: 'linear-gradient(45deg, darkBlue 30%, blue 90%)',
-  }
 });
 
 const getOpositeDirection = direction => (
@@ -47,9 +42,9 @@ const getOpositeDirection = direction => (
   'left'
 );
 
-const DemoA = ({a, b}) => {
+const DemoNext = ({a, b}) => {
 
-  const classes = useStyles();
+  const classes = useStyles({a});
 
   const {
     tiger,
@@ -59,13 +54,12 @@ const DemoA = ({a, b}) => {
   const hasDirection = tiger.args.direction !== undefined;
 
   return (
-    <Screen className={classNames(classes.screen, a ? classes.a : classes.b)}>
+    <Screen className={classes.screen}>
 
       <Paper className={classes.paper}>
         <Button
           className={classes.button}
           variant='contained'
-          color='primary'
           component={Link}
           to={`/demo-${a ? 'b' : 'a'}`}
           transition={() => tiger.func({...args})}
@@ -77,7 +71,6 @@ const DemoA = ({a, b}) => {
           <Button
             className={classes.button}
             variant='contained'
-            color='primary'
             component={Link}
             to={`/demo-${a ? 'b' : 'a'}`}
             transition={() => tiger.func({
@@ -91,8 +84,7 @@ const DemoA = ({a, b}) => {
 
         <Button
           className={classes.button}
-          variant='contained'
-          // color='secondary'
+          variant='outlined'
           component={Link}
           to='/demo'
           transition={() => (
@@ -112,4 +104,4 @@ const DemoA = ({a, b}) => {
 }
 
 
-export default DemoA;
+export default DemoNext;

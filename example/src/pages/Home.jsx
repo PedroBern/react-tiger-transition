@@ -4,9 +4,9 @@ import { makeStyles } from '@material-ui/styles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-// import Button from '@material-ui/core/Button';
 
-import { Button } from '../components';
+
+import { Button, themeColor } from '../components';
 
 import {
   Screen,
@@ -16,9 +16,6 @@ import {
 
 
 const useStyles = makeStyles({
-  // screen: {
-    // background: 'linear-gradient(120deg, rgba(247,192,111,1) 0%, rgba(212,137,75,1) 100%)'
-  // },
   container: {
     height: '100%',
   },
@@ -27,6 +24,7 @@ const useStyles = makeStyles({
   },
   h2: {
     lineHeight: 1.1,
+    color: themeColor
   },
   outlined: {
     borderColor: 'white',
@@ -71,7 +69,7 @@ const Home = props => {
             <Typography
               variant='h2'
               color='primary'
-              className='tiger-gradient-text'
+              // className='tiger-gradient-text'
               classes={{
                 h2: classes.h2
               }}

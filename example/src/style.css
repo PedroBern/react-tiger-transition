@@ -13,10 +13,3 @@ body {
   -o-background-size: cover;
   background-size: cover;
 }
-
-.tiger-gradient-text {
-  color: white;
-  background: linear-gradient(120deg, rgba(247,192,111,1) 0%, rgba(212,137,75,1) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
