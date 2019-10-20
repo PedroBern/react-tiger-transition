@@ -4,6 +4,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import { Route, Navigation, fade, Screen } from 'react-tiger-transition';
 
+import styles from '../../src/styles.css';
+
 import { Home, Docs, Demo, DemoNext, Guides } from './pages';
 
 import { Nav } from './components';

@@ -53,6 +53,8 @@ const Nav = ({match, location, history}) => {
     <AppBar position="fixed" className={classes.appBar}>
       <Container maxWidth='lg'>
         <Tabs
+          variant="scrollable"
+          scrollButtons="auto"
           value={
             match ?
               match.path.indexOf('demo') > -1 ?
