@@ -3,25 +3,23 @@ import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
-import themeColor from './themeColor';
+import { color, gradient } from './themeColor';
 
 
 const useStyles = makeStyles({
   root: {
-    background: props =>
-      props.variant === 'contained'
-        ? themeColor
-        : 'transparent',
+    background: gradient
   },
   outlined: {
-    borderColor: themeColor,
-    color: themeColor
+    borderColor: color,
+    WebkitBackgroundClip: 'text',
+    textFillColor: 'transparent',
   }
 });
 
 function MyButton(props) {
   const {variant, className, ...other} = props;
-  const classes = useStyles(props);
+  const classes = useStyles();
   return (
     <Button
       className={classNames(classes.root, className)}

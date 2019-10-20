@@ -13,3 +13,8 @@ body {
   -o-background-size: cover;
   background-size: cover;
 }
+
+.gradient-text {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

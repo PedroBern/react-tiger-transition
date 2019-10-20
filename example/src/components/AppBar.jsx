@@ -2,12 +2,16 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 
-import themeColor from './themeColor';
+import { gradient, color, gradientSecondary } from './themeColor';
 
 const useStyles = makeStyles({
   colorPrimary: {
     color: 'black',
-    backgroundColor: themeColor
+    background: gradient
+  },
+  colorSecondary: {
+    color: color,
+    background: gradientSecondary,
   }
 });
 
@@ -16,7 +20,8 @@ function MyAppBar(props) {
   return (
     <AppBar
       classes={{
-        colorPrimary: classes.colorPrimary
+        colorPrimary: classes.colorPrimary,
+        colorSecondary: classes.colorSecondary
       }}
       {...props}
     />

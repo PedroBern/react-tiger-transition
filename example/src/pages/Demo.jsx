@@ -64,10 +64,11 @@ const Demo = props => {
 
     <Screen className={classes.screen}>
 
-      <AppBar position="fixed">
+      <AppBar position="fixed" color='secondary'>
         <Container maxWidth='lg'>
 
           <Tabs
+            secondary
             value={tiger.name}
             variant="scrollable"
             scrollButtons="auto"

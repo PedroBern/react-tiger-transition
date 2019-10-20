@@ -2,15 +2,17 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 
+import { color } from './themeColor';
+
 const useStyles = makeStyles({
-  indicator: indicatorTop => indicatorTop ? {
-    backgroundColor: 'black',
+  indicator: props => props.indicatorTop ? {
+    backgroundColor: props.secondary ? color : 'black',
     top: 0,
-  } : { backgroundColor: 'black' }
+  } : { backgroundColor: props.secondary ? color : 'black' }
 });
 
-function MyTabs({classes, indicatorTop, ...other}) {
-  const styles = useStyles(indicatorTop);
+function MyTabs({classes, indicatorTop, secondary, ...other}) {
+  const styles = useStyles({indicatorTop, secondary});
   return (
     <Tabs {...other} classes={{
       indicator: styles.indicator,
@@ -20,7 +22,8 @@ function MyTabs({classes, indicatorTop, ...other}) {
 }
 
 MyTabs.defaultProps = {
-  indicatorTop: false
+  indicatorTop: false,
+  secondary: false,
 }
 
 export default MyTabs;

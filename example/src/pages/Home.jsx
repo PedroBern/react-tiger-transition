@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
 
-import { Button, themeColor } from '../components';
+import { Button, gradient } from '../components';
 
 import {
   Screen,
@@ -24,7 +24,9 @@ const useStyles = makeStyles({
   },
   h2: {
     lineHeight: 1.1,
-    color: themeColor
+    background: gradient,
+    WebkitBackgroundClip: 'text',
+    textFillColor: 'transparent',
   },
   outlined: {
     borderColor: 'white',

@@ -67,10 +67,11 @@ const Docs = ({
     :
     <Screen className={classes.screen}>
 
-      <AppBar position="fixed">
+      <AppBar position="fixed" color='secondary'>
         <Container maxWidth='lg'>
 
           <Tabs
+            secondary
             value={match ? docsPaths.indexOf(match.params.doc) : 0}
             variant="scrollable"
             scrollButtons="auto"
