@@ -62,14 +62,13 @@ const Route = ({
   transitionProps,
   screen,
   screenProps,
-  fixed,
   ...other,
 }) => {
 
   const _className = computeClassName(
     disableStyle,
     className,
-    `react-tiger-transition--${fixed ? 'fixed' : 'route'}`
+    `react-tiger-transition--route`
   )
 
   return (
@@ -99,7 +98,6 @@ Route.defaultProps = {
   disableStyle: false,
   screen: false,
   screenProps: {},
-  fixed: false,
 };
 
 Route.propTypes = {
@@ -118,14 +116,6 @@ Route.propTypes = {
    * still use className to set your own styles.
    */
   disableStyle: PropTypes.bool,
-
-  /**
-   * In case you want a route to render only a component like appbars,
-   * this is a shorthand, but you still need to set positioning and height.
-   * The only thing `fixed` does is not setting your `<route />` to fullscreen,
-   * like a regular route page.
-   */
-  fixed: PropTypes.bool,
 
  /**
   * Div container className. A string or a function returning a string.

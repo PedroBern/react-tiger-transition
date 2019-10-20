@@ -47,17 +47,6 @@ type: `bool`
 defaultValue: `false`
 
 
-### `fixed`
-
-In case you want a route to render only a component like appbars,
-this is a shorthand, but you still need to set positioning and height.
-The only thing `fixed` does is not setting your `<route />` to fullscreen,
-like a regular route page.
-
-type: `bool`
-defaultValue: `false`
-
-
 ### `screen`
 
 Autimatically wraps route child with `<Screen />`.

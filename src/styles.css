@@ -15,6 +15,11 @@ body {
 }
 
 .react-tiger-transition--route, .react-tiger-transition--fixed {
+	height: 100%;
+	top: 0;
+	left: 0;
+  bottom: 0;
+  right: 0;
 	width: 100%;
 	position: absolute;
 	visibility: visible;
@@ -28,18 +33,6 @@ body {
 	-webkit-transform-style: preserve-3d;
 	-moz-transform-style: preserve-3d;
 	transform-style: preserve-3d;
-}
-
-.react-tiger-transition--route {
-	height: 100%;
-	top: 0;
-	left: 0;
-  bottom: 0;
-  right: 0;
-}
-
-.react-tiger-transition--fixed {
-	z-index: 3;
 }
 
 .react-tiger-transition--screen {

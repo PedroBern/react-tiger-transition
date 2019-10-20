@@ -21,9 +21,7 @@ import 'codemirror/theme/material.css';
 
 const useStyles = makeStyles({
   nav: {
-    top: 'auto',
-    height: 64,
-    bottom: 0,
+    zIndex: -1
   },
   route: {
     height: `calc(100% - 47px)` // because of the shared appbar between screens
@@ -67,7 +65,6 @@ const App = () => {
           <Route exact path="/demo-b" children={<DemoNext b />} />
           <Route exact path="/guides" children={<Guides />} className={classes.route}/>
           <Route
-            fixed
             path={['/docs', '/demo', '/guides']}
             className={classes.nav}
             children={<Nav />}
