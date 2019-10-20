@@ -1,14 +1,56 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import { indigo, amber } from '@material-ui/core/colors';
-
+import {
+  red,
+  pink,
+  purple,
+  deepPurple,
+  indigo,
+  blue,
+  lightBlue,
+  cyan,
+  teal,
+  green,
+  lightGreen,
+  lime,
+  yellow,
+  amber,
+  orange,
+  deepOrange,
+  brown,
+  grey,
+  blueGrey
+} from '@material-ui/core/colors';
 
 import { Screen, Link } from 'react-tiger-transition';
 
 import { Button } from '../components'
 import { DemoContext } from '../provider';
+
+const colors = [
+  lime,
+  red,
+  blue,
+  purple,
+  deepOrange,
+  grey,
+  indigo,
+  pink,
+  brown,
+  cyan,
+  lightBlue,
+  green,
+  deepPurple,
+  yellow,
+  orange,
+  amber,
+  teal,
+  blueGrey,
+  lightGreen,
+];
 
 const useStyles = makeStyles({
   screen: {
@@ -16,7 +58,7 @@ const useStyles = makeStyles({
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    backgroundColor: props => props.a ? amber[500] : indigo[500]
+    backgroundColor: props => colors[props.color][500]
   },
   paper: {
     display: 'inherit',
@@ -27,7 +69,6 @@ const useStyles = makeStyles({
     paddingBottom: 16,
     paddingLeft: 40,
     paddingRight: 40,
-    // backgroundColor: '#333'
   },
   button: {
     margin: 8,
@@ -46,9 +87,19 @@ const changeAxis = direction => (
   direction === 'left' || direction === 'right' ? 'top' : 'left'
 );
 
-const DemoNext = ({a, b}) => {
 
-  const classes = useStyles({a});
+const DemoNext = ({a, b, location, ...other}) => {
+
+  const { state } = location;
+
+  const [localState, setLocalState] = useState(state && state.loop ? state : {loop: 0})
+
+  const [to, setTo] = useState({
+    pathname: `/demo-${a ? 'b' : 'a'}`,
+    state: { loop: localState.loop + 1 < 19 ? localState.loop + 1 : 0},
+  })
+
+  const classes = useStyles({color: to.state.loop});
 
   const {
     tiger,
@@ -66,7 +117,7 @@ const DemoNext = ({a, b}) => {
           className={classes.button}
           variant='contained'
           component={Link}
-          to={`/demo-${a ? 'b' : 'a'}`}
+          to={to}
           transition={() => tiger.func({...args})}
         >
           Continue
@@ -78,7 +129,7 @@ const DemoNext = ({a, b}) => {
               className={classes.button}
               variant='contained'
               component={Link}
-              to={`/demo-${a ? 'b' : 'a'}`}
+              to={to}
               transition={() => tiger.func({
                 ...args,
                 direction: getOpositeDirection(args.direction)
@@ -90,7 +141,7 @@ const DemoNext = ({a, b}) => {
               className={classes.button}
               variant='contained'
               component={Link}
-              to={`/demo-${a ? 'b' : 'a'}`}
+              to={to}
               onClick={() => {
                 const direction = changeAxis(args.direction)
                 onChangeFromObj({...args, direction})
@@ -127,4 +178,4 @@ const DemoNext = ({a, b}) => {
 }
 
 
-export default DemoNext;
+export default withRouter(DemoNext);
