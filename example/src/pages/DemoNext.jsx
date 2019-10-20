@@ -42,6 +42,10 @@ const getOpositeDirection = direction => (
   'left'
 );
 
+const changeAxis = direction => (
+  direction === 'left' || direction === 'right' ? 'top' : 'left'
+);
+
 const DemoNext = ({a, b}) => {
 
   const classes = useStyles({a});
@@ -49,6 +53,7 @@ const DemoNext = ({a, b}) => {
   const {
     tiger,
     args,
+    onChangeFromObj
   } = useContext(DemoContext)
 
   const hasDirection = tiger.args.direction !== undefined;
@@ -68,18 +73,36 @@ const DemoNext = ({a, b}) => {
         </Button>
 
         {hasDirection && (
-          <Button
-            className={classes.button}
-            variant='contained'
-            component={Link}
-            to={`/demo-${a ? 'b' : 'a'}`}
-            transition={() => tiger.func({
-              ...args,
-              direction: getOpositeDirection(args.direction)
-            })}
-          >
-            Turn around
-          </Button>
+          <React.Fragment>
+            <Button
+              className={classes.button}
+              variant='contained'
+              component={Link}
+              to={`/demo-${a ? 'b' : 'a'}`}
+              transition={() => tiger.func({
+                ...args,
+                direction: getOpositeDirection(args.direction)
+              })}
+            >
+              Turn around
+            </Button>
+            <Button
+              className={classes.button}
+              variant='contained'
+              component={Link}
+              to={`/demo-${a ? 'b' : 'a'}`}
+              onClick={() => {
+                const direction = changeAxis(args.direction)
+                onChangeFromObj({...args, direction})
+              }}
+              transition={() => tiger.func({
+                ...args,
+                direction: changeAxis(args.direction)
+              })}
+            >
+              Change axis
+            </Button>
+          </React.Fragment>
         )}
 
         <Button
