@@ -17,8 +17,6 @@ import { DemoContext } from '../provider';
 
 const useStyles = makeStyles({
   screen: {
-    // background: 'linear-gradient(45deg, orange 30%, yellow 90%)',
-    backgroundColor: 'white',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

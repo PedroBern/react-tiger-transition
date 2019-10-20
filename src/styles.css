@@ -14,7 +14,7 @@ body {
   overflow: hidden;
 }
 
-.react-tiger-transition--route, .react-tiger-transition--fixed {
+.react-tiger-transition--route {
 	height: 100%;
 	top: 0;
 	left: 0;

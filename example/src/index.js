@@ -21,10 +21,11 @@ import 'codemirror/theme/material.css';
 
 const useStyles = makeStyles({
   nav: {
-    zIndex: -1
+    zIndex: -1,
   },
   route: {
-    height: `calc(100% - 47px)` // because of the shared appbar between screens
+    height: `calc(100% - 48px)`, // because of the shared appbar between screens
+    backgroundColor: 'white'
   }
 });
 

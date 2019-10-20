@@ -7,7 +7,7 @@ import { color } from './themeColor';
 const useStyles = makeStyles({
   indicator: props => props.indicatorTop ? {
     backgroundColor: props.secondary ? color : 'black',
-    top: 0,
+    top: 1,
   } : { backgroundColor: props.secondary ? color : 'black' }
 });
 

@@ -14,9 +14,6 @@ import { Screen, Route, Link, flip, glide } from 'react-tiger-transition';
 
 
 const useStyles = makeStyles({
-  screen: {
-    backgroundColor: 'white',
-  },
   docsRoute: {
     top: 48,
     height: `calc(100% - 48px)`
@@ -65,7 +62,7 @@ const Docs = ({
     match && !docsPaths.includes(match.params.doc) ?
     <Redirect to='/docs/quick-start'/>
     :
-    <Screen className={classes.screen}>
+    <Screen>
 
       <AppBar position="fixed" color='secondary'>
         <Container maxWidth='lg'>
