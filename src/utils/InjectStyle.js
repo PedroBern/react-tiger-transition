@@ -1,7 +1,7 @@
 export class InjectStyle {
-  constructor(keyframes, d) {
+  constructor(style) {
     var styleTag = document.createElement("style");
-    styleTag.textContent = keyframes;
+    styleTag.textContent = style;
     styleTag.setAttribute("data-meta", "tiger-transition")
     this.main = styleTag;
   }
