@@ -27,6 +27,8 @@ const transition = () => glide({
 
 ```javascript
 // specifing for enter or exit
+// this have lower priority, so if the same key is defined
+// as above, this will not work.
 transition = () => glide({
     enter: {
       opacity: 0.8
