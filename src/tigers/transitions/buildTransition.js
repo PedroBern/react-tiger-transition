@@ -3,7 +3,7 @@ import {
   removeClass,
 } from '../../utils';
 
-export const baseIn = ({
+export const buildTransitionIn = ({
   rules='',
   className='',
   replaceBackground=null,
@@ -24,7 +24,7 @@ export const baseIn = ({
     },
 })
 
-export const baseOut = ({
+export const buildTransitionOut = ({
   rules='',
   className='',
   replaceBackground=null,

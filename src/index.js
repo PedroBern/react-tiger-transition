@@ -5,6 +5,7 @@ export { default as Link } from './Link';
 export { default as Navigation } from './Navigation';
 
 export {
+  buildTiger,
   glide,
   glideIn,
   glideOut,

@@ -1,4 +1,4 @@
-export { baseIn, baseOut } from './base';
+export { buildTransitionIn, buildTransitionOut } from './buildTransition';
 export { default as glideInRules } from './glideIn';
 export { default as glideOutRules } from './glideOut';
 export { default as scaleInRules } from './scaleIn';

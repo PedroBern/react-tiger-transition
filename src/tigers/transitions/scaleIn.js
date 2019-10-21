@@ -1,4 +1,4 @@
-import { baseIn } from './base';
+import { buildTransitionIn } from './buildTransition';
 
 import { InjectStyle } from '../../utils';
 
@@ -51,7 +51,7 @@ export default ({
     animation: new InjectStyle(animation),
   }
 
-  return baseIn({
+  return buildTransitionIn({
     rules: rules,
     replaceBackground: replaceBackground,
     className: `react-tiger-transition-scale-in`,

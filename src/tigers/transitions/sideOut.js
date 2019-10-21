@@ -1,4 +1,4 @@
-import { baseOut } from './base';
+import { buildTransitionOut } from './buildTransition';
 
 import { InjectStyle } from '../../utils';
 
@@ -62,7 +62,7 @@ export default ({
     animation: new InjectStyle(animation),
   }
 
-  return baseOut({
+  return buildTransitionOut({
     rules: rules,
     replaceBackground: replaceBackground,
     className: `react-tiger-transition-side-out-${direction}`,
