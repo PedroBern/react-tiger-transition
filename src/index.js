@@ -24,4 +24,5 @@ export {
   side,
   glueIn,
   glueOut,
+  shuffle,
 } from './tigers';

@@ -7,6 +7,7 @@ import extractArgs from './extractArgs';
 import glideRaw from '!raw-loader!../../../src/tigers/glide';
 import glideInRaw from '!raw-loader!../../../src/tigers/glideIn';
 import glideOutRaw from '!raw-loader!../../../src/tigers/glideOut';
+import suffleRaw from '!raw-loader!../../../src/tigers/shuffle';
 import foldRaw from '!raw-loader!../../../src/tigers/fold';
 import unfoldRaw from '!raw-loader!../../../src/tigers/unfold';
 import pushRaw from '!raw-loader!../../../src/tigers/push';
@@ -27,6 +28,7 @@ import {
   glide,
   glideIn,
   glideOut,
+  shuffle,
   fold,
   unfold,
   push,
@@ -42,13 +44,13 @@ import {
   side,
   glueOut,
   glueIn,
-
 } from 'react-tiger-transition';
 
 const rawTigers = {
   glide: glideRaw,
   glideIn: glideInRaw,
   glideOut: glideOutRaw,
+  shuffle: suffleRaw,
   fold: foldRaw,
   unfold: unfoldRaw,
   push: pushRaw,
@@ -141,6 +143,10 @@ const tigersArr = [
     name: 'glueIn',
     func: glueIn,
   },
+  {
+    name: 'shuffle',
+    func: shuffle,
+  }
 ].map(tiger => ({
   ...tiger,
   args: {...extractArgs(rawTigers[tiger.name])}

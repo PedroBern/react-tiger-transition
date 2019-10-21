@@ -1,6 +1,7 @@
 export { buildTiger } from './buildTiger';
 
 export { glide } from './glide'
+export { shuffle } from './shuffle'
 export { glideIn } from './glideIn'
 export { glideOut } from './glideOut'
 export { fold } from './fold'

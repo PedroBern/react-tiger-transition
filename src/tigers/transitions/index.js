@@ -23,3 +23,5 @@ export { default as sideInRules } from './sideIn';
 export { default as sideOutRules } from './sideOut';
 export { default as glueInRules } from './glueIn';
 export { default as glueOutRules } from './glueOut';
+export { default as shuffleInRules } from './shuffleIn';
+export { default as shuffleOutRules } from './shuffleOut';
