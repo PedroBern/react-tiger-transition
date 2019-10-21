@@ -4,7 +4,8 @@
   "description": "Tiger transitions for react router!",
   "main": "lib/react-tiger-transition.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --config ./jest.config.json",
+    "test:watch": "npm run test -- --watch",
     "build": "webpack --mode=production",
     "prepublish": "rm -rf ./lib && npm run build",
     "docz:dev": "docz dev",
