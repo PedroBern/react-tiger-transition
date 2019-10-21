@@ -1,7 +1,7 @@
 import { fadeInRules, fadeOutRules } from './transitions';
-import { base } from './base';
+import { buildTiger } from './buildTiger';
 
-export const fade = base(
+export const fade= buildTiger(
   // common
   {
     backgroundColor: 'white',

@@ -1,7 +1,7 @@
 import { roomInRules, roomOutRules } from './transitions';
-import { base } from './base';
+import { buildTiger } from './buildTiger';
 
-export const room = base(
+export const room= buildTiger(
   // common
   {
     direction: 'left',

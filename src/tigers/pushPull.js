@@ -1,7 +1,7 @@
 import { pushRules, pullRules } from './transitions';
-import { base } from './base';
+import { buildTiger } from './buildTiger';
 
-export const pushPull = base(
+export const pushPull= buildTiger(
   // common
   {
     direction: 'left',

@@ -1,7 +1,7 @@
 import { glideOutRules, unfoldRules } from './transitions';
-import { base } from './base';
+import { buildTiger } from './buildTiger';
 
-export const unfold = base(
+export const unfold= buildTiger(
   // common
   {
     direction: 'left',

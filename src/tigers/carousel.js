@@ -1,7 +1,7 @@
 import { carouselInRules, carouselOutRules } from './transitions';
-import { base } from './base';
+import { buildTiger } from './buildTiger';
 
-export const carousel = base(
+export const carousel= buildTiger(
   // common
   {
     direction: 'left',

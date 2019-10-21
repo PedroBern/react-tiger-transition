@@ -1,3 +1,5 @@
+export { buildTiger } from './buildTiger';
+
 export { glide } from './glide'
 export { glideIn } from './glideIn'
 export { glideOut } from './glideOut'

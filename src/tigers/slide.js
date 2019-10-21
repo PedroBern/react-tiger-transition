@@ -1,7 +1,7 @@
 import { slideInRules, slideOutRules } from './transitions';
-import { base } from './base';
+import { buildTiger } from './buildTiger';
 
-export const slide = base(
+export const slide= buildTiger(
   // common
   {
     direction: 'left',

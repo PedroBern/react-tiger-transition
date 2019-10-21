@@ -1,5 +1,5 @@
 import { glideInRules, glueOutRules } from './transitions';
-import { base } from './base';
+import { buildTiger } from './buildTiger';
 
 export const glueOut= base(
   // common

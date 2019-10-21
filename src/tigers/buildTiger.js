@@ -26,7 +26,7 @@
 
 import { ReplaceBackground } from '../utils';
 
-export const base = (
+export const buildTiger = (
   argsInit,
   enterInit,
   enterTransition,

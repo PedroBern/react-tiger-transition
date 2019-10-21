@@ -1,7 +1,7 @@
 import { sideInRules, sideOutRules } from './transitions';
-import { base } from './base';
+import { buildTiger } from './buildTiger';
 
-export const side = base(
+export const side= buildTiger(
   // common
   {
     direction: 'left',

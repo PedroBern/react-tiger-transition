@@ -1,7 +1,7 @@
 import { glideOutRules, glueInRules } from './transitions';
-import { base } from './base';
+import { buildTiger } from './buildTiger';
 
-export const glueIn = base(
+export const glueIn= buildTiger(
   // common
   {
     direction: 'left',

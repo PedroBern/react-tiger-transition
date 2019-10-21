@@ -1,7 +1,7 @@
 import { glideInRules, foldRules } from './transitions';
-import { base } from './base';
+import { buildTiger } from './buildTiger';
 
-export const fold = base(
+export const fold= buildTiger(
   // common
   {
     direction: 'left',

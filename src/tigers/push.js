@@ -1,7 +1,7 @@
 import { glideInRules, pushRules } from './transitions';
-import { base } from './base';
+import { buildTiger } from './buildTiger';
 
-export const push = base(
+export const push= buildTiger(
   // common
   {
     direction: 'left',

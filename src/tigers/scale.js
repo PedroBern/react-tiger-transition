@@ -1,7 +1,7 @@
 import { scaleInRules, scaleOutRules } from './transitions';
-import { base } from './base';
+import { buildTiger } from './buildTiger';
 
-export const scale = base(
+export const scale= buildTiger(
   // common
   {
     backgroundColor: null,
