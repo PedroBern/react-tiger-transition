@@ -38,12 +38,11 @@ export function reducer(state, action) {
       return args ? { ...state, args } : { ...state }
 
     case 'onChangeFromObj':
-      console.log('called');
       args = action.value;
-      console.log(args);
       return args ? { ...state, args } : { ...state }
 
     default:
       throw new Error();
+
   }
 }
