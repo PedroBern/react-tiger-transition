@@ -79,6 +79,8 @@ Link.defaultProps = {
   timeout: 600,
 };
 
+Link.displayName = 'TigerLink';
+
 Link.propTypes = {
   /**
    * Transition/animation to be applied when changing route. String if using

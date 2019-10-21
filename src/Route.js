@@ -103,6 +103,8 @@ Route.defaultProps = {
   transitionProps: {},
 };
 
+Route.displayName = 'TigerRoute';
+
 Route.propTypes = {
   /**
    * Propably your 'page' component. I recommend you to use [`<Screen />`](/docs/screen)
