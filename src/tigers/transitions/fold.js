@@ -10,7 +10,6 @@ export default ({
   angle=90,
   replaceBackground=null,
   zIndex=1,
-  fillMode='both',
 }={}) => {
 
   const config = {
@@ -38,7 +37,7 @@ export default ({
 
   const transformOrigin = config[direction].to;
   const animationName = `${direction}ReactTigerTransitionFold`;
-  const animationCss = `${animationName} ${duration}ms ${easing} ${fillMode}`
+  const animationCss = `${animationName} ${duration}ms ${easing} both`
 
   const style = `
   .react-tiger-transition-fold-${direction} {

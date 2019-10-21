@@ -12,7 +12,6 @@ export default ({
   depth=500,
   angle=90,
   offset=100,
-  fillMode='both',
 }={}) => {
 
   const config = {
@@ -25,7 +24,7 @@ export default ({
 
   const animationName = `${direction}ReactTigerTransitionSideOut`;
   const transformOrigin = config[direction][0];
-  const animationCss = `${animationName} ${duration}ms ${fillMode} ${easing}`;
+  const animationCss = `${animationName} ${duration}ms both ${easing}`;
 
   const style = `
   .react-tiger-transition-side-out-${direction} {

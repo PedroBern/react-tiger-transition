@@ -9,7 +9,6 @@ export default ({
   opacity=0.2,
   replaceBackground=null,
   zIndex=1,
-  fillMode='both',
   depth=1000,
 }={}) => {
 
@@ -37,7 +36,7 @@ export default ({
   const animationName = `${direction}ReactTigerTransitionCubeIn`;
   const transformOrigin = '50% 50%';
   let transform = config[direction].style;
-  const animationCss = `${animationName} ${duration}ms ${fillMode} ${easing}`
+  const animationCss = `${animationName} ${duration}ms both ${easing}`
 
   const style = `
   .react-tiger-transition-cube-in-${direction} {

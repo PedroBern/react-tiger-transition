@@ -11,7 +11,6 @@ export default ({
   zIndex=2,
   depth=500,
   offset=200,
-  fillMode='both',
 }={}) => {
 
   const config = {
@@ -23,7 +22,7 @@ export default ({
 
 
   const animationName = `${direction}ReactTigerTransitionSlideOut`;
-  const animationCss = `${animationName} ${duration}ms ${fillMode} ${easing}`;
+  const animationCss = `${animationName} ${duration}ms both ${easing}`;
 
   const style = `
   .react-tiger-transition-slide-out-${direction} {

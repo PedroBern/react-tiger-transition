@@ -14,7 +14,6 @@ export const glueIn= buildTiger(
     easing: 'ease-in',
     opacity: 0,
     zIndex: 1,
-    fillMode: 'both',
     angle: 15,
     depth: 200,
     delay: 0,
@@ -27,7 +26,6 @@ export const glueIn= buildTiger(
     easing: 'ease',
     opacity: 1,
     zIndex: 2,
-    fillMode: 'both',
   },
   glideOutRules,
 )

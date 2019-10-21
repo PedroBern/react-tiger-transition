@@ -9,7 +9,6 @@ export default ({
   scale=0.8,
   replaceBackground=null,
   zIndex=1,
-  fillMode='ease',
   delay=0,
 }={}) => {
 
@@ -20,8 +19,8 @@ export default ({
     -webkit-transform: scale(${scale});
     -ms-transform: scale(${scale});
     transform: scale(${scale});
-    -webkit-animation: ${animationName} ${duration}ms ${easing} ${fillMode};
-    animation: ${animationName} ${duration}ms ${easing} ${fillMode};
+    -webkit-animation: ${animationName} ${duration}ms ${easing} both;
+    animation: ${animationName} ${duration}ms ${easing} both;
     z-index: ${zIndex};
     -webkit-animation-delay: ${delay}ms;
     animation-delay: ${delay}ms;

@@ -14,7 +14,6 @@ export const unfold= buildTiger(
     easing: 'ease',
     opacity: 0.3,
     zIndex: 1,
-    fillMode: 'both',
     delay: 0,
   },
   unfoldRules,
@@ -25,7 +24,6 @@ export const unfold= buildTiger(
     easing: 'ease',
     opacity: 1,
     zIndex: 2,
-    fillMode: 'both',
   },
   glideOutRules,
 )

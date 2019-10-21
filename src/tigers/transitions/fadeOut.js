@@ -8,15 +8,14 @@ export default ({
   opacity=0,
   replaceBackground=null,
   zIndex=1,
-  fillMode='both',
 }={}) => {
 
   const animationName = 'ReactTigerTransitionFadeOut';
 
   const style = `
   .react-tiger-transition-fade-out {
-    -webkit-animation: ${animationName} ${duration}ms ${easing} ${fillMode};
-    animation: ${animationName} ${duration}ms ${easing} ${fillMode};
+    -webkit-animation: ${animationName} ${duration}ms ${easing} both;
+    animation: ${animationName} ${duration}ms ${easing} both;
     z-index: ${zIndex};
     opacity: 1;
   }

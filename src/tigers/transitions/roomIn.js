@@ -9,7 +9,6 @@ export default ({
   opacity=0.3,
   replaceBackground=null,
   zIndex=1,
-  fillMode='both',
   angle=90,
   delay=0,
 }={}) => {
@@ -27,7 +26,7 @@ export default ({
   const animationName = `${direction}ReactTigerTransitionRoomIn`;
   const transformOrigin = config[direction][0];
   let transform = config[direction][1];
-  const animationCss = `${animationName} ${duration}ms ${fillMode} ${easing}`
+  const animationCss = `${animationName} ${duration}ms both ${easing}`
 
   const style = `
   .react-tiger-transition-room-in-${direction} {

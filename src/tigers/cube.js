@@ -15,7 +15,6 @@ export const cube= buildTiger(
     easing: 'ease-in',
     opacity: 0.3,
     zIndex: 1,
-    fillMode: 'both',
     delay: 0,
   },
   cubeInRules,
@@ -26,7 +25,6 @@ export const cube= buildTiger(
     easing: 'ease-in',
     opacity: 0.3,
     zIndex: 2,
-    fillMode: 'both',
   },
   cubeOutRules,
 )

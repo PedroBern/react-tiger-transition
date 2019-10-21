@@ -9,7 +9,6 @@ export default ({
   opacity=0.3,
   replaceBackground=null,
   zIndex=1,
-  fillMode='both',
   depth=500,
   angle=90,
   offset=100,
@@ -26,7 +25,7 @@ export default ({
   const animationName = `${direction}ReactTigerTransitionSideIn`;
   const transformOrigin = config[direction][0];
   let transform = `${config[direction][1]}`;
-  const animationCss = `${animationName} ${duration}ms ${fillMode} ${easing}`
+  const animationCss = `${animationName} ${duration}ms both ${easing}`
 
   const style = `
   .react-tiger-transition-side-in-${direction} {

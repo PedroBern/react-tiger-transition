@@ -14,7 +14,6 @@ export const pull= buildTiger(
     easing: 'ease',
     opacity: 0.3,
     zIndex: 1,
-    fillMode: 'both',
     delay: 0,
     angle: 90,
   },
@@ -26,7 +25,6 @@ export const pull= buildTiger(
     easing: 'ease',
     opacity: 1,
     zIndex: 2,
-    fillMode: 'both',
   },
   glideOutRules,
 )

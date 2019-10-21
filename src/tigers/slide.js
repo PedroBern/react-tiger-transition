@@ -16,7 +16,6 @@ export const slide= buildTiger(
     easing: 'ease',
     opacity: 0.5,
     zIndex: 1,
-    fillMode: 'both',
     delay: 0,
   },
   slideInRules,
@@ -27,7 +26,6 @@ export const slide= buildTiger(
     easing: 'ease',
     opacity: 0.5,
     zIndex: 2,
-    fillMode: 'both',
   },
   slideOutRules,
 )

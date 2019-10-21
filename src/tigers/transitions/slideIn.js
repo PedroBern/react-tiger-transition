@@ -9,7 +9,6 @@ export default ({
   opacity=0.3,
   replaceBackground=null,
   zIndex=1,
-  fillMode='both',
   depth=500,
   offset=200,
   delay=0,
@@ -23,7 +22,7 @@ export default ({
   }
 
   const animationName = `${direction}ReactTigerTransitionSlideIn`;
-  const animationCss = `${animationName} ${duration}ms ${fillMode} ${easing}`
+  const animationCss = `${animationName} ${duration}ms both ${easing}`
 
   const style = `
   .react-tiger-transition-slide-in-${direction} {

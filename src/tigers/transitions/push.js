@@ -10,7 +10,6 @@ export default ({
   angle=90,
   replaceBackground=null,
   zIndex=1,
-  fillMode='both',
 }={}) => {
 
   const config = {
@@ -22,7 +21,7 @@ export default ({
 
   const transformOrigin = config[direction][0];
   const animationName = `${direction}ReactTigerTransitionPush`;
-  const animationCss = `${animationName} ${duration}ms ${easing} ${fillMode}`
+  const animationCss = `${animationName} ${duration}ms ${easing} both`
 
   const style = `
   .react-tiger-transition-push-${direction} {

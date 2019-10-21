@@ -10,7 +10,6 @@ export default ({
   angle=90,
   replaceBackground=null,
   zIndex=2,
-  fillMode='both',
   delay=0,
 }={}) => {
 
@@ -42,7 +41,7 @@ export default ({
   let translate = `translate${config[direction].trans[0]}${config[direction].trans[1]}`;
   let transform = `${rotate} ${translate}`;
   const animationName = `${direction}ReactTigerTransitionUnfold`;
-  const animationCss = `${animationName} ${duration}ms ${easing} ${fillMode}`;
+  const animationCss = `${animationName} ${duration}ms ${easing} both`;
 
   const style = `
   .react-tiger-transition-unfold-${direction} {

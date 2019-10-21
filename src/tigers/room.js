@@ -15,7 +15,6 @@ export const room= buildTiger(
     easing: 'ease',
     opacity: 0.3,
     zIndex: 1,
-    fillMode: 'both',
     delay: 0,
   },
   roomInRules,
@@ -26,7 +25,6 @@ export const room= buildTiger(
     easing: 'ease',
     opacity: 0.3,
     zIndex: 2,
-    fillMode: 'both',
   },
   roomOutRules,
 )

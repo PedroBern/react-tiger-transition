@@ -9,7 +9,6 @@ export default ({
   scale=0.8,
   replaceBackground=null,
   zIndex=1,
-  fillMode='both',
 }={}) => {
 
   const animationName = 'ReactTigerTransitionScaleOut';
@@ -19,8 +18,8 @@ export default ({
     -webkit-transform: scale(1);
     -ms-transform: scale(1);
     transform: scale(1);
-    -webkit-animation: ${animationName} ${duration}ms ${easing} ${fillMode};
-    animation: ${animationName} ${duration}ms ${easing} ${fillMode};
+    -webkit-animation: ${animationName} ${duration}ms ${easing} both;
+    animation: ${animationName} ${duration}ms ${easing} both;
     z-index: ${zIndex};
     opacity: 1;
   }

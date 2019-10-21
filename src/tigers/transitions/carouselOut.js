@@ -13,7 +13,6 @@ export default ({
   offset=300,
   angle=65,
   scale=0.4,
-  fillMode='both',
 }={}) => {
 
   const config = {
@@ -25,7 +24,7 @@ export default ({
 
   const animationName = `${direction}ReactTigerTransitionCarouselOut`;
   const transformOrigin = config[direction][0];
-  const animationCss = `${animationName} ${duration}ms ${fillMode} ${easing}`;
+  const animationCss = `${animationName} ${duration}ms both ${easing}`;
 
   const style = `
   .react-tiger-transition-carousel-out-${direction} {

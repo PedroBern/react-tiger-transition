@@ -11,7 +11,7 @@ const enter = {
   easing: 'ease',
   opacity: 1,
   zIndex: 2,
-  fillMode: 'both',
+
   delay: 0,
 }
 
@@ -20,7 +20,7 @@ const exit = {
   easing: 'ease',
   opacity: 0.3,
   zIndex: 1,
-  fillMode: 'both',
+
 }
 
 const tiger= buildTiger(

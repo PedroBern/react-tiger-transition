@@ -9,7 +9,6 @@ export default ({
   opacity=0.3,
   replaceBackground=null,
   zIndex=1,
-  fillMode='both',
   depth=200,
   angle=15,
   delay=0,
@@ -23,7 +22,7 @@ export default ({
   }
 
   const animationName = `${direction}ReactTigerTransitionGlueIn`;
-  const animationCss = `${animationName} ${duration}ms ${fillMode} ${easing}`;
+  const animationCss = `${animationName} ${duration}ms both ${easing}`;
   const transformOrigin = config[direction][0];
   const transform0 = `translateZ(${-depth}px)`;
 

@@ -13,7 +13,6 @@ export const fade= buildTiger(
     easing: 'ease-out',
     opacity: 0.3,
     zIndex: 2,
-    fillMode: 'both',
     delay: 0,
   },
   fadeInRules,
@@ -24,7 +23,6 @@ export const fade= buildTiger(
     easing: 'ease-out',
     opacity: 0.3,
     zIndex: 1,
-    fillMode: 'both',
   },
   fadeOutRules
 )

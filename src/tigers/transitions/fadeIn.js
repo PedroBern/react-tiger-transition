@@ -8,7 +8,6 @@ export default ({
   opacity=0,
   replaceBackground=null,
   zIndex=1,
-  fillMode='ease',
   delay=0,
 }={}) => {
 
@@ -16,8 +15,8 @@ export default ({
 
   const style = `
   .react-tiger-transition-fade-in {
-    -webkit-animation: ${animationName} ${duration}ms ${easing} ${fillMode};
-    animation: ${animationName} ${duration}ms ${easing} ${fillMode};
+    -webkit-animation: ${animationName} ${duration}ms ${easing} both;
+    animation: ${animationName} ${duration}ms ${easing} both;
     z-index: ${zIndex};
     -webkit-animation-delay: ${delay}ms;
     animation-delay: ${delay}ms;

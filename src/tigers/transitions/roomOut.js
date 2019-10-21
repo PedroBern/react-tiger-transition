@@ -10,7 +10,6 @@ export default ({
   replaceBackground=null,
   zIndex=2,
   angle=90,
-  fillMode='both',
 }={}) => {
 
   if (angle > 90) angle = 90;
@@ -25,7 +24,7 @@ export default ({
 
   const animationName = `${direction}ReactTigerTransitionRoomOut`;
   const transformOrigin = config[direction][0];
-  const animationCss = `${animationName} ${duration}ms ${fillMode} ${easing}`;
+  const animationCss = `${animationName} ${duration}ms both ${easing}`;
 
   const style = `
   .react-tiger-transition-room-out-${direction} {

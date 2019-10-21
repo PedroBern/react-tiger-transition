@@ -14,7 +14,6 @@ export const glideOut= buildTiger(
     easing: 'ease',
     opacity: 0.3,
     zIndex: 1,
-    fillMode: 'both',
     delay: 0,
     scale: 1,
   },
@@ -26,7 +25,6 @@ export const glideOut= buildTiger(
     easing: 'ease',
     opacity: 1,
     zIndex: 2,
-    fillMode: 'both',
   },
   glideOutRules,
 )

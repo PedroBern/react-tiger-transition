@@ -10,7 +10,6 @@ export default ({
   replaceBackground=null,
   zIndex=2,
   depth=200,
-  fillMode='both',
 }={}) => {
 
   const config = {
@@ -22,7 +21,7 @@ export default ({
 
   const animationName = `${direction}ReactTigerTransitionCubeOut`;
   const transformOrigin = config[direction][0];
-  const animationCss = `${animationName} ${duration}ms ${fillMode} ${easing}`;
+  const animationCss = `${animationName} ${duration}ms both ${easing}`;
 
   const style = `
   .react-tiger-transition-cube-out-${direction} {

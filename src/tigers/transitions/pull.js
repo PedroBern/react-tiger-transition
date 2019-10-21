@@ -10,7 +10,6 @@ export default ({
   angle=90,
   replaceBackground=null,
   zIndex=2,
-  fillMode='both',
   delay=0,
 }={}) => {
 
@@ -24,7 +23,7 @@ export default ({
   const transformOrigin = `${config[direction][0]}`;
   let rotate = `rotate${config[direction][1]}${config[direction][2]}`;
   const animationName = `${direction}ReactTigerTransitionPull`;
-  const animationCss = `${animationName} ${duration}ms ${easing} ${fillMode}`;
+  const animationCss = `${animationName} ${duration}ms ${easing} both`;
 
   const style = `
   .react-tiger-transition-pull-${direction} {

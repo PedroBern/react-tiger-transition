@@ -16,7 +16,6 @@ export const flip= buildTiger(
     easing: 'ease-out',
     opacity: 0.2,
     zIndex: 1,
-    fillMode: 'both',
   },
   flipInRules,
 
@@ -25,7 +24,6 @@ export const flip= buildTiger(
     easing: 'ease-in',
     opacity: 0.2,
     zIndex: 2,
-    fillMode: 'both',
   },
   flipOutRules,
 )

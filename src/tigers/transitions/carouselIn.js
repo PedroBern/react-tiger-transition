@@ -9,7 +9,6 @@ export default ({
   opacity=0.3,
   replaceBackground=null,
   zIndex=1,
-  fillMode='both',
   offset=300,
   angle=65,
   scale=0.4,
@@ -26,7 +25,7 @@ export default ({
   const animationName = `${direction}ReactTigerTransitionCarouselIn`;
   const transformOrigin = config[direction][0];
   let transform = `${config[direction][1]} scale(${scale})`;
-  const animationCss = `${animationName} ${duration}ms ${fillMode} ${easing}`
+  const animationCss = `${animationName} ${duration}ms both ${easing}`
 
   const style = `
   .react-tiger-transition-carousel-in-${direction} {
