@@ -28,9 +28,6 @@ module.exports = {
                 src,
                 parentSrc,
               ],
-              options: {
-                rootMode: "upward",
-              }
             },
             {
               test : /\.css$/,

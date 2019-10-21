@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   },
   route: {
     height: `calc(100% - 48px)`, // because of the shared appbar between screens
-    backgroundColor: 'white'
+    backgroundColor: '#fafafa'
   }
 });
 
