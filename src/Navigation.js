@@ -8,7 +8,7 @@ import Screen from './Screen';
 
 export const NavigationContext = React.createContext();
 
-const evalTransition = ({transition, timeout}) => (
+export const evalTransition = ({transition, timeout}) => (
   typeof(transition) === 'function' ?
   { timeout, ...transition(), css: false } :
   Object.prototype.toString.call(transition) === '[object Object]' ?
@@ -181,7 +181,8 @@ Navigation.propTypes = {
    * Props passed to [`<Transition />`](https://reactcommunity.org/react-transition-group/transition)
    * and [`<CSSTransition />`](https://reactcommunity.org/react-transition-group/css-transition).
    * Usually you don't need to worry about this. If you pass `appear`, the
-   * appearing animation is the `defaultTransition` prop.
+   * appearing animation is the `defaultTransition` prop, unless defined a
+   * `forceTransition` prop in [`<Route>`](/docs/route).
    */
   globalTransitionProps: PropTypes.object,
 

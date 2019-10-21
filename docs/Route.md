@@ -47,6 +47,16 @@ type: `bool`
 defaultValue: `false`
 
 
+### `forceTransition`
+
+Force a specific transition for the route. Same as [`<Link />`
+transition](/docs/link) prop. If you are using a css transition, you should
+provide `timeout` in `transitionProps`, or in `globalTransitionProps`
+from [`<Navigation />`](/docs/navigation).
+
+type: `union(string|func|object)`
+
+
 ### `screen`
 
 Autimatically wraps route child with `<Screen />`.
@@ -73,6 +83,7 @@ Props defined here have higher priority than `globalTransitionProps`
 defined in [`<Navigation />`](/docs/navigation).
 
 type: `object`
+defaultValue: `{}`
 
 
 \*Any other prop is passed to

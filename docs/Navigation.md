@@ -55,7 +55,8 @@ defaultValue: `600`
 Props passed to [`<Transition />`](https://reactcommunity.org/react-transition-group/transition)
 and [`<CSSTransition />`](https://reactcommunity.org/react-transition-group/css-transition).
 Usually you don't need to worry about this. If you pass `appear`, the
-appearing animation is the `defaultTransition` prop.
+appearing animation is the `defaultTransition` prop, unless defined a
+`forceTransition` prop in [`<Route>`](/docs/route).
 
 type: `object`
 defaultValue: `{}`

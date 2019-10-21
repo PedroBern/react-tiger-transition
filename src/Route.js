@@ -62,6 +62,7 @@ const Route = ({
   transitionProps,
   screen,
   screenProps,
+  forceTransition,
   ...other,
 }) => {
 
@@ -79,6 +80,7 @@ const Route = ({
           className={_className}
           containerProps={containerProps}
           transitionProps={transitionProps}
+          forceTransition={forceTransition}
         >
           {
             screen ?
@@ -98,6 +100,7 @@ Route.defaultProps = {
   disableStyle: false,
   screen: false,
   screenProps: {},
+  transitionProps: {},
 };
 
 Route.propTypes = {
@@ -151,6 +154,18 @@ Route.propTypes = {
    * Props passed to div container.
    */
   containerProps: PropTypes.object,
+
+  /**
+   * Force a specific transition for the route. Same as [`<Link />`
+   * transition](/docs/link) prop. If you are using a css transition, you should
+   * provide `timeout` in `transitionProps`, or in `globalTransitionProps`
+   * from [`<Navigation />`](/docs/navigation).
+   */
+  forceTransition: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func,
+    PropTypes.object,
+  ]),
 }
 
 export default Route
