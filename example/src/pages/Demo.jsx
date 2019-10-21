@@ -20,6 +20,7 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    height: `calc(100% - 48px)`
   },
   fullWidth: {
     width: '100%',

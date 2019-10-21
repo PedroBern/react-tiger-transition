@@ -9,6 +9,9 @@ import {
 } from 'react-tiger-transition'
 
 const useStyles = makeStyles({
+  screen: {
+    height: `calc(100% - 48px)`,
+  },
   container: {
     height: '100%',
     display: 'flex',
@@ -21,7 +24,7 @@ const Guides = () => {
   const classes = useStyles();
 
   return (
-    <Screen>
+    <Screen className={classes.screen}>
 
       <Container maxWidth='md' className={classes.container}>
         <Typography variant='h2'>

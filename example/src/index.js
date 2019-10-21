@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from "react-router-dom";
 
-import { Route, Navigation, fade, Screen } from 'react-tiger-transition';
+import { Route, Navigation, Screen, shuffle, fade } from 'react-tiger-transition';
 
 import styles from '../../src/styles.css';
 
@@ -21,11 +21,13 @@ import 'codemirror/theme/material.css';
 
 const useStyles = makeStyles({
   nav: {
-    zIndex: -1,
+    zIndex: 3,
+    bottom: 0,
+    top: 'auto',
+    height: 56,
   },
   route: {
-    height: `calc(100% - 48px)`, // because of the shared appbar between screens
-    backgroundColor: '#fafafa'
+    backgroundColor: '#fafafa',
   }
 });
 
@@ -69,6 +71,7 @@ const App = () => {
             path={['/docs', '/demo', '/guides']}
             className={classes.nav}
             children={<Nav />}
+            forceTransition={shuffle}
           />
 
         </Navigation>
