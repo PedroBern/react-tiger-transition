@@ -1,4 +1,4 @@
-import React, { useMemo, useReducer } from 'react';
+import React, { useMemo, useReducer, useEffect } from 'react';
 import { withRouter, matchPath, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -45,16 +45,15 @@ const NavigationProvider = withRouter(({
   children,
   defaultRoute,
   initialState,
+  disableDefaultRoute,
 
   match,
   location,
   history,
 }) => {
 
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  const context = {
-    ...state,
+  const [state, dispatch] = useReducer(reducer, {
+    ...initialState,
     setTransition: (transition, timeout) => new Promise(
       function(resolve, reject) {
         resolve(dispatch({
@@ -64,26 +63,32 @@ const NavigationProvider = withRouter(({
         }))
       }
     ),
-    endTransition: () => dispatch({type: 'endTransition'})
-  }
+    endTransition: () => dispatch({type: 'endTransition'}),
+    lastLocation: {...location},
+  });
 
-  const matched = useMemo(() => (
-    children.some((child, i) => {
-      const matchedPath = matchPath(location.pathname, {
-        path: child.props.path,
-        exact: child.props.exact || false,
-        strict: child.props.strict || false,
-      });
-      if (matchedPath != null){
-        return true
+  const matched = useMemo(() => {
+    let element, computeMatch;
+
+    React.Children.forEach(children, child => {
+      if (computeMatch == null && React.isValidElement(child)) {
+        element = child;
+
+        const path = child.props.path || child.props.from || null;
+
+        computeMatch = path
+          ? matchPath(location.pathname, { ...child.props, path })
+          : match;
       }
-    })
-  ), [location.pathname, children])
+    });
+
+    return computeMatch != null
+  }, [children, location, match]);
 
   return (
-    <NavigationContext.Provider value={context}>
+    <NavigationContext.Provider value={{...state}}>
       {children}
-      {!matched && defaultRoute}
+      {!disableDefaultRoute && !matched && defaultRoute}
     </NavigationContext.Provider>
   )
 })
@@ -134,15 +139,15 @@ const Navigation = ({
     <NavigationProvider
       {...other}
       initialState={{
-          transition: evalTransition({
-            transition: defaultTransition,
-            timeout: firstTimeout
-          }),
-          currentTransition: null,
-          onTransition: false,
-          defaultTransition,
-          globalTransitionProps,
-      }}
+        transition: evalTransition({
+          transition: defaultTransition,
+          timeout: firstTimeout
+        }),
+        currentTransition: null,
+        onTransition: false,
+        defaultTransition,
+        globalTransitionProps,
+    }}
     >
         {children}
     </NavigationProvider>
@@ -154,6 +159,7 @@ Navigation.defaultProps = {
   defaultRoute: <Redirect to='/' />,
   globalTransitionProps: {},
   firstTimeout: 600,
+  disableDefaultRoute: false,
 };
 
 Navigation.propTypes = {
@@ -193,12 +199,18 @@ Navigation.propTypes = {
   defaultRoute: PropTypes.element,
 
   /**
+   * Disable default route.
+   */
+  disableDefaultRoute: PropTypes.bool,
+
+  /**
    * First transition timeout in milliseconds. Used only on appearing (if set),
    * and only if you are using a css transition. If you are using an object
    * or function returning an transition with timeout, this `firstTimeout` is
    * ignored.
    */
   firstTimeout: PropTypes.number,
+
 }
 
 export default Navigation
