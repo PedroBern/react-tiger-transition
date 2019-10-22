@@ -16,7 +16,7 @@ export const evalTransition = ({transition, timeout}) => (
   { timeout, classNames: transition, css: true}
 )
 
-function reducer(state, action) {
+export function reducer(state, action) {
   switch (action.type) {
 
     case 'setTransition':
