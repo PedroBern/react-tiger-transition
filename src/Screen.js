@@ -64,7 +64,7 @@ const Display = withRouter(({
 /**
  * @description
  * A div with some default css applied to it. Designed to be child of [`<route />`](/docs/route),
- * or parent if passed the `container` prop.
+ * or parent if passed the `display` prop.
  *
  * @afterProps
  * \*Ref and other props are passed to div container.
