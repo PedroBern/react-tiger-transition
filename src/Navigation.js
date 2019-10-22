@@ -101,9 +101,6 @@ const NavigationProvider = withRouter(({
  * many different transitions for the same route as possible, all evaluated
  * on the fly.
  *
- * You must provide at least one **direct** [`<Route />`](/docs/route) child
- * for `<Navigation />`.
- *
  * @example
  * import { BrowserRouter as Router} from "react-router-dom";
  *

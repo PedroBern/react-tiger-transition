@@ -5,9 +5,6 @@ transition on click, before the routing. This makes possible to build as
 many different transitions for the same route as possible, all evaluated
 on the fly.
 
-You must provide at least one **direct** [`<Route />`](/docs/route) child
-for `<Navigation />`.
-
 ## Props
 ### `containerProps`
 
