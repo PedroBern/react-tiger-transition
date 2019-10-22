@@ -63,6 +63,7 @@ const Route = ({
   screen,
   screenProps,
   forceTransition,
+  cancelAnimation,
   ...other,
 }) => {
 
@@ -71,6 +72,18 @@ const Route = ({
     className,
     `react-tiger-transition--route`
   )
+
+  if (cancelAnimation) {
+    transitionProps = {
+      ...transitionProps,
+      onEnter: () => {},
+      onEntering: () => {},
+      onEntered: () => {},
+      onExit: () => {},
+      onExiting: () => {},
+      onExited: () => {},
+    }
+  }
 
   return (
     <RouterRoute {...other}>

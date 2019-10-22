@@ -98,7 +98,7 @@ const Docs = ({
         </Container>
       </AppBar>
 
-      <Screen container>
+      <Screen display>
         {docs.map(d => (
           <Route
             className={classes.docsRoute}
