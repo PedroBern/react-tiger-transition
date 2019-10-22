@@ -28,11 +28,11 @@ const Display = withRouter(({
 }) => {
 
   const [isFirstRender, setIsFirstRender] = useState(true);
-  const [baseMatch, setBaseMatch] = useState(match)
+  const [baseMatch, setBaseMatch] = useState(match);
 
   useEffect(() => {
     setIsFirstRender(false);
-  }, [])
+  }, []);
 
   const onDisplayPath =
     matchPath(location.pathname, {...baseMatch}) !== null ?
@@ -51,14 +51,14 @@ const Display = withRouter(({
       }
     });
     return clonedChildren;
-  }, [children])
+  }, [children]);
 
   return useMemo(() => (
     <React.Fragment>
       {computeChildren}
     </React.Fragment>
-  ), [computeChildren, cancelAnimation])
-})
+  ), [computeChildren, cancelAnimation]);
+});
 
 
 /**
@@ -90,13 +90,13 @@ const Screen = React.forwardRef(({
     disableStyle,
     className,
     `react-tiger-transition--${container || display ? 'container' : 'screen'}`
-  )
+  );
 
   const props = {
     className: _className,
     ref,
     ...other
-  }
+  };
 
   return display ?
     <ScreenBase {...props}>
@@ -104,7 +104,7 @@ const Screen = React.forwardRef(({
     </ScreenBase>
      :
     <ScreenBase {...props} children={children}/>
-})
+});
 
 Screen.displayName = 'TigerScreen';
 
