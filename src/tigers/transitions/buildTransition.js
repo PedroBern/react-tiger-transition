@@ -20,7 +20,7 @@ export const buildTransitionIn = ({
       removeClass(node, className)
       rules.style.remove();
       rules.animation.remove()
-      if (isAppearing && replaceBackground) replaceBackground.original();
+      if (replaceBackground) replaceBackground.original();
     },
 })
 
@@ -30,6 +30,7 @@ export const buildTransitionOut = ({
   replaceBackground=null,
 }={}) => ({
   onExit: (node, isAppearing) => {
+    if (replaceBackground) replaceBackground.fake();
     rules.style.add()
     addClass(node, className)
   },

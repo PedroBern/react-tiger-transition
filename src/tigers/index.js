@@ -1,7 +1,6 @@
 export { buildTiger } from './buildTiger';
 
 export { glide } from './glide'
-export { shuffle } from './shuffle'
 export { glideIn } from './glideIn'
 export { glideOut } from './glideOut'
 export { fold } from './fold'
@@ -19,3 +18,4 @@ export { carousel } from './carousel'
 export { side } from './side'
 export { glueIn } from './glueIn'
 export { glueOut } from './glueOut'
+export { shuffle } from './shuffle'
