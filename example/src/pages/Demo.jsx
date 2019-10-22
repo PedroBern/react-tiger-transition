@@ -9,6 +9,7 @@ import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import MuiLink from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
 
 import { Screen, Link, glide } from 'react-tiger-transition';
 
@@ -17,13 +18,7 @@ import { DemoContext } from '../provider';
 
 const useStyles = makeStyles({
   screen: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: `calc(100% - 48px)`
-  },
-  fullWidth: {
-    width: '100%',
+    height: `calc(100% - 48px)`,
   },
   paper: {
     padding: 16,
@@ -36,6 +31,10 @@ const useStyles = makeStyles({
     '& .CodeMirror': {
       borderRadius: 8,
     }
+  },
+  grid: {
+    height: `calc(100% - 48px)`,
+    marginTop: 48,
   }
 });
 
@@ -84,45 +83,54 @@ const Demo = props => {
         </Container>
       </AppBar>
 
-      <Container maxWidth='sm'>
-        <div className={classes.paper}>
+      <Grid
+        container
+        justify='center'
+        alignItems='center'
+        className={classes.grid}
+      >
+        <Grid item xs={12}>
+          <Container maxWidth='sm'>
+            <div className={classes.paper}>
 
-          <Button
-            variant='outlined'
-            className={classes.fullWidth}
-            component={Link}
-            to='/demo-a'
-            transition={() => tiger.func({...args})}
-          >
-            Start demo!
-          </Button>
-
-          <CodeMirror
-            className={classes.codeMirror}
-            value={strArgs}
-            options={codeMirrorOptions}
-            onBeforeChange={(editor, data, value) => {
-              onBeforeChange(value);
-            }}
-            onChange={(editor, data, value) => {
-              onChange(value);
-            }}
-          />
-
-          <Typography>
-            Check out the {
-              <MuiLink
+              <Button
+                variant='outlined'
+                fullWidth
                 component={Link}
-                to='/docs/transitions'
-                transition={() => glide({direction: 'right'})}
+                to='/demo-a'
+                transition={() => tiger.func({...args})}
               >
-                Transitions API
-              </MuiLink>
-            }.
-          </Typography>
+                Start demo!
+              </Button>
 
-        </div>
-      </Container>
+              <CodeMirror
+                className={classes.codeMirror}
+                value={strArgs}
+                options={codeMirrorOptions}
+                onBeforeChange={(editor, data, value) => {
+                  onBeforeChange(value);
+                }}
+                onChange={(editor, data, value) => {
+                  onChange(value);
+                }}
+              />
+
+              <Typography>
+                Check out the {
+                  <MuiLink
+                    component={Link}
+                    to='/docs/transitions'
+                    transition={() => glide({direction: 'right'})}
+                  >
+                    Transitions API
+                  </MuiLink>
+                }.
+              </Typography>
+
+            </div>
+          </Container>
+        </Grid>
+      </Grid>
     </Screen>
   )
 }
