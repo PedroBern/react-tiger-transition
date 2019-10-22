@@ -16,7 +16,8 @@ type: `union(string|func)`
 ### `container`
 
 Transform it into a container to wrap routes. `<Navigation />` already
-does that, but maybe you want it to create an extra container.
+does that. If you want to create a display container with transitions,
+use the `display` props.
 
 type: `bool`
 defaultValue: `false`
@@ -26,6 +27,15 @@ defaultValue: `false`
 
 Disable default styles applied to div container. You can
 still use `className` to set your own styles.
+
+type: `bool`
+defaultValue: `false`
+
+
+### `display`
+
+Create a display of routes. Works the same way, but does not animate
+on arriving and leaving to the base url of the screen.
 
 type: `bool`
 defaultValue: `false`

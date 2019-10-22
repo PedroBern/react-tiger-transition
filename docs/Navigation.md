@@ -39,6 +39,14 @@ type: `union(string|object|func)`
 defaultValue: `fade`
 
 
+### `disableDefaultRoute`
+
+Disable default route.
+
+type: `bool`
+defaultValue: `false`
+
+
 ### `firstTimeout`
 
 First transition timeout in milliseconds. Used only on appearing (if set),
