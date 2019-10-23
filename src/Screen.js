@@ -47,7 +47,12 @@ const Display = withRouter(({
     React.Children.forEach(children, child => {
       if (React.isValidElement(child)) {
         element = child;
-        clonedChildren.push(React.cloneElement(element, {cancelAnimation}));
+        clonedChildren.push(React.cloneElement(
+          element, {
+            cancelAnimation,
+            key: element.key || new Date().valueOf(),
+          })
+        );
       }
     });
     return clonedChildren;
