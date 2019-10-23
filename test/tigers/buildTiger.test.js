@@ -1,6 +1,7 @@
 import  { buildTiger } from '../../src/tigers/buildTiger';
 import  { ReplaceBackground } from '../../src/utils/ReplaceBackground';
 import { glideInRules, glideOutRules } from '../../src/tigers/transitions';
+import { flip } from '../../src/tigers';
 
 const args = {
   direction: 'left',
@@ -178,5 +179,11 @@ describe('buildTiger return a function that handle args correctly with', () => {
     expect(res.exit.replaceBackground instanceof ReplaceBackground)
     .toBe(true);
   });
+
+  test('flip tiger timeout', () => {
+    expect(flip({duration: 100}).timeout)
+    .toBe(200);
+  });
+
 
 });

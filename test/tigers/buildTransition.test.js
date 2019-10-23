@@ -22,6 +22,19 @@ describe('buildTransitionIn', () => {
   });
 
   const node = document.createElement("DIV");
+
+  test('onEnter not replace background', () => {
+    const transition = buildTransitionIn({...mock, replaceBackground: null});
+    transition.onEnter(node);
+    expect(document.body.style.backgroundColor).toBe('');
+  });
+
+  test('onEntered not replace background', () => {
+    const transition = buildTransitionIn({...mock, replaceBackground: null});
+    transition.onEntered(node);
+    expect(document.body.style.backgroundColor).toBe('');
+  });
+
   const transition = buildTransitionIn({...mock});
 
   test('onEnter inject style', () => {
@@ -69,6 +82,19 @@ describe('buildTransitionOut', () => {
   });
 
   const node = document.createElement("DIV");
+
+  test('onExit not replace background', () => {
+    const transition = buildTransitionOut({...mock, replaceBackground: null});
+    transition.onExit(node);
+    expect(document.body.style.backgroundColor).toBe('');
+  });
+
+  test('onExited not replace background', () => {
+    const transition = buildTransitionOut({...mock, replaceBackground: null});
+    transition.onExited(node);
+    expect(document.body.style.backgroundColor).toBe('');
+  });
+
   const transition = buildTransitionOut({...mock});
 
   test('onExit inject style', () => {
