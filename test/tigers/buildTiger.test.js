@@ -1,4 +1,5 @@
 import  { buildTiger } from '../../src/tigers/buildTiger';
+import  { ReplaceBackground } from '../../src/utils/ReplaceBackground';
 import { glideInRules, glideOutRules } from '../../src/tigers/transitions';
 
 const args = {
@@ -30,7 +31,6 @@ const tiger= buildTiger(
   exit,
   glideOutRules
 )
-
 
 describe('buildTiger computes the timeout correctly with', () => {
 
@@ -76,6 +76,16 @@ describe('buildTiger computes the timeout correctly with', () => {
 
   test('duration and delay defined globaly', () => {
     expect(tiger({duration: 1000, delay: 200}).timeout)
+    .toBe(1200);
+  });
+
+  test('duration globally delay on enter', () => {
+    expect(tiger({duration: 1000, enter: { delay: 200}}).timeout)
+    .toBe(1200);
+  });
+
+  test('duration globally delay on enter >= exit duration', () => {
+    expect(tiger({enter: {duration: 1000, delay: 200}, exit: {duration: 1100}}).timeout)
     .toBe(1200);
   });
 
@@ -159,6 +169,14 @@ describe('buildTiger return a function that handle args correctly with', () => {
       enter: { ...enter, ...args, duration: 300 },
       exit: { ...exit, ...args,  duration: 300  }
     });
+  });
+
+  test('creates ReplaceBackground if backgroundColor on args', () => {
+    const res = fakeTiger({backgroundColor: 'white'});
+    expect(res.enter.replaceBackground instanceof ReplaceBackground)
+    .toBe(true);
+    expect(res.exit.replaceBackground instanceof ReplaceBackground)
+    .toBe(true);
   });
 
 });
