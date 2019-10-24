@@ -1,5 +1,9 @@
 {
   "setupFilesAfterEnv": [
    "<rootDir>/jest.setup.js"
- ]
+ ],
+ "coveragePathIgnorePatterns": [
+      "node_modules",
+      "index.js"
+  ]
 }
