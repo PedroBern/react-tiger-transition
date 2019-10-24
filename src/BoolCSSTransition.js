@@ -30,78 +30,23 @@ import {
   removeClass as removeOneClass
 } from './utils';
 
-const addClass = (node, classes) => node && classes && classes.split(' ').forEach(c => addOneClass(node, c));
-const removeClass = (node, classes) => node && classes && classes.split(' ').forEach(c => removeOneClass(node, c));
+const addClasses = (node, classes) => node && classes && classes.split(' ').forEach(c => addOneClass(node, c));
+const removeClasses = (node, classes) => node && classes && classes.split(' ').forEach(c => removeOneClass(node, c));
 
 /**
  * @docIgnore
  *
  */
-class BoolCSSTransition extends React.Component {
+const BoolCSSTransition = (props) => {
 
-  appliedClasses = {
+  const appliedClasses = {
     appear: {},
     enter: {},
     exit: {},
   }
 
-  onEnter = (node, appearing) => {
-    this.removeClasses(node, 'exit');
-    this.addClass(node, appearing ? 'appear' : 'enter', 'base');
-
-    if (this.props.onEnter) {
-      this.props.onEnter(node, appearing)
-    }
-  }
-
-  onEntering = (node, appearing) => {
-    const type = appearing ? 'appear' : 'enter';
-    this.addClass(node, type, 'active')
-
-    if (this.props.onEntering) {
-      this.props.onEntering(node, appearing)
-    }
-  }
-
-  onEntered = (node, appearing) => {
-    const type = appearing ? 'appear' : 'enter'
-    this.removeClasses(node, type);
-    this.addClass(node, type, 'done');
-
-    if (this.props.onEntered) {
-      this.props.onEntered(node, appearing)
-    }
-  }
-
-  onExit = (node) => {
-    this.removeClasses(node, 'appear');
-    this.removeClasses(node, 'enter');
-    this.addClass(node, 'exit', 'base')
-
-    if (this.props.onExit) {
-      this.props.onExit(node)
-    }
-  }
-
-  onExiting = (node) => {
-    this.addClass(node, 'exit', 'active')
-
-    if (this.props.onExiting) {
-      this.props.onExiting(node)
-    }
-  }
-
-  onExited = (node) => {
-    this.removeClasses(node, 'exit');
-    this.addClass(node, 'exit', 'done');
-
-    if (this.props.onExited) {
-      this.props.onExited(node)
-    }
-  }
-
-  getClassNames = (type) => {
-    const { classNames } = this.props;
+  const getClassNames = (type) => {
+    const { classNames } = props;
     const isStringClassNames = typeof classNames === 'string';
     const prefix = isStringClassNames && classNames
       ? `${classNames}-`
@@ -126,56 +71,109 @@ class BoolCSSTransition extends React.Component {
     };
   }
 
-  addClass(node, type, phase) {
-    let className = this.getClassNames(type)[`${phase}ClassName`];
+  const onEnter = (node, appearing) => {
+    removeClassNames(node, 'exit');
+    addClassNames(node, appearing ? 'appear' : 'enter', 'base');
+
+    if (props.onEnter) {
+      props.onEnter(node, appearing);
+    }
+  }
+
+  const onEntering = (node, appearing) => {
+    const type = appearing ? 'appear' : 'enter';
+    addClassNames(node, type, 'active')
+
+    if (props.onEntering) {
+      props.onEntering(node, appearing);
+    }
+  }
+
+  const onEntered = (node, appearing) => {
+    const type = appearing ? 'appear' : 'enter'
+    removeClassNames(node, type);
+    addClassNames(node, type, 'done');
+
+    if (props.onEntered) {
+      props.onEntered(node, appearing);
+    }
+  }
+
+  const onExit = (node) => {
+    removeClassNames(node, 'appear');
+    removeClassNames(node, 'enter');
+    addClassNames(node, 'exit', 'base')
+
+    if (props.onExit) {
+      props.onExit(node);
+    }
+  }
+
+  const onExiting = (node) => {
+    addClassNames(node, 'exit', 'active')
+
+    if (props.onExiting) {
+      props.onExiting(node);
+    }
+  }
+
+  const onExited = (node) => {
+    removeClassNames(node, 'exit');
+    addClassNames(node, 'exit', 'done');
+
+    if (props.onExited) {
+      props.onExited(node);
+    }
+  }
+
+  function addClassNames(node, type, phase) {
+    let className = getClassNames(type)[`${phase}ClassName`];
 
     if (type === 'appear' && phase === 'done') {
-      className += ` ${this.getClassNames('enter').doneClassName}`;
+      className += ` ${getClassNames('enter').doneClassName}`;
     }
 
     if (phase === 'active') {
       node && node.scrollTop;
     }
 
-    this.appliedClasses[type][phase] = className
-    addClass(node, className)
+    appliedClasses[type][phase] = className
+    addClasses(node, className)
   }
 
-  removeClasses(node, type) {
+  function removeClassNames(node, type) {
     const {
       base: baseClassName,
       active: activeClassName,
       done: doneClassName
-    } = this.appliedClasses[type]
+    } = appliedClasses[type]
 
-    this.appliedClasses[type] = {};
+    appliedClasses[type] = {};
 
     if (baseClassName) {
-      removeClass(node, baseClassName);
+      removeClasses(node, baseClassName);
     }
     if (activeClassName) {
-      removeClass(node, activeClassName);
+      removeClasses(node, activeClassName);
     }
     if (doneClassName) {
-      removeClass(node, doneClassName);
+      removeClasses(node, doneClassName);
     }
   }
 
-  render() {
-    const { classNames: _, css, ...other } = this.props;
+  const { css, classNames, ...other } = props;
 
-    return (
-      <Transition
-        {...other}
-        onEnter={css ? this.onEnter : other.onEnter }
-        onEntered={css ? this.onEntered : other.onEntered }
-        onEntering={css ? this.onEntering : other.onEntering }
-        onExit={css ? this.onExit : other.onExit }
-        onExiting={css ? this.onExiting : other.onExiting }
-        onExited={css ? this.onExited : other.onExited }
-      />
-    );
-  }
+  return (
+    <Transition
+      {...other}
+      onEnter={css ? onEnter : other.onEnter || {} }
+      onEntered={css ? onEntered : other.onEntered || {} }
+      onEntering={css ? onEntering : other.onEntering || {} }
+      onExit={css ? onExit : other.onExit || {} }
+      onExiting={css ? onExiting : other.onExiting || {} }
+      onExited={css ? onExited : other.onExited || {} }
+    />
+  );
 }
 
 BoolCSSTransition.defaultProps = {
