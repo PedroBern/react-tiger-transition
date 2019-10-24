@@ -29,15 +29,15 @@ export const buildTransitionOut = ({
   className='',
   replaceBackground=null,
 }={}) => ({
-  onExit: (node, isAppearing) => {
+  onExit: (node) => {
     if (replaceBackground) replaceBackground.fake();
     rules.style.add()
     addClass(node, className)
   },
-  onExiting: (node, isAppearing) => {
+  onExiting: (node) => {
     rules.animation.add()
   },
-  onExited: (node, isAppearing) => {
+  onExited: (node) => {
     if (replaceBackground) replaceBackground.original();
     removeClass(node, className)
     rules.style.remove();
