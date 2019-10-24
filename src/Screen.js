@@ -44,25 +44,52 @@ const Display = withRouter(({
   const computeChildren = useMemo(() => {
     let clonedChildren = [];
     let element;
+    let key = new Date().valueOf();
     React.Children.forEach(children, child => {
       if (React.isValidElement(child)) {
         element = child;
         clonedChildren.push(React.cloneElement(
           element, {
             cancelAnimation,
-            key: element.key || new Date().valueOf(),
+            key: element.key || key + 1,
           })
         );
+        key += 1;
       }
     });
     return clonedChildren;
-  }, [children]);
+  }, [children, cancelAnimation]);
+
+  // const computeChildren = function() {
+  //   let clonedChildren = [];
+  //   let element;
+  //   let key = new Date().valueOf();
+  //   React.Children.forEach(children, child => {
+  //     if (React.isValidElement(child)) {
+  //       element = child;
+  //       clonedChildren.push(React.cloneElement(
+  //         element, {
+  //           cancelAnimation,
+  //           key: element.key || key + 1,
+  //         })
+  //       );
+  //       key += 1;
+  //     }
+  //   });
+  //   return clonedChildren;
+  // }();
 
   return useMemo(() => (
     <React.Fragment>
       {computeChildren}
     </React.Fragment>
   ), [computeChildren, cancelAnimation]);
+
+  // return (
+  //   <React.Fragment>
+  //     {computeChildren}
+  //   </React.Fragment>
+  // )
 });
 
 
