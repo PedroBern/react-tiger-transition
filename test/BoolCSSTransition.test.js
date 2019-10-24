@@ -1,8 +1,8 @@
 /**
- * most of tests of this file are copies from the original
- * CSSTransition.
+ * The tests include all the original tests from CSSTransition
+ * https://github.com/reactjs/react-transition-group/blob/master/test/CSSTransition-test.js
  *
- * More tests were added to ensure the new functionalities.
+ * More tests were created for the new functionalities.
  *
  */
 
@@ -18,8 +18,10 @@ import BoolCSSTransition from '../src/BoolCSSTransition';
  *  https://github.com/reactjs/react-transition-group/blob/master/test/CSSTransition-test.js
  *
  *  should pass all the orinal tests.
+ *
+ *  The new tests are at the end.
  */
- describe('BoolCSSTransition', () => {
+ describe('CSSTransition original tests:', () => {
 
    it('should flush new props to the DOM before initiating a transition', (done) => {
      mount(
@@ -440,4 +442,114 @@ import BoolCSSTransition from '../src/BoolCSSTransition';
        });
      });
    });
+ });
+
+ /**
+  *  new tests
+  *
+  */
+ describe('BoolCSSTransition new tests', () => {
+
+   describe('entering not css', () => {
+     let instance;
+     let callback;
+
+     beforeEach(() => {
+       callback = jest.fn(args => null);
+       instance = mount(
+         <BoolCSSTransition
+           timeout={10}
+         >
+           <div/>
+         </BoolCSSTransition>
+       )
+     });
+
+     it('should run each state callback', done => {
+       let count = 0;
+
+       instance.setProps({
+         in: true,
+
+         onEnter(node) {
+           count++;
+           callback('onEnter')
+           expect(callback).toBeCalled();
+           expect(callback).toHaveBeenCalledTimes(1);
+           expect(callback).toHaveBeenLastCalledWith('onEnter');
+         },
+
+         onEntering(node){
+           count++;
+           callback('onEntering');
+           expect(callback).toBeCalled();
+           expect(callback).toHaveBeenCalledTimes(2);
+           expect(callback).toHaveBeenLastCalledWith('onEntering');
+         },
+
+         onEntered(node){
+           callback('onEntered');
+           expect(count).toEqual(2);
+           expect(callback).toBeCalled();
+           expect(callback).toHaveBeenCalledTimes(3);
+           expect(callback).toHaveBeenLastCalledWith('onEntered');
+           done();
+         }
+       });
+
+     });
+
+   });
+
+   describe('exiting not css', () => {
+     let instance;
+     let callback;
+
+     beforeEach(() => {
+       callback = jest.fn(args => null);
+       instance = mount(
+         <BoolCSSTransition
+           in
+           timeout={10}
+         >
+           <div/>
+         </BoolCSSTransition>
+       )
+     });
+
+     it('should run each state callback', done => {
+       let count = 0;
+
+       instance.setProps({
+         in: false,
+
+         onExit(node){
+           count++;
+           callback('onExit')
+           expect(callback).toBeCalled();
+           expect(callback).toHaveBeenCalledTimes(1);
+           expect(callback).toHaveBeenLastCalledWith('onExit');
+         },
+
+         onExiting(node){
+           count++;
+           callback('onExiting')
+           expect(callback).toBeCalled();
+           expect(callback).toHaveBeenCalledTimes(2);
+           expect(callback).toHaveBeenLastCalledWith('onExiting');
+         },
+
+         onExited(node){
+           callback('onExited')
+           expect(count).toEqual(2);
+           expect(callback).toBeCalled();
+           expect(callback).toHaveBeenCalledTimes(3);
+           expect(callback).toHaveBeenLastCalledWith('onExited');
+           done();
+         }
+       });
+     });
+
+   });
+
  });
