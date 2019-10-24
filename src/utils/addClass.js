@@ -2,7 +2,7 @@
 // https://github.com/react-bootstrap/dom-helpers/blob/master/src/hasClass.ts
 // https://github.com/react-bootstrap/dom-helpers/blob/master/src/addClass.ts
 
-function hasClass(element, className) {
+export function hasClass(element, className) {
   if (element.classList)
     return !!className && element.classList.contains(className)
 
