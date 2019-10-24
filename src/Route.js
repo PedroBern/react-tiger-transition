@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Route as RouterRoute } from "react-router-dom";
 
 import { computeClassName } from './utils';
-import Transition from './Transition';
+// import Transition from './Transition';
 import Screen from './Screen';
+import BoolCSSTransition from './BoolCSSTransition'
+import { NavigationContext, evalTransition } from './Navigation';
 
 /**
  *
@@ -83,27 +85,52 @@ const Route = ({
       onExiting: () => {},
       onExited: () => {},
     }
-  }
+  };
+
+  const {
+    transition,
+    globalTransitionProps,
+  } = useContext(NavigationContext);
+
+  const forcedTransition = useMemo(() => forceTransition ?
+    {...evalTransition({
+        transition: forceTransition,
+        timeout:  globalTransitionProps.timeout ?
+          globalTransitionProps.timeout :
+          transitionProps.timeout ?
+          transitionProps.timeout :
+          600 // fallback if user is using css transition and dont set timeout
+    })} :
+    false,
+    [forceTransition, globalTransitionProps.timeout, transitionProps.timeout]
+  );
+
+  const computeTransition = forcedTransition ?
+    forcedTransition :
+    transition;
 
   return (
     <RouterRoute {...other}>
       {props => (
-        <Transition
-          match={props.match}
-          className={_className}
-          containerProps={containerProps}
-          transitionProps={transitionProps}
-          forceTransition={forceTransition}
+        <BoolCSSTransition
+          in={props.match != null}
+          mountOnEnter={!computeTransition.css}
+          unmountOnExit
+          {...computeTransition}
+          {...globalTransitionProps}
+          {...transitionProps}
         >
-          {
-            screen ?
-            <Screen {...screenProps}>
-              {children}
-            </Screen>
-            :
-            children
-          }
-        </Transition>
+          <div className={_className} {...containerProps}>
+            {
+              screen ?
+              <Screen {...screenProps}>
+                {children}
+              </Screen>
+              :
+              children
+            }
+          </div>
+        </BoolCSSTransition>
       )}
     </RouterRoute>
   )
