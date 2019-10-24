@@ -171,12 +171,12 @@ class BoolCSSTransition extends React.Component {
     return (
       <Transition
         {...other}
-        onEnter={css ? this.onEnter : other.onEnter || function(){} }
-        onEntered={css ? this.onEntered : other.onEntered || function(){} }
-        onEntering={css ? this.onEntering : other.onEntering || function(){}}
-        onExit={css ? this.onExit : other.onExit || function(){}}
-        onExiting={css ? this.onExiting : other.onExiting || function(){}}
-        onExited={css ? this.onExited : other.onExited || function(){}}
+        onEnter={css ? this.onEnter : other.onEnter  }
+        onEntered={css ? this.onEntered : other.onEntered  }
+        onEntering={css ? this.onEntering : other.onEntering }
+        onExit={css ? this.onExit : other.onExit }
+        onExiting={css ? this.onExiting : other.onExiting }
+        onExited={css ? this.onExited : other.onExited }
       />
     );
   }
@@ -185,6 +185,12 @@ class BoolCSSTransition extends React.Component {
 BoolCSSTransition.defaultProps = {
   css: false,
   classNames: '',
+  onEnter: () => {},
+  onEntered: () => {},
+  onEntering: () => {},
+  onExit: () => {},
+  onExiting: () => {},
+  onExited: () => {},
 }
 
 BoolCSSTransition.propTypes = {
