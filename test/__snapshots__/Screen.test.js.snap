@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Screen Snapshots className 1`] = `
+<div
+  className="react-tiger-transition--screen custom-classname"
+/>
+`;
+
+exports[`Screen Snapshots container 1`] = `
+<div
+  className="react-tiger-transition--container"
+/>
+`;
+
+exports[`Screen Snapshots default props 1`] = `
+<div
+  className="react-tiger-transition--screen"
+/>
+`;
+
+exports[`Screen Snapshots disableStyle 1`] = `
+<div
+  className=""
+/>
+`;
+
+exports[`Screen Snapshots display 1`] = `
+<div
+  className="react-tiger-transition--container"
+/>
+`;
+
+exports[`Screen Snapshots display pass cancelAnimation true to children on first render 1`] = `
+<div
+  className="react-tiger-transition--container"
+>
+  <div
+    cancelAnimation={true}
+    className="child"
+  />
+</div>
+`;
+
+exports[`Screen Snapshots display renders only valid elements 1`] = `
+<div
+  className="react-tiger-transition--container"
+/>
+`;
+
+exports[`Screen Snapshots pass children to SimpleScreen 1`] = `
+<div
+  className="react-tiger-transition--screen"
+>
+  <div
+    className="child"
+  />
+</div>
+`;
+
+exports[`Screen Snapshots pass props to container in SimpleScreen 1`] = `
+<div
+  className="react-tiger-transition--screen"
+  someProp="something"
+>
+  <div
+    className="child"
+  />
+</div>
+`;

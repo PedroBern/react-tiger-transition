@@ -8,9 +8,8 @@
     "test:watch": "npm run test -- --watch",
     "build": "webpack --mode=production",
     "prepublish": "rm -rf ./lib && npm run build",
-    "docz:dev": "docz dev",
-    "docz:build": "docz build",
-    "doc": "react-docgen src/ | node docs/config/buildDocs.js"
+    "doc": "react-docgen src/ | node docs/config/buildDocs.js",
+    "cover": "npx jest --config ./jest.config.json --coverage"
   },
   "author": "Pedro Bernardino Alves Moreira",
   "homepage": "https://github.com/PedroBern/react-tiger-transition",
@@ -25,13 +24,13 @@
   "devDependencies": {
     "@babel/cli": "^7.6.0",
     "@babel/core": "^7.6.0",
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
+    "history": "^4.10.1",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^24.9.0",
     "mini-css-extract-plugin": "^0.8.0",

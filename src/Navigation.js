@@ -63,7 +63,6 @@ const NavigationProvider = withRouter(({
         }))
       }
     ),
-    endTransition: () => dispatch({type: 'endTransition'}),
     lastLocation: {...location},
   });
 
@@ -78,7 +77,7 @@ const NavigationProvider = withRouter(({
 
         computeMatch = path
           ? matchPath(location.pathname, { ...child.props, path })
-          : match;
+          : null;
       }
     });
 
