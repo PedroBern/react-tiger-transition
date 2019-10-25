@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Route Snapshots custom className 1`] = `
+<div
+  className="react-tiger-transition--container"
+>
+  <div
+    className="react-tiger-transition--route custom"
+  >
+    <div />
+  </div>
+</div>
+`;
+
+exports[`Route Snapshots disableStyle 1`] = `
+<div
+  className="react-tiger-transition--container"
+>
+  <div
+    className=""
+  >
+    <div />
+  </div>
+</div>
+`;
+
+exports[`Route Snapshots screen prop 1`] = `
+<div
+  className="react-tiger-transition--container"
+>
+  <div
+    className="react-tiger-transition--route"
+  >
+    <div
+      className="react-tiger-transition--screen"
+    >
+      <div />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Route Snapshots screen with screen props 1`] = `
+<div
+  className="react-tiger-transition--container"
+>
+  <div
+    className="react-tiger-transition--route"
+  >
+    <div
+      className="react-tiger-transition--screen"
+      id="my-screen"
+    >
+      <div />
+    </div>
+  </div>
+</div>
+`;
