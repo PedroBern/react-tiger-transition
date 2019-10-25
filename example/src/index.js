@@ -39,24 +39,6 @@ const App = () => {
     <Router>
       <DemoProvider>
         <Navigation
-
-          // #docs.add
-          //
-          // ! CHROME BUG FOUND ! -> defaultTransition={glide}
-          //
-          // if the page have scroll:
-          // appear transition with translate cause a bug,
-          // scroll bars becomes unscrollable until any element of page get focus
-          // user needs to press tab, but if the page havent a focusabe element
-          // scroll is unreachable until open chrome dev tools and manually
-          // toggle some css properties, then all becomes normal.
-          // If start with translateX(50%), scroll works only when
-          // mouse is over half of page, other half doesn't respond.
-          // not a bug if is not appearing, like on regular transitions.
-          // Works as expected on firefox.
-          // Workaround for now is not to use defaultTransition that use
-          // any kind of translate. Recommend a simple fade.
-
           defaultTransition={() => fade({duration: 800, easing: 'ease-out'})}
           globalTransitionProps={{appear: true}}
         >
