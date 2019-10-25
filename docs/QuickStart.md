@@ -27,6 +27,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router} from "react-router-dom";
 
+// you need to import styles!
+import 'react-tiger-transition/dist/styles.css';
+
 import {
   Navigation,
   Route,
