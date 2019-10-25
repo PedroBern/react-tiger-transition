@@ -21,6 +21,7 @@ const useStyles = makeStyles({
   },
   grid: {
     height: '100%',
+    color: 'white',
   },
   h2: {
     lineHeight: 1.1,
@@ -71,12 +72,17 @@ const Home = props => {
             <Typography
               variant='h2'
               color='primary'
-              // className='tiger-gradient-text'
               classes={{
                 h2: classes.h2
               }}
             >
               React Tiger Transition
+            </Typography>
+            <Typography
+              variant='subtitle1'
+              color='inherit'
+            >
+            A small package ready to take your navigation animations to the next level.
             </Typography>
           </Grid>
 
