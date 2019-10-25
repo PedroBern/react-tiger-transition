@@ -129,7 +129,7 @@ const Navigation = ({
   defaultTransition,
   firstTimeout,
   globalTransitionProps,
-  ...other,
+  ...other
 }) => (
   <Screen container {...containerProps}>
     <NavigationProvider

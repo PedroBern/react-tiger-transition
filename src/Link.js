@@ -49,7 +49,7 @@ const Link = React.forwardRef(({
   onClick,
   to,
   timeout,
-  ...other,
+  ...other
 },ref) => {
 
   const {

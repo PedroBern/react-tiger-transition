@@ -66,7 +66,7 @@ const Route = ({
   screenProps,
   forceTransition,
   cancelAnimation,
-  ...other,
+  ...other
 }) => {
 
   const _className = computeClassName(
