@@ -1,4 +1,6 @@
 dist/
+lib/
+es/
 node_modules/
 .DS_Store
 build-web-server.py

@@ -1,39 +1,73 @@
 {
   "name": "react-tiger-transition",
   "version": "1.0.0",
-  "description": "Tiger transitions for react router!",
-  "main": "lib/react-tiger-transition.js",
+  "description": "Take your navigation transitions to the next level.",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "jsnext:main": "es/index.js",
+  "files": [
+    "dist",
+    "lib",
+    "es",
+    "src"
+  ],
   "scripts": {
-    "test": "jest --config ./jest.config.json",
+    "lint": "./node_modules/.bin/eslint src",
+    "lint-fix": "./node_modules/.bin/eslint --fix src --ext .js",
+    "test": "npm run lint && jest --config ./jest.config.json",
     "test:watch": "npm run test -- --watch",
-    "build": "webpack --mode=production",
-    "prepublish": "rm -rf ./lib && npm run build",
     "doc": "react-docgen src/ | node docs/config/buildDocs.js",
-    "cover": "npx jest --config ./jest.config.json --coverage"
+    "cover": "npx jest --config ./jest.config.json --coverage",
+    "clean": "rimraf lib dist es",
+    "build": "npm run build:commonjs && npm run build:umd && npm run build:es",
+    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib --copy-files",
+    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es --copy-files",
+    "build:umd": "cross-env BABEL_ENV=es rollup -c",
+    "prepublish": "npm run clean && npm run doc && npm run build"
   },
   "author": "Pedro Bernardino Alves Moreira",
-  "homepage": "https://github.com/PedroBern/react-tiger-transition",
+  "homepage": "https://github.com/pedrobern/react-tiger-transition",
   "bugs": {
-    "url": "https://github.com/PedroBern/react-tiger-transition/issues"
+    "url": "https://github.com/pedrobern/react-tiger-transition/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/PedroBern/react-tiger-transition.git"
+    "url": "https://github.com/pedrobern/react-tiger-transition.git"
   },
+  "keywords": [
+    "react",
+    "react-router",
+    "transition",
+    "transition-group",
+    "tiger",
+    "tiger-transition",
+    "animation",
+    "transitions"
+  ],
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.6.0",
     "@babel/core": "^7.6.0",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.6.2",
     "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "cross-env": "^6.0.3",
     "css-loader": "^3.2.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-react": "^7.16.0",
     "gh-pages": "^2.1.1",
     "history": "^4.10.1",
     "html-webpack-plugin": "^3.2.0",
+    "husky": "^4.0.0-beta.5",
     "jest": "^24.9.0",
     "mini-css-extract-plugin": "^0.8.0",
     "prop-types": "^15.7.2",
@@ -43,6 +77,17 @@
     "react-router-dom": "^5.0.1",
     "react-test-renderer": "^16.11.0",
     "react-transition-group": "^4.3.0",
+    "rimraf": "^3.0.0",
+    "rollup": "^1.25.2",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-insert": "^1.1.0",
+    "rollup-plugin-multi-entry": "^2.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-size-snapshot": "^0.10.0",
+    "rollup-plugin-terser": "^5.1.2",
     "style-loader": "^1.0.0",
     "webpack": "^4.40.2",
     "webpack-cli": "^3.3.9",
@@ -54,5 +99,11 @@
     "react-router-dom": "^5.0.1",
     "react-transition-group": "^4.3.0"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run test"
+    }
+  }
 }
