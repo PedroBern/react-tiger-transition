@@ -14,7 +14,7 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint src",
     "lint-fix": "./node_modules/.bin/eslint --fix src --ext .js",
-    "test": "npm run lint && jest --config ./jest.config.json",
+    "test": "npm run lint && cross-env NODE_ENV=commonjs jest --config ./jest.config.json",
     "test:watch": "npm run test -- --watch",
     "doc": "react-docgen src/ | node docs/config/buildDocs.js",
     "cover": "npx jest --config ./jest.config.json --coverage",
