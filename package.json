@@ -14,9 +14,12 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint src",
     "lint-fix": "./node_modules/.bin/eslint --fix src --ext .js",
-    "test": "cross-env NODE_ENV=commonjs jest --config ./jest.config.json",
+    "local-test": "cross-env NODE_ENV=commonjs jest --config ./jest.config.json",
+    "local-cover": "cross-env NODE_ENV=commonjs jest --config ./jest.config.json --coverage",
+    "local-test:watch": "npm run test -- --watch",
+    "test": "jest --config ./jest.config.json",
     "cover": "cross-env NODE_ENV=commonjs jest --config ./jest.config.json --coverage",
-    "test:watch": "npm run test -- --watch",
+    "test:watch": "npm run local-test -- --watch",
     "doc": "react-docgen src/ | node docs/config/buildDocs.js",
     "clean": "rimraf lib dist es",
     "build": "npm run build:commonjs && npm run build:umd && npm run build:es",
@@ -104,7 +107,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint",
-      "pre-push": "npm run test"
+      "pre-push": "npm run local-test"
     }
   }
 }
