@@ -1,6 +1,8 @@
 # react-tiger-transition
 
-`react-tiger-transition` is a small package ready to take navigation animations to the next level.
+`react-tiger-transition` is ready to take navigation animations to the next level.
+
+Checkout the [demo and docs] site!
 
 - Zero dependencies.
 - 19 built-in transitions (the tigers).

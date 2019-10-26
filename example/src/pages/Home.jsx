@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/styles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import MuiLink from '@material-ui/core/Link';
 
 
 import { Button, gradient } from '../components';
@@ -47,7 +48,8 @@ const buttons = [
     variant: 'contained',
   },
   {
-    to: '/github',
+    external: true,
+    to: 'https://github.com/pedrobern/react-tiger-transition',
     text: 'Github',
     variant: 'outlined',
     classes: true,
@@ -89,16 +91,27 @@ const Home = props => {
           <Grid container spacing={4}>
             {buttons.map(b => (
               <Grid item key={b.text}>
-                <Button
-                  component={Link}
-                  transition={glide}
-                  size='large'
-                  to={b.to}
-                  variant={b.variant}
+                {b.external ?
+                  <Button
+                    component={MuiLink}
+                    size='large'
+                    href={b.to}
+                    variant={b.variant}
+                  >
+                    {b.text}
+                  </Button>
+                  :
+                  <Button
+                    component={Link}
+                    transition={glide}
+                    size='large'
+                    to={b.to}
+                    variant={b.variant}
 
-                >
-                  {b.text}
-                </Button>
+                  >
+                    {b.text}
+                  </Button>
+                }
               </Grid>
             ))}
           </Grid>

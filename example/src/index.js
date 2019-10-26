@@ -36,7 +36,7 @@ const App = () => {
   const classes = useStyles();
 
   return (
-    <Router>
+    <Router basename="/react-tiger-transition">
       <DemoProvider>
         <Navigation
           defaultTransition={() => fade({duration: 800, easing: 'ease-out'})}

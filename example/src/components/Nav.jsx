@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import { makeStyles } from '@material-ui/styles';
 import Container from '@material-ui/core/Container';
 import Tab from '@material-ui/core/Tab';
+import MuiLink from '@material-ui/core/Link';
 
 import AppBar from './AppBar';
 import Tabs from './Tabs';
@@ -38,7 +39,8 @@ const paths = [
     text: 'guides',
   },
   {
-    path: '/github',
+    external: true,
+    path: 'https://github.com/pedrobern/react-tiger-transition',
     text: 'github',
   },
 ]
@@ -69,21 +71,29 @@ const Nav = ({match, location, history}) => {
           }}
         >
           {paths.map((p, index) => (
-            <Tab
-              component={Link}
-              key={p.text}
-              to={
-                typeof p.path === 'function' ?
-                match ? p.path(match.path) : '/demo' :
-                p.path
-              }
-              transition={() => glide({
-                direction: pathsAbs.indexOf(match.path) < index ?
-                'left' :
-                'right',
-              })}
-              label={p.text}
-            />
+            p.external ?
+              <Tab
+                component={MuiLink}
+                key={p.text}
+                href={p.path}
+                label={p.text}
+              />
+            :
+              <Tab
+                component={Link}
+                key={p.text}
+                to={
+                  typeof p.path === 'function' ?
+                  match ? p.path(match.path) : '/demo' :
+                  p.path
+                }
+                transition={() => glide({
+                  direction: pathsAbs.indexOf(match.path) < index ?
+                  'left' :
+                  'right',
+                })}
+                label={p.text}
+              />
           ))}
         </Tabs>
       </Container>

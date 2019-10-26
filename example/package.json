@@ -8,7 +8,7 @@
     "start": "webpack-dev-server --open",
     "create": "webpack",
     "build": "webpack -p --mode=production",
-    "deploy": "npm run build && npm run gh-pages -d dist" 
+    "deploy": "npm run build && npx gh-pages -d dist" 
   },
   "author": "",
   "license": "ISC",
