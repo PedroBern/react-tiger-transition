@@ -1,4 +1,6 @@
 /.*
 example/
-/rollup.*
+rollup.*
 docs/
+coverage/
+.DS_Store
