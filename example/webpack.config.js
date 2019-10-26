@@ -10,7 +10,7 @@ const parentSrc = path.join(__dirname, '../src')
 // need to import styles of code mirror
 const codeMirrorLib = path.join(__dirname, './node_modules/codemirror/lib')
 const codeMirrorTheme = path.join(__dirname, './node_modules/codemirror/theme')
-
+const reactTigerTransitionStyles = path.join(__dirname, './node_modules/react-tiger-transition/lib')
 
 module.exports = {
     entry : path.join(src, 'index.js'),
@@ -40,6 +40,7 @@ module.exports = {
                 parentSrc,
                 codeMirrorLib,
                 codeMirrorTheme,
+                reactTigerTransitionStyles
               ],
             },
             {
@@ -60,9 +61,9 @@ module.exports = {
          node_modules,
        ],
        extensions: ['*', '.js', '.jsx'],
-       alias: {
-        "react-tiger-transition": path.resolve(__dirname, '../src'),
-       }
+       // alias: {
+       //  "react-tiger-transition": path.resolve(__dirname, '../src'),
+       // }
      },
 
      resolveLoader: {
