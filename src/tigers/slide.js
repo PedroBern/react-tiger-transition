@@ -1,7 +1,7 @@
 import { slideInRules, slideOutRules } from './transitions';
 import { buildTiger } from './buildTiger';
 
-export const slide= buildTiger(
+export const slide = buildTiger(
   // common
   {
     direction: 'left',
@@ -20,7 +20,7 @@ export const slide= buildTiger(
   },
   slideInRules,
 
-  //exit
+  // exit
   {
     duration: 700,
     easing: 'ease',
@@ -28,4 +28,4 @@ export const slide= buildTiger(
     zIndex: 2,
   },
   slideOutRules,
-)
+);

@@ -1,7 +1,7 @@
 import { pushRules, pullRules } from './transitions';
 import { buildTiger } from './buildTiger';
 
-export const pushPull= buildTiger(
+export const pushPull = buildTiger(
   // common
   {
     direction: 'left',
@@ -19,7 +19,7 @@ export const pushPull= buildTiger(
   },
   pullRules,
 
-  //exit
+  // exit
   {
     duration: 700,
     easing: 'ease',
@@ -28,4 +28,4 @@ export const pushPull= buildTiger(
     angle: 90,
   },
   pushRules,
-)
+);

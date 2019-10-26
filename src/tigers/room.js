@@ -1,7 +1,7 @@
 import { roomInRules, roomOutRules } from './transitions';
 import { buildTiger } from './buildTiger';
 
-export const room= buildTiger(
+export const room = buildTiger(
   // common
   {
     direction: 'left',
@@ -19,7 +19,7 @@ export const room= buildTiger(
   },
   roomInRules,
 
-  //exit
+  // exit
   {
     duration: 700,
     easing: 'ease',
@@ -27,4 +27,4 @@ export const room= buildTiger(
     zIndex: 2,
   },
   roomOutRules,
-)
+);

@@ -1,7 +1,7 @@
 import { scaleInRules, scaleOutRules } from './transitions';
 import { buildTiger } from './buildTiger';
 
-export const scale= buildTiger(
+export const scale = buildTiger(
   // common
   {
     backgroundColor: null,
@@ -18,7 +18,7 @@ export const scale= buildTiger(
   },
   scaleInRules,
 
-  //exit
+  // exit
   {
     duration: 400,
     easing: 'ease-in',
@@ -27,4 +27,4 @@ export const scale= buildTiger(
     scale: 0.7,
   },
   scaleOutRules,
-)
+);

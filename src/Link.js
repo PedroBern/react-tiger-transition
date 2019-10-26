@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
-import { Link as RouterLink } from "react-router-dom";
+import PropTypes from 'prop-types'; // eslint-disable-line import/no-extraneous-dependencies
+import { Link as RouterLink } from 'react-router-dom';
 
 import { NavigationContext } from './Navigation';
 
@@ -39,41 +39,44 @@ import { withRouterAndRef } from './utils';
  *
  */
 const Link = React.forwardRef(({
+  /* eslint-disable */
   match,
   location,
   history,
   staticContext,
 
-  transition,
   children,
-  onClick,
   to,
+  /* eslint-enable */
+
+  transition,
+  onClick,
   timeout,
   ...other
-},ref) => {
+}, ref) => {
 
   const {
     setTransition,
     defaultTransition,
     onTransition
-  } = useContext(NavigationContext)
+  } = useContext(NavigationContext);
 
   return (
     <RouterLink
       onClick={() => {
-        if (!onTransition){
-          setTransition(transition || defaultTransition, timeout)
+        if (!onTransition) {
+          setTransition(transition || defaultTransition, timeout);
           if (typeof onClick === 'function') onClick();
         }
       }}
       ref={ref}
-      to={onTransition ? location.pathname : to}
+      to={onTransition ? location.pathname : to} // eslint-disable-line react/prop-types
       {...other}
     >
       {children}
     </RouterLink>
-  )
-})
+  );
+});
 
 Link.defaultProps = {
   timeout: 600,
@@ -105,6 +108,6 @@ Link.propTypes = {
    * transition object / function. Used on css transitions.
    */
   timeout: PropTypes.number,
-}
+};
 
-export default withRouterAndRef(Link)
+export default withRouterAndRef(Link);

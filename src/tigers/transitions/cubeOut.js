@@ -3,21 +3,21 @@ import { buildTransitionOut } from './buildTransition';
 import { InjectStyle } from '../../utils';
 
 export default ({
-  direction='left',
-  duration=700,
-  easing='ease-in',
-  opacity=0.3,
-  replaceBackground=null,
-  zIndex=2,
-  depth=200,
-}={}) => {
+  direction = 'left',
+  duration = 700,
+  easing = 'ease-in',
+  opacity = 0.3,
+  replaceBackground = null,
+  zIndex = 2,
+  depth = 200,
+} = {}) => {
 
   const config = {
     left: ['100% 50%', 'X(-50%)', 'Y(-45deg)', 'X(-100%)', 'Y(-90deg)'],
     right: ['0% 50%', 'X(50%)', 'Y(45deg)', 'X(100%)', 'Y(90deg)'],
     top: ['50% 100%', 'Y(-50%)', 'X(45deg)', 'Y(-100%)', 'X(90deg)'],
-    bottom:['50% 0%', 'Y(50%)', 'X(-45deg)', 'Y(100%)', 'X(-90deg)'],
-  }
+    bottom: ['50% 0%', 'Y(50%)', 'X(-45deg)', 'Y(100%)', 'X(-90deg)'],
+  };
 
   const animationName = `${direction}ReactTigerTransitionCubeOut`;
   const transformOrigin = config[direction][0];
@@ -33,7 +33,7 @@ export default ({
     z-index: ${zIndex};
     opacity: 1;
   }
-  `
+  `;
 
   const transform50 = `translate${config[direction][1]} translateZ(${-depth}px) rotate${config[direction][2]}`;
   const transform100 = `translate${config[direction][3]} rotate${config[direction][4]}`;
@@ -69,16 +69,16 @@ export default ({
       transform: ${transform100};
     }
   }
-  `
+  `;
 
   const rules = {
     style: new InjectStyle(style),
     animation: new InjectStyle(animation),
-  }
+  };
 
   return buildTransitionOut({
-    rules: rules,
-    replaceBackground: replaceBackground,
+    rules,
+    replaceBackground,
     className: `react-tiger-transition-cube-out-${direction}`,
-  })
-}
+  });
+};

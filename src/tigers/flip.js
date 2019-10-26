@@ -1,7 +1,7 @@
 import { flipInRules, flipOutRules } from './transitions';
 import { buildTiger } from './buildTiger';
 
-export const flip= buildTiger(
+export const flip = buildTiger(
   // common
   {
     direction: 'left',
@@ -26,4 +26,4 @@ export const flip= buildTiger(
     zIndex: 2,
   },
   flipOutRules,
-)
+);

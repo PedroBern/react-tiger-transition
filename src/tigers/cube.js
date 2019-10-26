@@ -1,7 +1,7 @@
 import { cubeInRules, cubeOutRules } from './transitions';
 import { buildTiger } from './buildTiger';
 
-export const cube= buildTiger(
+export const cube = buildTiger(
   // common
   {
     direction: 'left',
@@ -27,4 +27,4 @@ export const cube= buildTiger(
     zIndex: 2,
   },
   cubeOutRules,
-)
+);

@@ -5,7 +5,7 @@ function replaceClassName(origClass, classToRemove) {
   return origClass
     .replace(new RegExp(`(^|\\s)${classToRemove}(?:\\s|$)`, 'g'), '$1')
     .replace(/\s+/g, ' ')
-    .replace(/^\s*|\s*$/g, '')
+    .replace(/^\s*|\s*$/g, '');
 }
 
 export function removeClass(
@@ -13,19 +13,22 @@ export function removeClass(
   className
 ) {
   if (element.classList) {
-    element.classList.remove(className)
-  } else if (typeof element.className === 'string') {
+    element.classList.remove(className);
+  }
+  else if (typeof element.className === 'string') {
+    /* eslint-disable-next-line no-param-reassign */
     element.className = replaceClassName(
       element.className,
       className
-    )
-  } else {
+    );
+  }
+  else {
     element.setAttribute(
       'class',
       replaceClassName(
         (element.className && element.className.baseVal) || '',
         className
       )
-    )
+    );
   }
 }

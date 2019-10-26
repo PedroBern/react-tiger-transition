@@ -1,7 +1,7 @@
 import { glideInRules, glueOutRules } from './transitions';
 import { buildTiger } from './buildTiger';
 
-export const glueOut= buildTiger(
+export const glueOut = buildTiger(
   // common
   {
     direction: 'left',
@@ -18,7 +18,7 @@ export const glueOut= buildTiger(
   },
   glideInRules,
 
-  //exit
+  // exit
   {
     duration: 800,
     easing: 'ease-in',
@@ -28,4 +28,4 @@ export const glueOut= buildTiger(
     angle: 15,
   },
   glueOutRules,
-)
+);

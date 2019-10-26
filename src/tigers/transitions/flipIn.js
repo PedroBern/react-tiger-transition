@@ -3,14 +3,14 @@ import { buildTransitionIn } from './buildTransition';
 import { InjectStyle } from '../../utils';
 
 export default ({
-  direction='left',
-  duration=500,
-  easing='ease-out',
-  opacity=0.2,
-  replaceBackground=null,
-  zIndex=1,
-  depth=1000,
-}={}) => {
+  direction = 'left',
+  duration = 500,
+  easing = 'ease-out',
+  opacity = 0.2,
+  replaceBackground = null,
+  zIndex = 1,
+  depth = 1000,
+} = {}) => {
 
   const delay = duration;
 
@@ -31,12 +31,12 @@ export default ({
       style: `translateZ(${-depth}px) rotateX(90deg)`,
       animation: 'translateZ(0px) rotateX(0deg)'
     }
-  }
+  };
 
   const animationName = `${direction}ReactTigerTransitionCubeIn`;
   const transformOrigin = '50% 50%';
   let transform = config[direction].style;
-  const animationCss = `${animationName} ${duration}ms both ${easing}`
+  const animationCss = `${animationName} ${duration}ms both ${easing}`;
 
   const style = `
   .react-tiger-transition-cube-in-${direction} {
@@ -53,7 +53,7 @@ export default ({
     animation-delay: ${delay}ms;
     opacity: ${opacity};
   }
-  `
+  `;
 
   transform = config[direction].animation;
 
@@ -72,16 +72,16 @@ export default ({
       transform: ${transform};
     }
   }
-  `
+  `;
 
   const rules = {
     style: new InjectStyle(style),
     animation: new InjectStyle(animation),
-  }
+  };
 
   return buildTransitionIn({
-    rules: rules,
-    replaceBackground: replaceBackground,
+    rules,
+    replaceBackground,
     className: `react-tiger-transition-cube-in-${direction}`,
-  })
-}
+  });
+};

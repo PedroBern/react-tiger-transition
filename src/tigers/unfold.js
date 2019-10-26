@@ -1,7 +1,7 @@
 import { glideOutRules, unfoldRules } from './transitions';
 import { buildTiger } from './buildTiger';
 
-export const unfold= buildTiger(
+export const unfold = buildTiger(
   // common
   {
     direction: 'left',
@@ -18,7 +18,7 @@ export const unfold= buildTiger(
   },
   unfoldRules,
 
-  //exit
+  // exit
   {
     duration: 700,
     easing: 'ease',
@@ -26,4 +26,4 @@ export const unfold= buildTiger(
     zIndex: 2,
   },
   glideOutRules,
-)
+);

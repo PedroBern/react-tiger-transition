@@ -3,16 +3,16 @@ import { buildTransitionIn } from './buildTransition';
 import { InjectStyle } from '../../utils';
 
 export default ({
-  duration=700,
-  easing='ease',
-  opacity=1,
-  scale=0.8,
-  replaceBackground=null,
-  zIndex=1,
-  delay=0,
-}={}) => {
+  duration = 700,
+  easing = 'ease',
+  opacity = 1,
+  scale = 0.8,
+  replaceBackground = null,
+  zIndex = 1,
+  delay = 0,
+} = {}) => {
 
-  const animationName = 'ReactTigerTransitionScaleIn'
+  const animationName = 'ReactTigerTransitionScaleIn';
 
   const style = `
   .react-tiger-transition-scale-in {
@@ -26,7 +26,7 @@ export default ({
     animation-delay: ${delay}ms;
     opacity: ${opacity};
   }
-  `
+  `;
 
   const animation = `
   @-webkit-keyframes ${animationName} {
@@ -43,16 +43,16 @@ export default ({
       transform: scale(1);
     }
   }
-  `
+  `;
 
   const rules = {
     style: new InjectStyle(style),
     animation: new InjectStyle(animation),
-  }
+  };
 
   return buildTransitionIn({
-    rules: rules,
-    replaceBackground: replaceBackground,
+    rules,
+    replaceBackground,
     className: `react-tiger-transition-scale-in`,
-  })
-}
+  });
+};

@@ -1,7 +1,7 @@
 import { glideOutRules, pullRules } from './transitions';
 import { buildTiger } from './buildTiger';
 
-export const pull= buildTiger(
+export const pull = buildTiger(
   // common
   {
     direction: 'left',
@@ -19,7 +19,7 @@ export const pull= buildTiger(
   },
   pullRules,
 
-  //exit
+  // exit
   {
     duration: 700,
     easing: 'ease',
@@ -27,4 +27,4 @@ export const pull= buildTiger(
     zIndex: 2,
   },
   glideOutRules,
-)
+);

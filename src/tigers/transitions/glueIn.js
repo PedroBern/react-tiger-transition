@@ -3,23 +3,23 @@ import { buildTransitionIn } from './buildTransition';
 import { InjectStyle } from '../../utils';
 
 export default ({
-  direction='left',
-  duration=700,
-  easing='ease-in',
-  opacity=0.3,
-  replaceBackground=null,
-  zIndex=1,
-  depth=200,
-  angle=15,
-  delay=0,
-}={}) => {
+  direction = 'left',
+  duration = 700,
+  easing = 'ease-in',
+  opacity = 0.3,
+  replaceBackground = null,
+  zIndex = 1,
+  depth = 200,
+  angle = 15,
+  delay = 0,
+} = {}) => {
 
   const config = {
     left: ['100% 50%', `Y(${-angle}deg)`],
     right: ['0% 50%', `Y(${angle}deg)`],
     top: ['50% 0%', `X(${-angle}deg)`],
     bottom: ['50% 100%', `X(${angle}deg)`],
-  }
+  };
 
   const animationName = `${direction}ReactTigerTransitionGlueIn`;
   const animationCss = `${animationName} ${duration}ms both ${easing}`;
@@ -41,7 +41,7 @@ export default ({
     animation-delay: ${delay}ms;
     opacity: ${opacity};
   }
-  `
+  `;
   const transform1 = `rotate${config[direction][1]}`;
 
   const animation = `
@@ -77,16 +77,16 @@ export default ({
       opacity: 1;
     }
   }
-  `
+  `;
 
   const rules = {
     style: new InjectStyle(style),
     animation: new InjectStyle(animation),
-  }
+  };
 
   return buildTransitionIn({
-    rules: rules,
-    replaceBackground: replaceBackground,
+    rules,
+    replaceBackground,
     className: `react-tiger-transition-glue-in-${direction}`,
-  })
-}
+  });
+};

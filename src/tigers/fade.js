@@ -1,7 +1,7 @@
 import { fadeInRules, fadeOutRules } from './transitions';
 import { buildTiger } from './buildTiger';
 
-export const fade= buildTiger(
+export const fade = buildTiger(
   // common
   {
     backgroundColor: 'white',
@@ -25,4 +25,4 @@ export const fade= buildTiger(
     zIndex: 1,
   },
   fadeOutRules
-)
+);

@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useMemo } from 'react';
-import PropTypes from 'prop-types';
-import { Route as RouterRoute } from "react-router-dom";
+import React, { useContext, useMemo } from 'react';
+import PropTypes from 'prop-types'; // eslint-disable-line import/no-extraneous-dependencies
+import { Route as RouterRoute } from 'react-router-dom';
 
 import { computeClassName } from './utils';
 // import Transition from './Transition';
 import Screen from './Screen';
-import BoolCSSTransition from './BoolCSSTransition'
+import BoolCSSTransition from './BoolCSSTransition';
 import { NavigationContext, evalTransition } from './Navigation';
 
 /**
@@ -73,74 +73,71 @@ const Route = ({
     disableStyle,
     className,
     `react-tiger-transition--route`
-  )
+  );
 
-  if (cancelAnimation) {
-    transitionProps = {
-      ...transitionProps,
-      onEnter: () => {},
-      onEntering: () => {},
-      onEntered: () => {},
-      onExit: () => {},
-      onExiting: () => {},
-      onExited: () => {},
-    }
-  };
+  const cancelTransition = cancelAnimation ? {
+    onEnter: () => {},
+    onEntering: () => {},
+    onEntered: () => {},
+    onExit: () => {},
+    onExiting: () => {},
+    onExited: () => {},
+  } : {};
 
   const {
     transition,
     globalTransitionProps,
   } = useContext(NavigationContext);
 
-  const forcedTransition = useMemo(() => forceTransition ?
-    {...evalTransition({
+  const forcedTransition = useMemo(() => (forceTransition
+    ? {
+      ...evalTransition({
         transition: forceTransition,
-        timeout:  globalTransitionProps.timeout ?
-          globalTransitionProps.timeout :
-          transitionProps.timeout ?
-          transitionProps.timeout :
-          600 // fallback if user is using css transition and dont set timeout
-    })} :
-    false,
-    [forceTransition, globalTransitionProps.timeout, transitionProps.timeout]
-  );
+        timeout: globalTransitionProps.timeout
+          ? globalTransitionProps.timeout
+          : transitionProps.timeout
+            ? transitionProps.timeout
+            : 600 // fallback if user is using css transition and dont set timeout
+      })
+    }
+    : false),
+  [forceTransition, globalTransitionProps.timeout, transitionProps.timeout]);
 
-  const computeTransition = forcedTransition ?
-    forcedTransition :
-    transition;
+  const computeTransition = forcedTransition || transition;
 
   return (
     <RouterRoute {...other}>
       {props => (
         <BoolCSSTransition
-          in={props.match != null}
+          in={props.match != null} // eslint-disable-line react/prop-types
           mountOnEnter={!computeTransition.css}
           unmountOnExit
           {...computeTransition}
           {...globalTransitionProps}
           {...transitionProps}
+          {...cancelTransition}
         >
           <div className={_className} {...containerProps}>
             {
-              screen ?
-              <Screen {...screenProps}>
-                {children}
-              </Screen>
-              :
-              children
+              screen
+                ? <Screen {...screenProps}>
+                  {children}
+                </Screen>
+                : children
             }
           </div>
         </BoolCSSTransition>
       )}
     </RouterRoute>
-  )
-}
+  );
+};
 
 Route.defaultProps = {
   disableStyle: false,
   screen: false,
   screenProps: {},
   transitionProps: {},
+  cancelAnimation: false
 };
 
 Route.displayName = 'TigerRoute';
@@ -162,7 +159,7 @@ Route.propTypes = {
    */
   disableStyle: PropTypes.bool,
 
- /**
+  /**
   * Div container className. A string or a function returning a string.
   * If not `disableStyle`, this className will be chained to
   * `react-tiger-transition--route` or `react-tiger-transition--fixed`.
@@ -172,17 +169,17 @@ Route.propTypes = {
     PropTypes.func,
   ]),
 
- /**
+  /**
   * Autimatically wraps route child with `<Screen />`.
   */
   screen: PropTypes.bool,
 
- /**
+  /**
   * If `screen` prop is true, you can pass props to it.
   */
   screenProps: PropTypes.object,
 
- /**
+  /**
   * Props passed to [`<Transition />`](https://reactcommunity.org/react-transition-group/transition)
   * or [`<CSSTransition />`](https://reactcommunity.org/react-transition-group/css-transition).
   * Usually you don't need to worry about this. If you pass `appear`, the
@@ -190,7 +187,7 @@ Route.propTypes = {
   * Props defined here have higher priority than `globalTransitionProps`
   * defined in [`<Navigation />`](/docs/navigation).
   */
- transitionProps: PropTypes.object,
+  transitionProps: PropTypes.object,
 
   /**
    * Props passed to div container.
@@ -208,6 +205,11 @@ Route.propTypes = {
     PropTypes.func,
     PropTypes.object,
   ]),
-}
 
-export default Route
+  /**
+   *  Cancel animation.
+   */
+  cancelAnimation: PropTypes.bool
+};
+
+export default Route;

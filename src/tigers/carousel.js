@@ -1,7 +1,7 @@
 import { carouselInRules, carouselOutRules } from './transitions';
 import { buildTiger } from './buildTiger';
 
-export const carousel= buildTiger(
+export const carousel = buildTiger(
   // common
   {
     direction: 'left',
@@ -32,4 +32,4 @@ export const carousel= buildTiger(
     angle: 65,
   },
   carouselOutRules,
-)
+);

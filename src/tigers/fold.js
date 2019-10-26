@@ -1,7 +1,7 @@
 import { glideInRules, foldRules } from './transitions';
 import { buildTiger } from './buildTiger';
 
-export const fold= buildTiger(
+export const fold = buildTiger(
   // common
   {
     direction: 'left',
@@ -27,4 +27,4 @@ export const fold= buildTiger(
     angle: 90,
   },
   foldRules,
-)
+);

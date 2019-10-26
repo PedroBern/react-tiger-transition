@@ -3,26 +3,26 @@ import { buildTransitionIn } from './buildTransition';
 import { InjectStyle } from '../../utils';
 
 export default ({
-  direction='left',
-  duration=700,
-  easing='ease-in',
-  opacity=0.3,
-  replaceBackground=null,
-  zIndex=1,
-  depth=500,
-  offset=200,
-  delay=0,
-}={}) => {
+  direction = 'left',
+  duration = 700,
+  easing = 'ease-in',
+  opacity = 0.3,
+  replaceBackground = null,
+  zIndex = 1,
+  depth = 500,
+  offset = 200,
+  delay = 0,
+} = {}) => {
 
   const config = {
     left: `X(${offset}%)`,
     right: `X(${-offset}%)`,
     top: `Y(${offset}%)`,
     bottom: `Y(${-offset}%)`,
-  }
+  };
 
   const animationName = `${direction}ReactTigerTransitionSlideIn`;
-  const animationCss = `${animationName} ${duration}ms both ${easing}`
+  const animationCss = `${animationName} ${duration}ms both ${easing}`;
 
   const style = `
   .react-tiger-transition-slide-in-${direction} {
@@ -33,9 +33,9 @@ export default ({
     animation-delay: ${delay}ms;
     opacity: ${opacity};
   }
-  `
+  `;
   const transform0 = `translateZ(${-depth}px) translate${config[direction]}`;
-  const transform75 = `translateZ(${-depth}px)`
+  const transform75 = `translateZ(${-depth}px)`;
 
   const animation = `
   @-webkit-keyframes ${animationName} {
@@ -72,16 +72,16 @@ export default ({
       transform: translateZ(0) translateX(0);
     }
   }
-  `
+  `;
 
   const rules = {
     style: new InjectStyle(style),
     animation: new InjectStyle(animation),
-  }
+  };
 
   return buildTransitionIn({
-    rules: rules,
-    replaceBackground: replaceBackground,
+    rules,
+    replaceBackground,
     className: `react-tiger-transition-slide-in-${direction}`,
-  })
-}
+  });
+};

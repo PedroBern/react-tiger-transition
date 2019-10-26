@@ -3,22 +3,22 @@ import { buildTransitionIn } from './buildTransition';
 import { InjectStyle } from '../../utils';
 
 export default ({
-  direction='left',
-  duration=700,
-  easing='ease',
-  opacity=1,
-  angle=90,
-  replaceBackground=null,
-  zIndex=2,
-  delay=0,
-}={}) => {
+  direction = 'left',
+  duration = 700,
+  easing = 'ease',
+  opacity = 1,
+  angle = 90,
+  replaceBackground = null,
+  zIndex = 2,
+  delay = 0,
+} = {}) => {
 
   const config = {
-    left: ['100% 50%', 'Y',`(${-angle}deg)` ],
-    right: ['0% 50%', 'Y', `(${angle}deg)` ],
-    bottom: ['50% 0%', 'X',`(${-angle}deg)` ],
-    top: ['50% 100%', 'X', `(${angle}deg)` ],
-  }
+    left: ['100% 50%', 'Y', `(${-angle}deg)`],
+    right: ['0% 50%', 'Y', `(${angle}deg)`],
+    bottom: ['50% 0%', 'X', `(${-angle}deg)`],
+    top: ['50% 100%', 'X', `(${angle}deg)`],
+  };
 
   const transformOrigin = `${config[direction][0]}`;
   let rotate = `rotate${config[direction][1]}${config[direction][2]}`;
@@ -40,8 +40,8 @@ export default ({
     animation-delay: ${delay}ms;
     opacity: ${opacity};
   }
-  `
-  rotate = `rotate${config[direction][1]}(0deg)}`
+  `;
+  rotate = `rotate${config[direction][1]}(0deg)}`;
 
   const animation = `
   @-webkit-keyframes ${animationName} {
@@ -58,16 +58,16 @@ export default ({
       transform: ${rotate};
     }
   }
-  `
+  `;
 
   const rules = {
     style: new InjectStyle(style),
     animation: new InjectStyle(animation),
-  }
+  };
 
   return buildTransitionIn({
-    rules: rules,
-    replaceBackground: replaceBackground,
+    rules,
+    replaceBackground,
     className: `react-tiger-transition-pull-${direction}`,
-  })
-}
+  });
+};

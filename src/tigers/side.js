@@ -1,7 +1,7 @@
 import { sideInRules, sideOutRules } from './transitions';
 import { buildTiger } from './buildTiger';
 
-export const side= buildTiger(
+export const side = buildTiger(
   // common
   {
     direction: 'left',
@@ -21,7 +21,7 @@ export const side= buildTiger(
   },
   sideInRules,
 
-  //exit
+  // exit
   {
     duration: 500,
     easing: 'ease-in',
@@ -32,4 +32,4 @@ export const side= buildTiger(
     offset: 100,
   },
   sideOutRules,
-)
+);

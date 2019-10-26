@@ -3,12 +3,12 @@ import { buildTransitionOut } from './buildTransition';
 import { InjectStyle } from '../../utils';
 
 export default ({
-  duration=700,
-  easing='ease',
-  opacity=0,
-  replaceBackground=null,
-  zIndex=1,
-}={}) => {
+  duration = 700,
+  easing = 'ease',
+  opacity = 0,
+  replaceBackground = null,
+  zIndex = 1,
+} = {}) => {
 
   const animationName = 'ReactTigerTransitionFadeOut';
 
@@ -19,7 +19,7 @@ export default ({
     z-index: ${zIndex};
     opacity: 1;
   }
-  `
+  `;
 
   const animation = `
   @-webkit-keyframes ${animationName} {
@@ -32,16 +32,16 @@ export default ({
       opacity: ${opacity};
     }
   }
-  `
+  `;
 
   const rules = {
     style: new InjectStyle(style),
     animation: new InjectStyle(animation),
-  }
+  };
 
   return buildTransitionOut({
-    rules: rules,
-    replaceBackground: replaceBackground,
+    rules,
+    replaceBackground,
     className: `react-tiger-transition-fade-out`,
-  })
-}
+  });
+};

@@ -8,7 +8,7 @@ export const shuffle = buildTiger(
     backgroundColor: null,
   },
 
-  //enter
+  // enter
   {
     duration: 700,
     easing: 'ease',
@@ -19,7 +19,7 @@ export const shuffle = buildTiger(
   },
   shuffleInRules,
 
-  //exit
+  // exit
   {
     duration: 700,
     easing: 'ease',
@@ -28,4 +28,4 @@ export const shuffle = buildTiger(
     zIndex: 1,
   },
   shuffleOutRules
-)
+);

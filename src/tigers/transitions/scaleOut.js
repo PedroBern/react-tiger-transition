@@ -3,13 +3,13 @@ import { buildTransitionOut } from './buildTransition';
 import { InjectStyle } from '../../utils';
 
 export default ({
-  duration=700,
-  easing='ease',
-  opacity=1,
-  scale=0.8,
-  replaceBackground=null,
-  zIndex=1,
-}={}) => {
+  duration = 700,
+  easing = 'ease',
+  opacity = 1,
+  scale = 0.8,
+  replaceBackground = null,
+  zIndex = 1,
+} = {}) => {
 
   const animationName = 'ReactTigerTransitionScaleOut';
 
@@ -23,7 +23,7 @@ export default ({
     z-index: ${zIndex};
     opacity: 1;
   }
-  `
+  `;
 
   const animation = `
   @-webkit-keyframes ${animationName} {
@@ -40,16 +40,16 @@ export default ({
       transform: scale(${scale});
     }
   }
-  `
+  `;
 
   const rules = {
     style: new InjectStyle(style),
     animation: new InjectStyle(animation),
-  }
+  };
 
   return buildTransitionOut({
-    rules: rules,
-    replaceBackground: replaceBackground,
+    rules,
+    replaceBackground,
     className: `react-tiger-transition-scale-out`,
-  })
-}
+  });
+};

@@ -1,13 +1,13 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'; // eslint-disable-line import/no-extraneous-dependencies
 import { withRouter, matchPath } from 'react-router-dom';
 
 import { computeClassName } from './utils';
 
 
 const ScreenBase = React.forwardRef(({
-  className,
-  children,
+  className, // eslint-disable-line react/prop-types
+  children, // eslint-disable-line react/prop-types
   ...other
 }, ref) => (
   <div
@@ -19,30 +19,33 @@ const ScreenBase = React.forwardRef(({
   </div>
 ));
 
+ScreenBase.displayName = 'TigerScreenBase';
+
+ScreenBase.defaultProps = {
+  className: '',
+};
+
 
 const Display = withRouter(({
   match,
   location,
-  history,
   children,
 }) => {
 
   const [isFirstRender, setIsFirstRender] = useState(true);
+  // eslint-disable-next-line no-unused-vars
   const [baseMatch, setBaseMatch] = useState(match);
 
   useEffect(() => {
     setIsFirstRender(false);
   }, []);
 
-  const onDisplayPath =
-    matchPath(location.pathname, {...baseMatch}) !== null ?
-    true :
-    false;
+  const onDisplayPath = matchPath(location.pathname, { ...baseMatch }) !== null;
 
   const cancelAnimation = isFirstRender || !onDisplayPath;
 
   const computeChildren = useMemo(() => {
-    let clonedChildren = [];
+    const clonedChildren = [];
     let element;
     let key = new Date().valueOf();
     React.Children.forEach(children, child => {
@@ -52,8 +55,8 @@ const Display = withRouter(({
           element, {
             cancelAnimation,
             key: element.key || key + 1,
-          })
-        );
+          }
+        ));
         key += 1;
       }
     });
@@ -89,7 +92,7 @@ const Screen = React.forwardRef(({
   disableStyle,
   container,
   display,
-  children,
+  children, // eslint-disable-line react/prop-types
   ...other
 }, ref) => {
 
@@ -105,12 +108,15 @@ const Screen = React.forwardRef(({
     ...other
   };
 
-  return display ?
-    <ScreenBase {...props}>
-      <Display children={children} />
+  return display
+    ? <ScreenBase {...props}>
+      <Display>
+        {children}
+      </Display>
     </ScreenBase>
-     :
-    <ScreenBase {...props} children={children}/>
+    : <ScreenBase {...props}>
+      {children}
+    </ScreenBase>;
 });
 
 Screen.displayName = 'TigerScreen';
@@ -119,7 +125,7 @@ Screen.defaultProps = {
   disableStyle: false,
   container: false,
   display: false,
-}
+};
 
 Screen.propTypes = {
   /**
@@ -150,6 +156,6 @@ Screen.propTypes = {
     PropTypes.string,
     PropTypes.func,
   ]),
-}
+};
 
-export default Screen
+export default Screen;

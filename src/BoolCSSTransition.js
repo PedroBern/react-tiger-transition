@@ -25,9 +25,9 @@
  *
  */
 
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'; // eslint-disable-line import/no-extraneous-dependencies
 import React from 'react';
-import { Transition } from 'react-transition-group'
+import { Transition } from 'react-transition-group';
 
 import {
   addClass as addOneClass,
@@ -54,44 +54,44 @@ class BoolCSSTransition extends React.Component {
     this.addClass(node, appearing ? 'appear' : 'enter', 'base');
 
     if (this.props.onEnter) {
-      this.props.onEnter(node, appearing)
+      this.props.onEnter(node, appearing);
     }
   }
 
   onEntering = (node, appearing) => {
     const type = appearing ? 'appear' : 'enter';
-    this.addClass(node, type, 'active')
+    this.addClass(node, type, 'active');
 
     if (this.props.onEntering) {
-      this.props.onEntering(node, appearing)
+      this.props.onEntering(node, appearing);
     }
   }
 
   onEntered = (node, appearing) => {
-    const type = appearing ? 'appear' : 'enter'
+    const type = appearing ? 'appear' : 'enter';
     this.removeClasses(node, type);
     this.addClass(node, type, 'done');
 
     if (this.props.onEntered) {
-      this.props.onEntered(node, appearing)
+      this.props.onEntered(node, appearing);
     }
   }
 
   onExit = (node) => {
     this.removeClasses(node, 'appear');
     this.removeClasses(node, 'enter');
-    this.addClass(node, 'exit', 'base')
+    this.addClass(node, 'exit', 'base');
 
     if (this.props.onExit) {
-      this.props.onExit(node)
+      this.props.onExit(node);
     }
   }
 
   onExiting = (node) => {
-    this.addClass(node, 'exit', 'active')
+    this.addClass(node, 'exit', 'active');
 
     if (this.props.onExiting) {
-      this.props.onExiting(node)
+      this.props.onExiting(node);
     }
   }
 
@@ -100,7 +100,7 @@ class BoolCSSTransition extends React.Component {
     this.addClass(node, 'exit', 'done');
 
     if (this.props.onExited) {
-      this.props.onExited(node)
+      this.props.onExited(node);
     }
   }
 
@@ -111,15 +111,15 @@ class BoolCSSTransition extends React.Component {
       ? `${classNames}-`
       : '';
 
-    let baseClassName = isStringClassNames
+    const baseClassName = isStringClassNames
       ? `${prefix}${type}`
-      : classNames[type]
+      : classNames[type];
 
-    let activeClassName = isStringClassNames
+    const activeClassName = isStringClassNames
       ? `${baseClassName}-active`
       : classNames[`${type}Active`];
 
-    let doneClassName = isStringClassNames
+    const doneClassName = isStringClassNames
       ? `${baseClassName}-done`
       : classNames[`${type}Done`];
 
@@ -138,11 +138,11 @@ class BoolCSSTransition extends React.Component {
     }
 
     if (phase === 'active') {
-      node && node.scrollTop;
+      node && node.scrollTop; // eslint-disable-line
     }
 
-    this.appliedClasses[type][phase] = className
-    addClass(node, className)
+    this.appliedClasses[type][phase] = className;
+    addClass(node, className);
   }
 
   removeClasses(node, type) {
@@ -150,7 +150,7 @@ class BoolCSSTransition extends React.Component {
       base: baseClassName,
       active: activeClassName,
       done: doneClassName
-    } = this.appliedClasses[type]
+    } = this.appliedClasses[type];
 
     this.appliedClasses[type] = {};
 
@@ -166,13 +166,14 @@ class BoolCSSTransition extends React.Component {
   }
 
   render() {
+    // eslint-disable-next-line
     const { classNames: _, css, ...other } = this.props;
 
     return (
       <Transition
         {...other}
-        onEnter={css ? this.onEnter : other.onEnter  }
-        onEntered={css ? this.onEntered : other.onEntered  }
+        onEnter={css ? this.onEnter : other.onEnter }
+        onEntered={css ? this.onEntered : other.onEntered }
         onEntering={css ? this.onEntering : other.onEntering }
         onExit={css ? this.onExit : other.onExit }
         onExiting={css ? this.onExiting : other.onExiting }
@@ -191,7 +192,7 @@ BoolCSSTransition.defaultProps = {
   onExit: () => {},
   onExiting: () => {},
   onExited: () => {},
-}
+};
 
 BoolCSSTransition.propTypes = {
   ...Transition.propTypes,
@@ -220,4 +221,4 @@ BoolCSSTransition.propTypes = {
   css: PropTypes.bool,
 };
 
-export default BoolCSSTransition
+export default BoolCSSTransition;

@@ -3,29 +3,29 @@ import { buildTransitionIn } from './buildTransition';
 import { InjectStyle } from '../../utils';
 
 export default ({
-  direction='left',
-  duration=700,
-  easing='ease-in',
-  opacity=0.3,
-  replaceBackground=null,
-  zIndex=1,
-  depth=500,
-  angle=90,
-  offset=100,
-  delay=0,
-}={}) => {
+  direction = 'left',
+  duration = 700,
+  easing = 'ease-in',
+  opacity = 0.3,
+  replaceBackground = null,
+  zIndex = 1,
+  depth = 500,
+  angle = 90,
+  offset = 100,
+  delay = 0,
+} = {}) => {
 
   const config = {
-    left: [`${50 + offset}% 50%`,`translateZ(${-depth}px) rotateY(${-angle}deg)`, 'X','Y'],
-    right: [`${-(50 + offset)}% 50%`,`translateZ(${depth}px) rotateY(${angle}deg)`, 'X','Y'],
-    top: [`50% ${50 + offset}%`,`translateZ(${-depth}px) rotateX(${angle}deg)`, 'Y','X'],
-    bottom: [`50% ${-(50 + offset)}%`,`translateZ(${-depth}px) rotateX(${-angle}deg)`, 'Y','X'],
-  }
+    left: [`${50 + offset}% 50%`, `translateZ(${-depth}px) rotateY(${-angle}deg)`, 'X', 'Y'],
+    right: [`${-(50 + offset)}% 50%`, `translateZ(${depth}px) rotateY(${angle}deg)`, 'X', 'Y'],
+    top: [`50% ${50 + offset}%`, `translateZ(${-depth}px) rotateX(${angle}deg)`, 'Y', 'X'],
+    bottom: [`50% ${-(50 + offset)}%`, `translateZ(${-depth}px) rotateX(${-angle}deg)`, 'Y', 'X'],
+  };
 
   const animationName = `${direction}ReactTigerTransitionSideIn`;
   const transformOrigin = config[direction][0];
   let transform = `${config[direction][1]}`;
-  const animationCss = `${animationName} ${duration}ms both ${easing}`
+  const animationCss = `${animationName} ${duration}ms both ${easing}`;
 
   const style = `
   .react-tiger-transition-side-in-${direction} {
@@ -42,7 +42,7 @@ export default ({
     animation-delay: ${delay}ms;
     opacity: ${opacity};
   }
-  `
+  `;
   transform = `translate${config[direction][2]}(0px) rotate${config[direction][3]}(0deg)`;
 
   const animation = `
@@ -60,16 +60,16 @@ export default ({
       transform: ${transform};
     }
   }
-  `
+  `;
 
   const rules = {
     style: new InjectStyle(style),
     animation: new InjectStyle(animation),
-  }
+  };
 
   return buildTransitionIn({
-    rules: rules,
-    replaceBackground: replaceBackground,
+    rules,
+    replaceBackground,
     className: `react-tiger-transition-side-in-${direction}`,
-  })
-}
+  });
+};

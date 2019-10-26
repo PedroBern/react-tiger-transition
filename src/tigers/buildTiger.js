@@ -32,36 +32,33 @@ export const buildTiger = (
   enterTransition,
   exitInit,
   exitTransition
-) => {
+) => ({
+  enter,
+  exit,
+  ...args
+} = {}) => {
 
-   return ({
-     enter,
-     exit,
-     ...args
-   }={}) => {
+  /* eslint-disable no-param-reassign */
+  enter = { ...enterInit, ...enter };
+  exit = { ...exitInit, ...exit };
+  args = { ...argsInit, ...args };
 
-    enter = {...enterInit, ...enter};
-    exit = {...exitInit, ...exit};
-    args = {...argsInit, ...args};
+  if (args.backgroundColor) {
+    args.replaceBackground = new ReplaceBackground(args.backgroundColor);
+  }
+  /* eslint-enable */
 
-    if (args.backgroundColor) {
-      args.replaceBackground = new ReplaceBackground(args.backgroundColor);
-    }
+  const timeout = typeof args.timeout === 'function' && args.duration ? args.timeout(args.duration)
+    : args.duration && args.delay ? args.duration + args.delay
+      : args.duration && enter.delay ? args.duration + enter.delay
+        : args.duration ? args.duration
+          : enter.duration >= exit.duration ? enter.duration + enter.delay
+            : enter.duration + enter.delay >= exit.duration ? enter.duration + enter.delay
+              : exit.duration;
 
-    const timeout =
-       typeof args.timeout === 'function' && args.duration ? args.timeout(args.duration) :
-       args.duration && args.delay ? args.duration + args.delay :
-       args.duration && enter.delay ? args.duration + enter.delay :
-       args.duration ? args.duration :
-       enter.duration >= exit.duration ? enter.duration + enter.delay :
-       enter.duration + enter.delay >= exit.duration ? enter.duration + enter.delay :
-       exit.duration;
-
-     return {
-       timeout: timeout,
-       ...enterTransition({...enter, ...args}),
-       ...exitTransition({...exit, ...args}),
-     }
-   }
-
-}
+  return {
+    timeout,
+    ...enterTransition({ ...enter, ...args }),
+    ...exitTransition({ ...exit, ...args }),
+  };
+};

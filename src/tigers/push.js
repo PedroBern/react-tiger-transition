@@ -1,7 +1,7 @@
 import { glideInRules, pushRules } from './transitions';
 import { buildTiger } from './buildTiger';
 
-export const push= buildTiger(
+export const push = buildTiger(
   // common
   {
     direction: 'left',
@@ -18,7 +18,7 @@ export const push= buildTiger(
   },
   glideInRules,
 
-  //exit
+  // exit
   {
     duration: 700,
     easing: 'ease',
@@ -27,4 +27,4 @@ export const push= buildTiger(
     angle: 90,
   },
   pushRules,
-)
+);

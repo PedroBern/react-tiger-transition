@@ -1,43 +1,47 @@
-import React, { useMemo, useReducer, useEffect } from 'react';
+import React, { useMemo, useReducer } from 'react';
 import { withRouter, matchPath, Redirect } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'; // eslint-disable-line import/no-extraneous-dependencies
 
-import { computeClassName } from './utils';
 import { fade } from './tigers';
 import Screen from './Screen';
 
+// if (umd-build) import './styles.css';
+
 export const NavigationContext = React.createContext();
 
-export const evalTransition = ({transition, timeout}) => (
-  typeof(transition) === 'function' ?
-  { timeout, ...transition(), css: false } :
-  Object.prototype.toString.call(transition) === '[object Object]' ?
-  { timeout, ...transition, css: false } :
-  { timeout, classNames: transition, css: true}
-)
+export const evalTransition = ({ transition, timeout }) => (
+  typeof (transition) === 'function'
+    ? { timeout, ...transition(), css: false }
+    : Object.prototype.toString.call(transition) === '[object Object]'
+      ? { timeout, ...transition, css: false }
+      : { timeout, classNames: transition, css: true }
+);
 
 export function reducer(state, action) {
   switch (action.type) {
 
-    case 'setTransition':
-      const transition = evalTransition({...action.value});
-      window.setTimeout(function() {
-        action.dispatch({type: 'endTransition'})
+    case 'setTransition': {
+      const transition = evalTransition({ ...action.value });
+      window.setTimeout(() => {
+        action.dispatch({ type: 'endTransition' });
       }, transition.timeout + 200);
       return {
         ...state,
         transition,
         onTransition: true,
       };
+    }
 
-    case 'endTransition':
+    case 'endTransition': {
       return {
         ...state,
         onTransition: false,
       };
+    }
 
-    default:
+    default: {
       return { ...state };
+    }
   }
 }
 
@@ -48,49 +52,45 @@ const NavigationProvider = withRouter(({
   disableDefaultRoute,
 
   match,
-  location,
-  history,
+  location
 }) => {
 
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
     setTransition: (transition, timeout) => new Promise(
-      function(resolve, reject) {
+      ((resolve) => {
         resolve(dispatch({
           type: 'setTransition',
           value: { transition, timeout },
           dispatch
-        }))
-      }
+        }));
+      })
     ),
-    lastLocation: {...location},
+    lastLocation: { ...location },
   });
 
   const matched = useMemo(() => {
-    let element, computeMatch;
+    let computeMatch;
 
     React.Children.forEach(children, child => {
       if (computeMatch == null && React.isValidElement(child)) {
-        element = child;
-
         const path = child.props.path || child.props.from || null;
-
         computeMatch = path
           ? matchPath(location.pathname, { ...child.props, path })
           : null;
       }
     });
 
-    return computeMatch != null
+    return computeMatch != null;
   }, [children, location, match]);
 
   return (
-    <NavigationContext.Provider value={{...state}}>
+    <NavigationContext.Provider value={{ ...state }}>
       {children}
       {!disableDefaultRoute && !matched && defaultRoute}
     </NavigationContext.Provider>
-  )
-})
+  );
+});
 
 /**
  *
@@ -123,7 +123,7 @@ const NavigationProvider = withRouter(({
  *
  */
 const Navigation = ({
-  children,
+  children, // eslint-disable-line react/prop-types
   containerProps,
 
   defaultTransition,
@@ -143,12 +143,12 @@ const Navigation = ({
         onTransition: false,
         defaultTransition,
         globalTransitionProps,
-    }}
+      }}
     >
-        {children}
+      {children}
     </NavigationProvider>
   </Screen>
-)
+);
 
 Navigation.defaultProps = {
   defaultTransition: fade,
@@ -163,7 +163,7 @@ Navigation.propTypes = {
    * Props passed to [`<Screen container />`](/docs/screen) (that wraps the
    * routes).
    */
-   containerProps: PropTypes.object,
+  containerProps: PropTypes.object,
 
   /**
    * The default transition to be consumed by every [`<Link />`](/docs/link)
@@ -207,6 +207,6 @@ Navigation.propTypes = {
    */
   firstTimeout: PropTypes.number,
 
-}
+};
 
-export default Navigation
+export default Navigation;

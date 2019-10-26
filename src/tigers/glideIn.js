@@ -1,7 +1,7 @@
 import { glideInRules, scaleOutRules } from './transitions';
 import { buildTiger } from './buildTiger';
 
-export const glideIn= buildTiger(
+export const glideIn = buildTiger(
   // common
   {
     direction: 'left',
@@ -18,7 +18,7 @@ export const glideIn= buildTiger(
   },
   glideInRules,
 
-  //exit
+  // exit
   {
     duration: 700,
     easing: 'ease',
@@ -27,4 +27,4 @@ export const glideIn= buildTiger(
     scale: 1,
   },
   scaleOutRules,
-)
+);

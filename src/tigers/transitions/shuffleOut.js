@@ -3,21 +3,21 @@ import { buildTransitionOut } from './buildTransition';
 import { InjectStyle } from '../../utils';
 
 export default ({
-  direction='top',
-  duration=700,
-  easing='ease',
-  opacity=1,
-  replaceBackground=null,
-  scale=1,
-  zIndex=1,
-}={}) => {
+  direction = 'top',
+  duration = 700,
+  easing = 'ease',
+  opacity = 1,
+  replaceBackground = null,
+  scale = 1,
+  zIndex = 1,
+} = {}) => {
 
   const config = {
     right: [-100, 'X'],
     left: [100, 'X'],
     bottom: [-100, 'Y'],
     top: [100, 'Y'],
-  }
+  };
 
   const animationName = `${direction}ReactTigerTransitionShuffleOut`;
   const animationCss = `${animationName} ${duration}ms ${easing} both`;
@@ -33,7 +33,7 @@ export default ({
     z-index: ${zIndex};
     opacity: 1;
   }
-  `
+  `;
 
   transform = `translate${config[direction][1]}(${config[direction][0]}%) scale(${scale})`;
 
@@ -52,16 +52,16 @@ export default ({
       transform: ${transform};
     }
   }
-  `
+  `;
 
   const rules = {
     style: new InjectStyle(style),
     animation: new InjectStyle(animation),
-  }
+  };
 
   return buildTransitionOut({
-    rules: rules,
-    replaceBackground: replaceBackground,
+    rules,
+    replaceBackground,
     className: `react-tiger-transition-glide-shuffle-out-${direction}`,
-  })
-}
+  });
+};
