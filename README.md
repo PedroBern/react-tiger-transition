@@ -7,7 +7,11 @@
 
 `react-tiger-transition` is ready to take navigation animations to the next level.
 
-Checkout the [demo and docs](https://pedrobern.github.io/react-tiger-transition) site!
+## Documentation
+
+- [**Documentation and Demo**](https://pedrobern.github.io/react-tiger-transition)
+
+## Features
 
 - Zero dependencies.
 - 19 built-in transitions (the tigers).
