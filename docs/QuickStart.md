@@ -1,6 +1,6 @@
 # Quick start
 
-`react-tiger-transition` is a small package ready to take your navigation animations to the next level.
+`react-tiger-transition` is ready to take your navigation animations to the next level.
 
 - Zero dependencies.
 - 19 built-in transitions (the tigers).
@@ -27,8 +27,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router} from "react-router-dom";
 
-// you need to import styles!
-import 'react-tiger-transition/dist/styles.css';
+// you need to import styles for commonjs or ES modules
+// umd already ships styles together
+import styles from 'react-tiger-transition/lib/styles.css';
 
 import {
   Navigation,
