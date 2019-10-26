@@ -1,6 +1,8 @@
 # react-tiger-transition
 
-[![dependencies](https://david-dm.org/pedrobern/react-tiger-transition.svg)]
+[![dependencies](https://david-dm.org/pedrobern/react-tiger-transition.svg)](https://github.com/PedroBern/react-tiger-transition)[![Build Status](https://travis-ci.com/PedroBern/react-tiger-transition.svg?branch=master)](https://travis-ci.com/PedroBern/react-tiger-transition)
+
+
 
 `react-tiger-transition` is ready to take navigation animations to the next level.
 
