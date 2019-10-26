@@ -23,7 +23,7 @@
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib --copy-files",
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es --copy-files",
     "build:umd": "cross-env BABEL_ENV=es rollup -c",
-    "prepublish": "npm run clean && npm run doc && npm run build"
+    "prepublishOnly": "npm run clean && npm run doc && npm run build"
   },
   "author": "Pedro Bernardino Alves Moreira",
   "homepage": "https://github.com/pedrobern/react-tiger-transition",
