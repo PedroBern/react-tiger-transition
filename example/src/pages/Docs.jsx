@@ -45,6 +45,7 @@ const RenderDoc = ({doc}) => (
         :
         <ReactMarkdown
           source={doc}
+          escapeHtml={false}
           renderers={{
             code: CodeRender,
             link: LinkRender
@@ -60,6 +61,7 @@ const Docs = ({
   history,
 }) => {
   const classes = useStyles();
+  
 
   return (
     match && !docsPaths.includes(match.params.doc) ?
@@ -107,6 +109,18 @@ const Docs = ({
             path={d.path}
           >
             <RenderDoc doc={d.doc} />
+            {/*{d.path === '/docs/quick-start' &&
+              <iframe
+                src="https://codesandbox.io/embed/heuristic-herschel-70s21?fontsize=14"
+                title="heuristic-herschel-70s21"
+                allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+                width='100%'
+                height='500px'
+                frameBorder="0"
+                sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+              >
+              </iframe>
+            }*/}
           </Route>
         ))}
       </Screen>

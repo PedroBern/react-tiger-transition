@@ -12,12 +12,12 @@ const codeMirrorLib = path.join(__dirname, './node_modules/codemirror/lib')
 const codeMirrorTheme = path.join(__dirname, './node_modules/codemirror/theme')
 const reactTigerTransitionStyles = path.join(__dirname, './node_modules/react-tiger-transition/lib')
 
-module.exports = {
+module.exports = (env, argv) => ({
     entry : path.join(src, 'index.js'),
     output : {
         path : path.resolve(__dirname , 'dist'),
         filename: 'bundle.js',
-        publicPath: ''
+        publicPath: argv.mode === 'production' ? '' : 'http://localhost:8080/'
     },
     module : {
         rules : [
@@ -84,4 +84,4 @@ module.exports = {
         }),
     ]
 
-}
+})
