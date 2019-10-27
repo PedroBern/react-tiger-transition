@@ -1,6 +1,7 @@
 var path = require('path');
 
 var HtmlWebpackPlugin =  require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 
 const node_modules = path.join(__dirname, './node_modules');
@@ -82,6 +83,9 @@ module.exports = (env, argv) => ({
         new HtmlWebpackPlugin ({
             template : path.join(src, 'index.html'),
         }),
+        new CopyPlugin([
+          { from: path.join(src, '404.html'), to: path.resolve(__dirname , 'dist') },
+        ]),
     ]
 
 })
