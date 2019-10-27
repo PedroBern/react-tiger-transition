@@ -11,6 +11,7 @@ import {
 const useStyles = makeStyles({
   screen: {
     height: `calc(100% - 48px)`,
+    marginTop: 48,
   },
   container: {
     height: '100%',

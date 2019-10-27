@@ -21,9 +21,8 @@ You need to install peerDependencies:
 
 <div class="iframe_container">
   <iframe
-    src="https://codesandbox.io/embed/heuristic-herschel-70s21?fontsize=14"
+    src="https://codesandbox.io/embed/heuristic-herschel-70s21?fontsize=14&codemirror=1"
     title="heuristic-herschel-70s21"
-    allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
     width='100%'
     height='500px'
     frameBorder="0"

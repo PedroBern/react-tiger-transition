@@ -8,7 +8,7 @@ import styles from 'react-tiger-transition/lib/styles.css';
 
 import { Home, Docs, Demo, DemoNext, Guides } from './pages';
 
-import { Nav } from './components';
+import { Nav, DemoNav, DocsNav } from './components';
 
 import { DemoProvider } from './provider';
 
@@ -21,15 +21,43 @@ import 'codemirror/theme/material.css';
 
 const useStyles = makeStyles({
   nav: {
-    zIndex: 3,
-    bottom: 0,
-    top: 'auto',
-    height: 56,
+    zIndex: 200,
+    top: 0,
+    bottom: 'auto',
+    height: 48,
+  },
+  scondaryNav: {
+    zIndex: 100,
+    top: 0,
+    bottom: 'auto',
+    height: 96,
   },
   route: {
     backgroundColor: '#fafafa',
   }
 });
+
+const navs = [
+  {
+    key: 'main',
+    path: ['/docs', '/demo', '/guides'],
+    component: <Nav />,
+    navClass: 'nav',
+    zIndex: 200,
+  },
+  {
+    path: '/demo',
+    component: <DemoNav />,
+    navClass: 'scondaryNav',
+    zIndex: 100,
+  },
+  {
+    path: '/docs',
+    component: <DocsNav />,
+    navClass: 'scondaryNav',
+    zIndex: 100,
+  }
+]
 
 const App = () => {
 
@@ -43,18 +71,44 @@ const App = () => {
           globalTransitionProps={{appear: true}}
         >
 
-          <Route exact path="/" children={<Home />} />
-          <Route exact path="/docs/:doc?" children={<Docs />} className={classes.route}/>
-          <Route exact path="/demo" children={<Demo />} className={classes.route}/>
-          <Route exact path="/demo-a" children={<DemoNext a />} />
-          <Route exact path="/demo-b" children={<DemoNext b />} />
-          <Route exact path="/guides" children={<Guides />} className={classes.route}/>
-          <Route
-            path={['/docs', '/demo', '/guides']}
-            className={classes.nav}
-            children={<Nav />}
-            forceTransition={shuffle}
-          />
+          <Route exact path="/" >
+            <Home />
+          </Route>
+
+          <Route exact path="/docs/:doc?" className={classes.route}>
+            <Docs />
+          </Route>
+
+          <Route exact path="/demo" className={classes.route}>
+            <Demo />
+          </Route>
+
+          <Route exact path="/demo-a">
+            <DemoNext a />
+          </Route>
+
+          <Route exact path="/demo-b">
+            <DemoNext b />
+          </Route>
+
+          <Route exact path="/guides" className={classes.route}>
+            <Guides />
+          </Route>
+
+          {navs.map(nav => (
+            <Route
+              key={nav.key || nav.path}
+              path={nav.path}
+              className={classes[nav.navClass]}
+              forceTransition={() => shuffle({
+                direction: 'bottom',
+                opacity: 1,
+                zIndex: nav.zIndex
+              })}
+            >
+              {nav.component}
+            </Route>
+          ))}
 
         </Navigation>
       </DemoProvider>

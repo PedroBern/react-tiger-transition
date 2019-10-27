@@ -65,7 +65,6 @@ const Nav = ({match, location, history}) => {
             : 0
           }
           textColor="inherit"
-          indicatorTop
           classes={{
             flexContainer: classes.tabsFlexContainer,
           }}
