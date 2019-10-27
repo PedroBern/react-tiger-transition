@@ -2,7 +2,7 @@
   "short_name": "React TT",
   "name": "React Tiger Transition",
   "start_url": "/react-tiger-transition/",
-  "background_color": "#333",
+  "background_color": "#333333",
   "display": "minimal-ui",
   "scope": "/react-tiger-transition/",
   "theme_color": "#ffa000"
