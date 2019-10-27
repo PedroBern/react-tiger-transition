@@ -52,7 +52,7 @@ const navs = [
     zIndex: 100,
   },
   {
-    path: '/docs',
+    path: '/docs/:doc?',
     component: <DocsNav />,
     navClass: 'scondaryNav',
     zIndex: 100,

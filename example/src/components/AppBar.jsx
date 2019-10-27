@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 
-import { gradient, color, gradientSecondary } from './themeColor';
+import { gradient, color, colorSecondary, gradientSecondary } from './themeColor';
 
 const useStyles = makeStyles({
   colorPrimary: {
@@ -11,7 +11,8 @@ const useStyles = makeStyles({
   },
   colorSecondary: {
     color: color,
-    background: gradientSecondary,
+    // background: gradientSecondary,
+    backgroundColor: colorSecondary,
   }
 });
 

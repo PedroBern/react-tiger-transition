@@ -27,7 +27,7 @@ const DemoNav = () => {
   } = useContext(DemoContext)
 
   return (
-    <AppBar position="fixed" color='secondary' className={classes.appBar}>
+    <AppBar position="fixed" className={classes.appBar}>
       <Container maxWidth='lg'>
 
         <Tabs

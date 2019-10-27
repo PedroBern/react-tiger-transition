@@ -52,7 +52,7 @@ const Nav = ({match, location, history}) => {
   const classes = useStyles();
 
   return (
-    <AppBar position="fixed" className={classes.appBar}>
+    <AppBar position="fixed" color='secondary' className={classes.appBar}>
       <Container maxWidth='lg'>
         <Tabs
           variant="scrollable"

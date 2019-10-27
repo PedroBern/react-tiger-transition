@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 
 import { makeStyles } from '@material-ui/styles';
 import Container from '@material-ui/core/Container';
@@ -33,7 +33,10 @@ const DocsNav = ({
   const classes = useStyles();
 
   return (
-    <AppBar position="fixed" color='secondary' className={classes.appBar}>
+    match && !docsPaths.includes(match.params.doc) ?
+    <Redirect to='/docs/quick-start'/>
+    :
+    <AppBar position="fixed" className={classes.appBar}>
       <Container maxWidth='lg'>
 
         <Tabs

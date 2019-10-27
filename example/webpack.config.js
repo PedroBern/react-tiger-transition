@@ -1,6 +1,7 @@
 var path = require('path');
 
 var HtmlWebpackPlugin =  require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const node_modules = path.join(__dirname, './node_modules');
 const src = path.join(__dirname, './src');
@@ -79,8 +80,12 @@ module.exports = (env, argv) => ({
 
     plugins : [
         new HtmlWebpackPlugin ({
-            template : path.join(src, 'index.html'),
-        })
+            template : path.resolve(__dirname , 'public/index.html'),
+        }),
+        new CopyPlugin([{
+          from: path.resolve(__dirname , 'public/manifest.json'),
+          to: path.resolve(__dirname , 'dist/') 
+        }]),
     ]
 
 })

@@ -51,9 +51,6 @@ const Docs = ({
 
 
   return (
-    match && !docsPaths.includes(match.params.doc) ?
-    <Redirect to='/docs/quick-start'/>
-    :
     <Screen className={classes.screen}>
 
       <Screen display>
