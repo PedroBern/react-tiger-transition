@@ -23,10 +23,14 @@ body {
 
 .iframe_container {
 	position: relative;
-	padding-bottom: 56.25%; /* 16:9 - this is responsive by adjusting the hight according to the width! */
+	padding-bottom: 40%; /* 16:9 - this is responsive by adjusting the hight according to the width! */
 	padding-top: 24px;
 	height: 0;
   margin-bottom: 24px;
+  min-width: 200px;
+  max-width: 980px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .iframe_container iframe {

@@ -18,18 +18,3 @@ You need to install peerDependencies:
 `npm i react-router-dom react-transition-group`
 
 ## Basic Example
-
-<div class="iframe_container">
-  <iframe
-    src="https://codesandbox.io/embed/heuristic-herschel-70s21?fontsize=14&codemirror=1"
-    title="heuristic-herschel-70s21"
-    width='100%'
-    height='500px'
-    frameBorder="0"
-    sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
-  >
-  </iframe>
-</div>
-
-
-[Keep reading!](/docs/navigation)

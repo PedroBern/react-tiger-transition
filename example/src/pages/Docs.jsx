@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import ReactMarkdown from 'react-markdown';
 import { withRouter, Redirect } from "react-router-dom";
@@ -49,6 +49,11 @@ const Docs = ({
 }) => {
   const classes = useStyles();
 
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(false);
+  }, [])
 
   return (
     <Screen className={classes.screen}>
@@ -62,6 +67,19 @@ const Docs = ({
             path={d.path}
           >
             <RenderDoc doc={d.doc} />
+            {d.path === '/docs/quick-start' && !loading && (
+              <div className="iframe_container">
+                <iframe
+                  src="https://codesandbox.io/embed/heuristic-herschel-70s21?fontsize=14&codemirror=1"
+                  title="heuristic-herschel-70s21"
+                  width='100%'
+                  height='100px'
+                  frameBorder="0"
+                  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+                >
+                </iframe>
+              </div>
+            )}
           </Route>
         ))}
       </Screen>
