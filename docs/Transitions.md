@@ -18,7 +18,7 @@ const transition = glide;
 const transition = () => glide({
     direction: 'right',
     duration: 1000,
-    easing: 'ease-in-out',
+    easing: 'easeInOutQuad', // checkout animejs easings
     opacity: 1,
   })
 ```
@@ -34,7 +34,7 @@ transition = () => glide({
       opacity: 0.8
     }
     exit: {
-      easing: 'ease-in-out',
+      easing: 'easeInOutQuad', // checkout animejs easings
       opacity: 0,
     }
   })
