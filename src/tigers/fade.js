@@ -10,17 +10,16 @@ export const fade = buildTiger(
   // enter
   {
     duration: 700,
-    easing: 'ease-out',
+    easing: 'easeOutQuad',
     opacity: 0.3,
     zIndex: 2,
-    delay: 0,
   },
   fadeInRules,
 
   // exit
   {
     duration: 700,
-    easing: 'ease-out',
+    easing: 'easeOutQuad',
     opacity: 0.3,
     zIndex: 1,
   },

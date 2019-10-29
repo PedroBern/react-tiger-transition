@@ -11,7 +11,7 @@ export const shuffle = buildTiger(
   // enter
   {
     duration: 700,
-    easing: 'ease',
+    easing: 'easeOutQuad',
     opacity: 1,
     scale: 1,
     zIndex: 2,
@@ -22,7 +22,7 @@ export const shuffle = buildTiger(
   // exit
   {
     duration: 700,
-    easing: 'ease',
+    easing: 'easeOutQuad',
     opacity: 0.3,
     scale: 1,
     zIndex: 1,

@@ -66,7 +66,6 @@ const NavigationProvider = withRouter(({
         }));
       })
     ),
-    lastLocation: { ...location },
   });
 
   const matched = useMemo(() => {

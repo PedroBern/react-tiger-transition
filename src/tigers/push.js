@@ -11,7 +11,7 @@ export const push = buildTiger(
   // enter
   {
     duration: 700,
-    easing: 'ease',
+    easing: 'easeInBack',
     opacity: 1,
     zIndex: 2,
     delay: 0,
@@ -21,7 +21,7 @@ export const push = buildTiger(
   // exit
   {
     duration: 700,
-    easing: 'ease',
+    easing: 'easeInBack',
     opacity: 0.3,
     zIndex: 1,
     angle: 90,

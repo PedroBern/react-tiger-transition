@@ -7,22 +7,20 @@ export const room = buildTiger(
     direction: 'left',
     backgroundColor: null,
     angle: 90,
+    easing: 'easeInOutCubic',
   },
 
   // enter
   {
     duration: 700,
-    easing: 'ease',
     opacity: 0.3,
     zIndex: 1,
-    delay: 0,
   },
   roomInRules,
 
   // exit
   {
     duration: 700,
-    easing: 'ease',
     opacity: 0.3,
     zIndex: 2,
   },

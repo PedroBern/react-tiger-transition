@@ -1,11 +1,11 @@
+import anime from 'animejs';
 import { buildTransitionIn } from './buildTransition';
 
-import { InjectStyle } from '../../utils';
 
 export default ({
   direction = 'left',
   duration = 700,
-  easing = 'ease-in',
+  easing = 'easeInOutCubic',
   opacity = 0.3,
   replaceBackground = null,
   zIndex = 1,
@@ -16,61 +16,40 @@ export default ({
 } = {}) => {
 
   const config = {
-    left: ['0% 50%', `translateX(${offset}%) rotateY(${angle}deg)`, 'X', 'Y'],
-    right: ['100% 50%', `translateX(${-offset}%) rotateY(${-angle}deg)`, 'X', 'Y'],
-    top: ['50% 0%', `translateY(${offset}%) rotateX(${-angle}deg)`, 'Y', 'X'],
-    bottom: ['50% 100%', `translateY(${-offset}%) rotateX(${angle}deg)`, 'Y', 'X'],
-  };
-
-  const animationName = `${direction}ReactTigerTransitionCarouselIn`;
-  const transformOrigin = config[direction][0];
-  let transform = `${config[direction][1]} scale(${scale})`;
-  const animationCss = `${animationName} ${duration}ms both ${easing}`;
-
-  const style = `
-  .react-tiger-transition-carousel-in-${direction} {
-    -webkit-transform-origin: ${transformOrigin};
-    -ms-transform-origin: ${transformOrigin};
-    transform-origin: ${transformOrigin};
-    -webkit-transform: ${transform};
-    -ms-transform: ${transform};
-    transform: ${transform};
-    -webkit-animation: ${animationCss};
-    animation: ${animationCss};
-    z-index: ${zIndex};
-    -webkit-animation-delay: ${delay}ms;
-    animation-delay: ${delay}ms;
-    opacity: ${opacity};
-  }
-  `;
-
-  transform = `translate${config[direction][2]}(0px) rotate${config[direction][3]}(0deg) scale(1)`;
-
-  const animation = `
-  @-webkit-keyframes ${animationName} {
-    to {
-      opacity: 1;
-      -webkit-transform: ${transform};
-      transform: ${transform};
-    }
-  }
-  @keyframes ${animationName} {
-    to {
-      opacity: 1;
-      -webkit-transform: ${transform};
-      transform: ${transform};
-    }
-  }
-  `;
-
-  const rules = {
-    style: new InjectStyle(style),
-    animation: new InjectStyle(animation),
+    left: {
+      transformOrigin: { value: '0% 50%', duration: 0 },
+      translateX: [`${offset}%`, 0],
+      rotateY: [angle, 0]
+    },
+    right: {
+      transformOrigin: { value: '100% 50%', duration: 0 },
+      translateX: [`${-offset}%`, 0],
+      rotateY: [-angle, 0]
+    },
+    top: {
+      transformOrigin: { value: '50% 0%', duration: 0 },
+      translateY: [`${offset}%`, 0],
+      rotateX: [-angle, 0]
+    },
+    bottom: {
+      transformOrigin: { value: '50% 100%', duration: 0 },
+      translateY: [`${-offset}%`, 0],
+      rotateX: [angle, 0]
+    },
   };
 
   return buildTransitionIn({
-    rules,
-    replaceBackground,
-    className: `react-tiger-transition-carousel-in-${direction}`,
+    transition: (node) => anime({
+      targets: node,
+      easing,
+      delay,
+      duration,
+      zIndex: { value: zIndex, duration: 0 },
+      opacity: [opacity, 1],
+      scale: [scale, 1],
+      ...config[direction]
+    }),
+    replaceBackground
   });
+
 };

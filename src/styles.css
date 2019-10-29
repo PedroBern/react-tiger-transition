@@ -41,3 +41,7 @@ body {
   position: relative;
   overflow-y: scroll;
 }
+
+.isAppearing {
+	opacity: 0;
+}
