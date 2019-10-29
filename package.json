@@ -111,5 +111,8 @@
       "pre-commit": "npm run lint",
       "pre-push": "npm run local-test"
     }
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

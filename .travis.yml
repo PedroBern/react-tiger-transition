@@ -6,3 +6,15 @@ node_js:
   - 8
   - 7
   - 6
+
+jobs:
+  include:
+    - stage: npm release
+      node_js: "6"
+      deploy:
+        provider: npm
+        email: "$NPM_EMAIL"
+        api_key: "$NPM_TOKEN"
+        skip_cleanup: true
+        on:
+          tags: true
