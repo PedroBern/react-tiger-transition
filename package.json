@@ -1,6 +1,6 @@
 {
   "name": "react-tiger-transition",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Take your navigation transitions to the next level.",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -18,7 +18,7 @@
     "local-cover": "cross-env NODE_ENV=commonjs jest --config ./jest.config.json --coverage",
     "local-test:watch": "npm run test -- --watch",
     "test": "jest --config ./jest.config.json",
-    "cover": "cross-env NODE_ENV=commonjs jest --config ./jest.config.json --coverage",
+    "cover": "jest --config ./jest.config.json --coverage",
     "test:watch": "npm run local-test -- --watch",
     "doc": "react-docgen src/ | node docs/config/buildDocs.js",
     "clean": "rimraf lib dist es",
@@ -101,10 +101,10 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1",
-    "react-transition-group": "^4.3.0"
+    "react-transition-group": "^4.3.0",
+    "animejs": "^3.1.0"
   },
   "dependencies": {
-    "animejs": "^3.1.0"
   },
   "husky": {
     "hooks": {
