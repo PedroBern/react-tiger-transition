@@ -26,4 +26,4 @@
 
 You need to install peerDependencies:
 
-`npm i react-router-dom react-transition-group`
+`npm i react-router-dom react-transition-group animejs`
