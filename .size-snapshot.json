@@ -1,12 +1,12 @@
 {
   "dist/react-tiger-transition.js": {
-    "bundled": 120269,
-    "minified": 62016,
-    "gzipped": 9730
+    "bundled": 116566,
+    "minified": 52425,
+    "gzipped": 7951
   },
   "dist/react-tiger-transition.min.js": {
-    "bundled": 62016,
-    "minified": 61928,
-    "gzipped": 9710
+    "bundled": 52425,
+    "minified": 52338,
+    "gzipped": 7925
   }
 }

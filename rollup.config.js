@@ -16,6 +16,7 @@ const globals = {
   'react-dom': 'ReactDOM',
   "react-router-dom": 'ReactRouterDOM',
   "react-transition-group": 'ReactTransitionGroup',
+  animejs: 'animejs'
 };
 
 const babelOptions = {
