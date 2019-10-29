@@ -1,11 +1,10 @@
+import anime from 'animejs';
 import { buildTransitionOut } from './buildTransition';
-
-import { InjectStyle } from '../../utils';
 
 export default ({
   direction = 'left',
   duration = 700,
-  easing = 'ease-in',
+  easing = 'easeInCubic',
   opacity = 0.3,
   replaceBackground = null,
   zIndex = 2,
@@ -15,55 +14,42 @@ export default ({
 } = {}) => {
 
   const config = {
-    left: [`${50 - offset}% 50%`, `translateZ(${depth}px) rotateY(${angle}deg)`],
-    right: [`${50 + offset}% 50%`, `translateZ(${-depth}px) rotateY(${-angle}deg)`],
-    top: [`50% ${50 - offset}%`, `translateZ(${-depth}px) rotateX(${-angle}deg)`],
-    bottom: [`50% ${50 + offset}%`, `translateZ(${-depth}px) rotateX(${angle}deg)`],
-  };
-
-
-  const animationName = `${direction}ReactTigerTransitionSideOut`;
-  const transformOrigin = config[direction][0];
-  const animationCss = `${animationName} ${duration}ms both ${easing}`;
-
-  const style = `
-  .react-tiger-transition-side-out-${direction} {
-    -webkit-transform-origin: ${transformOrigin};
-    -ms-transform-origin: ${transformOrigin};
-    transform-origin: ${transformOrigin};
-    -webkit-animation: ${animationCss};
-    animation: ${animationCss};
-    z-index: ${zIndex};
-    opacity: 1;
-  }
-  `;
-  const transform = config[direction][1];
-
-  const animation = `
-  @-webkit-keyframes ${animationName} {
-    to {
-      opacity: ${opacity};
-      -webkit-transform: ${transform};
-      transform: ${transform};
-    }
-  }
-  @keyframes ${animationName} {
-    to {
-      opacity: ${opacity};
-      -webkit-transform: ${transform};
-      transform: ${transform};
-    }
-  }
-  `;
-
-  const rules = {
-    style: new InjectStyle(style),
-    animation: new InjectStyle(animation),
+    left: {
+      transformOrigin: { value: `${50 - offset}% 50%`, duration: 0 },
+      translateZ: [0, depth],
+      translateX: [0, `${-offset}%`],
+      rotateY: [0, angle]
+    },
+    right: {
+      transformOrigin: { value: `${50 + offset}% 50%`, duration: 0 },
+      translateZ: [0, -depth],
+      translateX: [0, `${offset}%`],
+      rotateY: [0, -angle]
+    },
+    top: {
+      transformOrigin: { value: `50% ${50 - offset}%`, duration: 0 },
+      translateZ: [0, -depth],
+      translateY: [0, `${-offset}%`],
+      rotateX: [0, -angle]
+    },
+    bottom: {
+      transformOrigin: { value: `50% ${50 + offset}%`, duration: 0 },
+      translateZ: [0, -depth],
+      translateY: [0, `${offset}%`],
+      rotateX: [0, angle]
+    },
   };
 
   return buildTransitionOut({
-    rules,
-    replaceBackground,
-    className: `react-tiger-transition-side-out-${direction}`,
+    transition: (node) => anime({
+      targets: node,
+      easing,
+      duration,
+      zIndex: { value: zIndex, duration: 0 },
+      opacity: [1, opacity],
+      ...config[direction]
+    }),
+    replaceBackground
   });
+
 };

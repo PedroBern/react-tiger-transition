@@ -1,6 +1,5 @@
+import anime from 'animejs';
 import { buildTransitionOut } from './buildTransition';
-
-import { InjectStyle } from '../../utils';
 
 export default ({
   direction = 'left',
@@ -14,71 +13,47 @@ export default ({
 } = {}) => {
 
   const config = {
-    left: ['0% 50%', `Y(${angle}deg)`],
-    right: ['100% 50%', `Y(${-angle}deg)`],
-    top: ['50% 100%', `X(${angle}deg)`],
-    bottom: ['50% 0%', `X(${-angle}deg)`],
-  };
-
-  const animationName = `${direction}ReactTigerTransitionGlueOut`;
-  const animationCss = `${animationName} ${duration}ms both ${easing}`;
-  const transformOrigin = config[direction][0];
-
-  const style = `
-  .react-tiger-transition-glue-out-${direction} {
-    -webkit-transform-origin:${transformOrigin};
-    -ms-transform-origin: ${transformOrigin};
-    transform-origin: ${transformOrigin};
-    -webkit-animation: ${animationCss};
-    animation: ${animationCss};
-    z-index: ${zIndex};
-    opacity: 1;
-  }
-  `;
-  const transform40 = `rotate${config[direction][1]}`;
-  const transform100 = `translateZ(${-depth}px)`;
-
-  const animation = `
-  @-webkit-keyframes ${animationName} {
-    0% {
-      opacity: 1;
+    left: {
+      transformOrigin: { value: '0% 50%', duration: 0 },
+      rotateY: [
+        { value: angle, duration: duration * 0.4 },
+        { value: 0, duration: duration * 0.6 },
+      ]
+    },
+    right: {
+      transformOrigin: { value: '100% 50%', duration: 0 },
+      rotateY: [
+        { value: -angle, duration: duration * 0.4 },
+        { value: 0, duration: duration * 0.6 },
+      ]
+    },
+    top: {
+      transformOrigin: { value: '50% 100%', duration: 0 },
+      rotateX: [
+        { value: angle, duration: duration * 0.4 },
+        { value: 0, duration: duration * 0.6 },
+      ]
+    },
+    bottom: {
+      transformOrigin: { value: '50% 0%', duration: 0 },
+      rotateX: [
+        { value: -angle, duration: duration * 0.4 },
+        { value: 0, duration: duration * 0.6 },
+      ]
     }
-    40% {
-      -webkit-transform: ${transform40};
-      transform: ${transform40};
-      animation-timing-function: ease-out;
-    }
-    100% {
-      -webkit-transform: ${transform100};
-      transform: ${transform100};
-      opacity: ${opacity};
-    }
-  }
-  @keyframes ${animationName} {
-    0% {
-      opacity: 1;
-    }
-    40% {
-      -webkit-transform: ${transform40};
-      transform: ${transform40};
-      animation-timing-function: ease-out;
-    }
-    100% {
-      -webkit-transform: ${transform100};
-      transform: ${transform100};
-      opacity: ${opacity};
-    }
-  }
-  `;
-
-  const rules = {
-    style: new InjectStyle(style),
-    animation: new InjectStyle(animation),
   };
 
   return buildTransitionOut({
-    rules,
-    replaceBackground,
-    className: `react-tiger-transition-glue-out-${direction}`,
+    transition: (node) => anime({
+      targets: node,
+      easing,
+      duration,
+      zIndex: { value: zIndex, duration: 0 },
+      opacity: [1, opacity],
+      translateZ: [0, -depth],
+      ...config[direction]
+    }),
+    replaceBackground
   });
+
 };

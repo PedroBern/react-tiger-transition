@@ -10,7 +10,7 @@ export const scale = buildTiger(
   // enter
   {
     duration: 400,
-    easing: 'ease-out',
+    easing: 'easeOutQuad',
     opacity: 0,
     zIndex: 1,
     scale: 0.7,
@@ -21,7 +21,7 @@ export const scale = buildTiger(
   // exit
   {
     duration: 400,
-    easing: 'ease-in',
+    easing: 'easeOutQuad',
     opacity: 0,
     zIndex: 2,
     scale: 0.7,

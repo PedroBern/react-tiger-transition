@@ -6,22 +6,20 @@ export const fold = buildTiger(
   {
     direction: 'left',
     backgroundColor: null,
+    easing: 'easeInOutCubic',
   },
 
   // enter
   {
     duration: 700,
-    easing: 'ease',
     opacity: 0.3,
     zIndex: 2,
-    delay: 0,
   },
   glideInRules,
 
   // exit
   {
     duration: 700,
-    easing: 'ease',
     opacity: 0.3,
     zIndex: 1,
     angle: 90,

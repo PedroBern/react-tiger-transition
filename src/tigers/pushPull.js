@@ -11,21 +11,21 @@ export const pushPull = buildTiger(
   // enter
   {
     duration: 700,
-    easing: 'ease',
+    easing: 'easeInOutBack',
     opacity: 0,
     zIndex: 1,
-    angle: 90,
-    delay: 150,
+    angle: 120,
+    delay: 200,
   },
   pullRules,
 
   // exit
   {
     duration: 700,
-    easing: 'ease',
+    easing: 'easeInOutBack',
     opacity: 0,
     zIndex: 2,
-    angle: 90,
+    angle: 120,
   },
   pushRules,
 );

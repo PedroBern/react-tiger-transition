@@ -11,7 +11,7 @@ export const side = buildTiger(
   // enter
   {
     duration: 500,
-    easing: 'ease-out',
+    easing: 'easeOutCubic',
     opacity: 0,
     zIndex: 1,
     delay: 300,
@@ -24,7 +24,7 @@ export const side = buildTiger(
   // exit
   {
     duration: 500,
-    easing: 'ease-in',
+    easing: 'easeInCubic',
     opacity: 0,
     zIndex: 2,
     depth: 500,

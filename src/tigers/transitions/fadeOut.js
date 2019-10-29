@@ -1,47 +1,19 @@
+import anime from 'animejs';
 import { buildTransitionOut } from './buildTransition';
-
-import { InjectStyle } from '../../utils';
 
 export default ({
   duration = 700,
-  easing = 'ease',
+  easing = 'easeInOutQuad',
   opacity = 0,
   replaceBackground = null,
   zIndex = 1,
-} = {}) => {
-
-  const animationName = 'ReactTigerTransitionFadeOut';
-
-  const style = `
-  .react-tiger-transition-fade-out {
-    -webkit-animation: ${animationName} ${duration}ms ${easing} both;
-    animation: ${animationName} ${duration}ms ${easing} both;
-    z-index: ${zIndex};
-    opacity: 1;
-  }
-  `;
-
-  const animation = `
-  @-webkit-keyframes ${animationName} {
-    to {
-      opacity: ${opacity};
-    }
-  }
-  @keyframes ${animationName} {
-    to {
-      opacity: ${opacity};
-    }
-  }
-  `;
-
-  const rules = {
-    style: new InjectStyle(style),
-    animation: new InjectStyle(animation),
-  };
-
-  return buildTransitionOut({
-    rules,
-    replaceBackground,
-    className: `react-tiger-transition-fade-out`,
-  });
-};
+} = {}) => buildTransitionOut({
+  transition: (node) => anime({
+    targets: node,
+    easing,
+    duration,
+    zIndex: { value: zIndex, duration: 0 },
+    opacity: [1, opacity],
+  }),
+  replaceBackground
+});

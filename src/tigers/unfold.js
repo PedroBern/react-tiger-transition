@@ -6,22 +6,20 @@ export const unfold = buildTiger(
   {
     direction: 'left',
     backgroundColor: null,
+    easing: 'easeInOutCubic',
   },
 
   // enter
   {
     duration: 700,
-    easing: 'ease',
     opacity: 0.3,
     zIndex: 1,
-    delay: 0,
   },
   unfoldRules,
 
   // exit
   {
     duration: 700,
-    easing: 'ease',
     opacity: 1,
     zIndex: 2,
   },

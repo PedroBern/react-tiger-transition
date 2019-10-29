@@ -13,7 +13,7 @@ export const flip = buildTiger(
 
   // enter
   {
-    easing: 'ease-out',
+    easing: 'easeOutQuad',
     opacity: 0.2,
     zIndex: 1,
   },
@@ -21,7 +21,7 @@ export const flip = buildTiger(
 
   // exit
   {
-    easing: 'ease-in',
+    easing: 'easeInQuad',
     opacity: 0.2,
     zIndex: 2,
   },

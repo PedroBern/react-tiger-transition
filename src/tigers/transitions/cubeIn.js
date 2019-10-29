@@ -1,86 +1,52 @@
+import anime from 'animejs';
 import { buildTransitionIn } from './buildTransition';
-
-import { InjectStyle } from '../../utils';
 
 export default ({
   direction = 'left',
   duration = 700,
-  easing = 'ease-in',
+  easing = 'cubicBezier(.42, 0, 1, 1)',
   opacity = 0.3,
   replaceBackground = null,
   zIndex = 1,
   depth = 200,
-  delay = 0,
 } = {}) => {
 
   const config = {
-    left: ['0% 50%', 'X(100%)', 'Y(90deg)', 'X(50%)', 'Y(45deg)'],
-    right: ['100% 50%', 'X(-100%)', 'Y(-90deg)', 'X(-50%)', 'Y(-45deg)'],
-    top: ['50% 0%', 'Y(100%)', 'X(-90deg)', 'Y(50%)', 'X(-45deg)'],
-    bottom: ['50% 100%', 'Y(-100%)', 'X(90deg)', 'Y(-50%)', 'X(45deg)'],
-  };
-
-  const animationName = `${direction}ReactTigerTransitionCubeIn`;
-  const transformOrigin = config[direction][0];
-  const animationCss = `${animationName} ${duration}ms both ${easing}`;
-
-  const style = `
-  .react-tiger-transition-cube-in-${direction} {
-    -webkit-transform-origin: ${transformOrigin};
-    -ms-transform-origin: ${transformOrigin};
-    transform-origin: ${transformOrigin};
-    -webkit-animation: ${animationCss};
-    animation: ${animationCss};
-    z-index: ${zIndex};
-    -webkit-animation-delay: ${delay}ms;
-    animation-delay: ${delay}ms;
-    opacity: ${opacity};
-  }
-  `;
-  const transform0 = `translate${config[direction][1]} rotate${config[direction][2]}`;
-  const transform50 = `translate${config[direction][3]} translateZ(${-depth}px) rotate${config[direction][4]}`;
-
-  const animation = `
-  @-webkit-keyframes ${animationName} {
-    0% {
-      opacity: ${opacity};
-      -webkit-transform: ${transform0};
-      transform: ${transform0};
-    }
-    50% {
-      animation-timing-function: ease-out;
-      -webkit-transform: ${transform50};
-      transform: ${transform50};
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-  @keyframes ${animationName} {
-    0% {
-      opacity: ${opacity};
-      -webkit-transform: ${transform0};
-      transform: ${transform0};
-    }
-    50% {
-      animation-timing-function: ease-out;
-      -webkit-transform: ${transform50};
-      transform: ${transform50};
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-  `;
-
-  const rules = {
-    style: new InjectStyle(style),
-    animation: new InjectStyle(animation),
+    left: {
+      transformOrigin: { value: '0% 50%', duration: 0 },
+      translateX: ['100%', 0],
+      rotateY: [90, 0]
+    },
+    right: {
+      transformOrigin: { value: '100% 50%', duration: 0 },
+      translateX: ['-100%', 0],
+      rotateY: [-90, 0]
+    },
+    top: {
+      transformOrigin: { value: '50% 0%', duration: 0 },
+      translateY: ['100%', 0],
+      rotateX: [-90, 0]
+    },
+    bottom: {
+      transformOrigin: { value: '50% 100%', duration: 0 },
+      translateY: ['-100%', 0],
+      rotateX: [90, 0]
+    },
   };
 
   return buildTransitionIn({
-    rules,
-    replaceBackground,
-    className: `react-tiger-transition-cube-in-${direction}`,
+    transition: (node) => anime({
+      targets: node,
+      easing,
+      duration,
+      zIndex: { value: zIndex, duration: 0 },
+      opacity: [opacity, 1],
+      translateZ: [
+        { value: -depth, duration: duration / 2 },
+        { value: 0, duration: duration / 2 },
+      ],
+      ...config[direction]
+    }),
+    replaceBackground
   });
 };

@@ -11,7 +11,7 @@ export const pull = buildTiger(
   // enter
   {
     duration: 700,
-    easing: 'ease',
+    easing: 'easeOutBack',
     opacity: 0.3,
     zIndex: 1,
     delay: 0,
@@ -22,7 +22,7 @@ export const pull = buildTiger(
   // exit
   {
     duration: 700,
-    easing: 'ease',
+    easing: 'easeOutBack',
     opacity: 1,
     zIndex: 2,
   },

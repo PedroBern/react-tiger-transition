@@ -7,22 +7,19 @@ export const cube = buildTiger(
     direction: 'left',
     backgroundColor: null,
     depth: 300,
+    duration: 700,
+    easing: 'easeInOutBack',
   },
 
   // enter
   {
-    duration: 700,
-    easing: 'ease-in',
     opacity: 0.3,
     zIndex: 1,
-    delay: 0,
   },
   cubeInRules,
 
   // exit
   {
-    duration: 700,
-    easing: 'ease-in',
     opacity: 0.3,
     zIndex: 2,
   },

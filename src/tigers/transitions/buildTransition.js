@@ -1,46 +1,29 @@
-import {
-  addClass,
-  removeClass,
-} from '../../utils';
-
 export const buildTransitionIn = ({
-  rules = '',
-  className = '',
+  transition = () => {},
   replaceBackground = null,
 } = {}) => ({
-  onEnter: (node) => {
+  onEnter: () => {
     if (replaceBackground) replaceBackground.fake();
-    rules.style.add();
-    addClass(node, className);
   },
-  onEntering: () => {
-    rules.animation.add();
+  onEntering: (node) => {
+    transition(node);
   },
-  onEntered: (node) => {
-    removeClass(node, className);
-    rules.style.remove();
-    rules.animation.remove();
+  onEntered: () => {
     if (replaceBackground) replaceBackground.original();
   },
 });
 
 export const buildTransitionOut = ({
-  rules = '',
-  className = '',
+  transition = () => {},
   replaceBackground = null,
 } = {}) => ({
-  onExit: (node) => {
+  onExit: () => {
     if (replaceBackground) replaceBackground.fake();
-    rules.style.add();
-    addClass(node, className);
   },
-  onExiting: () => {
-    rules.animation.add();
+  onExiting: (node) => {
+    transition(node);
   },
-  onExited: (node) => {
+  onExited: () => {
     if (replaceBackground) replaceBackground.original();
-    removeClass(node, className);
-    rules.style.remove();
-    rules.animation.remove();
-  }
+  },
 });
