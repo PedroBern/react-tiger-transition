@@ -9,6 +9,9 @@ node_js:
 
 jobs:
   include:
+    - stage: coverage
+      node_js: "6"
+      script: ./node_modules/.bin/codecov --token="$CODECOV"
     - stage: npm release
       node_js: "6"
       deploy:
