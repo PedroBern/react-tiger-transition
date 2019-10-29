@@ -16,7 +16,9 @@ module.exports = (env, argv) => ({
     output : {
         path : path.resolve(__dirname , 'dist'),
         filename: 'bundle.js',
-        publicPath: argv.mode === 'production' ? '' : 'http://localhost:8080/'
+        publicPath: argv.mode === 'production'
+        ? 'https://pedrobern.github.io/react-tiger-transition/'
+        : 'http://localhost:8080/'
     },
     module : {
         rules : [
@@ -60,9 +62,9 @@ module.exports = (env, argv) => ({
          node_modules,
        ],
        extensions: ['*', '.js', '.jsx'],
-       alias: {
-        "react-tiger-transition": path.resolve(__dirname, '../src'),
-       }
+     //   alias: {
+     //    "react-tiger-transition": path.resolve(__dirname, '../src'),
+     //   }
      },
 
      resolveLoader: {
@@ -80,6 +82,10 @@ module.exports = (env, argv) => ({
     plugins : [
         new HtmlWebpackPlugin ({
             template : path.resolve(__dirname , 'public/index.html'),
+        }),
+        new HtmlWebpackPlugin ({
+            template : path.resolve(__dirname , 'public/index.html'),
+            filename: '404.html'
         }),
     ]
 
