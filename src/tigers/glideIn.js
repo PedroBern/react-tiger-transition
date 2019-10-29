@@ -10,7 +10,7 @@ export const glideIn = buildTiger(
 
   // enter
   {
-    duration: 7000,
+    duration: 700,
     easing: 'easeOutQuad',
     opacity: 1,
     zIndex: 2,
@@ -20,7 +20,7 @@ export const glideIn = buildTiger(
 
   // exit
   {
-    duration: 7000,
+    duration: 700,
     easing: 'easeOutQuad',
     opacity: 0.3,
     zIndex: 1,
