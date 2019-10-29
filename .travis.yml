@@ -1,4 +1,6 @@
 language: node_js
+install:
+  - npm install -g codecov
 node_js:
   - 11
   - 10
@@ -11,7 +13,9 @@ jobs:
   include:
     - stage: coverage
       node_js: "6"
-      script: ./node_modules/.bin/codecov
+      script:
+      - npm run cover
+      - ./node_modules/.bin/codecov
     - stage: npm release
       node_js: "6"
       deploy:
