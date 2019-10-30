@@ -5,6 +5,7 @@ var HtmlWebpackPlugin =  require('html-webpack-plugin');
 const node_modules = path.join(__dirname, './node_modules');
 const src = path.join(__dirname, './src');
 const parentSrc = path.join(__dirname, '../src')
+const docsAssets = path.join(__dirname, '../documentation/assets')
 
 // need to import styles of code mirror
 const codeMirrorLib = path.join(__dirname, './node_modules/codemirror/lib')
@@ -46,7 +47,10 @@ module.exports = (env, argv) => ({
             },
             {
               test: /\.md$/i,
-              use: 'raw-loader'
+              use: 'raw-loader',
+              // include: [
+              //   docsAssets
+              // ],
             },
             {
               test: /\.(gif)$/i,
@@ -62,9 +66,10 @@ module.exports = (env, argv) => ({
          node_modules,
        ],
        extensions: ['*', '.js', '.jsx'],
-     //   alias: {
-     //    "react-tiger-transition": path.resolve(__dirname, '../src'),
-     //   }
+       alias: {
+        // "react-tiger-transition": path.resolve(__dirname, '../src'),
+        "docsAssets": docsAssets,
+       }
      },
 
      resolveLoader: {

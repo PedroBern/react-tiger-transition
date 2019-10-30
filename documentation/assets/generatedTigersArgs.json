@@ -1,0 +1,400 @@
+{
+  "defaultArgs": [
+    {
+      "name": "glide",
+      "args": {
+        "direction": "left",
+        "backgroundColor": null,
+        "enter": {
+          "duration": 700,
+          "easing": "easeOutQuad",
+          "opacity": 1,
+          "zIndex": 2,
+          "delay": 0
+        },
+        "exit": {
+          "duration": 700,
+          "easing": "easeOutQuad",
+          "opacity": 0.3,
+          "zIndex": 1
+        }
+      }
+    },
+    {
+      "name": "glideIn",
+      "args": {
+        "direction": "left",
+        "backgroundColor": null,
+        "enter": {
+          "duration": 700,
+          "easing": "easeOutQuad",
+          "opacity": 1,
+          "zIndex": 2,
+          "delay": 0
+        },
+        "exit": {
+          "duration": 700,
+          "easing": "easeOutQuad",
+          "opacity": 0.3,
+          "zIndex": 1,
+          "scale": 1
+        }
+      }
+    },
+    {
+      "name": "glideOut",
+      "args": {
+        "direction": "left",
+        "backgroundColor": null,
+        "enter": {
+          "duration": 700,
+          "easing": "easeOutQuad",
+          "opacity": 0.3,
+          "zIndex": 1,
+          "delay": 0,
+          "scale": 1
+        },
+        "exit": {
+          "duration": 700,
+          "easing": "easeOutQuad",
+          "opacity": 1,
+          "zIndex": 2
+        }
+      }
+    },
+    {
+      "name": "shuffle",
+      "args": {
+        "direction": "top",
+        "backgroundColor": null,
+        "enter": {
+          "duration": 700,
+          "easing": "easeOutQuad",
+          "opacity": 1,
+          "scale": 1,
+          "zIndex": 2,
+          "delay": 0
+        },
+        "exit": {
+          "duration": 700,
+          "easing": "easeOutQuad",
+          "opacity": 0.3,
+          "scale": 1,
+          "zIndex": 1
+        }
+      }
+    },
+    {
+      "name": "fold",
+      "args": {
+        "direction": "left",
+        "backgroundColor": null,
+        "easing": "easeInOutCubic",
+        "enter": {
+          "duration": 700,
+          "opacity": 0.3,
+          "zIndex": 2
+        },
+        "exit": {
+          "duration": 700,
+          "opacity": 0.3,
+          "zIndex": 1,
+          "angle": 90
+        }
+      }
+    },
+    {
+      "name": "unfold",
+      "args": {
+        "direction": "left",
+        "backgroundColor": null,
+        "easing": "easeInOutCubic",
+        "enter": {
+          "duration": 700,
+          "opacity": 0.3,
+          "zIndex": 1
+        },
+        "exit": {
+          "duration": 700,
+          "opacity": 1,
+          "zIndex": 2
+        }
+      }
+    },
+    {
+      "name": "push",
+      "args": {
+        "direction": "left",
+        "backgroundColor": null,
+        "enter": {
+          "duration": 700,
+          "easing": "easeInBack",
+          "opacity": 1,
+          "zIndex": 2,
+          "delay": 0
+        },
+        "exit": {
+          "duration": 700,
+          "easing": "easeInBack",
+          "opacity": 0.3,
+          "zIndex": 1,
+          "angle": 90
+        }
+      }
+    },
+    {
+      "name": "pull",
+      "args": {
+        "direction": "left",
+        "backgroundColor": null,
+        "enter": {
+          "duration": 700,
+          "easing": "easeOutBack",
+          "opacity": 0.3,
+          "zIndex": 1,
+          "delay": 0,
+          "angle": 90
+        },
+        "exit": {
+          "duration": 700,
+          "easing": "easeOutBack",
+          "opacity": 1,
+          "zIndex": 2
+        }
+      }
+    },
+    {
+      "name": "pushPull",
+      "args": {
+        "direction": "left",
+        "backgroundColor": null,
+        "enter": {
+          "duration": 700,
+          "easing": "easeInOutBack",
+          "opacity": 0,
+          "zIndex": 1,
+          "angle": 120,
+          "delay": 200
+        },
+        "exit": {
+          "duration": 700,
+          "easing": "easeInOutBack",
+          "opacity": 0,
+          "zIndex": 2,
+          "angle": 120
+        }
+      }
+    },
+    {
+      "name": "fade",
+      "args": {
+        "backgroundColor": "white",
+        "enter": {
+          "duration": 700,
+          "easing": "easeOutQuad",
+          "opacity": 0.3,
+          "zIndex": 2
+        },
+        "exit": {
+          "duration": 700,
+          "easing": "easeOutQuad",
+          "opacity": 0.3,
+          "zIndex": 1
+        }
+      }
+    },
+    {
+      "name": "scale",
+      "args": {
+        "backgroundColor": null,
+        "enter": {
+          "duration": 400,
+          "easing": "easeOutQuad",
+          "opacity": 0,
+          "zIndex": 1,
+          "scale": 0.7,
+          "delay": 400
+        },
+        "exit": {
+          "duration": 400,
+          "easing": "easeOutQuad",
+          "opacity": 0,
+          "zIndex": 2,
+          "scale": 0.7
+        }
+      }
+    },
+    {
+      "name": "flip",
+      "args": {
+        "direction": "left",
+        "backgroundColor": null,
+        "duration": 500,
+        "depth": 500,
+        "enter": {
+          "easing": "easeOutQuad",
+          "opacity": 0.2,
+          "zIndex": 1
+        },
+        "exit": {
+          "easing": "easeInQuad",
+          "opacity": 0.2,
+          "zIndex": 2
+        }
+      }
+    },
+    {
+      "name": "slide",
+      "args": {
+        "direction": "left",
+        "backgroundColor": null,
+        "depth": 1000,
+        "offset": 200,
+        "enter": {
+          "duration": 700,
+          "easing": "easeInOutCubic",
+          "opacity": 0.5,
+          "zIndex": 1
+        },
+        "exit": {
+          "duration": 700,
+          "easing": "easeInOutCubic",
+          "opacity": 0.5,
+          "zIndex": 2
+        }
+      }
+    },
+    {
+      "name": "cube",
+      "args": {
+        "direction": "left",
+        "backgroundColor": null,
+        "depth": 300,
+        "duration": 700,
+        "easing": "easeInOutBack",
+        "enter": {
+          "opacity": 0.3,
+          "zIndex": 1
+        },
+        "exit": {
+          "opacity": 0.3,
+          "zIndex": 2
+        }
+      }
+    },
+    {
+      "name": "room",
+      "args": {
+        "direction": "left",
+        "backgroundColor": null,
+        "angle": 90,
+        "easing": "easeInOutCubic",
+        "enter": {
+          "duration": 700,
+          "opacity": 0.3,
+          "zIndex": 1
+        },
+        "exit": {
+          "duration": 700,
+          "opacity": 0.3,
+          "zIndex": 2
+        }
+      }
+    },
+    {
+      "name": "carousel",
+      "args": {
+        "direction": "left",
+        "backgroundColor": null,
+        "easing": "easeInOutCubic",
+        "enter": {
+          "duration": 700,
+          "opacity": 0.3,
+          "zIndex": 1,
+          "delay": 0,
+          "scale": 0.4,
+          "offset": 300,
+          "angle": 65
+        },
+        "exit": {
+          "duration": 700,
+          "opacity": 0.3,
+          "zIndex": 2,
+          "scale": 0.4,
+          "offset": 300,
+          "angle": 65
+        }
+      }
+    },
+    {
+      "name": "side",
+      "args": {
+        "direction": "left",
+        "backgroundColor": null,
+        "enter": {
+          "duration": 500,
+          "easing": "easeOutCubic",
+          "opacity": 0,
+          "zIndex": 1,
+          "delay": 300,
+          "depth": 500,
+          "angle": 90,
+          "offset": 100
+        },
+        "exit": {
+          "duration": 500,
+          "easing": "easeInCubic",
+          "opacity": 0,
+          "zIndex": 2,
+          "depth": 500,
+          "angle": 90,
+          "offset": 100
+        }
+      }
+    },
+    {
+      "name": "glueOut",
+      "args": {
+        "direction": "left",
+        "backgroundColor": null,
+        "enter": {
+          "duration": 600,
+          "easing": "easeInOutQuad",
+          "opacity": 1,
+          "zIndex": 2,
+          "delay": 200
+        },
+        "exit": {
+          "duration": 800,
+          "easing": "easeOutQuad",
+          "opacity": 0,
+          "zIndex": 1,
+          "depth": 200,
+          "angle": 15
+        }
+      }
+    },
+    {
+      "name": "glueIn",
+      "args": {
+        "direction": "left",
+        "backgroundColor": null,
+        "enter": {
+          "duration": 800,
+          "easing": "easeInOutQuad",
+          "opacity": 0,
+          "zIndex": 1,
+          "angle": 15,
+          "depth": 200,
+          "delay": 0
+        },
+        "exit": {
+          "duration": 600,
+          "easing": "easeOutQuad",
+          "opacity": 1,
+          "zIndex": 2
+        }
+      }
+    }
+  ]
+}

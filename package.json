@@ -20,7 +20,9 @@
     "test": "jest --config ./jest.config.json",
     "cover": "jest --config ./jest.config.json --coverage",
     "test:watch": "npm run local-test -- --watch",
-    "doc": "react-docgen src/ | node docs/config/buildDocs.js",
+    "tigers-doc": "cross-env NODE_ENV=docs webpack -p --config documentation/webpack.config.js && node documentation/tigersAPI.bundle.js",
+    "components-doc": "cross-env NODE_ENV=commonjs react-docgen src/ | node documentation/buildDocs.js",
+    "doc": "npm run components-doc && npm run tigers-doc",
     "clean": "rimraf lib dist es",
     "build": "npm run build:commonjs && npm run build:umd && npm run build:es",
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib --copy-files",
@@ -73,9 +75,11 @@
     "history": "^4.10.1",
     "html-webpack-plugin": "^3.2.0",
     "husky": "^4.0.0-beta.5",
+    "javascript-stringify": "^2.0.0",
     "jest": "^24.9.0",
     "mini-css-extract-plugin": "^0.8.0",
     "prop-types": "^15.7.2",
+    "raw-loader": "^3.1.0",
     "react": "^16.9.0",
     "react-docgen": "^4.1.1",
     "react-dom": "^16.9.0",
@@ -94,7 +98,6 @@
     "rollup-plugin-size-snapshot": "^0.10.0",
     "rollup-plugin-terser": "^5.1.2",
     "style-loader": "^1.0.0",
-    "webpack": "^4.40.2",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.1"
   },
@@ -105,7 +108,9 @@
     "react-transition-group": "^4.3.0",
     "animejs": "^3.1.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "webpack": "^4.41.2"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint",

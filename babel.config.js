@@ -27,6 +27,10 @@ module.exports = {
         ["@babel/preset-env", { modules: false }],
         "@babel/preset-react",
       ]
+    },
+    "docs": {
+      "presets": ["@babel/preset-react", "@babel/preset-env"],
+      "plugins": ["@babel/plugin-proposal-class-properties"],
     }
    }
 };

@@ -1,11 +1,11 @@
-import quickStartDocs from '../../../docs/QuickStart.md';
-import navigationDocs from '../../../docs/Navigation.md';
-import routeDocs from '../../../docs/Route.md';
-import linkDocs from '../../../docs/Link.md';
-import screenDocs from '../../../docs/Screen.md';
-import customTransitionsDocs from '../../../docs/CustomTransitions.md';
-import transitionsDocs from '../../../docs/Transitions.md';
-import transitionsAPI from './buildTransitionsAPI';
+import quickStartDocs from 'docsAssets/QuickStart.md';
+import navigationDocs from 'docsAssets/Navigation.md';
+import routeDocs from 'docsAssets/Route.md';
+import linkDocs from 'docsAssets/Link.md';
+import screenDocs from 'docsAssets/Screen.md';
+import customTransitionsDocs from 'docsAssets/CustomTransitions.md';
+import transitionsDocs from 'docsAssets/Transitions.md';
+import tigersAPI from 'docsAssets/tigersAPI.md';
 
 export const docs = [
   {
@@ -36,7 +36,7 @@ export const docs = [
   {
     path: '/docs/transitions',
     text: 'Transitions',
-    doc: [transitionsDocs, customTransitionsDocs, transitionsAPI],
+    doc: [transitionsDocs, customTransitionsDocs, tigersAPI],
   },
 ]
 
