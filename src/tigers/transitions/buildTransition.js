@@ -29,6 +29,7 @@ export const buildTransitionIn = ({
   onEntered: (node, isAppearing) => {
     if (replaceBackground) replaceBackground.original();
     if (isAppearing) removeClass(node, 'isAppearing');
+    node.removeAttribute('style');
   },
 });
 
