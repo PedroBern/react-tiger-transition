@@ -1,10 +1,10 @@
 {
   "name": "react-tiger-transition",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Take your navigation transitions to the next level.",
   "main": "index.js",
   "module": "esm/index.js",
-  "jsnext:main": "es/index.js",
+  "jsnext:main": "esm/index.js",
   "files": [
     "umd",
     "cjs",
@@ -14,9 +14,8 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint src",
     "lint-fix": "./node_modules/.bin/eslint --fix src --ext .js",
-    "local-test:watch": "npm run test -- --watch",
-    "test": "jest --config ./jest.config.json",
-    "cover": "jest --config ./jest.config.json --coverage",
+    "test": "cross-env NODE_ENV=test jest --config ./jest.config.json",
+    "cover": "cross-env NODE_ENV=test jest --config ./jest.config.json --coverage",
     "test:watch": "npm run test -- --watch",
     "tigers-doc": "webpack -p --config documentation/webpack.config.js && node documentation/tigersAPI.bundle.js",
     "components-doc": "react-docgen src/ | node documentation/buildDocs.js",
@@ -108,7 +107,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint",
-      "pre-push": "npm run local-test"
+      "pre-push": "npm run test"
     }
   },
   "publishConfig": {
