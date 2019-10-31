@@ -1,6 +1,9 @@
 dist/
 lib/
 es/
+esm/
+cjs/
+umd/
 node_modules/
 .DS_Store
 coverage/

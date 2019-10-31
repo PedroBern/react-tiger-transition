@@ -1,80 +1,164 @@
-import nodeResolve from 'rollup-plugin-node-resolve';
-import babel from 'rollup-plugin-babel';
-import commonjs from 'rollup-plugin-commonjs';
-import replace from 'rollup-plugin-replace';
-import { sizeSnapshot } from 'rollup-plugin-size-snapshot';
-import { terser } from 'rollup-plugin-terser';
-import postcss from 'rollup-plugin-postcss';
+const path = require("path");
+const babel = require("rollup-plugin-babel");
+const commonjs = require("rollup-plugin-commonjs");
+const nodeResolve = require("rollup-plugin-node-resolve");
 import { prepend } from 'rollup-plugin-insert';
+import postcss from 'rollup-plugin-postcss';
+const { uglify } = require("rollup-plugin-uglify");
+const pkg = require("./package.json");
+import { sizeSnapshot } from 'rollup-plugin-size-snapshot';
 
 const input = './src/index.js';
 
-const name = 'ReactTigerTransition';
-
 const globals = {
   react: 'React',
-  'react-dom': 'ReactDOM',
   "react-router-dom": 'ReactRouterDOM',
   "react-transition-group": 'ReactTransitionGroup',
   animejs: 'animejs'
 };
 
-const babelOptions = {
-  exclude: /node_modules/,
-  runtimeHelpers: true
-}
-
-const commonjsOptions = {
-  include: /node_modules/,
-};
-
-export default [
+const cjs = [
   {
     input,
     output: {
-      file: './dist/react-tiger-transition.js',
-      format: 'umd',
-      name,
-      globals
+      file: `cjs/${pkg.name}.js`,
+      sourcemap: true,
+      format: "cjs",
+      esModule: false
     },
     external: Object.keys(globals),
     plugins: [
       prepend("import './styles.css';", {
-        include: /Navigation.js/,
-      }),
+         include: /Navigation.js/,
+       }),
+      babel({ exclude: /node_modules/, sourceMaps: true }),
       nodeResolve(),
-      babel(babelOptions),
-      commonjs(commonjsOptions),
-      replace({ 'process.env.NODE_ENV': JSON.stringify('development') }),
       postcss({
         extensions: [ '.css' ],
       }),
       sizeSnapshot()
     ]
   },
+  {
+    input,
+    output: { file: `cjs/${pkg.name}.min.js`, sourcemap: true, format: "cjs" },
+    external: Object.keys(globals),
+    plugins: [
+      prepend("import './styles.css';", {
+         include: /Navigation.js/,
+       }),
+      babel({ exclude: /node_modules/, sourceMaps: true }),
+      nodeResolve(),
+      postcss({
+        extensions: [ '.css' ],
+      }),
+      uglify(),
+      sizeSnapshot()
+    ]
+  }
+];
 
+const esm = [
+  {
+    input,
+    output: { file: `esm/${pkg.name}.js`, sourcemap: true, format: "esm" },
+    external: Object.keys(globals),
+    plugins: [
+      prepend("import './styles.css';", {
+         include: /Navigation.js/,
+       }),
+      babel({
+        exclude: /node_modules/,
+        runtimeHelpers: true,
+        sourceMaps: true,
+        plugins: [["@babel/transform-runtime", { useESModules: true }]],
+      }),
+      nodeResolve(),
+      postcss({
+        extensions: [ '.css' ],
+      }),
+      sizeSnapshot()
+    ]
+  }
+];
+
+const umd = [
   {
     input,
     output: {
-      file: './dist/react-tiger-transition.min.js',
-      format: 'umd',
-      name,
+      file: `umd/${pkg.name}.js`,
+      sourcemap: true,
+      format: "umd",
+      name: "ReactTigerTransition",
       globals
     },
     external: Object.keys(globals),
     plugins: [
       prepend("import './styles.css';", {
-        include: /Navigation.js/,
+         include: /Navigation.js/,
+       }),
+      babel({
+        exclude: /node_modules/,
+        runtimeHelpers: true,
+        sourceMaps: true,
+        plugins: [["@babel/transform-runtime", { useESModules: true }]],
       }),
       nodeResolve(),
-      babel(babelOptions),
-      commonjs(commonjsOptions),
-      replace({ 'process.env.NODE_ENV': JSON.stringify('production') }),
+      commonjs({
+        include: /node_modules/,
+      }),
       postcss({
         extensions: [ '.css' ],
       }),
-      terser(),
+      sizeSnapshot()
+    ]
+  },
+  {
+    input,
+    output: {
+      file: `umd/${pkg.name}.min.js`,
+      sourcemap: true,
+      format: "umd",
+      name: "ReactTigerTransition",
+      globals
+    },
+    external: Object.keys(globals),
+    plugins: [
+      prepend("import './styles.css';", {
+         include: /Navigation.js/,
+       }),
+      babel({
+        exclude: /node_modules/,
+        runtimeHelpers: true,
+        sourceMaps: true,
+        plugins: [["@babel/transform-runtime", { useESModules: true }]],
+      }),
+      nodeResolve(),
+      commonjs({
+        include: /node_modules/,
+      }),
+      postcss({
+        extensions: [ '.css' ],
+      }),
+      uglify(),
       sizeSnapshot()
     ]
   }
 ];
+
+let config;
+switch (process.env.BUILD_ENV) {
+  case "cjs":
+    config = cjs;
+    break;
+  case "esm":
+    config = esm;
+    break;
+  case "umd":
+    config = umd;
+    break;
+  default:
+    config = cjs.concat(esm).concat(umd);
+}
+
+module.exports = config;
