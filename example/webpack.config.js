@@ -66,10 +66,15 @@ module.exports = (env, argv) => ({
          node_modules,
        ],
        extensions: ['*', '.js', '.jsx'],
-       alias: {
-        // "react-tiger-transition": path.resolve(__dirname, '../src'),
-        "docsAssets": docsAssets,
-       }
+       alias: argv.mode === 'production'
+        ? {
+          "docsAssets": docsAssets,
+         }
+        : {
+          "react-tiger-transition/lib": path.resolve(__dirname, '../src'),
+          "react-tiger-transition": path.resolve(__dirname, '../src'),
+          "docsAssets": docsAssets,
+         }
      },
 
      resolveLoader: {
