@@ -2,14 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from "react-router-dom";
 
-import { Route, Navigation, Screen, shuffle, fade } from 'react-tiger-transition';
+import {
+  Route,
+  Navigation,
+  Screen,
+  shuffle,
+  fade
+} from 'react-tiger-transition';
 
-import styles from 'react-tiger-transition/lib/styles.css';
+import styles from 'react-tiger-transition/styles.min.css';
 
 import { Home, Docs, Demo, DemoNext, Guides } from './pages';
-
 import { Nav, DemoNav, DocsNav } from './components';
-
 import { DemoProvider } from './provider';
 
 import { makeStyles } from '@material-ui/styles';
