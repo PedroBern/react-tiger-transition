@@ -15,9 +15,11 @@ jobs:
       script:
       - npm run cover
       - ./node_modules/.bin/codecov
+    allow_failures:
     - stage: npm release
       node_js: "6"
       deploy:
+        script: npm run build
         provider: npm
         email: "$NPM_EMAIL"
         api_key: "$NPM_TOKEN"
