@@ -8,3 +8,5 @@ node_modules/
 .DS_Store
 coverage/
 documentation/tigersAPI.bundle.js
+/styles.css
+styles.min.css

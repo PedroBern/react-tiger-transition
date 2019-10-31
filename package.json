@@ -1,6 +1,6 @@
 {
   "name": "react-tiger-transition",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "Take your navigation transitions to the next level.",
   "main": "index.js",
   "module": "esm/index.js",
@@ -9,7 +9,10 @@
     "umd",
     "cjs",
     "esm",
-    "src"
+    "src",
+    "styles.css",
+    "styles.min.css",
+    "index.js"
   ],
   "scripts": {
     "lint": "./node_modules/.bin/eslint src",
@@ -23,11 +26,13 @@
     "doc": "npm run components-doc && npm run tigers-doc",
     "prepublishOnly": "npm run clean && npm run build",
     "deploy": "cd example && npm run deploy",
-    "clean": "rimraf cjs umd esm",
-    "build": "npm run clean && rollup -c",
+    "clean": "rimraf cjs umd esm styles.css styles.min.css",
+    "clean-empty-js": "rimraf styles.js styles.min.js",
+    "build": "npm run clean && rollup -c && npm run clean-empty-js",
     "build:cjs": "cross-env BUILD_ENV=cjs rollup -c",
     "build:esm": "cross-env BUILD_ENV=esm rollup -c",
-    "build:umd": "cross-env BUILD_ENV=umd rollup -c"
+    "build:umd": "cross-env BUILD_ENV=umd rollup -c",
+    "build:css": "cross-env BUILD_ENV=css rollup -c && npm run clean-empty-js"
   },
   "author": "Pedro Bernardino Alves Moreira",
   "homepage": "https://github.com/pedrobern/react-tiger-transition",
@@ -57,12 +62,14 @@
     "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",
     "animejs": "^3.1.0",
+    "autoprefixer": "^9.7.0",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "babel-plugin-transform-runtime": "^6.23.0",
     "cross-env": "^6.0.3",
     "css-loader": "^3.2.0",
+    "cssnano": "^4.1.10",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "eslint": "^6.6.0",

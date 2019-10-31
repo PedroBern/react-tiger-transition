@@ -8,8 +8,6 @@ body {
 	position: relative;
 	width: 100%;
 	height: 100%;
-	-webkit-perspective: 1200px;
-	-moz-perspective: 1200px;
 	perspective: 1200px;
   overflow: hidden;
 }
@@ -24,14 +22,8 @@ body {
 	position: absolute;
 	visibility: visible;
 	overflow: hidden;
-	-webkit-backface-visibility: hidden;
-	-moz-backface-visibility: hidden;
 	backface-visibility: hidden;
-	-webkit-transform: translate3d(0, 0, 0);
-	-moz-transform: translate3d(0, 0, 0);
 	transform: translate3d(0, 0, 0);
-	-webkit-transform-style: preserve-3d;
-	-moz-transform-style: preserve-3d;
 	transform-style: preserve-3d;
 }
 
@@ -42,6 +34,6 @@ body {
   overflow-y: scroll;
 }
 
-.isAppearing {
+.react-tiger-transition--is-appearing {
 	opacity: 0;
 }

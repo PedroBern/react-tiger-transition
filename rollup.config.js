@@ -2,11 +2,12 @@ const path = require("path");
 const babel = require("rollup-plugin-babel");
 const commonjs = require("rollup-plugin-commonjs");
 const nodeResolve = require("rollup-plugin-node-resolve");
-import { prepend } from 'rollup-plugin-insert';
-import postcss from 'rollup-plugin-postcss';
 const { uglify } = require("rollup-plugin-uglify");
 const pkg = require("./package.json");
 import { sizeSnapshot } from 'rollup-plugin-size-snapshot';
+import postcss from 'rollup-plugin-postcss';
+import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
 
 const input = './src/index.js';
 
@@ -28,14 +29,8 @@ const cjs = [
     },
     external: Object.keys(globals),
     plugins: [
-      prepend("import './styles.css';", {
-         include: /Navigation.js/,
-       }),
       babel({ exclude: /node_modules/, sourceMaps: true }),
       nodeResolve(),
-      postcss({
-        extensions: [ '.css' ],
-      }),
       sizeSnapshot()
     ]
   },
@@ -44,14 +39,8 @@ const cjs = [
     output: { file: `cjs/${pkg.name}.min.js`, sourcemap: true, format: "cjs" },
     external: Object.keys(globals),
     plugins: [
-      prepend("import './styles.css';", {
-         include: /Navigation.js/,
-       }),
       babel({ exclude: /node_modules/, sourceMaps: true }),
       nodeResolve(),
-      postcss({
-        extensions: [ '.css' ],
-      }),
       uglify(),
       sizeSnapshot()
     ]
@@ -64,9 +53,6 @@ const esm = [
     output: { file: `esm/${pkg.name}.js`, sourcemap: true, format: "esm" },
     external: Object.keys(globals),
     plugins: [
-      prepend("import './styles.css';", {
-         include: /Navigation.js/,
-       }),
       babel({
         exclude: /node_modules/,
         runtimeHelpers: true,
@@ -74,9 +60,6 @@ const esm = [
         plugins: [["@babel/transform-runtime", { useESModules: true }]],
       }),
       nodeResolve(),
-      postcss({
-        extensions: [ '.css' ],
-      }),
       sizeSnapshot()
     ]
   }
@@ -94,9 +77,6 @@ const umd = [
     },
     external: Object.keys(globals),
     plugins: [
-      prepend("import './styles.css';", {
-         include: /Navigation.js/,
-       }),
       babel({
         exclude: /node_modules/,
         runtimeHelpers: true,
@@ -106,9 +86,6 @@ const umd = [
       nodeResolve(),
       commonjs({
         include: /node_modules/,
-      }),
-      postcss({
-        extensions: [ '.css' ],
       }),
       sizeSnapshot()
     ]
@@ -124,9 +101,6 @@ const umd = [
     },
     external: Object.keys(globals),
     plugins: [
-      prepend("import './styles.css';", {
-         include: /Navigation.js/,
-       }),
       babel({
         exclude: /node_modules/,
         runtimeHelpers: true,
@@ -137,11 +111,39 @@ const umd = [
       commonjs({
         include: /node_modules/,
       }),
-      postcss({
-        extensions: [ '.css' ],
-      }),
       uglify(),
       sizeSnapshot()
+    ]
+  }
+];
+
+const css = [
+  {
+    input: "./src/styles.js",
+    output: {
+      format: 'system',
+      file: 'styles.js'
+    },
+    plugins: [
+      postcss({
+        extract: true,
+        inject: false,
+        plugins: [autoprefixer]
+      })
+    ]
+  },
+  {
+    input: "./src/styles.js",
+    output: {
+      format: 'system',
+      file: 'styles.min.js'
+    },
+    plugins: [
+      postcss({
+        extract: true,
+        inject: false,
+        plugins: [autoprefixer, cssnano]
+      })
     ]
   }
 ];
@@ -157,8 +159,11 @@ switch (process.env.BUILD_ENV) {
   case "umd":
     config = umd;
     break;
+  case "css":
+    config = css;
+    break;
   default:
-    config = cjs.concat(esm).concat(umd);
+    config = cjs.concat(esm).concat(umd).concat(css);
 }
 
 module.exports = config;

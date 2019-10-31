@@ -6,7 +6,7 @@ export const buildTransitionIn = ({
 } = {}) => ({
   onEnter: (node, isAppearing) => {
     if (replaceBackground) replaceBackground.fake();
-    if (isAppearing) addClass(node, 'isAppearing');
+    if (isAppearing) addClass(node, 'react-tiger-transition--is-appearing');
   },
   onEntering: (node, isAppearing) => {
     if (isAppearing) {
@@ -28,7 +28,7 @@ export const buildTransitionIn = ({
   },
   onEntered: (node, isAppearing) => {
     if (replaceBackground) replaceBackground.original();
-    if (isAppearing) removeClass(node, 'isAppearing');
+    if (isAppearing) removeClass(node, 'react-tiger-transition--is-appearing');
     node.removeAttribute('style');
   },
 });
