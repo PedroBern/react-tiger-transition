@@ -1,6 +1,6 @@
 {
   "name": "react-tiger-transition",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Take your navigation transitions to the next level.",
   "main": "index.js",
   "module": "esm/index.js",
@@ -94,6 +94,7 @@
     "rollup-plugin-terser": "^5.1.2",
     "rollup-plugin-uglify": "^6.0.3",
     "style-loader": "^1.0.0",
+    "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9"
   },
   "peerDependencies": {
@@ -102,9 +103,7 @@
     "react-transition-group": "^4.3.0",
     "animejs": "^3.1.0"
   },
-  "dependencies": {
-    "webpack": "^4.41.2"
-  },
+  "dependencies": {},
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint",
@@ -113,5 +112,6 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "sideEffects": false
 }
