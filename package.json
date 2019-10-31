@@ -14,8 +14,9 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint src",
     "lint-fix": "./node_modules/.bin/eslint --fix src --ext .js",
-    "test": "cross-env NODE_ENV=test jest --config ./jest.config.json",
-    "cover": "cross-env NODE_ENV=test jest --config ./jest.config.json --coverage",
+    "pre-push-test": "cross-env NODE_ENV=test jest --config ./jest.config.json",
+    "test": "jest --config ./jest.config.json",
+    "cover": "jest --config ./jest.config.json --coverage",
     "test:watch": "npm run test -- --watch",
     "tigers-doc": "webpack -p --config documentation/webpack.config.js && node documentation/tigersAPI.bundle.js",
     "components-doc": "react-docgen src/ | node documentation/buildDocs.js",
@@ -107,7 +108,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint",
-      "pre-push": "npm run test"
+      "pre-push": "npm run pre-push-test"
     }
   },
   "publishConfig": {
