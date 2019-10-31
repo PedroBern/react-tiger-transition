@@ -8,5 +8,39 @@
     "bundled": 52452,
     "minified": 52365,
     "gzipped": 7936
+  },
+  "cjs/react-tiger-transition.js": {
+    "bundled": 80615,
+    "minified": 37369,
+    "gzipped": 6526
+  },
+  "cjs/react-tiger-transition.min.js": {
+    "bundled": 37370,
+    "minified": 37421,
+    "gzipped": 6546
+  },
+  "esm/react-tiger-transition.js": {
+    "bundled": 79675,
+    "minified": 36511,
+    "gzipped": 6426,
+    "treeshaked": {
+      "rollup": {
+        "code": 10070,
+        "import_statements": 256
+      },
+      "webpack": {
+        "code": 33637
+      }
+    }
+  },
+  "umd/react-tiger-transition.js": {
+    "bundled": 86507,
+    "minified": 33650,
+    "gzipped": 6358
+  },
+  "umd/react-tiger-transition.min.js": {
+    "bundled": 33522,
+    "minified": 33611,
+    "gzipped": 6383
   }
 }
