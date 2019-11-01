@@ -10,7 +10,7 @@ import {
   fade
 } from 'react-tiger-transition';
 
-import styles from 'react-tiger-transition/styles.min.css';
+import "react-tiger-transition/styles/main.min.css";
 
 import { Home, Docs, Demo, DemoNext, Guides } from './pages';
 import { Nav, DemoNav, DocsNav } from './components';

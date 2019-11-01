@@ -10,7 +10,7 @@ const docsAssets = path.join(__dirname, '../documentation/assets')
 // need to import styles of code mirror
 const codeMirrorLib = path.join(__dirname, './node_modules/codemirror/lib')
 const codeMirrorTheme = path.join(__dirname, './node_modules/codemirror/theme')
-const reactTigerTransitionStyles = path.join(__dirname, './node_modules/react-tiger-transition')
+const reactTigerTransitionStyles = path.join(__dirname, './node_modules/react-tiger-transition/styles')
 
 module.exports = (env, argv) => ({
     entry : path.join(src, 'index.js'),
@@ -71,7 +71,7 @@ module.exports = (env, argv) => ({
           "docsAssets": docsAssets,
          }
         : {
-          'react-tiger-transition/styles.min.css': path.resolve(__dirname, '../src/styles.css'),
+          'react-tiger-transition/styles/main.min.css': path.resolve(__dirname, '../src/styles.css'),
           "react-tiger-transition": path.resolve(__dirname, '../src'),
           "docsAssets": docsAssets,
          }
