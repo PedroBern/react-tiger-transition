@@ -1,6 +1,6 @@
 {
   "name": "react-tiger-transition",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "description": "Take your navigation transitions to the next level.",
   "main": "index.js",
   "module": "esm/index.js",

@@ -37,6 +37,30 @@ const Display = withRouter(({
   const [mountedChild, setMountedChild] = useState(null);
 
   useEffect(() => {
+    try {
+      React.Children.forEach(children, child => {
+        if (React.isValidElement(child)) {
+          if (children.length > 0) {
+            if (!child.key
+              || children.filter(c => !c).filter(c => c.key === child.key).length > 0
+            ) {
+              throw new Error('Each child of <Screen display /> should have an unique key.');
+            }
+          }
+          else if (!child.key) {
+            throw new Error('Each child of <Screen display /> should have an unique key.');
+          }
+        }
+      });
+    }
+    catch (e) {
+      try {
+        console.error(e);
+      } // Non-standard
+      catch {
+        console.log(e);
+      }
+    }
     setIsFirstRender(false);
   }, []);
 
@@ -48,11 +72,6 @@ const Display = withRouter(({
     let element;
     React.Children.forEach(children, child => {
       if (React.isValidElement(child)) {
-        if (!child.key
-          || clonedChildren.filter(c => c.key === child.key).length > 0
-        ) {
-          throw new Error('Each child of <Screen display /> should have an unique key.');
-        }
         const overridesPath = !isFirstRender && cancelAnimation
           && child.key === mountedChild
           ? { path: location.pathname }
