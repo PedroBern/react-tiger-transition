@@ -122,7 +122,7 @@ const css = [
     input: "./src/styles.js",
     output: {
       format: 'system',
-      file: 'styles.js'
+      file: 'styles/main.js'
     },
     plugins: [
       postcss({
@@ -136,7 +136,7 @@ const css = [
     input: "./src/styles.js",
     output: {
       format: 'system',
-      file: 'styles.min.js'
+      file: 'styles/main.min.js'
     },
     plugins: [
       postcss({

@@ -1,6 +1,6 @@
 {
   "name": "react-tiger-transition",
-  "version": "2.1.4",
+  "version": "2.2.4",
   "description": "Take your navigation transitions to the next level.",
   "main": "index.js",
   "module": "esm/index.js",
@@ -10,8 +10,7 @@
     "cjs",
     "esm",
     "src",
-    "styles.css",
-    "styles.min.css",
+    "styles",
     "index.js"
   ],
   "scripts": {
@@ -26,8 +25,8 @@
     "doc": "npm run components-doc && npm run tigers-doc",
     "prepublishOnly": "npm run clean && npm run build",
     "deploy": "cd example && npm run deploy",
-    "clean": "rimraf cjs umd esm styles.css styles.min.css",
-    "clean-empty-js": "rimraf styles.js styles.min.js",
+    "clean": "rimraf cjs umd esm styles",
+    "clean-empty-js": "rimraf styles/main.js styles/main.min.js",
     "build": "npm run clean && rollup -c && npm run clean-empty-js",
     "build:cjs": "cross-env BUILD_ENV=cjs rollup -c",
     "build:esm": "cross-env BUILD_ENV=esm rollup -c",
@@ -120,5 +119,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "sideEffects": false
+  "sideEffects": ["**/*.css"]
 }
