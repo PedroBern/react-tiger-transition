@@ -68,7 +68,7 @@ describe('Screen', () => {
       const component = renderer.create(
         <BrowserRouter>
           <Screen display>
-            <div className='child' />
+            <div key='child' className='child' />
           </Screen>
         </BrowserRouter>
       );
@@ -114,7 +114,7 @@ describe('Screen', () => {
         <Navigation>
           <Route path={['/', '/valid']}>
             <Screen display>
-              <FakeComponent className='child'/>
+              <FakeComponent key='child' className='child'/>
             </Screen>
           </Route>
           <Link to='/valid'>
@@ -140,6 +140,27 @@ describe('Screen', () => {
       expect(wrapper.find('FakeComponent').props().cancelAnimation)
       .toBe(false);
       expect(mockCallback.mock.calls.length).toBe(2);
+    });
+
+    it('renders only children with key', () => {
+      expect(() => shallow(
+        <BrowserRouter>
+          <Screen display>
+            <div className='child' />
+          </Screen>
+        </BrowserRouter>
+      ).toThrowError());
+    });
+
+    it('renders only children with unique keys', () => {
+      expect(() => shallow(
+        <BrowserRouter>
+          <Screen display>
+            <div key='a' className='child' />
+            <div key='a' className='child' />
+          </Screen>
+        </BrowserRouter>
+      ).toThrowError());
     });
 
     // #newTest: test turn cancelAnimation to true on leaving base match path

@@ -33,35 +33,52 @@ const Display = withRouter(({
 }) => {
 
   const [isFirstRender, setIsFirstRender] = useState(true);
-  // eslint-disable-next-line no-unused-vars
-  const [baseMatch, setBaseMatch] = useState(match);
+  const [baseMatch, setBaseMatch] = useState(match); // eslint-disable-line no-unused-vars
+  const [mountedChild, setMountedChild] = useState(null);
 
   useEffect(() => {
     setIsFirstRender(false);
   }, []);
 
   const onDisplayPath = matchPath(location.pathname, { ...baseMatch }) !== null;
-
   const cancelAnimation = isFirstRender || !onDisplayPath;
 
   const computeChildren = useMemo(() => {
     const clonedChildren = [];
     let element;
-    let key = new Date().valueOf();
     React.Children.forEach(children, child => {
       if (React.isValidElement(child)) {
+        if (!child.key
+          || clonedChildren.filter(c => c.key === child.key).length > 0
+        ) {
+          throw new Error('Each child of <Screen display /> should have an unique key.');
+        }
+        const overridesPath = !isFirstRender && cancelAnimation
+          && child.key === mountedChild
+          ? { path: location.pathname }
+          : {};
         element = child;
         clonedChildren.push(React.cloneElement(
           element, {
             cancelAnimation,
-            key: element.key || key + 1,
+            ...overridesPath
           }
         ));
-        key += 1;
       }
     });
     return clonedChildren;
   }, [children, cancelAnimation]);
+
+  useEffect(() => {
+    if (!isFirstRender && onDisplayPath) {
+      React.Children.forEach(computeChildren, child => {
+        if (React.isValidElement(child)
+        && child.props.path === location.pathname) {
+          setMountedChild(child.key);
+        }
+      });
+    }
+  }, [location.pathname, isFirstRender]);
 
   return useMemo(() => (
     <React.Fragment>
