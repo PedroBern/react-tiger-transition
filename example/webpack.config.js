@@ -17,7 +17,7 @@ module.exports = (env, argv) => ({
     output : {
         path : path.resolve(__dirname , 'dist'),
         filename: 'bundle.js',
-        publicPath: argv.mode === 'production'
+        publicPath: argv.mode === 'production' && !argv.local
         ? 'https://pedrobern.github.io/react-tiger-transition/'
         : 'http://localhost:8080/'
     },

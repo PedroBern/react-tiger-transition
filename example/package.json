@@ -7,10 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --open",
     "create": "webpack",
+    "build-local": "rimraf dist && webpack -p --local=true --mode=production",
     "build": "rimraf dist && webpack -p --mode=production",
     "deploy": "npm run build && npx gh-pages -d dist",
     "build-server": "python build-web-server.py",
-    "build:server": "npm run build && npm run build-server",
+    "build:server": "npm run build-local && npm run build-server",
     "add": "npm i react-tiger-transition",
     "remove": "npm uninstall react-tiger-transition"
   },
