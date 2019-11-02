@@ -88,17 +88,5 @@ const Docs = ({
   )
 }
 
-// <div className="iframe_container">
-//   <iframe
-//     src="https://codesandbox.io/embed/heuristic-herschel-70s21?fontsize=14&codemirror=1"
-//     title="heuristic-herschel-70s21"
-//     width='100%'
-//     height='100px'
-//     frameBorder="0"
-//     sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
-//   >
-//   </iframe>
-// </div>
-
 
 export default withRouter(Docs)
