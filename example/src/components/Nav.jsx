@@ -86,11 +86,15 @@ const Nav = ({match, location, history}) => {
                   match ? p.path(match.path) : '/demo' :
                   p.path
                 }
-                transition={() => glide({
-                  direction: pathsAbs.indexOf(match.path) < index ?
-                  'left' :
-                  'right',
-                })}
+                // transition={() => glide({
+                //   direction: pathsAbs.indexOf(match.path) < index ?
+                //   'left' :
+                //   'right',
+                // })}
+                transition={match && pathsAbs.indexOf(match.path) < index ?
+                  'glide-left' :
+                  'glide-right'
+                }
                 label={p.text}
               />
           ))}
