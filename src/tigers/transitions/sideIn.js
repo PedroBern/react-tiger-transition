@@ -1,10 +1,11 @@
-import anime from 'animejs';
 import { buildTransitionIn } from './buildTransition';
+
+import { InjectStyle, getEasing } from '../../utils';
 
 export default ({
   direction = 'left',
   duration = 700,
-  easing = 'easeOutCubic',
+  easing = 'ease-in',
   opacity = 0.3,
   replaceBackground = null,
   zIndex = 1,
@@ -15,43 +16,60 @@ export default ({
 } = {}) => {
 
   const config = {
-    left: {
-      transformOrigin: { value: `${50 + offset}% 50%`, duration: 0 },
-      translateZ: [-depth, 0],
-      translateX: 0,
-      rotateY: [-angle, 0]
-    },
-    right: {
-      transformOrigin: { value: `${-(50 + offset)}% 50%`, duration: 0 },
-      translateZ: [depth, 0],
-      translateX: 0,
-      rotateY: [angle, 0]
-    },
-    top: {
-      transformOrigin: { value: `50% ${50 + offset}%`, duration: 0 },
-      translateZ: [-depth, 0],
-      translateY: 0,
-      rotateX: [angle, 0]
-    },
-    bottom: {
-      transformOrigin: { value: `50% ${-(50 + offset)}%`, duration: 0 },
-      translateZ: [depth, 0],
-      translateY: 0,
-      rotateX: [-angle, 0]
-    },
+    left: [`${50 + offset}% 50%`, `translateZ(${-depth}px) rotateY(${-angle}deg)`, 'X', 'Y'],
+    right: [`${-(50 + offset)}% 50%`, `translateZ(${depth}px) rotateY(${angle}deg)`, 'X', 'Y'],
+    top: [`50% ${50 + offset}%`, `translateZ(${-depth}px) rotateX(${angle}deg)`, 'Y', 'X'],
+    bottom: [`50% ${-(50 + offset)}%`, `translateZ(${-depth}px) rotateX(${-angle}deg)`, 'Y', 'X'],
+  };
+
+  const animationName = `${direction}ReactTigerTransitionSideIn`;
+  const transformOrigin = config[direction][0];
+  let transform = `${config[direction][1]}`;
+  const animationCss = `${animationName} ${duration}ms both ${getEasing(easing)}`;
+
+  const style = `
+  .react-tiger-transition-side-in-${direction} {
+    -webkit-transform-origin: ${transformOrigin};
+    -ms-transform-origin: ${transformOrigin};
+    transform-origin: ${transformOrigin};
+    -webkit-transform: ${transform};
+    -ms-transform: ${transform};
+    transform: ${transform};
+    -webkit-animation: ${animationCss};
+    animation: ${animationCss};
+    z-index: ${zIndex};
+    -webkit-animation-delay: ${delay}ms;
+    animation-delay: ${delay}ms;
+    opacity: ${opacity};
+  }
+  `;
+  transform = `translate${config[direction][2]}(0px) rotate${config[direction][3]}(0deg)`;
+
+  const animation = `
+  @-webkit-keyframes ${animationName} {
+    to {
+      opacity: 1;
+      -webkit-transform: ${transform};
+      transform: ${transform};
+    }
+  }
+  @keyframes ${animationName} {
+    to {
+      opacity: 1;
+      -webkit-transform: ${transform};
+      transform: ${transform};
+    }
+  }
+  `;
+
+  const rules = {
+    style: new InjectStyle(style),
+    animation: new InjectStyle(animation),
   };
 
   return buildTransitionIn({
-    transition: (node) => anime({
-      targets: node,
-      easing,
-      duration,
-      delay,
-      zIndex: { value: zIndex, duration: 0 },
-      opacity: [opacity, 1],
-      ...config[direction]
-    }),
-    replaceBackground
+    rules,
+    replaceBackground,
+    className: `react-tiger-transition-side-in-${direction}`,
   });
-
 };

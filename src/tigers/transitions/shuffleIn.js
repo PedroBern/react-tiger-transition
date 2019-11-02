@@ -1,10 +1,11 @@
-import anime from 'animejs';
 import { buildTransitionIn } from './buildTransition';
+
+import { InjectStyle, getEasing } from '../../utils';
 
 export default ({
   direction = 'top',
   duration = 700,
-  easing = 'easeInOutQuad',
+  easing = 'ease',
   opacity = 1,
   replaceBackground = null,
   zIndex = 2,
@@ -13,32 +14,57 @@ export default ({
 } = {}) => {
 
   const config = {
-    right: {
-      translateX: ['-100%', 0]
-    },
-    left: {
-      translateX: ['100%', 0]
-    },
-    bottom: {
-      translateY: ['-100%', 0]
-    },
-    top: {
-      translateY: ['100%', 0]
+    right: [-100, 'X'],
+    left: [100, 'X'],
+    bottom: [-100, 'Y'],
+    top: [100, 'Y'],
+  };
+
+  const animationName = `${direction}ReactTigerTransitionShuffleIn`;
+  let transform = `scale(${scale}) translate${config[direction][1]}(${config[direction][0]}%)`;
+  const animationCss = `${animationName} ${duration}ms ${getEasing(easing)} both`;
+
+  const style = `
+  .react-tiger-transition-glide-shuffle-in-${direction} {
+    -webkit-transform: ${transform};
+    -ms-transform: ${transform};
+    transform: ${transform};
+    -webkit-animation: ${animationCss};
+    animation: ${animationCss};
+    z-index: ${zIndex};
+    -webkit-animation-delay: ${delay}ms;
+    animation-delay: ${delay}ms;
+    opacity: ${opacity};
+  }
+  `;
+
+  transform = `translate${config[direction][1]}(0px) scale(1)`;
+
+  const animation = `
+  @-webkit-keyframes ${animationName} {
+    to {
+      opacity: 1;
+      -webkit-transform: ${transform};
+      transform: ${transform};
     }
+  }
+  @keyframes ${animationName} {
+    to {
+      opacity: 1;
+      -webkit-transform: ${transform};
+      transform: ${transform};
+    }
+  }
+  `;
+
+  const rules = {
+    style: new InjectStyle(style),
+    animation: new InjectStyle(animation),
   };
 
   return buildTransitionIn({
-    transition: (node) => anime({
-      targets: node,
-      easing,
-      delay,
-      duration,
-      scale: [scale, 1],
-      zIndex: { value: zIndex, duration: 0 },
-      opacity: [opacity, 1],
-      ...config[direction]
-    }),
-    replaceBackground
+    rules,
+    replaceBackground,
+    className: `react-tiger-transition-glide-shuffle-in-${direction}`,
   });
-
 };

@@ -11,7 +11,7 @@ export const glueIn = buildTiger(
   // enter
   {
     duration: 800,
-    easing: 'easeInOutQuad',
+    easing: 'ease-in',
     opacity: 0,
     zIndex: 1,
     angle: 15,
@@ -23,7 +23,7 @@ export const glueIn = buildTiger(
   // exit
   {
     duration: 600,
-    easing: 'easeOutQuad',
+    easing: 'ease',
     opacity: 1,
     zIndex: 2,
   },
