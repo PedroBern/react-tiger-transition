@@ -7,7 +7,7 @@ export const cube = buildTiger(
     direction: 'left',
     backgroundColor: null,
     depth: 300,
-    easing: 'easeInOutBack',
+    easing: 'easeInBack',
     duration: 700,
   },
 
