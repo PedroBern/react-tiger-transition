@@ -1,5 +1,6 @@
-import anime from 'animejs';
 import { buildTransitionOut } from './buildTransition';
+
+import { InjectStyle, getEasing } from '../../utils';
 
 export default ({
   direction = 'left',
@@ -12,34 +13,55 @@ export default ({
 } = {}) => {
 
   const config = {
-    right: {
-      transformOrigin: { value: '100% 50%', duration: 0 },
-      rotateY: [0, -angle]
-    },
-    left: {
-      transformOrigin: { value: '0% 50%', duration: 0 },
-      rotateY: [0, angle]
-    },
-    top: {
-      transformOrigin: { value: '50% 0%', duration: 0 },
-      rotateX: [0, -angle]
-    },
-    bottom: {
-      transformOrigin: { value: '50% 100%', duration: 0 },
-      rotateX: [0, angle]
-    },
+    right: ['100% 50%', 'Y', `(${-angle}deg)`],
+    left: ['0% 50%', 'Y', `(${angle}deg)`],
+    top: ['50% 0%', 'X', `(${-angle}deg)`],
+    bottom: ['50% 100%', 'X', `(${angle}deg)`],
+  };
+
+  const transformOrigin = config[direction][0];
+  const animationName = `${direction}ReactTigerTransitionPush`;
+  const animationCss = `${animationName} ${duration}ms ${getEasing(easing)} both`;
+
+  const style = `
+  .react-tiger-transition-push-${direction} {
+    -webkit-transform-origin:${transformOrigin};
+    -ms-transform-origin: ${transformOrigin};
+    transform-origin: ${transformOrigin};
+    -webkit-animation: ${animationCss};
+    animation: ${animationCss};
+    z-index: ${zIndex};
+    opacity: 1;
+  }
+  `;
+
+  const transform = `rotate${config[direction][1]}${config[direction][2]}`;
+
+  const animation = `
+  @-webkit-keyframes ${animationName} {
+    to {
+      opacity: ${opacity};
+      -webkit-transform: ${transform};
+      transform: ${transform};
+    }
+  }
+  @keyframes ${animationName} {
+    to {
+      opacity: ${opacity};
+      -webkit-transform: ${transform};
+      transform: ${transform};
+    }
+  }
+  `;
+
+  const rules = {
+    style: new InjectStyle(style),
+    animation: new InjectStyle(animation),
   };
 
   return buildTransitionOut({
-    transition: (node) => anime({
-      targets: node,
-      easing,
-      duration,
-      zIndex: { value: zIndex, duration: 0 },
-      opacity: [1, opacity],
-      ...config[direction]
-    }),
-    replaceBackground
+    rules,
+    replaceBackground,
+    className: `react-tiger-transition-push-${direction}`,
   });
-
 };

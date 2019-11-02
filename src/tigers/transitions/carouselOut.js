@@ -1,10 +1,11 @@
-import anime from 'animejs';
 import { buildTransitionOut } from './buildTransition';
+
+import { InjectStyle, getEasing } from '../../utils';
 
 export default ({
   direction = 'left',
   duration = 700,
-  easing = 'easeInOutCubic',
+  easing = 'ease-in',
   opacity = 0.3,
   replaceBackground = null,
   zIndex = 2,
@@ -14,39 +15,58 @@ export default ({
 } = {}) => {
 
   const config = {
-    left: {
-      transformOrigin: { value: '100% 50%', duration: 0 },
-      translateX: [0, `${-offset}%`],
-      rotateY: [0, -angle]
-    },
-    right: {
-      transformOrigin: { value: '0% 50%', duration: 0 },
-      translateX: [0, `${offset}%`],
-      rotateY: [0, angle]
-    },
-    top: {
-      transformOrigin: { value: '50% 100%', duration: 0 },
-      translateY: [0, `${-offset}%`],
-      rotateX: [0, angle]
-    },
-    bottom: {
-      transformOrigin: { value: '50% 0%', duration: 0 },
-      translateY: [0, `${offset}%`],
-      rotateX: [0, -angle]
-    },
+    left: ['100% 50%', `translateX(${-offset}%) rotateY(${-angle}deg)`],
+    right: ['0% 50%', `translateX(${offset}%) rotateY(${angle}deg)`],
+    top: ['50% 100%', `translateY(${-offset}%) rotateX(${angle}deg)`],
+    bottom: ['50% 0%', `translateY(${offset}%) rotateX(${-angle}deg)`],
+  };
+
+  const animationName = `${direction}ReactTigerTransitionCarouselOut`;
+  const transformOrigin = config[direction][0];
+  const animationCss = `${animationName} ${duration}ms both ${getEasing(easing)}`;
+
+  const style = `
+  .react-tiger-transition-carousel-out-${direction} {
+    -webkit-transform-origin: ${transformOrigin};
+    -ms-transform-origin: ${transformOrigin};
+    transform-origin: ${transformOrigin};
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    -webkit-animation: ${animationCss};
+    animation: ${animationCss};
+    z-index: ${zIndex};
+    opacity: 1;
+  }
+  `;
+
+  const transform = `${config[direction][1]} scale(${scale})`;
+
+  const animation = `
+    @-webkit-keyframes ${animationName} {
+      to {
+        opacity: ${opacity};
+        -webkit-transform: ${transform};
+        transform: ${transform};
+      }
+    }
+    @keyframes ${animationName} {
+      to {
+        opacity: ${opacity};
+        -webkit-transform: ${transform};
+        transform: ${transform};
+      }
+    }
+  `;
+
+  const rules = {
+    style: new InjectStyle(style),
+    animation: new InjectStyle(animation),
   };
 
   return buildTransitionOut({
-    transition: (node) => anime({
-      targets: node,
-      easing,
-      duration,
-      zIndex: { value: zIndex, duration: 0 },
-      opacity: [1, opacity],
-      scale: [1, scale],
-      ...config[direction]
-    }),
-    replaceBackground
+    rules,
+    replaceBackground,
+    className: `react-tiger-transition-carousel-out-${direction}`,
   });
-
 };

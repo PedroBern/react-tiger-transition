@@ -1,49 +1,72 @@
-import anime from 'animejs';
 import { buildTransitionOut } from './buildTransition';
+
+import { InjectStyle, getEasing } from '../../utils';
 
 export default ({
   direction = 'left',
   duration = 700,
-  easing = 'easeInOutCubic',
+  easing = 'ease-in',
   opacity = 0.3,
   replaceBackground = null,
   zIndex = 2,
   angle = 90,
 } = {}) => {
 
+  /* eslint-disable no-param-reassign */
+  if (angle > 90) angle = 90;
+  else if (angle < 0) angle = 0;
+  /* eslint-enable */
+
   const config = {
-    left: {
-      transformOrigin: { value: '100% 50%', duration: 0 },
-      translateX: [0, '-100%'],
-      rotateY: [0, angle]
-    },
-    right: {
-      transformOrigin: { value: '0% 50%', duration: 0 },
-      translateX: [0, '100%'],
-      rotateY: [0, -angle]
-    },
-    top: {
-      transformOrigin: { value: '50% 100%', duration: 0 },
-      translateY: [0, '-100%'],
-      rotateX: [0, -angle]
-    },
-    bottom: {
-      transformOrigin: { value: '50% 0%', duration: 0 },
-      translateY: [0, '100%'],
-      rotateX: [0, angle]
-    },
+    left: ['100% 50%', `translateX(-100%) rotateY(${angle}deg)`],
+    right: ['0% 50%', `translateX(100%) rotateY(${-angle}deg)`],
+    top: ['50% 100%', `translateY(-100%) rotateX(${-angle}deg)`],
+    bottom: ['50% 0%', `translateY(100%) rotateX(${angle}deg)`],
+  };
+
+  const animationName = `${direction}ReactTigerTransitionRoomOut`;
+  const transformOrigin = config[direction][0];
+  const animationCss = `${animationName} ${duration}ms both ${getEasing(easing)}`;
+
+  const style = `
+  .react-tiger-transition-room-out-${direction} {
+    -webkit-transform-origin: ${transformOrigin};
+    -ms-transform-origin: ${transformOrigin};
+    transform-origin: ${transformOrigin};
+    -webkit-animation: ${animationCss};
+    animation: ${animationCss};
+    z-index: ${zIndex};
+    opacity: 1;
+  }
+  `;
+
+  const transform = config[direction][1];
+
+  const animation = `
+    @-webkit-keyframes ${animationName} {
+      to {
+        opacity: ${opacity};
+        -webkit-transform: ${transform};
+        transform: ${transform};
+      }
+    }
+    @keyframes ${animationName} {
+      to {
+        opacity: ${opacity};
+        -webkit-transform: ${transform};
+        transform: ${transform};
+      }
+    }
+  `;
+
+  const rules = {
+    style: new InjectStyle(style),
+    animation: new InjectStyle(animation),
   };
 
   return buildTransitionOut({
-    transition: (node) => anime({
-      targets: node,
-      easing,
-      duration,
-      zIndex: { value: zIndex, duration: 0 },
-      opacity: [1, opacity],
-      ...config[direction]
-    }),
-    replaceBackground
+    rules,
+    replaceBackground,
+    className: `react-tiger-transition-room-out-${direction}`,
   });
-
 };

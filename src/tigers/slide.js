@@ -6,23 +6,23 @@ export const slide = buildTiger(
   {
     direction: 'left',
     backgroundColor: null,
-    depth: 1000,
+    depth: 500,
     offset: 200,
+    easing: 'easeInOutCubic',
   },
 
   // enter
   {
     duration: 700,
-    easing: 'easeInOutCubic',
     opacity: 0.5,
     zIndex: 1,
+    delay: 0,
   },
   slideInRules,
 
   // exit
   {
     duration: 700,
-    easing: 'easeInOutCubic',
     opacity: 0.5,
     zIndex: 2,
   },

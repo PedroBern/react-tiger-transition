@@ -14,8 +14,8 @@ export const pushPull = buildTiger(
     easing: 'easeInOutBack',
     opacity: 0,
     zIndex: 1,
-    angle: 120,
-    delay: 200,
+    angle: 90,
+    delay: 150,
   },
   pullRules,
 
@@ -25,7 +25,7 @@ export const pushPull = buildTiger(
     easing: 'easeInOutBack',
     opacity: 0,
     zIndex: 2,
-    angle: 120,
+    angle: 90,
   },
   pushRules,
 );
