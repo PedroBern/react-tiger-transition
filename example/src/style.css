@@ -20,3 +20,10 @@ body {
 }
 
 ::-webkit-scrollbar { display: none; }
+
+iframe {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 4px;
+  display: flex;
+}

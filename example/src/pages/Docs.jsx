@@ -71,7 +71,7 @@ const Docs = ({
 
               <SandboxExample
                 label='Quick Start'
-                path='/example/src/utils/getArgs'
+                path='documentation/examples/Basic.jsx'
                 dependencies={{
                   "react-router-dom": "latest",
                   "react-tiger-transition": "latest",

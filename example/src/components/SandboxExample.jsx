@@ -33,11 +33,12 @@ export default function SandboxExample({
         ...extraEmbedOptions
       }}
       height="calc(100% - 8px)"
+      width="calc(100% - 8px)"
     >
       <div
         style={{
-          width: "100%",
-          // height: "100vh",
+          width: "calc(100% - 8px)",
+          height: "calc(100% - 8px)",
           backgroundColor: "#FFF"
         }}
       />
