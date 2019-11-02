@@ -6,7 +6,7 @@ import { docs, docsPaths } from '../utils';
 import { CodeRender, LinkRender } from '../renderers';
 import Container from '@material-ui/core/Container';
 import { Screen, Route } from 'react-tiger-transition';
-
+import { SandboxExample } from '../components';
 
 const useStyles = makeStyles({
   screen: {
@@ -68,17 +68,17 @@ const Docs = ({
           >
             <RenderDoc doc={d.doc} />
             {d.path === '/docs/quick-start' && !loading && (
-              <div className="iframe_container">
-                <iframe
-                  src="https://codesandbox.io/embed/heuristic-herschel-70s21?fontsize=14&codemirror=1"
-                  title="heuristic-herschel-70s21"
-                  width='100%'
-                  height='100px'
-                  frameBorder="0"
-                  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
-                >
-                </iframe>
-              </div>
+
+              <SandboxExample
+                label='Quick Start'
+                path='/example/src/utils/getArgs'
+                dependencies={{
+                  "react-router-dom": "latest",
+                  "react-tiger-transition": "latest",
+                  "react-transition-group": "latest",
+                }}
+              />
+
             )}
           </Route>
         ))}
@@ -87,6 +87,18 @@ const Docs = ({
     </Screen>
   )
 }
+
+// <div className="iframe_container">
+//   <iframe
+//     src="https://codesandbox.io/embed/heuristic-herschel-70s21?fontsize=14&codemirror=1"
+//     title="heuristic-herschel-70s21"
+//     width='100%'
+//     height='100px'
+//     frameBorder="0"
+//     sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+//   >
+//   </iframe>
+// </div>
 
 
 export default withRouter(Docs)
