@@ -1,0 +1,56 @@
+import { prefixer, getEasing } from '../utils';
+
+export default ({
+  name = 'flip-in',
+  direction = 'left',
+  duration = 500,
+  easing = 'easeOutQuad',
+  opacity = 0.2,
+  zIndex = 1,
+  depth = 1000,
+  overridesName = null,
+} = {}) => {
+
+  const config = {
+    left: {
+      transform: `translateZ(${-depth}px) rotateY(-90deg)`,
+      transformActive: 'translateZ(0px) rotateY(0deg)'
+    },
+    right: {
+      transform: `translateZ(${-depth}px) rotateY(90deg)`,
+      transformActive: 'translateZ(0px) rotateY(0deg)'
+    },
+    top: {
+      transform: `translateZ(${-depth}px) rotateX(-90deg)`,
+      transformActive: 'translateZ(0px) rotateX(0deg)'
+    },
+    bottom: {
+      transform: `translateZ(${-depth}px) rotateX(90deg)`,
+      transformActive: 'translateZ(0px) rotateX(0deg)'
+    }
+  };
+
+  const computeName = overridesName || `${name}-${direction}`;
+  const transition = `transform, opacity`;
+  const delay = duration;
+
+  const style = prefixer(`
+  .${computeName}-enter {
+    transformOrigin: '50% 50%';
+    transform: ${config[direction].transform};
+    z-index: ${zIndex};
+    opacity: ${opacity};
+  }
+  .${computeName}-enter-active {
+    transform: ${config[direction].transformActive};
+    opacity: 1;
+    transition: ${transition};
+    transition-delay: ${delay}ms;
+    transition-duration: ${duration}ms;
+    transition-timing-function: ${getEasing(easing)};
+  }
+  `);
+
+  return style;
+
+};
