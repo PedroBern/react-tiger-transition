@@ -20,6 +20,7 @@ import { makeStyles } from '@material-ui/styles';
 
 import './style.css';
 import './markdown.css';
+import './transitions.css';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
 
@@ -72,7 +73,9 @@ const App = () => {
       <DemoProvider>
         <Navigation
           defaultTransition={fade}
-          globalTransitionProps={{appear: true}}
+          globalTransitionProps={{
+            appear: true,
+          }}
         >
 
           <Route exact path="/" >
@@ -104,14 +107,20 @@ const App = () => {
               key={nav.key || nav.path}
               path={nav.path}
               className={classes[nav.navClass]}
-              forceTransition={() => shuffle({
-                direction: 'bottom',
-                duration: 500,
-                opacity: 1,
-                zIndex: nav.zIndex,
-                delay: nav.key ? 0 : 100,
-                easing: 'easeOutCubic'
-              })}
+              forceTransition={
+                nav.key ? "shuffle-bottom" : "shuffle-bottom-secondary"
+              }
+              transitionProps={{
+                timeout: 600
+              }}
+              // forceTransition={() => shuffle({
+              //   direction: 'bottom',
+              //   duration: 500,
+              //   opacity: 1,
+              //   zIndex: nav.zIndex,
+              //   delay: nav.key ? 0 : 100,
+              //   easing: 'easeOutCubic'
+              // })}
             >
               {nav.component}
             </Route>

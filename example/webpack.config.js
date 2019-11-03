@@ -35,7 +35,8 @@ module.exports = (env, argv) => ({
               test : /\.css$/,
               loader:[
                 'style-loader',
-                'css-loader'
+                'css-loader',
+                'postcss-loader'
               ],
               include: [
                 src,
