@@ -8,18 +8,17 @@ import { color, gradient } from './themeColor';
 
 const useStyles = makeStyles({
   root: {
-    background: gradient
+    background: props => props.variant === 'outlined' ? 'none' : gradient
   },
   outlined: {
     borderColor: color,
-    WebkitBackgroundClip: 'text',
-    textFillColor: 'transparent',
+    color: color,
   }
 });
 
 function MyButton(props) {
   const {variant, className, ...other} = props;
-  const classes = useStyles();
+  const classes = useStyles({variant});
   return (
     <Button
       className={classNames(classes.root, className)}

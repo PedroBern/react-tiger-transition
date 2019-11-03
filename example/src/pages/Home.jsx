@@ -17,6 +17,9 @@ import {
 
 
 const useStyles = makeStyles({
+  root: {
+    backgroundColor: '#263238'
+  },
   container: {
     height: '100%',
   },
@@ -60,7 +63,7 @@ const Home = props => {
   const classes = useStyles();
 
   return (
-    <Screen className='home-screen'>
+    <Screen className={classes.root}>
 
       <Container maxWidth='md' className={classes.container}>
         <Grid
@@ -84,7 +87,7 @@ const Home = props => {
               variant='subtitle1'
               color='inherit'
             >
-            A small package ready to take your navigation animations to the next level.
+            Page transitions for react router.
             </Typography>
           </Grid>
 

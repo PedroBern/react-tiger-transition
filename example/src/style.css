@@ -6,19 +6,6 @@ body {
   background-color: #333;
 }
 
-.home-screen {
-  background: url('./tiger-walking.gif') no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.gradient-text {
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 ::-webkit-scrollbar { display: none; }
 
 iframe {
