@@ -45,7 +45,7 @@ const useStyles = makeStyles({
 const navs = [
   {
     key: 'main',
-    path: ['/docs/:doc?', '/demo', '/guides'],
+    path: ['/docs', '/demo', '/guides'],
     component: <Nav />,
     navClass: 'nav',
     zIndex: 200,
@@ -109,7 +109,6 @@ const App = () => {
 
           {navs.map(nav => (
             <Route
-              exact
               key={nav.key || nav.path}
               path={nav.path}
               className={classes[nav.navClass]}
