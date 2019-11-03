@@ -74,9 +74,10 @@ const Docs = ({
                 path='documentation/examples/Basic.jsx'
                 dependencies={{
                   "react-router-dom": "latest",
-                  "react-tiger-transition": "latest",
+                  "react-tiger-transition": "^3.0.1",
                   "react-transition-group": "latest",
                 }}
+                code=''
               />
 
             )}

@@ -45,22 +45,27 @@ const useStyles = makeStyles({
 const navs = [
   {
     key: 'main',
-    path: ['/docs', '/demo', '/guides'],
+    path: ['/docs/:doc?', '/demo', '/guides'],
     component: <Nav />,
     navClass: 'nav',
     zIndex: 200,
+    transition: "shuffle-bottom"
   },
   {
+    key: 'demo',
     path: '/demo',
     component: <DemoNav />,
     navClass: 'scondaryNav',
     zIndex: 100,
+    transition: "shuffle-bottom-secondary"
   },
   {
+    key: 'docs',
     path: '/docs/:doc?',
     component: <DocsNav />,
     navClass: 'scondaryNav',
     zIndex: 100,
+    transition: "shuffle-bottom-secondary"
   }
 ]
 
@@ -104,12 +109,11 @@ const App = () => {
 
           {navs.map(nav => (
             <Route
+              exact
               key={nav.key || nav.path}
               path={nav.path}
               className={classes[nav.navClass]}
-              forceTransition={
-                nav.key ? "shuffle-bottom" : "shuffle-bottom-secondary"
-              }
+              forceTransition={nav.transition}
               transitionProps={{
                 timeout: 600
               }}
