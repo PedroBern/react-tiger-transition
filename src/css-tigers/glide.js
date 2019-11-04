@@ -8,6 +8,6 @@ export const glide = ({
   name = 'glide',
   ...other
 } = {}) => {
-  styleInject(glideIn({ name, ...enter, ...other }), name);
-  styleInject(glideOut({ name, ...exit, ...other }), name);
+  styleInject(glideIn({ name, ...enter, ...other }), `${name}-enter`);
+  styleInject(glideOut({ name, ...exit, ...other }), `${name}-exit`);
 };

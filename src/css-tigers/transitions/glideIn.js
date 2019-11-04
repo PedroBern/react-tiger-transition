@@ -1,7 +1,7 @@
 import { getEasing } from '../../utils';
 
 export default ({
-  name = 'glide-in',
+  name = 'glide',
   direction = 'left',
   duration = 600,
   easing = 'ease',

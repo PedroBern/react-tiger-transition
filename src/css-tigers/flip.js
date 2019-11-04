@@ -8,6 +8,6 @@ export const flip = ({
   name = 'flip',
   ...other
 } = {}) => {
-  styleInject(flipIn({ name, ...enter, ...other }), name);
-  styleInject(flipOut({ name, ...exit, ...other }), name);
+  styleInject(flipIn({ name, ...enter, ...other }), `${name}-enter`);
+  styleInject(flipOut({ name, ...exit, ...other }), `${name}-exit`);
 };

@@ -22,11 +22,11 @@ export const shuffle = ({
       : !exit.direction ? 'right'
         : exit.direction;
 
-  styleInject(glideIn({ name, ...enter, ...other }), name);
+  styleInject(glideIn({ name, ...enter, ...other }), `${name}-enter`);
   styleInject(glideOut({
     name,
     ...exit,
     ...other,
     direction: outDirection
-  }), name);
+  }), `${name}-exit`);
 };

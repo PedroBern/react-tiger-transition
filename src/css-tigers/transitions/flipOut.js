@@ -1,7 +1,7 @@
 import { getEasing } from '../../utils';
 
 export default ({
-  name = 'flip-out',
+  name = 'flip',
   direction = 'left',
   duration = 500,
   easing = 'easeInQuad',
