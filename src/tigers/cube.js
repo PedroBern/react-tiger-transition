@@ -7,8 +7,8 @@ export const cube = buildTiger(
     direction: 'left',
     backgroundColor: null,
     depth: 300,
+    easing: 'ease-in',
     duration: 700,
-    easing: 'easeInOutBack',
   },
 
   // enter

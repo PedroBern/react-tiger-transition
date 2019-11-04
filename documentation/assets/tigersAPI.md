@@ -37,8 +37,8 @@ const cubeDefaultArgs = {
 	direction: 'left',
 	backgroundColor: null,
 	depth: 300,
+	easing: 'ease-in',
 	duration: 700,
-	easing: 'easeInOutBack',
 	enter: {
 		opacity: 0.3,
 		zIndex: 1
@@ -108,7 +108,8 @@ const foldDefaultArgs = {
 	enter: {
 		duration: 700,
 		opacity: 0.3,
-		zIndex: 2
+		zIndex: 2,
+		delay: 0
 	},
 	exit: {
 		duration: 700,
@@ -178,7 +179,7 @@ const glideOutDefaultArgs = {
 	backgroundColor: null,
 	enter: {
 		duration: 700,
-		easing: 'easeOutQuad',
+		easing: 'ease',
 		opacity: 0.3,
 		zIndex: 1,
 		delay: 0,
@@ -186,7 +187,7 @@ const glideOutDefaultArgs = {
 	},
 	exit: {
 		duration: 700,
-		easing: 'easeOutQuad',
+		easing: 'ease',
 		opacity: 1,
 		zIndex: 2
 	}
@@ -203,7 +204,7 @@ const glueInDefaultArgs = {
 	backgroundColor: null,
 	enter: {
 		duration: 800,
-		easing: 'easeInOutQuad',
+		easing: 'ease-in',
 		opacity: 0,
 		zIndex: 1,
 		angle: 15,
@@ -212,7 +213,7 @@ const glueInDefaultArgs = {
 	},
 	exit: {
 		duration: 600,
-		easing: 'easeOutQuad',
+		easing: 'ease',
 		opacity: 1,
 		zIndex: 2
 	}
@@ -308,15 +309,15 @@ const pushPullDefaultArgs = {
 		easing: 'easeInOutBack',
 		opacity: 0,
 		zIndex: 1,
-		angle: 120,
-		delay: 200
+		angle: 90,
+		delay: 150
 	},
 	exit: {
 		duration: 700,
 		easing: 'easeInOutBack',
 		opacity: 0,
 		zIndex: 2,
-		angle: 120
+		angle: 90
 	}
 }
 const pushPullDefault = () => pushPull({...pushPullDefaultArgs});
@@ -433,17 +434,17 @@ const sideDefault = () => side({...sideDefaultArgs});
 const slideDefaultArgs = {
 	direction: 'left',
 	backgroundColor: null,
-	depth: 1000,
+	depth: 500,
 	offset: 200,
+	easing: 'easeInOutCubic',
 	enter: {
 		duration: 700,
-		easing: 'easeInOutCubic',
 		opacity: 0.5,
-		zIndex: 1
+		zIndex: 1,
+		delay: 0
 	},
 	exit: {
 		duration: 700,
-		easing: 'easeInOutCubic',
 		opacity: 0.5,
 		zIndex: 2
 	}
@@ -462,7 +463,8 @@ const unfoldDefaultArgs = {
 	enter: {
 		duration: 700,
 		opacity: 0.3,
-		zIndex: 1
+		zIndex: 1,
+		delay: 0
 	},
 	exit: {
 		duration: 700,

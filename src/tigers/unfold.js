@@ -14,6 +14,7 @@ export const unfold = buildTiger(
     duration: 700,
     opacity: 0.3,
     zIndex: 1,
+    delay: 0,
   },
   unfoldRules,
 

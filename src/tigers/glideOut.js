@@ -11,7 +11,7 @@ export const glideOut = buildTiger(
   // enter
   {
     duration: 700,
-    easing: 'easeOutQuad',
+    easing: 'ease',
     opacity: 0.3,
     zIndex: 1,
     delay: 0,
@@ -22,7 +22,7 @@ export const glideOut = buildTiger(
   // exit
   {
     duration: 700,
-    easing: 'easeOutQuad',
+    easing: 'ease',
     opacity: 1,
     zIndex: 2,
   },

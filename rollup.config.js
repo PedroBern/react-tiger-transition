@@ -15,7 +15,6 @@ const globals = {
   react: 'React',
   "react-router-dom": 'ReactRouterDOM',
   "react-transition-group": 'ReactTransitionGroup',
-  animejs: 'animejs'
 };
 
 const cjs = [

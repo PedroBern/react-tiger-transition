@@ -14,6 +14,7 @@ export const fold = buildTiger(
     duration: 700,
     opacity: 0.3,
     zIndex: 2,
+    delay: 0,
   },
   glideInRules,
 

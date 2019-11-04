@@ -24,6 +24,7 @@ import { makeStyles } from '@material-ui/styles';
 
 import './style.css';
 import './markdown.css';
+import './transitions.css';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
 
@@ -78,6 +79,7 @@ const navs = [
     transition: 'shuffle-bottom'
   },
   {
+    key: 'demo',
     path: '/demo',
     component: <DemoNav />,
     navClass: 'scondaryNav',
@@ -85,6 +87,7 @@ const navs = [
     transition: 'shuffle-secondary-bottom'
   },
   {
+    key: 'docs',
     path: '/docs/:doc?',
     component: <DocsNav />,
     navClass: 'scondaryNav',
@@ -102,7 +105,9 @@ const App = () => {
       <DemoProvider>
         <Navigation
           defaultTransition={fade}
-          globalTransitionProps={{appear: true}}
+          globalTransitionProps={{
+            appear: true,
+          }}
         >
 
           <Route exact path="/" >

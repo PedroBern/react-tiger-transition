@@ -1,5 +1,6 @@
-import anime from 'animejs';
 import { buildTransitionIn } from './buildTransition';
+
+import { InjectStyle, getEasing } from '../../utils';
 
 export default ({
   direction = 'left',
@@ -14,48 +15,78 @@ export default ({
 } = {}) => {
 
   const config = {
-    left: {
-      transformOrigin: { value: '100% 50%', duration: 0 },
-      rotateY: [
-        { value: -angle, duration: duration * 0.6 },
-        { value: 0, duration: duration * 0.4 },
-      ]
-    },
-    right: {
-      transformOrigin: { value: '0% 50%', duration: 0 },
-      rotateY: [
-        { value: angle, duration: duration * 0.6 },
-        { value: 0, duration: duration * 0.4 },
-      ]
-    },
-    top: {
-      transformOrigin: { value: '50% 0%', duration: 0 },
-      rotateX: [
-        { value: -angle, duration: duration * 0.6 },
-        { value: 0, duration: duration * 0.4 },
-      ]
-    },
-    bottom: {
-      transformOrigin: { value: '50% 100%', duration: 0 },
-      rotateX: [
-        { value: angle, duration: duration * 0.6 },
-        { value: 0, duration: duration * 0.4 },
-      ]
+    left: ['100% 50%', `Y(${-angle}deg)`],
+    right: ['0% 50%', `Y(${angle}deg)`],
+    top: ['50% 0%', `X(${-angle}deg)`],
+    bottom: ['50% 100%', `X(${angle}deg)`],
+  };
+
+  const animationName = `${direction}ReactTigerTransitionGlueIn`;
+  const animationCss = `${animationName} ${duration}ms both ${getEasing(easing)}`;
+  const transformOrigin = config[direction][0];
+  const transform0 = `translateZ(${-depth}px)`;
+
+  const style = `
+  .react-tiger-transition-glue-in-${direction} {
+    -webkit-transform: ${transform0};
+    -ms-transform: ${transform0};
+    transform: ${transform0};
+    -webkit-transform-origin: ${transformOrigin};
+    -ms-transform-origin: ${transformOrigin};
+    transform-origin: ${transformOrigin};
+    -webkit-animation: ${animationCss};
+    animation: ${animationCss};
+    z-index: ${zIndex};
+    -webkit-animation-delay: ${delay}ms;
+    animation-delay: ${delay}ms;
+    opacity: ${opacity};
+  }
+  `;
+  const transform1 = `rotate${config[direction][1]}`;
+
+  const animation = `
+  @-webkit-keyframes ${animationName} {
+    0% {
+      opacity: ${opacity};
+      transform: ${transform0};
     }
+    60% {
+      -webkit-transform: ${transform1};
+      transform: ${transform1};
+      animation-timing-function: ease-in;
+    }
+    100% {
+      -webkit-transform: translateZ(0px);
+      transform: translateZ(0px);
+      opacity: 1;
+    }
+  }
+  @keyframes ${animationName} {
+    0% {
+      opacity: ${opacity};
+      transform: ${transform0};
+    }
+    60% {
+      -webkit-transform: ${transform1};
+      transform: ${transform1};
+      animation-timing-function: ease-in;
+    }
+    100% {
+      -webkit-transform: translateZ(0px);
+      transform: translateZ(0px);
+      opacity: 1;
+    }
+  }
+  `;
+
+  const rules = {
+    style: new InjectStyle(style),
+    animation: new InjectStyle(animation),
   };
 
   return buildTransitionIn({
-    transition: (node) => anime({
-      targets: node,
-      easing,
-      duration,
-      delay,
-      zIndex: { value: zIndex, duration: 0 },
-      opacity: [opacity, 1],
-      translateZ: [-depth, 0],
-      ...config[direction]
-    }),
-    replaceBackground
+    rules,
+    replaceBackground,
+    className: `react-tiger-transition-glue-in-${direction}`,
   });
-
 };

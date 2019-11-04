@@ -33,9 +33,13 @@ module.exports = (env, argv) => ({
             },
             {
               test : /\.css$/,
-              loader:[
+              loader:argv.mode === 'production' ?[
                 'style-loader',
-                'css-loader'
+                'css-loader',
+                'postcss-loader'
+              ] : [
+                'style-loader',
+                'css-loader',
               ],
               include: [
                 src,

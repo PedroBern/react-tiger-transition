@@ -6,37 +6,11 @@ body {
   background-color: #333;
 }
 
-.home-screen {
-  background: url('./tiger-walking.gif') no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.gradient-text {
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 ::-webkit-scrollbar { display: none; }
 
-.iframe_container {
-	position: relative;
-	padding-bottom: 40%; /* 16:9 - this is responsive by adjusting the hight according to the width! */
-	padding-top: 24px;
-	height: 0;
-  margin-bottom: 24px;
-  min-width: 200px;
-  max-width: 980px;
+iframe {
   margin-left: auto;
   margin-right: auto;
-}
-
-.iframe_container iframe {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
+  padding: 4px;
+  display: flex;
 }
