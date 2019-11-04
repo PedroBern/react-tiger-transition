@@ -12,9 +12,7 @@ import {
 
 import "react-tiger-transition/styles/main.min.css";
 
-import { glide } from 'react-tiger-transition/css-tigers/glide';
-import { shuffle } from 'react-tiger-transition/css-tigers/shuffle';
-import { flip } from 'react-tiger-transition/css-tigers/flip';
+import "./registerTransitions";
 
 import { Home, Docs, Demo, DemoNext, Guides } from './pages';
 import { Nav, DemoNav, DocsNav } from './components';
@@ -27,29 +25,6 @@ import './markdown.css';
 import './transitions.css';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
-
-glide({opacity: 0.3, easing: 'easeOutQuad'});
-glide({direction: 'right', opacity: 0.3, easing: 'easeOutQuad'})
-shuffle({
-  direction: 'bottom',
-  duration: 500,
-  opacity: 1,
-  zIndex: 200,
-  easing: 'easeOutCubic'
-});
-shuffle({
-  name: 'shuffle-secondary',
-  direction: 'bottom',
-  duration: 500,
-  opacity: 1,
-  zIndex: 100,
-  easing: 'easeOutCubic'
-})
-flip({duration: 300});
-flip({
-  duration: 300,
-  direction: 'right'
-})
 
 const useStyles = makeStyles({
   nav: {

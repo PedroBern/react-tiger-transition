@@ -34,10 +34,11 @@ export default (string, sep = '\n') => {
     const prefix = prefixes.filter(p => p.name === match.groups.property)[0];// eslint-disable-line
     if (prefix) {
       let prefixedProperty = '';
-      prefix.prefixes.map(p => {// eslint-disable-line
-        prefixedProperty += p + match[0] + sep;
+      prefix.prefixes.map((p, i) => {// eslint-disable-line
+        // insert tab after first line to keep it pretty
+        prefixedProperty += `${i > 0 ? '\t' : ''}${p}${match[0]}${sep}`;
       });
-      prefixedProperty += match[0];
+      prefixedProperty += `\t${match[0]}`;
       prefixedString = prefixedString.replace(match[0], prefixedProperty);
     }
   }

@@ -1,4 +1,4 @@
-import { styleInject } from './utils/styleInject';
+import { styleInject } from '../utils';
 import glideIn from './transitions/glideIn';
 import glideOut from './transitions/glideOut';
 
@@ -24,7 +24,7 @@ export const shuffle = ({
 
   styleInject(glideIn({ name, ...enter, ...other }), name);
   styleInject(glideOut({
-    overridesName: `${name}-${opositeDirection(outDirection)}`,
+    name,
     ...exit,
     ...other,
     direction: outDirection

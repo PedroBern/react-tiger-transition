@@ -1,14 +1,20 @@
-export function styleInject(css, meta, ref = {}) {
+// postcss injectStyle function
+
+import prefixer from './prefixer';
+
+export function styleInject(css, name, ref = {}) {
   const { insertAt } = ref;
 
   if (!css || typeof document === 'undefined') {
     return;
   }
 
+  const computedCSS = prefixer(css);
+
   const head = document.head || document.getElementsByTagName('head')[0];
   const style = document.createElement('style');
   style.type = 'text/css';
-  style.setAttribute('data-meta', meta);
+  style.setAttribute('data-meta', name);
 
   if (insertAt === 'top') {
     if (head.firstChild) {
@@ -23,9 +29,9 @@ export function styleInject(css, meta, ref = {}) {
   }
 
   if (style.styleSheet) {
-    style.styleSheet.cssText = css;
+    style.styleSheet.cssText = computedCSS;
   }
   else {
-    style.appendChild(document.createTextNode(css));
+    style.appendChild(document.createTextNode(computedCSS));
   }
 }

@@ -1,4 +1,4 @@
-import { prefixer, getEasing } from '../utils';
+import { getEasing } from '../../utils';
 
 export default ({
   name = 'glide-out',
@@ -9,7 +9,6 @@ export default ({
   zIndex = 1,
   delay = 0,
   scale = 1,
-  overridesName = null,
 } = {}) => {
 
   const config = {
@@ -19,15 +18,14 @@ export default ({
     bottom: [100, 'Y'],
   };
 
-  const computeName = overridesName || `${name}-${direction}`;
   const transformActive = `scale(${scale}) translate${config[direction][1]}(${config[direction][0]}%)`;
   const transition = `transform, opacity`;
 
-  const style = prefixer(`
-  .${computeName}-exit {
+  const style = `
+  .${name}-exit {
     z-index: ${zIndex};
   }
-  .${computeName}-exit-active {
+  .${name}-exit-active {
     transform: ${transformActive};
     opacity: ${opacity};
     transition: ${transition};
@@ -35,7 +33,7 @@ export default ({
     transition-duration: ${duration}ms;
     transition-timing-function: ${getEasing(easing)};
   }
-  `);
+  `;
 
   return style;
 };

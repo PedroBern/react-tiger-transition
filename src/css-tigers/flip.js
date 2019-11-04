@@ -1,4 +1,4 @@
-import { styleInject } from './utils/styleInject';
+import { styleInject } from '../utils';
 import flipIn from './transitions/flipIn';
 import flipOut from './transitions/flipOut';
 

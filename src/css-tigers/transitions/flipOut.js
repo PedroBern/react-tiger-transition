@@ -1,4 +1,4 @@
-import { prefixer, getEasing } from '../utils';
+import { getEasing } from '../../utils';
 
 export default ({
   name = 'flip-out',
@@ -8,7 +8,6 @@ export default ({
   opacity = 0.2,
   zIndex = 2,
   depth = 1000,
-  overridesName = null,
 } = {}) => {
 
   const config = {
@@ -18,21 +17,20 @@ export default ({
     bottom: `translateZ(${-depth}px) rotateX(-90deg)`,
   };
 
-  const computeName = overridesName || `${name}-${direction}`;
   const transition = `transform, opacity`;
 
-  const style = prefixer(`
-  .${computeName}-exit {
+  const style = `
+  .${name}-exit {
     z-index: ${zIndex};
   }
-  .${computeName}-exit-active {
+  .${name}-exit-active {
     transform: ${config[direction]};
     opacity: ${opacity};
     transition: ${transition};
     transition-duration: ${duration}ms;
     transition-timing-function: ${getEasing(easing)};
   }
-  `);
+  `;
 
   return style;
 
