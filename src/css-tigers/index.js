@@ -5,3 +5,5 @@ export { fade } from './fade';
 export { scale } from './scale';
 export { carousel } from './carousel';
 export { cube } from './cube';
+export { fold } from './fold';
+export { unfold } from './unfold';
