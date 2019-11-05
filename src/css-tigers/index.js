@@ -9,3 +9,5 @@ export { fold } from './fold';
 export { unfold } from './unfold';
 export { glideIn } from './glideIn';
 export { glideOut } from './glideOut';
+export { drop } from './drop';
+export { rise } from './rise';

@@ -2,7 +2,7 @@ import buildTiger from './buildTiger';
 import glideInRules from './transitions/glideIn';
 import scaleOut from './transitions/scaleOut';
 
-export const glideIn = buildTiger(
+export const drop = buildTiger(
   // common
   {
     direction: 'left',
@@ -24,7 +24,7 @@ export const glideIn = buildTiger(
     easing: 'ease',
     opacity: 0.3,
     zIndex: 1,
-    scale: 1,
+    scale: 0.6,
     delay: 0,
   },
   scaleOut,
