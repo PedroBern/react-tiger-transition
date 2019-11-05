@@ -11,3 +11,4 @@ export { glideIn } from './glideIn';
 export { glideOut } from './glideOut';
 export { drop } from './drop';
 export { rise } from './rise';
+export { room } from './room';
