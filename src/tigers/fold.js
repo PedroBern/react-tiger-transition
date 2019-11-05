@@ -1,29 +1,31 @@
-import { glideInRules, foldRules } from './transitions';
-import { buildTiger } from './buildTiger';
+import buildTiger from './buildTiger';
+import glideIn from './transitions/glideIn';
+import foldRules from './transitions/fold';
 
 export const fold = buildTiger(
   // common
   {
     direction: 'left',
-    backgroundColor: null,
-    easing: 'easeInOutCubic',
   },
 
   // enter
   {
-    duration: 700,
+    duration: 600,
+    easing: 'ease',
     opacity: 0.3,
     zIndex: 2,
     delay: 0,
   },
-  glideInRules,
+  glideIn,
 
   // exit
   {
-    duration: 700,
+    duration: 600,
+    easing: 'ease',
     opacity: 0.3,
     zIndex: 1,
     angle: 90,
+    delay: 0,
   },
   foldRules,
 );

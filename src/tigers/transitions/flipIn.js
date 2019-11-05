@@ -1,87 +1,54 @@
-import { buildTransitionIn } from './buildTransition';
-
-import { InjectStyle, getEasing } from '../../utils';
+import { getEasing } from '../../utils';
 
 export default ({
+  name = 'flip',
   direction = 'left',
   duration = 500,
-  easing = 'ease-out',
+  easing = 'easeOutQuad',
   opacity = 0.2,
-  replaceBackground = null,
   zIndex = 1,
   depth = 1000,
 } = {}) => {
 
-  const delay = duration;
-
   const config = {
     left: {
-      style: `translateZ(${-depth}px) rotateY(-90deg)`,
-      animation: 'translateZ(0px) rotateY(0deg)'
+      transform: `translateZ(${-depth}px) rotateY(-90deg)`,
+      transformActive: 'translateZ(0px) rotateY(0deg)'
     },
     right: {
-      style: `translateZ(${-depth}px) rotateY(90deg)`,
-      animation: 'translateZ(0px) rotateY(0deg)'
+      transform: `translateZ(${-depth}px) rotateY(90deg)`,
+      transformActive: 'translateZ(0px) rotateY(0deg)'
     },
     top: {
-      style: `translateZ(${-depth}px) rotateX(-90deg)`,
-      animation: 'translateZ(0px) rotateX(0deg)'
+      transform: `translateZ(${-depth}px) rotateX(-90deg)`,
+      transformActive: 'translateZ(0px) rotateX(0deg)'
     },
     bottom: {
-      style: `translateZ(${-depth}px) rotateX(90deg)`,
-      animation: 'translateZ(0px) rotateX(0deg)'
+      transform: `translateZ(${-depth}px) rotateX(90deg)`,
+      transformActive: 'translateZ(0px) rotateX(0deg)'
     }
   };
 
-  const animationName = `${direction}ReactTigerTransitionCubeIn`;
-  const transformOrigin = '50% 50%';
-  let transform = config[direction].style;
-  const animationCss = `${animationName} ${duration}ms both ${getEasing(easing)}`;
+  const transition = `transform, opacity`;
+  const delay = duration;
 
   const style = `
-  .react-tiger-transition-cube-in-${direction} {
-    -webkit-transform: ${transform};
-    -ms-transform: ${transform};
-    transform: ${transform};
-    -webkit-transform-origin: ${transformOrigin};
-    -ms-transform-origin: ${transformOrigin};
-    transform-origin: ${transformOrigin};
-    -webkit-animation: ${animationCss};
-    animation: ${animationCss};
+  .${name}-enter {
+    transformOrigin: '50% 50%';
+    transform: ${config[direction].transform};
     z-index: ${zIndex};
-    -webkit-animation-delay: ${delay}ms;
-    animation-delay: ${delay}ms;
     opacity: ${opacity};
   }
-  `;
-
-  transform = config[direction].animation;
-
-  const animation = `
-  @-webkit-keyframes ${animationName} {
-    to {
-      opacity: 1;
-      -webkit-transform: ${transform};
-      transform: ${transform};
-    }
-  }
-  @keyframes ${animationName} {
-    to {
-      opacity: 1;
-      -webkit-transform: ${transform};
-      transform: ${transform};
-    }
+  .${name}-enter-active {
+    transform: ${config[direction].transformActive};
+    opacity: 1;
+    transition: ${transition};
+    transition-delay: ${delay}ms;
+    transition-duration: ${duration}ms;
+    transition-timing-function: ${getEasing(easing)};
   }
   `;
 
-  const rules = {
-    style: new InjectStyle(style),
-    animation: new InjectStyle(animation),
-  };
+  return style;
 
-  return buildTransitionIn({
-    rules,
-    replaceBackground,
-    className: `react-tiger-transition-cube-in-${direction}`,
-  });
 };

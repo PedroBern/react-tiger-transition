@@ -1,29 +1,32 @@
-import { glideInRules, glideOutRules } from './transitions';
-import { buildTiger } from './buildTiger';
+import buildTiger from './buildTiger';
+import glideIn from './transitions/glideIn';
+import glideOut from './transitions/glideOut';
 
 export const glide = buildTiger(
   // common
   {
     direction: 'left',
-    backgroundColor: null,
   },
 
   // enter
   {
-    duration: 700,
+    duration: 600,
     easing: 'easeOutQuad',
     opacity: 1,
     zIndex: 2,
+    scale: 1,
     delay: 0,
   },
-  glideInRules,
+  glideIn,
 
   // exit
   {
-    duration: 700,
+    duration: 600,
     easing: 'easeOutQuad',
     opacity: 0.3,
     zIndex: 1,
+    scale: 1,
+    delay: 0,
   },
-  glideOutRules
+  glideOut
 );

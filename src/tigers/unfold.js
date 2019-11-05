@@ -1,28 +1,31 @@
-import { glideOutRules, unfoldRules } from './transitions';
-import { buildTiger } from './buildTiger';
+import buildTiger from './buildTiger';
+import glideOut from './transitions/glideOut';
+import unfoldRules from './transitions/unfold';
 
 export const unfold = buildTiger(
   // common
   {
     direction: 'left',
-    backgroundColor: null,
-    easing: 'easeInOutCubic',
   },
 
   // enter
   {
-    duration: 700,
+    duration: 600,
+    easing: 'ease',
     opacity: 0.3,
     zIndex: 1,
+    angle: 90,
     delay: 0,
   },
   unfoldRules,
 
   // exit
   {
-    duration: 700,
+    duration: 600,
+    easing: 'ease',
     opacity: 1,
     zIndex: 2,
+    delay: 0,
   },
-  glideOutRules,
+  glideOut,
 );

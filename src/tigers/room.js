@@ -1,28 +1,31 @@
-import { roomInRules, roomOutRules } from './transitions';
-import { buildTiger } from './buildTiger';
+import buildTiger from './buildTiger';
+import roomIn from './transitions/roomIn';
+import roomOut from './transitions/roomOut';
 
 export const room = buildTiger(
   // common
   {
     direction: 'left',
-    backgroundColor: null,
     angle: 90,
-    easing: 'easeInOutCubic',
   },
 
   // enter
   {
-    duration: 700,
+    duration: 600,
+    easing: 'ease',
     opacity: 0.3,
     zIndex: 1,
+    delay: 0,
   },
-  roomInRules,
+  roomIn,
 
   // exit
   {
-    duration: 700,
+    duration: 600,
+    easing: 'ease',
     opacity: 0.3,
     zIndex: 2,
+    delay: 0,
   },
-  roomOutRules,
+  roomOut,
 );

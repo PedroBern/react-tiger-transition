@@ -6,8 +6,8 @@
 //   Route,
 //   Navigation,
 //   Screen,
-//   // shuffle,
-//   fade
+//   // flip,
+//   flip
 // } from 'react-tiger-transition';
 //
 // import "react-tiger-transition/styles/main.min.css";
@@ -51,7 +51,7 @@
 //     component: <Nav />,
 //     navClass: 'nav',
 //     zIndex: 200,
-//     transition: 'shuffle-bottom'
+//     transition: 'flip-bottom'
 //   },
 //   {
 //     key: 'demo',
@@ -59,7 +59,7 @@
 //     component: <DemoNav />,
 //     navClass: 'scondaryNav',
 //     zIndex: 100,
-//     transition: 'shuffle-secondary-bottom'
+//     transition: 'flip-secondary-bottom'
 //   },
 //   {
 //     key: 'docs',
@@ -67,7 +67,7 @@
 //     component: <DocsNav />,
 //     navClass: 'scondaryNav',
 //     zIndex: 100,
-//     transition: 'shuffle-secondary-bottom'
+//     transition: 'flip-secondary-bottom'
 //   }
 // ]
 //
@@ -79,7 +79,7 @@
 //     <Router basename="/react-tiger-transition">
 //       <DemoProvider>
 //         <Navigation
-//           defaultTransition={fade}
+//           defaultTransition={flip}
 //           globalTransitionProps={{
 //             appear: true,
 //           }}
@@ -115,7 +115,7 @@
 //               path={nav.path}
 //               className={classes[nav.navClass]}
 //               forceTransition={nav.transition}
-//               // forceTransition={() => shuffle({
+//               // forceTransition={() => flip({
 //               //   direction: 'bottom',
 //               //   duration: 500,
 //               //   opacity: 1,
@@ -147,10 +147,10 @@ import "react-tiger-transition/styles/main.min.css"; // eslint-disable-line
 
 import { Navigation, Route, Screen, Link } from "react-tiger-transition";
 
-import { fade } from 'react-tiger-transition/css-tigers';
+import { glueOut } from 'react-tiger-transition/css-tigers';
 
-fade({
-  name: 'fade',
+glueOut({
+  name: 'tiger',
 });
 
 // basic styling to not hurt eyes
@@ -193,7 +193,7 @@ const App = () => {
             {/* Use Link the same way you use
                   react-router Link, but
                   add transition */}
-            <Link to="/a" transition='fade' timeout={600} style={{ ...linkStyle }}>
+            <Link to="/a" transition='tiger' timeout={600} style={{ ...linkStyle }}>
               Check out the page A
             </Link>
           </Screen>
@@ -212,8 +212,8 @@ const App = () => {
         >
           <Link
             to="/"
-            transition='fade'
-            timeout={600} 
+            transition='tiger'
+            timeout={600}
             style={{ ...linkStyle }}
           >
             Back to home page

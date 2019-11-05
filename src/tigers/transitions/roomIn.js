@@ -1,79 +1,58 @@
-import { buildTransitionIn } from './buildTransition';
-
-import { InjectStyle, getEasing } from '../../utils';
+import { getEasing } from '../../utils';
 
 export default ({
+  name = 'room',
   direction = 'left',
   duration = 700,
   easing = 'ease-in',
   opacity = 0.3,
-  replaceBackground = null,
   zIndex = 1,
   angle = 90,
   delay = 0,
 } = {}) => {
 
-  /* eslint-disable no-param-reassign */
-  if (angle > 90) angle = 90;
-  else if (angle < 0) angle = 0;
-  /* eslint-enable */
-
   const config = {
-    left: ['0% 50%', `translateX(100%) rotateY(${-angle}deg)`, 'X', 'Y'],
-    right: ['100% 50%', `translateX(-100%) rotateY(${angle}deg)`, 'X', 'Y'],
-    top: ['50% 0%', `translateY(100%) rotateX(${angle}deg)`, 'Y', 'X'],
-    bottom: ['50% 100%', `translateY(-100%) rotateX(${-angle}deg)`, 'Y', 'X'],
+    left: {
+      origin: '0% 50%',
+      transform: `translateX(100%) rotateY(${-angle}deg)`,
+      transformActive: `translateX(0px) rotateY(0deg)`,
+    },
+    right: {
+      origin: '100% 50%',
+      transform: `translateX(-100%) rotateY(${angle}deg)`,
+      transformActive: `translateX(0px) rotate$Y(0deg)`,
+    },
+    top: {
+      origin: '50% 0%',
+      transform: `translateY(100%) rotateX(${angle}deg)`,
+      transformActive: `translateY(0px) rotateX(0deg)`,
+    },
+    bottom: {
+      origin: '50% 100%',
+      transform: `translateY(-100%) rotateX(${-angle}deg)`,
+      transformActive: `translateY(0px) rotate$X(0deg)`,
+    }
   };
 
-  const animationName = `${direction}ReactTigerTransitionRoomIn`;
-  const transformOrigin = config[direction][0];
-  let transform = config[direction][1];
-  const animationCss = `${animationName} ${duration}ms both ${getEasing(easing)}`;
+  const transition = `transform, opacity`;
 
   const style = `
-  .react-tiger-transition-room-in-${direction} {
-    -webkit-transform: ${transform};
-    -ms-transform: ${transform};
-    transform: ${transform};
-    -webkit-transform-origin: ${transformOrigin};
-    -ms-transform-origin: ${transformOrigin};
-    transform-origin: ${transformOrigin};
-    -webkit-animation: ${animationCss};
-    animation: ${animationCss};
+  .${name}-enter {
+    transform-origin: ${config[direction].origin};
+    transform: ${config[direction].transform};
     z-index: ${zIndex};
-    -webkit-animation-delay: ${delay}ms;
-    animation-delay: ${delay}ms;
     opacity: ${opacity};
   }
-  `;
-
-  transform = `translate${config[direction][2]}(0px) rotate${config[direction][3]}(0deg)`;
-
-  const animation = `
-  @-webkit-keyframes ${animationName} {
-    to {
-      opacity: 1;
-      -webkit-transform: ${transform};
-      transform: ${transform};
-    }
-  }
-  @keyframes ${animationName} {
-    to {
-      opacity: 1;
-      -webkit-transform: ${transform};
-      transform: ${transform};
-    }
+  .${name}-enter-active {
+    transform: ${config[direction].transformActive};
+    opacity: 1;
+    transition: ${transition};
+    transition-delay: ${delay}ms;
+    transition-duration: ${duration}ms;
+    transition-timing-function: ${getEasing(easing)};
   }
   `;
 
-  const rules = {
-    style: new InjectStyle(style),
-    animation: new InjectStyle(animation),
-  };
+  return style;
 
-  return buildTransitionIn({
-    rules,
-    replaceBackground,
-    className: `react-tiger-transition-room-in-${direction}`,
-  });
 };

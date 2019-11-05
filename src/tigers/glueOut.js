@@ -1,5 +1,6 @@
-import { glideInRules, glueOutRules } from './transitions';
-import { buildTiger } from './buildTiger';
+import buildTiger from './buildTiger';
+import glideIn from './transitions/glideIn';
+import glueOutRules from './transitions/glueOut';
 
 export const glueOut = buildTiger(
   // common
@@ -10,18 +11,18 @@ export const glueOut = buildTiger(
 
   // enter
   {
-    duration: 600,
-    easing: 'easeInOutQuad',
+    duration: 400,
+    easing: 'ease',
     opacity: 1,
     zIndex: 2,
     delay: 200,
   },
-  glideInRules,
+  glideIn,
 
   // exit
   {
-    duration: 800,
-    easing: 'easeOutQuad',
+    duration: 600,
+    easing: 'ease-in',
     opacity: 0,
     zIndex: 1,
     depth: 200,

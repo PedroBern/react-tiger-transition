@@ -1,27 +1,31 @@
-import { fadeInRules, fadeOutRules } from './transitions';
-import { buildTiger } from './buildTiger';
+import buildTiger from './buildTiger';
+import scaleIn from './transitions/scaleIn';
+import scaleOut from './transitions/scaleOut';
 
 export const fade = buildTiger(
   // common
   {
-    backgroundColor: 'white',
+    direction: 'left',
   },
 
   // enter
   {
-    duration: 700,
-    easing: 'easeOutQuad',
-    opacity: 0.3,
-    zIndex: 2,
+    duration: 600,
+    easing: 'ease-in',
+    zIndex: 1,
+    opacity: 0,
+    scale: 1,
   },
-  fadeInRules,
+  scaleIn,
 
   // exit
   {
-    duration: 700,
-    easing: 'easeOutQuad',
-    opacity: 0.3,
-    zIndex: 1,
+    duration: 600,
+    easing: 'ease-in',
+    opacity: 0,
+    zIndex: 2,
+    delay: 0,
+    scale: 1,
   },
-  fadeOutRules
+  scaleOut,
 );

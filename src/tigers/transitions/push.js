@@ -1,67 +1,52 @@
-import { buildTransitionOut } from './buildTransition';
-
-import { InjectStyle, getEasing } from '../../utils';
+import { getEasing } from '../../utils';
 
 export default ({
+  name = 'push',
   direction = 'left',
   duration = 700,
   easing = 'ease',
   opacity = 1,
   angle = 90,
-  replaceBackground = null,
   zIndex = 1,
+  delay = 0,
 } = {}) => {
 
   const config = {
-    right: ['100% 50%', 'Y', `(${-angle}deg)`],
-    left: ['0% 50%', 'Y', `(${angle}deg)`],
-    top: ['50% 0%', 'X', `(${-angle}deg)`],
-    bottom: ['50% 100%', 'X', `(${angle}deg)`],
+    right: {
+      origin: '100% 50%',
+      transformActive: `rotateY(${-angle}deg)`,
+    },
+    left: {
+      origin: '0% 50%',
+      transformActive: `rotateY(${angle}deg)`,
+    },
+    top: {
+      origin: '50% 100%',
+      transformActive: `rotateX(${-angle}deg)`,
+    },
+    bottom: {
+      origin: '50% 0%',
+      transformActive: `rotateX(${angle}deg)`,
+    },
   };
 
-  const transformOrigin = config[direction][0];
-  const animationName = `${direction}ReactTigerTransitionPush`;
-  const animationCss = `${animationName} ${duration}ms ${getEasing(easing)} both`;
+  const transition = `transform, opacity`;
 
   const style = `
-  .react-tiger-transition-push-${direction} {
-    -webkit-transform-origin:${transformOrigin};
-    -ms-transform-origin: ${transformOrigin};
-    transform-origin: ${transformOrigin};
-    -webkit-animation: ${animationCss};
-    animation: ${animationCss};
+  .${name}-exit {
+    transform-origin: ${config[direction].origin};
     z-index: ${zIndex};
-    opacity: 1;
+  }
+  .${name}-exit-active {
+    transform: ${config[direction].transformActive};
+    opacity: ${opacity};
+    transition: ${transition};
+    transition-delay: ${delay}ms;
+    transition-duration: ${duration}ms;
+    transition-timing-function: ${getEasing(easing)};
   }
   `;
 
-  const transform = `rotate${config[direction][1]}${config[direction][2]}`;
+  return style;
 
-  const animation = `
-  @-webkit-keyframes ${animationName} {
-    to {
-      opacity: ${opacity};
-      -webkit-transform: ${transform};
-      transform: ${transform};
-    }
-  }
-  @keyframes ${animationName} {
-    to {
-      opacity: ${opacity};
-      -webkit-transform: ${transform};
-      transform: ${transform};
-    }
-  }
-  `;
-
-  const rules = {
-    style: new InjectStyle(style),
-    animation: new InjectStyle(animation),
-  };
-
-  return buildTransitionOut({
-    rules,
-    replaceBackground,
-    className: `react-tiger-transition-push-${direction}`,
-  });
 };

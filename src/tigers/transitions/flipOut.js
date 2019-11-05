@@ -1,13 +1,11 @@
-import { buildTransitionOut } from './buildTransition';
-
-import { InjectStyle, getEasing } from '../../utils';
+import { getEasing } from '../../utils';
 
 export default ({
+  name = 'flip',
   direction = 'left',
   duration = 500,
-  easing = 'ease-in',
+  easing = 'easeInQuad',
   opacity = 0.2,
-  replaceBackground = null,
   zIndex = 2,
   depth = 1000,
 } = {}) => {
@@ -19,49 +17,21 @@ export default ({
     bottom: `translateZ(${-depth}px) rotateX(-90deg)`,
   };
 
-  const animationName = `${direction}ReactTigerTransitionCubeOut`;
-  const transformOrigin = '50% 50%';
-  const animationCss = `${animationName} ${duration}ms both ${getEasing(easing)}`;
+  const transition = `transform, opacity`;
 
   const style = `
-  .react-tiger-transition-flip-out-${direction} {
-    -webkit-transform-origin: ${transformOrigin};
-    -ms-transform-origin: ${transformOrigin};
-    transform-origin: ${transformOrigin};
-    -webkit-animation: ${animationCss};
-    animation: ${animationCss};
+  .${name}-exit {
     z-index: ${zIndex};
-    opacity: 1;
+  }
+  .${name}-exit-active {
+    transform: ${config[direction]};
+    opacity: ${opacity};
+    transition: ${transition};
+    transition-duration: ${duration}ms;
+    transition-timing-function: ${getEasing(easing)};
   }
   `;
 
-  const transform = config[direction];
+  return style;
 
-  const animation = `
-  @-webkit-keyframes ${animationName} {
-    to {
-      opacity: ${opacity};
-      -webkit-transform: ${transform};
-      transform: ${transform};
-    }
-  }
-  @keyframes ${animationName} {
-    to {
-      opacity: ${opacity};
-      -webkit-transform: ${transform};
-      transform: ${transform};
-    }
-  }
-  `;
-
-  const rules = {
-    style: new InjectStyle(style),
-    animation: new InjectStyle(animation),
-  };
-
-  return buildTransitionOut({
-    rules,
-    replaceBackground,
-    className: `react-tiger-transition-flip-out-${direction}`,
-  });
 };

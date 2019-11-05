@@ -1,15 +1,14 @@
-import { buildTransitionIn } from './buildTransition';
-
-import { InjectStyle, getEasing } from '../../utils';
+import { getEasing } from '../../utils';
 
 export default ({
+  name = 'glide',
   direction = 'left',
-  duration = 700,
+  duration = 600,
   easing = 'ease',
   opacity = 1,
-  replaceBackground = null,
   zIndex = 2,
   delay = 0,
+  scale = 1,
 } = {}) => {
 
   const config = {
@@ -19,51 +18,26 @@ export default ({
     top: [100, 'Y'],
   };
 
-  const animationName = `${direction}ReactTigerTransitionGlideIn`;
-  let transform = `translate${config[direction][1]}(${config[direction][0]}%)`;
-  const animationCss = `${animationName} ${duration}ms ${getEasing(easing)} both`;
+  const transform = `scale(${scale}) translate${config[direction][1]}(${config[direction][0]}%)`;
+  const transformActive = `scale(1) translate${config[direction][1]}(0px)`;
+  const transition = `transform, opacity`;
 
   const style = `
-  .react-tiger-transition-glide-in-${direction} {
-    -webkit-transform: ${transform};
-    -ms-transform: ${transform};
+  .${name}-enter {
     transform: ${transform};
-    -webkit-animation: ${animationCss};
-    animation: ${animationCss};
     z-index: ${zIndex};
-    -webkit-animation-delay: ${delay}ms;
-    animation-delay: ${delay}ms;
     opacity: ${opacity};
   }
-  `;
-
-  transform = `translate${config[direction][1]}(0px)`;
-
-  const animation = `
-  @-webkit-keyframes ${animationName} {
-    to {
-      opacity: 1;
-      -webkit-transform: ${transform};
-      transform: ${transform};
-    }
-  }
-  @keyframes ${animationName} {
-    to {
-      opacity: 1;
-      -webkit-transform: ${transform};
-      transform: ${transform};
-    }
+  .${name}-enter-active {
+    transform: ${transformActive};
+    opacity: 1;
+    transition: ${transition};
+    transition-delay: ${delay}ms;
+    transition-duration: ${duration}ms;
+    transition-timing-function: ${getEasing(easing)};
   }
   `;
 
-  const rules = {
-    style: new InjectStyle(style),
-    animation: new InjectStyle(animation),
-  };
+  return style;
 
-  return buildTransitionIn({
-    rules,
-    replaceBackground,
-    className: `react-tiger-transition-glide-in-${direction}`,
-  });
 };

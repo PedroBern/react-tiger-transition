@@ -1,69 +1,53 @@
-import { buildTransitionOut } from './buildTransition';
-
-import { InjectStyle, getEasing } from '../../utils';
+import { getEasing } from '../../utils';
 
 export default ({
+  name = 'side',
   direction = 'left',
   duration = 700,
   easing = 'ease-in',
   opacity = 0.3,
-  replaceBackground = null,
   zIndex = 2,
   depth = 500,
   angle = 90,
   offset = 100,
+  delay = 0,
 } = {}) => {
 
   const config = {
-    left: [`${50 - offset}% 50%`, `translateZ(${depth}px) rotateY(${angle}deg)`],
-    right: [`${50 + offset}% 50%`, `translateZ(${-depth}px) rotateY(${-angle}deg)`],
-    top: [`50% ${50 - offset}%`, `translateZ(${-depth}px) rotateX(${-angle}deg)`],
-    bottom: [`50% ${50 + offset}%`, `translateZ(${-depth}px) rotateX(${angle}deg)`],
+    left: {
+      origin: `${50 - offset}% 50%`,
+      transformActive: `translateZ(${depth}px) rotateY(${angle}deg)`,
+    },
+    right: {
+      origin: `${50 + offset}% 50%`,
+      transformActive: `translateZ(${-depth}px) rotateY(${-angle}deg)`,
+    },
+    top: {
+      origin: `50% ${50 - offset}%`,
+      transformActive: `translateZ(${-depth}px) rotateX(${-angle}deg)`,
+    },
+    bottom: {
+      origin: `50% ${50 + offset}%`,
+      transformActive: `translateZ(${-depth}px) rotateX(${angle}deg)`,
+    },
   };
 
-
-  const animationName = `${direction}ReactTigerTransitionSideOut`;
-  const transformOrigin = config[direction][0];
-  const animationCss = `${animationName} ${duration}ms both ${getEasing(easing)}`;
+  const transition = `transform, opacity`;
 
   const style = `
-  .react-tiger-transition-side-out-${direction} {
-    -webkit-transform-origin: ${transformOrigin};
-    -ms-transform-origin: ${transformOrigin};
-    transform-origin: ${transformOrigin};
-    -webkit-animation: ${animationCss};
-    animation: ${animationCss};
+  .${name}-exit {
+    transform-origin: ${config[direction].origin};
     z-index: ${zIndex};
-    opacity: 1;
   }
-  `;
-  const transform = config[direction][1];
-
-  const animation = `
-  @-webkit-keyframes ${animationName} {
-    to {
-      opacity: ${opacity};
-      -webkit-transform: ${transform};
-      transform: ${transform};
-    }
-  }
-  @keyframes ${animationName} {
-    to {
-      opacity: ${opacity};
-      -webkit-transform: ${transform};
-      transform: ${transform};
-    }
+  .${name}-exit-active {
+    transform: ${config[direction].transformActive};
+    opacity: ${opacity};
+    transition: ${transition};
+    transition-delay: ${delay}ms;
+    transition-duration: ${duration}ms;
+    transition-timing-function: ${getEasing(easing)};
   }
   `;
 
-  const rules = {
-    style: new InjectStyle(style),
-    animation: new InjectStyle(animation),
-  };
-
-  return buildTransitionOut({
-    rules,
-    replaceBackground,
-    className: `react-tiger-transition-side-out-${direction}`,
-  });
+  return style;
 };
