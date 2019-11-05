@@ -1,41 +1,32 @@
-import { styleInject } from '../utils';
+import buildTiger from './buildTiger';
 import scaleIn from './transitions/scaleIn';
 import scaleOut from './transitions/scaleOut';
 
-export const scale = ({
-  enter = {},
-  exit = {},
-  name = 'scale',
-  ...other
-} = {}) => {
+export const scale = buildTiger(
+  // common
+  {
+    direction: 'left',
+  },
 
-  const enterArgs = {
-    delay: 300,
+  // enter
+  {
+    duration: 300,
+    easing: 'ease',
     zIndex: 2,
+    delay: 300,
     opacity: 0,
-    ...enter,
-  };
+    scale: 0.8,
+  },
+  scaleIn,
 
-  const exitArgs = {
+  // exit
+  {
+    duration: 300,
+    easing: 'ease',
+    opacity: 0,
     zIndex: 1,
-    opacity: 0,
-    ...exit,
-  };
-
-  const commonArgs = {
-    duration: 300
-  };
-
-  styleInject(scaleIn({
-    name,
-    ...commonArgs,
-    ...enterArgs,
-    ...other
-  }), `${name}-enter`);
-  styleInject(scaleOut({
-    name,
-    ...commonArgs,
-    ...exitArgs,
-    ...other
-  }), `${name}-exit`);
-};
+    delay: 0,
+    scale: 0.8,
+  },
+  scaleOut,
+);

@@ -1,32 +1,32 @@
-import { styleInject } from '../utils';
+import buildTiger from './buildTiger';
 import glideIn from './transitions/glideIn';
-import glideOut from './transitions/glideOut';
+import shuffleOut from './transitions/shuffleOut';
 
-const opositeDirection = d => (
-  d === 'left' ? 'right'
-    : d === 'right' ? 'left'
-      : d === 'top' ? 'bottom'
-        : d === 'bottom' ? 'top'
-          : null
+export const shuffle = buildTiger(
+  // common
+  {
+    direction: 'left',
+  },
+
+  // enter
+  {
+    duration: 600,
+    easing: 'easeOutQuad',
+    opacity: 1,
+    zIndex: 2,
+    scale: 1,
+    delay: 0,
+  },
+  glideIn,
+
+  // exit
+  {
+    duration: 600,
+    easing: 'easeOutQuad',
+    opacity: 0.3,
+    zIndex: 1,
+    scale: 1,
+    delay: 0,
+  },
+  shuffleOut,
 );
-
-export const shuffle = ({
-  enter = {},
-  exit = {},
-  name = 'shuffle',
-  ...other
-} = {}) => {
-
-  const outDirection = other.direction ? opositeDirection(other.direction)
-    : enter.direction ? opositeDirection(enter.direction)
-      : !exit.direction ? 'right'
-        : exit.direction;
-
-  styleInject(glideIn({ name, ...enter, ...other }), `${name}-enter`);
-  styleInject(glideOut({
-    name,
-    ...exit,
-    ...other,
-    direction: outDirection
-  }), `${name}-exit`);
-};
