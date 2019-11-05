@@ -1,3 +1,9 @@
+/**
+ *  basic css processor for tiger
+ *  designed only for css written in tigers folder
+ *
+ */
+
 const prefixes = [
   {
     name: 'transform',
@@ -23,12 +29,20 @@ const prefixes = [
     name: 'transform-origin',
     prefixes: ['-ms-', '-webkit-']
   },
+  {
+    name: 'animation',
+    prefixes: ['-webkit-']
+  },
+  {
+    name: 'animation-delay',
+    prefixes: ['-webkit-']
+  },
 ];
 
 
 export default (string, sep = '\n') => {
   let prefixedString = string;
-  const regex = /(?<property>[a-z-]+) *:(?<value>[^:;]+;)/gm;
+  let regex = /(?<property>[a-z-]+) *:(?<value>[^:;]+;)/gm;
   let match;
   while (match = regex.exec(string)) {// eslint-disable-line
     const prefix = prefixes.filter(p => p.name === match.groups.property)[0];// eslint-disable-line
@@ -42,5 +56,14 @@ export default (string, sep = '\n') => {
       prefixedString = prefixedString.replace(match[0], prefixedProperty);
     }
   }
+
+  // test for @keyframes
+  // keyframes are always last item
+  regex = /keyframes.*}/gs;
+  match = regex.exec(prefixedString);
+  if (match) {
+    prefixedString += `@-webkit-${match[0]}`;
+  }
+
   return prefixedString;
 };
