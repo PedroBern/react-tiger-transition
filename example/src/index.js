@@ -147,7 +147,7 @@ import "react-tiger-transition/styles/main.min.css"; // eslint-disable-line
 
 import { Navigation, Route, Screen, Link } from "react-tiger-transition";
 
-import { glueOut } from 'react-tiger-transition/css-tigers';
+import { glueOut } from 'react-tiger-transition/tigers';
 
 glueOut({
   name: 'tiger',

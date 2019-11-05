@@ -1,4 +1,4 @@
-export buildTiger from './buildTiger';
+export { default as buildTiger } from './buildTiger';
 export { flip } from './flip';
 export { glide } from './glide';
 export { shuffle } from './shuffle';
