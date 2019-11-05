@@ -15,3 +15,4 @@ export { room } from './room';
 export { pull } from './pull';
 export { push } from './push';
 export { pushPull } from './pushPull';
+export { side } from './side';
