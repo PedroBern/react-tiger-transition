@@ -12,3 +12,6 @@ export { glideOut } from './glideOut';
 export { drop } from './drop';
 export { rise } from './rise';
 export { room } from './room';
+export { pull } from './pull';
+export { push } from './push';
+export { pushPull } from './pushPull';
