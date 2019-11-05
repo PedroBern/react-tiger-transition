@@ -17,3 +17,5 @@ export { push } from './push';
 export { pushPull } from './pushPull';
 export { side } from './side';
 export { slide } from './slide';
+export { glueIn } from './glueIn';
+export { glueOut } from './glueOut';

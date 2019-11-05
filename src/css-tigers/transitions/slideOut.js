@@ -20,7 +20,7 @@ export default ({
   };
 
 
-  const animationName = `${direction}ReactTigerTransitionSlideOut`;
+  const animationName = `${name}--react-tige-transition-slide-out`;
   const animationCss = `${animationName} ${duration}ms both ${getEasing(easing)}`;
   const transform25 = `translateZ(${-depth}px)`;
   const transform75 = `translateZ(${-depth}px) translate${config[direction]}`;
