@@ -7,3 +7,5 @@ export { carousel } from './carousel';
 export { cube } from './cube';
 export { fold } from './fold';
 export { unfold } from './unfold';
+export { glideIn } from './glideIn';
+export { glideOut } from './glideOut';
