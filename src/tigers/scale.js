@@ -4,9 +4,7 @@ import scaleOut from './transitions/scaleOut';
 
 export const scale = buildTiger(
   // common
-  {
-    direction: 'left',
-  },
+  {},
 
   // enter
   {

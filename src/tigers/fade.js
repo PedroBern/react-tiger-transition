@@ -4,9 +4,7 @@ import scaleOut from './transitions/scaleOut';
 
 export const fade = buildTiger(
   // common
-  {
-    direction: 'left',
-  },
+  {},
 
   // enter
   {
