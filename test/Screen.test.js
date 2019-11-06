@@ -111,7 +111,7 @@ describe('Screen', () => {
 
     const wrapper = mount(
       <Router history={history}>
-        <Navigation>
+        <Navigation defaultTransition='fade'>
           <Route path={['/', '/valid']}>
             <Screen display>
               <FakeComponent key='child' className='child'/>
