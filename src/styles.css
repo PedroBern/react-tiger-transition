@@ -33,7 +33,3 @@ body {
   position: relative;
   overflow-y: scroll;
 }
-
-.react-tiger-transition--is-appearing {
-	opacity: 0;
-}
