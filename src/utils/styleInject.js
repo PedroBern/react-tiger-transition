@@ -3,6 +3,10 @@
 import prefixer from './prefixer';
 
 export function styleInject(css, name, ref = {}) {
+
+  const created = document.querySelector(`[data-meta=${name}]`);
+  if (created) created.remove();
+
   const { insertAt } = ref;
 
   if (!css || typeof document === 'undefined') {
