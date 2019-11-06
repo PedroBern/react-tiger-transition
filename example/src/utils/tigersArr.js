@@ -24,6 +24,8 @@ import {
   side,
   glueOut,
   glueIn,
+  rise,
+  drop,
 } from 'react-tiger-transition';
 
 const tigersArr = [
@@ -38,6 +40,14 @@ const tigersArr = [
   {
     name: 'glideOut',
     func: glideOut,
+  },
+  {
+    name: 'rise',
+    func: rise,
+  },
+  {
+    name: 'drop',
+    func: drop,
   },
   {
     name: 'fold',
@@ -103,13 +113,20 @@ const tigersArr = [
     name: 'shuffle',
     func: shuffle,
   }
-].map(tiger => ({
-  ...tiger,
-  args: {
-    ...tigersDefaultArgs.defaultArgs.filter(t => (
-      t.name === tiger.name
-    ))[0].args
-  }
-}))
+].map(tiger => {
+
+  tiger.func({
+    name: tiger.name + '-demo'
+  });
+
+  return ({
+    ...tiger,
+    args: {
+      ...tigersDefaultArgs.defaultArgs.filter(t => (
+        t.name === tiger.name
+      ))[0].args
+    }
+  });
+})
 
 export default tigersArr;

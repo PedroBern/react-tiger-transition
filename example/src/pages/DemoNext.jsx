@@ -104,7 +104,7 @@ const DemoNext = ({a, b, location, ...other}) => {
   const {
     tiger,
     args,
-    onChangeFromObj
+    timeout,
   } = useContext(DemoContext)
 
   const hasDirection = tiger.args.direction !== undefined;
@@ -113,61 +113,51 @@ const DemoNext = ({a, b, location, ...other}) => {
     <Screen className={classes.screen}>
 
       <Paper className={classes.paper}>
-        <Button
-          className={classes.button}
-          variant='contained'
-          component={Link}
-          to={to}
-          transition={() => tiger.func({...args})}
-        >
-          Continue
-        </Button>
 
-        {hasDirection && (
+        {!hasDirection ?
+
+          <Button
+            className={classes.button}
+            variant='contained'
+            component={Link}
+            to={to}
+            transition={`${tiger.name}-demo`}
+            timeout={timeout}
+          >
+            Continue
+          </Button>
+
+          :
+
           <React.Fragment>
-            <Button
-              className={classes.button}
-              variant='contained'
-              component={Link}
-              to={to}
-              transition={() => tiger.func({
-                ...args,
-                direction: getOpositeDirection(args.direction)
-              })}
-            >
-              Turn around
-            </Button>
-            <Button
-              className={classes.button}
-              variant='contained'
-              component={Link}
-              to={to}
-              onClick={() => {
-                const direction = changeAxis(args.direction)
-                onChangeFromObj({...args, direction})
-              }}
-              transition={() => tiger.func({
-                ...args,
-                direction: changeAxis(args.direction)
-              })}
-            >
-              Change axis
-            </Button>
+            {['left', 'right', 'top', 'bottom'].map(direction => (
+              <Button
+                key={direction}
+                className={classes.button}
+                variant='contained'
+                component={Link}
+                to={to}
+                onClick={() => tiger.func({
+                  name: `${tiger.name}-demo`,
+                  ...args,
+                  direction: direction
+                })}
+                transition={`${tiger.name}-demo`}
+                timeout={timeout}
+              >
+                {direction}
+              </Button>
+            ))}
           </React.Fragment>
-        )}
+        }
 
         <Button
           className={classes.button}
           variant='outlined'
           component={Link}
           to='/demo'
-          transition={() => (
-            hasDirection ? tiger.func({
-              ...args,
-              direction: getOpositeDirection(args.direction)
-            }) :
-            tiger.func({...args})
-          )}
+          transition={`${tiger.name}-demo`}
+          timeout={timeout}
         >
           Back to settings
         </Button>

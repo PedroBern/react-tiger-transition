@@ -1,6 +1,13 @@
-import { glide } from 'react-tiger-transition/css-tigers';
-import { shuffle } from 'react-tiger-transition/css-tigers';
-import { flip } from 'react-tiger-transition/css-tigers';
+import {
+  glide,
+  shuffle,
+  flip,
+  fade
+} from 'react-tiger-transition/tigers';
+
+fade({
+  name: 'fade'
+});
 
 glide({
   name: 'glide-left',

@@ -57,14 +57,6 @@ const DocsNav = ({
                 'flip-left' :
                 'flip-right'
               }
-              timeout={600}
-              // transition={() => flip({
-              //   duration: 300,
-              //   direction:
-              //     docsPaths.indexOf(match.params.doc) < index ?
-              //     'left' :
-              //     'right'
-              // })}
               label={d.text}
             />
           ))}

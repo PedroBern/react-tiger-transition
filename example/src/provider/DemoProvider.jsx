@@ -15,7 +15,7 @@ const DemoProvider = ({children}) => {
         updateTiger: value => dispatch({type: 'updateTiger', value}),
         onBeforeChange: value => dispatch({type: 'onBeforeChange', value}),
         onChange: value => dispatch({type: 'onChange', value}),
-        onChangeFromObj: value => dispatch({type: 'onChangeFromObj', value})
+        updateDemoTimeout: value => dispatch({type: 'updateDemoTimeout', value})
       }}
     >
       {children}
