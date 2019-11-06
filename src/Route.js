@@ -1,12 +1,10 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types'; // eslint-disable-line import/no-extraneous-dependencies
 import { Route as RouterRoute } from 'react-router-dom';
-
+import { CSSTransition } from 'react-transition-group';
 import { computeClassName } from './utils';
-// import Transition from './Transition';
 import Screen from './Screen';
-import BoolCSSTransition from './BoolCSSTransition';
-import { NavigationContext, evalTransition } from './Navigation';
+import { NavigationContext } from './Navigation';
 
 /**
  *
@@ -64,7 +62,6 @@ const Route = ({
   transitionProps,
   screen,
   screenProps,
-  forceTransition,
   cancelAnimation,
   ...other
 }) => {
@@ -82,6 +79,7 @@ const Route = ({
     onExit: () => {},
     onExiting: () => {},
     onExited: () => {},
+    classNames: 'canceled-transition'
   } : {};
 
   const {
@@ -89,30 +87,13 @@ const Route = ({
     globalTransitionProps,
   } = useContext(NavigationContext);
 
-  const forcedTransition = useMemo(() => (forceTransition
-    ? {
-      ...evalTransition({
-        transition: forceTransition,
-        timeout: globalTransitionProps.timeout
-          ? globalTransitionProps.timeout
-          : transitionProps.timeout
-            ? transitionProps.timeout
-            : 600 // fallback if user is using css transition and dont set timeout
-      })
-    }
-    : false),
-  [forceTransition, globalTransitionProps.timeout, transitionProps.timeout]);
-
-  const computeTransition = forcedTransition || transition;
-
   return (
     <RouterRoute {...other}>
       {props => (
-        <BoolCSSTransition
+        <CSSTransition
           in={props.match != null} // eslint-disable-line react/prop-types
-          mountOnEnter={!computeTransition.css}
           unmountOnExit
-          {...computeTransition}
+          {...transition}
           {...globalTransitionProps}
           {...transitionProps}
           {...cancelTransition}
@@ -126,7 +107,7 @@ const Route = ({
                 : children
             }
           </div>
-        </BoolCSSTransition>
+        </CSSTransition>
       )}
     </RouterRoute>
   );
@@ -144,7 +125,7 @@ Route.displayName = 'TigerRoute';
 
 Route.propTypes = {
   /**
-   * Propably your 'page' component. I recommend you to use [`<Screen />`](/docs/screen)
+   * Probably your 'page' component. I recommend you to use [`<Screen />`](/docs/screen)
    * to wrap your pages. Or pass in the `screen` prop to automatically
    * wrap.
    */
@@ -193,18 +174,6 @@ Route.propTypes = {
    * Props passed to div container.
    */
   containerProps: PropTypes.object,
-
-  /**
-   * Force a specific transition for the route. Same as [`<Link />`
-   * transition](/docs/link) prop. If you are using a css transition, you should
-   * provide `timeout` in `transitionProps`, or in `globalTransitionProps`
-   * from [`<Navigation />`](/docs/navigation).
-   */
-  forceTransition: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.func,
-    PropTypes.object,
-  ]),
 
   /**
    *  Cancel animation.
