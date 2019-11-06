@@ -1,20 +1,16 @@
 import React, { useMemo, useReducer } from 'react';
 import { withRouter, matchPath, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types'; // eslint-disable-line import/no-extraneous-dependencies
-
-import { fade } from './tigers';
 import Screen from './Screen';
-
-// if (umd-build) import './styles.css';
 
 export const NavigationContext = React.createContext();
 
 export const evalTransition = ({ transition, timeout }) => (
   typeof (transition) === 'function'
-    ? { timeout, ...transition(), css: false }
+    ? { timeout, ...transition() }
     : Object.prototype.toString.call(transition) === '[object Object]'
-      ? { timeout, ...transition, css: false }
-      : { timeout, classNames: transition, css: true }
+      ? { timeout, ...transition }
+      : { timeout, classNames: transition }
 );
 
 export function reducer(state, action) {
@@ -150,7 +146,6 @@ const Navigation = ({
 );
 
 Navigation.defaultProps = {
-  defaultTransition: fade,
   defaultRoute: <Redirect to='/' />,
   globalTransitionProps: {},
   firstTimeout: 600,
