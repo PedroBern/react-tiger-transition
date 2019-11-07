@@ -6,7 +6,6 @@ export const cube = buildTiger(
   // common
   {
     direction: 'left',
-    backgroundColor: null,
     depth: 1000,
   },
 

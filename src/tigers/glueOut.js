@@ -6,7 +6,6 @@ export const glueOut = buildTiger(
   // common
   {
     direction: 'left',
-    backgroundColor: null,
   },
 
   // enter
