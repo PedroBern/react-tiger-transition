@@ -3,7 +3,7 @@ import {
   shuffle,
   flip,
   fade
-} from 'react-tiger-transition/tigers';
+} from 'react-tiger-transition';
 
 fade({
   name: 'fade'

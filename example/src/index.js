@@ -89,9 +89,8 @@ const App = () => {
     <Router basename="/react-tiger-transition">
       <DemoProvider>
         <Navigation
-          defaultTransition='fade'
           globalTransitionProps={{
-            appear: true,
+            classNames: "fade"
           }}
         >
 
