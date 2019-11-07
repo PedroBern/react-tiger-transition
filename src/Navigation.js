@@ -10,7 +10,9 @@ export const evalTransition = ({ transition, timeout }) => (
     ? { timeout, ...transition() }
     : Object.prototype.toString.call(transition) === '[object Object]'
       ? { timeout, ...transition }
-      : { timeout, classNames: transition }
+      : typeof (transition) === 'string'
+        ? { timeout, classNames: transition }
+        : { timeout: 0, classNames: '' }
 );
 
 export function reducer(state, action) {
@@ -87,6 +89,11 @@ const NavigationProvider = withRouter(({
   );
 });
 
+const globalTransitionPropsDefaultValues = {
+  unmountOnExit: true,
+  timeout: 600,
+};
+
 /**
  *
  * @description
@@ -95,34 +102,10 @@ const NavigationProvider = withRouter(({
  * many different transitions for the same route as possible, all evaluated
  * on the fly.
  *
- * @example
- * import { BrowserRouter as Router} from "react-router-dom";
- *
- * import {
- *   Navigation,
- *   Route,
- *   Screen,
- *   Link,
- * } from "react-tiger-transition";
- *
- * <div id='root' style={{height: '100vh'}}>
- *   <Router>
- *     <Navigation>
- *
- *       { MyRoutes }
- *
- *     </Navigation>
- *   </Router>
- * </div>
- *
- *
  */
 const Navigation = ({
   children, // eslint-disable-line react/prop-types
   containerProps,
-
-  defaultTransition,
-  firstTimeout,
   globalTransitionProps,
   ...other
 }) => (
@@ -131,13 +114,15 @@ const Navigation = ({
       {...other}
       initialState={{
         transition: evalTransition({
-          transition: defaultTransition,
-          timeout: firstTimeout
+          transition: globalTransitionProps.classNames,
+          timeout: globalTransitionProps.timeout
         }),
         currentTransition: null,
         onTransition: false,
-        defaultTransition,
-        globalTransitionProps,
+        globalTransitionProps: {
+          ...globalTransitionPropsDefaultValues,
+          ...globalTransitionProps,
+        },
       }}
     >
       {children}
@@ -147,8 +132,7 @@ const Navigation = ({
 
 Navigation.defaultProps = {
   defaultRoute: <Redirect to='/' />,
-  globalTransitionProps: {},
-  firstTimeout: 600,
+  globalTransitionProps: globalTransitionPropsDefaultValues,
   disableDefaultRoute: false,
 };
 
@@ -156,35 +140,47 @@ Navigation.propTypes = {
   /**
    * Props passed to [`<Screen container />`](/docs/screen) (that wraps the
    * routes).
+   *
+   * ```javascript
+   * <Navigation
+   *    containerProps={{
+   *      className: 'my-custom-class-name'
+   *    }}
+   * >
+   *    ...
+   * </Navigation>
+   * ```
    */
   containerProps: PropTypes.object,
 
   /**
-   * The default transition to be consumed by every [`<Link />`](/docs/link)
-   * component that transition prop is not defined. Good if you want the same
-   * transition for all routes, or most of them. Use string if you have your
-   * own css animation, or an object or function returning an object to be
-   * passed to [`<Transition />`](https://reactcommunity.org/react-transition-group/transition)
-   * and [`<CSSTransition />`](https://reactcommunity.org/react-transition-group/css-transition).
-   */
-  defaultTransition: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.object,
-    PropTypes.func,
-  ]).isRequired,
-
-  /**
-   * Props passed to [`<Transition />`](https://reactcommunity.org/react-transition-group/transition)
-   * and [`<CSSTransition />`](https://reactcommunity.org/react-transition-group/css-transition).
-   * Usually you don't need to worry about this. If you pass `appear`, the
-   * appearing animation is the `defaultTransition` prop, unless defined a
-   * `forceTransition` prop in [`<Route>`](/docs/route).
+   * Default props passed to all [`<CSSTransition />`](https://reactcommunity.org/react-transition-group/css-transition).
+   *
+   * Use it to define a default transition:
+   *
+   * ```javascript
+   * <Navigation
+   *    globalTransitionProps={{
+   *      ...props,
+   *      timeout: 600,
+   *      classNames: 'fade'
+   *    }}
+   * >
+   *    ...
+   * </Navigation>
+   * ```
+   *
+   * `transitionProps` defined in [`<Route>`](/docs/route) have higher priority.
    */
   globalTransitionProps: PropTypes.object,
 
   /**
    * A route that matches when all routes do not. Default is
    * [`<Redirect to='/' />`](https://reacttraining.com/react-router/web/api/Redirect).
+   *
+   * ```javascript
+   * <Navigation defaultRoute={<Redirect to='/home' />}>...</Navigation>
+   * ```
    */
   defaultRoute: PropTypes.element,
 
@@ -192,15 +188,6 @@ Navigation.propTypes = {
    * Disable default route.
    */
   disableDefaultRoute: PropTypes.bool,
-
-  /**
-   * First transition timeout in milliseconds. Used only on appearing (if set),
-   * and only if you are using a css transition. If you are using an object
-   * or function returning an transition with timeout, this `firstTimeout` is
-   * ignored.
-   */
-  firstTimeout: PropTypes.number,
-
 };
 
 export default Navigation;

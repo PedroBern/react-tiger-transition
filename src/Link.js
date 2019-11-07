@@ -35,7 +35,7 @@ const Link = React.forwardRef(({
 
   const {
     setTransition,
-    defaultTransition,
+    globalTransitionProps,
     onTransition
   } = useContext(NavigationContext);
 
@@ -43,7 +43,10 @@ const Link = React.forwardRef(({
     <RouterLink
       onClick={() => {
         if (!onTransition) {
-          setTransition(transition || defaultTransition, timeout);
+          setTransition(
+            transition || globalTransitionProps.classNames,
+            timeout || globalTransitionProps.timeout
+          );
           if (typeof onClick === 'function') onClick();
         }
       }}
@@ -56,10 +59,6 @@ const Link = React.forwardRef(({
   );
 });
 
-Link.defaultProps = {
-  timeout: 600,
-};
-
 Link.displayName = 'TigerLink';
 
 Link.propTypes = {
@@ -68,7 +67,24 @@ Link.propTypes = {
    * [`<CSSTransition />`](https://reactcommunity.org/react-transition-group/css-transition)
    *
    * Default value comes from context, defined in
-   * [`<Navigation />`](/docs/navigation) component.
+   * [`<Navigation />`](/docs/navigation) `globalTransitionProps`.
+   *
+   * ```javascript
+   * <Navigation
+   *    globalTransitionProps={{
+   *      ...props,
+   *      timeout: 600,
+   *      classNames: 'fade'
+   *    }}
+   * >
+   *    <Link
+   *      // transition of this link is "fade" with 600 ms timeout
+   *      {...linkProps}
+   *    >
+   *      {linkChildren}
+   *    </Link>
+   * </Navigation>
+   * ```
    *
    * If string, it is the `classNames` prop:
    *
@@ -131,15 +147,39 @@ Link.propTypes = {
 
   /**
    * Transition timeout in milliseconds. Used as fallback if not provided on
-   * `transition` prop object / function.
+   * `transition` prop object / function. Default value comes from
+   * `globalTransitionProps` from [`<Navigation />`](/docs/navigation).
    *
    * ```javascript
-   * <Link
-   *    timeout={600} //default value is overwritten if provided in transition prop.
-   *    {...linkProps}
-   * >
-   *    {linkChildren}
-   * </Link>
+   * <Navigation globalTransitionProps={{...props, timeout: 600}}>
+   *  ...
+   *    <Link
+   *      // timeout is 600 here, comes from navigation
+   *      {...linkProps}
+   *    >
+   *      {linkChildren}
+   *    </Link>
+   *
+   *    <Link
+   *      timeout={500} // 500 take over the 600
+   *      {...linkProps}
+   *    >
+   *      {linkChildren}
+   *    </Link>
+   *
+   *    <Link
+   *      // here you dont need to set, because it is defined in transition prop
+   *      transition={{
+   *        classNames: 'my-animation',
+   *        timeout: 700
+   *        ...moreProps
+   *      }}
+   *      {...linkProps}
+   *    >
+   *      {linkChildren}
+   *    </Link>
+   *  ...
+   * </Navigation>
    * ```
    */
   timeout: PropTypes.number,

@@ -25,34 +25,6 @@ import { NavigationContext } from './Navigation';
  * \*Any other prop is passed to
  * [react router `<Route />`](https://reacttraining.com/react-router/web/api/Route).
  *
- * @example
- * import { BrowserRouter as Router} from "react-router-dom";
- *
- * import {
- *   Navigation, // Route needs context from Navigation
- *   Route,
- *   Screen,
- *   Link,
- * } from "react-tiger-transition";
- *
- * <Router>
- *   <Navigation>
- *     <Route exact path="/a" >
- *       <Screen>
- *         <PageA />
- *       </Screen>
- *     </Route>
- *
- *     <Route exact path="/b" screen children={<PageB />} />
- *
- *     { moreRoutes }
- *
- *   </Navigation>
- * </Router>
- *
- * @footer
- * \*Refer to [transitions API](/docs/transitions), for more details about
- * transitions.
  */
 const Route = ({
   children,
@@ -92,9 +64,8 @@ const Route = ({
       {props => (
         <CSSTransition
           in={props.match != null} // eslint-disable-line react/prop-types
-          unmountOnExit
-          {...transition}
           {...globalTransitionProps}
+          {...transition}
           {...transitionProps}
           {...cancelTransition}
         >
@@ -137,13 +108,32 @@ Route.propTypes = {
   /**
    * Disable default styles applied to the div container. You can
    * still use className to set your own styles.
+   *
+   * ```javascript
+   * <Route
+   *    // will have only "my-class-name" styles
+   *    disableStyle
+   *    className="my-class-name"
+   *  >
+   *    {routeChildren}
+   * </Route>
+   * ```
    */
   disableStyle: PropTypes.bool,
 
   /**
   * Div container className. A string or a function returning a string.
   * If not `disableStyle`, this className will be chained to
-  * `react-tiger-transition--route` or `react-tiger-transition--fixed`.
+  * `react-tiger-transition--route`.
+  *
+  * ```javascript
+  * <Route
+  *    // className will be "react-tiger-transition--route my-class-name"
+  *    className="my-class-name"
+  *  >
+  *    {routeChildren}
+  * </Route>
+  * ```
   */
   className: PropTypes.oneOfType([
     PropTypes.string,
@@ -152,26 +142,80 @@ Route.propTypes = {
 
   /**
   * Autimatically wraps route child with `<Screen />`.
+  *
+  * ```javascript
+  * <Route screen>
+  *    {routeChildren}
+  * </Route>
+  * ```
+  * Is shorthand for:
+  *
+  * ```javascript
+  * <Route>
+  *   <Screen>
+  *       {routeChildren}
+  *   </Screen>
+  * </Route>
+  * ```
+  *
   */
   screen: PropTypes.bool,
 
   /**
   * If `screen` prop is true, you can pass props to it.
+  *
+  * ```javascript
+  * <Route screen screenProps={{...props}}>
+  *    {routeChildren}
+  * </Route>
+  * ```
+  * Is shorthand for:
+  *
+  * ```javascript
+  * <Route>
+  *   <Screen {...props}>
+  *       {routeChildren}
+  *   </Screen>
+  * </Route>
+  * ```
   */
   screenProps: PropTypes.object,
 
   /**
-  * Props passed to [`<Transition />`](https://reactcommunity.org/react-transition-group/transition)
-  * or [`<CSSTransition />`](https://reactcommunity.org/react-transition-group/css-transition).
-  * Usually you don't need to worry about this. If you pass `appear`, the
-  * appearing animation is the default one defined in [`<Navigation />`](/docs/navigation).
   * Props defined here have higher priority than `globalTransitionProps`
-  * defined in [`<Navigation />`](/docs/navigation).
+  * defined in [`<Navigation />`](/docs/navigation) or props defined in
+  * [`<Link />`](/docs/link) `transition` prop.
+  *
+  * Usefull for defining specific transitions for the route:
+  *
+  * ```javascript
+  * <Route
+  *   // every time this route animates will be with these props
+  *   screen
+  *   transitionProps={{
+  *       classNames: 'shuffle-bottom',
+  *       timeout: 400
+  *   }}
+  * >
+  *     {routeChildren}
+  * </Route>
+  * ```
   */
   transitionProps: PropTypes.object,
 
   /**
    * Props passed to div container.
+   *
+   * ```javascript
+   * <Route
+   *    containerProps={{
+   *      className: 'my-custom-class-name'
+   *      style: { ...someStyle }
+   *    }}
+   * >
+   *    ...
+   * </Route>
+   * ```
    */
   containerProps: PropTypes.object,
 

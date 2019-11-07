@@ -115,13 +115,6 @@ const Display = withRouter(({
  * @afterProps
  * \*Ref and other props are passed to div container.
  *
- * @example
- * import { Screen } from 'react-tiger-transition';
- *
- * <Screen>
- *  <MyPage />
- * </Screen>
- *
  */
 const Screen = React.forwardRef(({
   className,
@@ -173,13 +166,33 @@ Screen.propTypes = {
 
   /**
    * Create a display of routes. Works the same way, but does not animate
-   * on arriving and leaving to the base url of the screen.
+   * on arriving and leaving to the base url of the screen (url where the
+   * screen was mounted).
+   *
+   * ```javascript
+   * <Screen
+   *    //write routes inside this screen
+   *    display
+   *  >
+   *    { ...children }
+   * </Screen>
+   * ```
    */
   display: PropTypes.bool,
 
   /**
    * Disable default styles applied to div container. You can
    * still use `className` to set your own styles.
+   *
+   * ```javascript
+   * <Screen
+   *    // will have only "my-class-name" styles
+   *    disableStyle
+   *    className="my-class-name"
+   *  >
+   *    {screenChildren}
+   * </Screen>
+   * ```
    */
   disableStyle: PropTypes.bool,
 
@@ -187,6 +200,15 @@ Screen.propTypes = {
    * Div container `className`. A string or a function returning a string.
    * If not `disableStyle`, this `className` will be chained to
    * `react-tiger-transition--screen`.
+   *
+   * ```javascript
+   * <Screen
+   *    // className will be "react-tiger-transition--screen my-class-name"
+   *    className="my-class-name"
+   *  >
+   *    {routeChildren}
+   * </Screen>
+   * ```
    */
   className: PropTypes.oneOfType([
     PropTypes.string,
