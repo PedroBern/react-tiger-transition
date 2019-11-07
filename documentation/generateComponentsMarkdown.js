@@ -43,9 +43,9 @@ function generateProp(propName, prop) {
     (prop.required ? ' (required)' : '') +
     '\n' +
     '\n' +
-    (prop.description ? prop.description + '\n\n' : '') +
-    (prop.type ? generatePropType(prop.type) : '') +
-    (prop.defaultValue ? generatePropDefaultValue(prop.defaultValue) : '') +
+    (prop.type ? `${generatePropType(prop.type)}${prop.defaultValue ? '' : '\n\n'}`  : '') +
+    (prop.defaultValue ? generatePropDefaultValue(prop.defaultValue) + '\n\n': '') +
+    (prop.description ? prop.description + '\n' : '') +
     '\n'
   );
 }

@@ -15,114 +15,156 @@ your custom classes.
 ## Props
 ### `cancelAnimation`
 
-Cancel animation.
-
 type: `bool`
 defaultValue: `false`
+
+
+Cancel animation.
 
 
 ### `children` (required)
 
-Propably your 'page' component. I recommend you to use [`<Screen />`](/docs/screen)
+type: `union(func|node)`
+
+
+Probably your 'page' component. I recommend you to use [`<Screen />`](/docs/screen)
 to wrap your pages. Or pass in the `screen` prop to automatically
 wrap.
-
-type: `union(func|node)`
 
 
 ### `className`
 
+type: `union(string|func)`
+
+
 Div container className. A string or a function returning a string.
 If not `disableStyle`, this className will be chained to
-`react-tiger-transition--route` or `react-tiger-transition--fixed`.
+`react-tiger-transition--route`.
 
-type: `union(string|func)`
+```javascript
+<Route
+   // className will be "react-tiger-transition--route my-class-name"
+   className="my-class-name"
+ >
+   {routeChildren}
+</Route>
+```
 
 
 ### `containerProps`
 
+type: `object`
+
+
 Props passed to div container.
 
-type: `object`
+```javascript
+<Route
+   containerProps={{
+     className: 'my-custom-class-name'
+     style: { ...someStyle }
+   }}
+>
+   ...
+</Route>
+```
 
 
 ### `disableStyle`
 
-Disable default styles applied to the div container. You can
-still use className to set your own styles.
-
 type: `bool`
 defaultValue: `false`
 
 
-### `forceTransition`
+Disable default styles applied to the div container. You can
+still use className to set your own styles.
 
-Force a specific transition for the route. Same as [`<Link />`
-transition](/docs/link) prop. If you are using a css transition, you should
-provide `timeout` in `transitionProps`, or in `globalTransitionProps`
-from [`<Navigation />`](/docs/navigation).
-
-type: `union(string|func|object)`
+```javascript
+<Route
+   // will have only "my-class-name" styles
+   disableStyle
+   className="my-class-name"
+ >
+   {routeChildren}
+</Route>
+```
 
 
 ### `screen`
 
-Autimatically wraps route child with `<Screen />`.
-
 type: `bool`
 defaultValue: `false`
 
 
-### `screenProps`
+Autimatically wraps route child with `<Screen />`.
 
-If `screen` prop is true, you can pass props to it.
+```javascript
+<Route screen>
+   {routeChildren}
+</Route>
+```
+Is shorthand for:
+
+```javascript
+<Route>
+  <Screen>
+      {routeChildren}
+  </Screen>
+</Route>
+```
+
+
+### `screenProps`
 
 type: `object`
 defaultValue: `{}`
+
+
+If `screen` prop is true, you can pass props to it.
+
+```javascript
+<Route screen screenProps={{...props}}>
+   {routeChildren}
+</Route>
+```
+Is shorthand for:
+
+```javascript
+<Route>
+  <Screen {...props}>
+      {routeChildren}
+  </Screen>
+</Route>
+```
 
 
 ### `transitionProps`
 
-Props passed to [`<Transition />`](https://reactcommunity.org/react-transition-group/transition)
-or [`<CSSTransition />`](https://reactcommunity.org/react-transition-group/css-transition).
-Usually you don't need to worry about this. If you pass `appear`, the
-appearing animation is the default one defined in [`<Navigation />`](/docs/navigation).
-Props defined here have higher priority than `globalTransitionProps`
-defined in [`<Navigation />`](/docs/navigation).
-
 type: `object`
 defaultValue: `{}`
+
+
+Props defined here have higher priority than `globalTransitionProps`
+defined in [`<Navigation />`](/docs/navigation) or props defined in
+[`<Link />`](/docs/link) `transition` prop.
+
+Usefull for defining specific transitions for the route:
+
+```javascript
+<Route
+  // every time this route animates will be with these props
+  screen
+  transitionProps={{
+      classNames: 'shuffle-bottom',
+      timeout: 400
+  }}
+>
+    {routeChildren}
+</Route>
+```
 
 
 \*Any other prop is passed to
 [react router `<Route />`](https://reacttraining.com/react-router/web/api/Route).
 
-## Example
-```javascript
-import { BrowserRouter as Router} from "react-router-dom";
 
-import {
-  Navigation, // Route needs context from Navigation
-  Route,
-  Screen,
-  Link,
-} from "react-tiger-transition";
-
-<Router>
-  <Navigation>
-    <Route exact path="/a" >
-      <Screen>
-        <PageA />
-      </Screen>
-    </Route>
-
-    <Route exact path="/b" screen children={<PageB />} />
-
-    { moreRoutes }
-
-  </Navigation>
-</Router>
-```
-
-\*Refer to [transitions API](/docs/transitions), for more details about
-transitions.

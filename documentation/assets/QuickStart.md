@@ -1,4 +1,4 @@
-# Quick start
+# Quickstart
 
 `react-tiger-transition` is ready to take your navigation animations to the next level.
 

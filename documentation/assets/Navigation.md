@@ -8,85 +8,73 @@ on the fly.
 ## Props
 ### `containerProps`
 
-Props passed to [`<Screen container />`](/docs/screen) (that wraps the
-routes).
-
 type: `object`
 
 
-### `defaultRoute`
+Props passed to [`<Screen container />`](/docs/screen) (that wraps the
+routes).
 
-A route that matches when all routes do not. Default is
-[`<Redirect to='/' />`](https://reacttraining.com/react-router/web/api/Redirect).
+```javascript
+<Navigation
+   containerProps={{
+     className: 'my-custom-class-name'
+   }}
+>
+   ...
+</Navigation>
+```
+
+
+### `defaultRoute`
 
 type: `element`
 defaultValue: `<Redirect to='/' />`
 
 
-### `defaultTransition`
+A route that matches when all routes do not. Default is
+[`<Redirect to='/' />`](https://reacttraining.com/react-router/web/api/Redirect).
 
-The default transition to be consumed by every [`<Link />`](/docs/link)
-component that transition prop is not defined. Good if you want the same
-transition for all routes, or most of them. Use string if you have your
-own css animation, or an object or function returning an object to be
-passed to [`<Transition />`](https://reactcommunity.org/react-transition-group/transition)
-and [`<CSSTransition />`](https://reactcommunity.org/react-transition-group/css-transition).
-
-type: `union(string|object|func)`
-defaultValue: `fade`
+```javascript
+<Navigation defaultRoute={<Redirect to='/home' />}>...</Navigation>
+```
 
 
 ### `disableDefaultRoute`
-
-Disable default route.
 
 type: `bool`
 defaultValue: `false`
 
 
-### `firstTimeout`
-
-First transition timeout in milliseconds. Used only on appearing (if set),
-and only if you are using a css transition. If you are using an object
-or function returning an transition with timeout, this `firstTimeout` is
-ignored.
-
-type: `number`
-defaultValue: `600`
+Disable default route.
 
 
 ### `globalTransitionProps`
 
-Props passed to [`<Transition />`](https://reactcommunity.org/react-transition-group/transition)
-and [`<CSSTransition />`](https://reactcommunity.org/react-transition-group/css-transition).
-Usually you don't need to worry about this. If you pass `appear`, the
-appearing animation is the `defaultTransition` prop, unless defined a
-`forceTransition` prop in [`<Route>`](/docs/route).
-
 type: `object`
-defaultValue: `{}`
+defaultValue: `{
+  unmountOnExit: true,
+  timeout: 600,
+}`
 
 
+Default props passed to all [`<CSSTransition />`](https://reactcommunity.org/react-transition-group/css-transition).
 
-## Example
+Use it to define a default transition:
+
 ```javascript
-import { BrowserRouter as Router} from "react-router-dom";
-
-import {
-  Navigation,
-  Route,
-  Screen,
-  Link,
-} from "react-tiger-transition";
-
-<div id='root' style={{height: '100vh'}}>
-  <Router>
-    <Navigation>
-
-      { MyRoutes }
-
-    </Navigation>
-  </Router>
-</div>
+<Navigation
+   globalTransitionProps={{
+     ...props,
+     timeout: 600,
+     classNames: 'fade'
+   }}
+>
+   ...
+</Navigation>
 ```
+
+`transitionProps` defined in [`<Route>`](/docs/route) have higher priority.
+
+
+
 
