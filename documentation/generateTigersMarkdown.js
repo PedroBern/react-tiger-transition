@@ -5,6 +5,8 @@ import  { stringify } from 'javascript-stringify';
 import glide from 'tigers/glide';
 import glideIn from 'tigers/glideIn';
 import glideOut from 'tigers/glideOut';
+import rise from 'tigers/rise';
+import drop from 'tigers/drop';
 import shuffle from 'tigers/shuffle';
 import fold from 'tigers/fold';
 import unfold from 'tigers/unfold';
@@ -26,6 +28,8 @@ const rawTigers = {
  glide,
  glideIn,
  glideOut,
+ rise,
+ drop,
  shuffle,
  fold,
  unfold,

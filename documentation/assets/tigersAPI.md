@@ -6,11 +6,10 @@
 // carousel
 const carouselDefaultArgs = {
 	direction: 'left',
-	backgroundColor: null,
-	easing: 'easeInOutCubic',
 	enter: {
-		duration: 700,
+		duration: 600,
 		opacity: 0.3,
+		easing: 'easeInOutCubic',
 		zIndex: 1,
 		delay: 0,
 		scale: 0.4,
@@ -18,9 +17,11 @@ const carouselDefaultArgs = {
 		angle: 65
 	},
 	exit: {
-		duration: 700,
+		duration: 600,
 		opacity: 0.3,
+		easing: 'easeInOutCubic',
 		zIndex: 2,
+		delay: 0,
 		scale: 0.4,
 		offset: 300,
 		angle: 65
@@ -36,19 +37,48 @@ const carouselDefault = () => carousel({...carouselDefaultArgs});
 const cubeDefaultArgs = {
 	direction: 'left',
 	backgroundColor: null,
-	depth: 300,
-	easing: 'ease-in',
-	duration: 700,
+	depth: 1000,
 	enter: {
+		duration: 600,
+		easing: 'easeInOutQuad',
 		opacity: 0.3,
-		zIndex: 1
+		zIndex: 1,
+		delay: 0
 	},
 	exit: {
+		duration: 600,
+		easing: 'easeInOutQuad',
 		opacity: 0.3,
-		zIndex: 2
+		zIndex: 2,
+		delay: 0
 	}
 }
 const cubeDefault = () => cube({...cubeDefaultArgs});
+```
+
+## drop
+
+```javascript
+// drop
+const dropDefaultArgs = {
+	direction: 'left',
+	enter: {
+		duration: 600,
+		easing: 'ease',
+		opacity: 1,
+		zIndex: 2,
+		delay: 0
+	},
+	exit: {
+		duration: 600,
+		easing: 'ease',
+		opacity: 0.3,
+		zIndex: 1,
+		scale: 0.6,
+		delay: 0
+	}
+}
+const dropDefault = () => drop({...dropDefaultArgs});
 ```
 
 ## fade
@@ -56,18 +86,20 @@ const cubeDefault = () => cube({...cubeDefaultArgs});
 ```javascript
 // fade
 const fadeDefaultArgs = {
-	backgroundColor: 'white',
 	enter: {
-		duration: 700,
-		easing: 'easeOutQuad',
-		opacity: 0.3,
-		zIndex: 2
+		duration: 600,
+		easing: 'ease-in',
+		zIndex: 1,
+		opacity: 0,
+		scale: 1
 	},
 	exit: {
-		duration: 700,
-		easing: 'easeOutQuad',
-		opacity: 0.3,
-		zIndex: 1
+		duration: 600,
+		easing: 'ease-in',
+		opacity: 0,
+		zIndex: 2,
+		delay: 0,
+		scale: 1
 	}
 }
 const fadeDefault = () => fade({...fadeDefaultArgs});
@@ -79,19 +111,18 @@ const fadeDefault = () => fade({...fadeDefaultArgs});
 // flip
 const flipDefaultArgs = {
 	direction: 'left',
-	backgroundColor: null,
-	duration: 500,
-	depth: 500,
-	timeout: duration => duration * 2,
+	duration: 300,
 	enter: {
 		easing: 'easeOutQuad',
 		opacity: 0.2,
-		zIndex: 1
+		zIndex: 1,
+		depth: 1000
 	},
 	exit: {
 		easing: 'easeInQuad',
 		opacity: 0.2,
-		zIndex: 2
+		zIndex: 2,
+		depth: 1000
 	}
 }
 const flipDefault = () => flip({...flipDefaultArgs});
@@ -103,19 +134,20 @@ const flipDefault = () => flip({...flipDefaultArgs});
 // fold
 const foldDefaultArgs = {
 	direction: 'left',
-	backgroundColor: null,
-	easing: 'easeInOutCubic',
 	enter: {
-		duration: 700,
+		duration: 600,
+		easing: 'ease',
 		opacity: 0.3,
 		zIndex: 2,
 		delay: 0
 	},
 	exit: {
-		duration: 700,
+		duration: 600,
+		easing: 'ease',
 		opacity: 0.3,
 		zIndex: 1,
-		angle: 90
+		angle: 90,
+		delay: 0
 	}
 }
 const foldDefault = () => fold({...foldDefaultArgs});
@@ -127,19 +159,21 @@ const foldDefault = () => fold({...foldDefaultArgs});
 // glide
 const glideDefaultArgs = {
 	direction: 'left',
-	backgroundColor: null,
 	enter: {
-		duration: 700,
+		duration: 600,
 		easing: 'easeOutQuad',
 		opacity: 1,
 		zIndex: 2,
+		scale: 1,
 		delay: 0
 	},
 	exit: {
-		duration: 700,
+		duration: 600,
 		easing: 'easeOutQuad',
 		opacity: 0.3,
-		zIndex: 1
+		zIndex: 1,
+		scale: 1,
+		delay: 0
 	}
 }
 const glideDefault = () => glide({...glideDefaultArgs});
@@ -151,20 +185,20 @@ const glideDefault = () => glide({...glideDefaultArgs});
 // glideIn
 const glideInDefaultArgs = {
 	direction: 'left',
-	backgroundColor: null,
 	enter: {
-		duration: 700,
-		easing: 'easeOutQuad',
+		duration: 600,
+		easing: 'ease',
 		opacity: 1,
 		zIndex: 2,
 		delay: 0
 	},
 	exit: {
-		duration: 700,
-		easing: 'easeOutQuad',
+		duration: 600,
+		easing: 'ease',
 		opacity: 0.3,
 		zIndex: 1,
-		scale: 1
+		scale: 1,
+		delay: 0
 	}
 }
 const glideInDefault = () => glideIn({...glideInDefaultArgs});
@@ -176,9 +210,8 @@ const glideInDefault = () => glideIn({...glideInDefaultArgs});
 // glideOut
 const glideOutDefaultArgs = {
 	direction: 'left',
-	backgroundColor: null,
 	enter: {
-		duration: 700,
+		duration: 600,
 		easing: 'ease',
 		opacity: 0.3,
 		zIndex: 1,
@@ -186,10 +219,11 @@ const glideOutDefaultArgs = {
 		scale: 1
 	},
 	exit: {
-		duration: 700,
+		duration: 600,
 		easing: 'ease',
 		opacity: 1,
-		zIndex: 2
+		zIndex: 2,
+		delay: 0
 	}
 }
 const glideOutDefault = () => glideOut({...glideOutDefaultArgs});
@@ -201,9 +235,8 @@ const glideOutDefault = () => glideOut({...glideOutDefaultArgs});
 // glueIn
 const glueInDefaultArgs = {
 	direction: 'left',
-	backgroundColor: null,
 	enter: {
-		duration: 800,
+		duration: 600,
 		easing: 'ease-in',
 		opacity: 0,
 		zIndex: 1,
@@ -212,7 +245,7 @@ const glueInDefaultArgs = {
 		delay: 0
 	},
 	exit: {
-		duration: 600,
+		duration: 400,
 		easing: 'ease',
 		opacity: 1,
 		zIndex: 2
@@ -229,15 +262,15 @@ const glueOutDefaultArgs = {
 	direction: 'left',
 	backgroundColor: null,
 	enter: {
-		duration: 600,
-		easing: 'easeInOutQuad',
+		duration: 400,
+		easing: 'ease',
 		opacity: 1,
 		zIndex: 2,
 		delay: 200
 	},
 	exit: {
-		duration: 800,
-		easing: 'easeOutQuad',
+		duration: 600,
+		easing: 'ease-in',
 		opacity: 0,
 		zIndex: 1,
 		depth: 200,
@@ -253,9 +286,8 @@ const glueOutDefault = () => glueOut({...glueOutDefaultArgs});
 // pull
 const pullDefaultArgs = {
 	direction: 'left',
-	backgroundColor: null,
 	enter: {
-		duration: 700,
+		duration: 600,
 		easing: 'easeOutBack',
 		opacity: 0.3,
 		zIndex: 1,
@@ -263,10 +295,11 @@ const pullDefaultArgs = {
 		angle: 90
 	},
 	exit: {
-		duration: 700,
+		duration: 600,
 		easing: 'easeOutBack',
 		opacity: 1,
-		zIndex: 2
+		zIndex: 2,
+		delay: 0
 	}
 }
 const pullDefault = () => pull({...pullDefaultArgs});
@@ -278,20 +311,20 @@ const pullDefault = () => pull({...pullDefaultArgs});
 // push
 const pushDefaultArgs = {
 	direction: 'left',
-	backgroundColor: null,
 	enter: {
-		duration: 700,
+		duration: 600,
 		easing: 'easeInBack',
 		opacity: 1,
 		zIndex: 2,
 		delay: 0
 	},
 	exit: {
-		duration: 700,
+		duration: 600,
 		easing: 'easeInBack',
 		opacity: 0.3,
 		zIndex: 1,
-		angle: 90
+		angle: 90,
+		delay: 0
 	}
 }
 const pushDefault = () => push({...pushDefaultArgs});
@@ -303,17 +336,16 @@ const pushDefault = () => push({...pushDefaultArgs});
 // pushPull
 const pushPullDefaultArgs = {
 	direction: 'left',
-	backgroundColor: null,
 	enter: {
-		duration: 700,
+		duration: 500,
 		easing: 'easeInOutBack',
 		opacity: 0,
 		zIndex: 1,
 		angle: 90,
-		delay: 150
+		delay: 100
 	},
 	exit: {
-		duration: 700,
+		duration: 500,
 		easing: 'easeInOutBack',
 		opacity: 0,
 		zIndex: 2,
@@ -323,24 +355,51 @@ const pushPullDefaultArgs = {
 const pushPullDefault = () => pushPull({...pushPullDefaultArgs});
 ```
 
+## rise
+
+```javascript
+// rise
+const riseDefaultArgs = {
+	direction: 'left',
+	enter: {
+		duration: 600,
+		easing: 'ease',
+		opacity: 0.3,
+		zIndex: 1,
+		delay: 0,
+		scale: 0.6
+	},
+	exit: {
+		duration: 600,
+		easing: 'ease',
+		opacity: 1,
+		zIndex: 2,
+		delay: 0
+	}
+}
+const riseDefault = () => rise({...riseDefaultArgs});
+```
+
 ## room
 
 ```javascript
 // room
 const roomDefaultArgs = {
 	direction: 'left',
-	backgroundColor: null,
 	angle: 90,
-	easing: 'easeInOutCubic',
 	enter: {
-		duration: 700,
+		duration: 600,
+		easing: 'ease',
 		opacity: 0.3,
-		zIndex: 1
+		zIndex: 1,
+		delay: 0
 	},
 	exit: {
-		duration: 700,
+		duration: 600,
+		easing: 'ease',
 		opacity: 0.3,
-		zIndex: 2
+		zIndex: 2,
+		delay: 0
 	}
 }
 const roomDefault = () => room({...roomDefaultArgs});
@@ -351,21 +410,21 @@ const roomDefault = () => room({...roomDefaultArgs});
 ```javascript
 // scale
 const scaleDefaultArgs = {
-	backgroundColor: null,
 	enter: {
-		duration: 400,
-		easing: 'easeOutQuad',
+		duration: 300,
+		easing: 'ease',
+		zIndex: 2,
+		delay: 300,
 		opacity: 0,
-		zIndex: 1,
-		scale: 0.7,
-		delay: 400
+		scale: 0.8
 	},
 	exit: {
-		duration: 400,
-		easing: 'easeOutQuad',
+		duration: 300,
+		easing: 'ease',
 		opacity: 0,
-		zIndex: 2,
-		scale: 0.7
+		zIndex: 1,
+		delay: 0,
+		scale: 0.8
 	}
 }
 const scaleDefault = () => scale({...scaleDefaultArgs});
@@ -376,22 +435,22 @@ const scaleDefault = () => scale({...scaleDefaultArgs});
 ```javascript
 // shuffle
 const shuffleDefaultArgs = {
-	direction: 'top',
-	backgroundColor: null,
+	direction: 'left',
 	enter: {
-		duration: 700,
+		duration: 600,
 		easing: 'easeOutQuad',
 		opacity: 1,
-		scale: 1,
 		zIndex: 2,
+		scale: 1,
 		delay: 0
 	},
 	exit: {
-		duration: 700,
+		duration: 600,
 		easing: 'easeOutQuad',
 		opacity: 0.3,
+		zIndex: 1,
 		scale: 1,
-		zIndex: 1
+		delay: 0
 	}
 }
 const shuffleDefault = () => shuffle({...shuffleDefaultArgs});
@@ -403,25 +462,25 @@ const shuffleDefault = () => shuffle({...shuffleDefaultArgs});
 // side
 const sideDefaultArgs = {
 	direction: 'left',
-	backgroundColor: null,
 	enter: {
-		duration: 500,
-		easing: 'easeOutCubic',
+		duration: 400,
+		easing: 'ease-out',
 		opacity: 0,
 		zIndex: 1,
-		delay: 300,
+		delay: 200,
 		depth: 500,
 		angle: 90,
 		offset: 100
 	},
 	exit: {
-		duration: 500,
-		easing: 'easeInCubic',
+		duration: 400,
+		easing: 'ease-in',
 		opacity: 0,
 		zIndex: 2,
 		depth: 500,
 		angle: 90,
-		offset: 100
+		offset: 100,
+		delay: 0
 	}
 }
 const sideDefault = () => side({...sideDefaultArgs});
@@ -433,18 +492,18 @@ const sideDefault = () => side({...sideDefaultArgs});
 // slide
 const slideDefaultArgs = {
 	direction: 'left',
-	backgroundColor: null,
 	depth: 500,
 	offset: 200,
-	easing: 'easeInOutCubic',
 	enter: {
-		duration: 700,
+		duration: 600,
+		easing: 'ease',
 		opacity: 0.5,
 		zIndex: 1,
 		delay: 0
 	},
 	exit: {
-		duration: 700,
+		duration: 600,
+		easing: 'ease',
 		opacity: 0.5,
 		zIndex: 2
 	}
@@ -458,18 +517,20 @@ const slideDefault = () => slide({...slideDefaultArgs});
 // unfold
 const unfoldDefaultArgs = {
 	direction: 'left',
-	backgroundColor: null,
-	easing: 'easeInOutCubic',
 	enter: {
-		duration: 700,
+		duration: 600,
+		easing: 'ease',
 		opacity: 0.3,
 		zIndex: 1,
+		angle: 90,
 		delay: 0
 	},
 	exit: {
-		duration: 700,
+		duration: 600,
+		easing: 'ease',
 		opacity: 1,
-		zIndex: 2
+		zIndex: 2,
+		delay: 0
 	}
 }
 const unfoldDefault = () => unfold({...unfoldDefaultArgs});

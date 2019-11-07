@@ -1,73 +1,58 @@
-import { buildTransitionIn } from './buildTransition';
-
-import { InjectStyle, getEasing } from '../../utils';
+import { getEasing } from '../../utils';
 
 export default ({
+  name = 'pull',
   direction = 'left',
   duration = 700,
   easing = 'ease',
   opacity = 1,
   angle = 90,
-  replaceBackground = null,
   zIndex = 2,
   delay = 0,
 } = {}) => {
 
   const config = {
-    left: ['100% 50%', 'Y', `(${-angle}deg)`],
-    right: ['0% 50%', 'Y', `(${angle}deg)`],
-    bottom: ['50% 0%', 'X', `(${-angle}deg)`],
-    top: ['50% 100%', 'X', `(${angle}deg)`],
+    left: {
+      origin: '100% 50%',
+      transform: `rotateY(${-angle}deg)`,
+      transformActive: 'rotateY(0deg)'
+    },
+    right: {
+      origin: '0% 50%',
+      transform: `rotateY(${angle}deg)`,
+      transformActive: 'rotateY(0deg)'
+    },
+    bottom: {
+      origin: '50% 0%',
+      transform: `rotateX(${-angle}deg)`,
+      transformActive: 'rotateX(0deg)'
+    },
+    top: {
+      origin: '50% 100%',
+      transform: `rotateX(${angle}deg)`,
+      transformActive: 'rotateX(0deg)'
+    }
   };
 
-  const transformOrigin = `${config[direction][0]}`;
-  let rotate = `rotate${config[direction][1]}${config[direction][2]}`;
-  const animationName = `${direction}ReactTigerTransitionPull`;
-  const animationCss = `${animationName} ${duration}ms ${getEasing(easing)} both`;
+  const transition = `transform, opacity`;
 
   const style = `
-  .react-tiger-transition-pull-${direction} {
-    -webkit-transform-origin: ${transformOrigin};
-    -ms-transform-origin: ${transformOrigin};
-    transform-origin: ${transformOrigin};
-    -webkit-transform: ${rotate};
-    -ms-transform: ${rotate};
-    transform: ${rotate};
-    -webkit-animation: ${animationCss};
-    animation: ${animationCss};
+  .${name}-enter {
+    transform-origin: ${config[direction].origin};
+    transform: ${config[direction].transform};
     z-index: ${zIndex};
-    -webkit-animation-delay: ${delay}ms;
-    animation-delay: ${delay}ms;
     opacity: ${opacity};
   }
-  `;
-  rotate = `rotate${config[direction][1]}(0deg)}`;
-
-  const animation = `
-  @-webkit-keyframes ${animationName} {
-    to {
-      opacity: 1;
-      -webkit-transform: ${rotate};
-      transform: ${rotate};
-    }
-  }
-  @keyframes ${animationName} {
-    to {
-      opacity: 1;
-      -webkit-transform: ${rotate};
-      transform: ${rotate};
-    }
+  .${name}-enter-active {
+    transform: ${config[direction].transformActive};
+    opacity: 1;
+    transition: ${transition};
+    transition-delay: ${delay}ms;
+    transition-duration: ${duration}ms;
+    transition-timing-function: ${getEasing(easing)};
   }
   `;
 
-  const rules = {
-    style: new InjectStyle(style),
-    animation: new InjectStyle(animation),
-  };
+  return style;
 
-  return buildTransitionIn({
-    rules,
-    replaceBackground,
-    className: `react-tiger-transition-pull-${direction}`,
-  });
 };

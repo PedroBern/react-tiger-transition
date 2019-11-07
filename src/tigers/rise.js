@@ -1,12 +1,11 @@
 import buildTiger from './buildTiger';
-import roomIn from './transitions/roomIn';
-import roomOut from './transitions/roomOut';
+import scaleIn from './transitions/scaleIn';
+import glideOutRules from './transitions/glideOut';
 
-export const room = buildTiger(
+export const rise = buildTiger(
   // common
   {
     direction: 'left',
-    angle: 90,
   },
 
   // enter
@@ -16,16 +15,17 @@ export const room = buildTiger(
     opacity: 0.3,
     zIndex: 1,
     delay: 0,
+    scale: 0.6,
   },
-  roomIn,
+  scaleIn,
 
   // exit
   {
     duration: 600,
     easing: 'ease',
-    opacity: 0.3,
+    opacity: 1,
     zIndex: 2,
     delay: 0,
   },
-  roomOut,
+  glideOutRules,
 );

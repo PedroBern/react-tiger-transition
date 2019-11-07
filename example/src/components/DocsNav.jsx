@@ -34,7 +34,7 @@ const DocsNav = ({
 
   return (
     match && !docsPaths.includes(match.params.doc) ?
-    <Redirect to='/docs/quick-start'/>
+    <Redirect to='/docs/quickstart'/>
     :
     <AppBar position="fixed" className={classes.appBar}>
       <Container maxWidth='lg'>
@@ -53,18 +53,10 @@ const DocsNav = ({
               component={Link}
               key={d.path}
               to={d.path}
-              // transition={() => flip({
-              //   duration: 300,
-              //   direction:
-              //     docsPaths.indexOf(match.params.doc) < index ?
-              //     'left' :
-              //     'right'
-              // })}
               transition={match && docsPaths.indexOf(match.params.doc) < index ?
-                  'flip-left' :
-                  'flip-right'
+                'flip-left' :
+                'flip-right'
               }
-              timeout={600}
               label={d.text}
             />
           ))}

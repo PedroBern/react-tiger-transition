@@ -4,10 +4,9 @@ import { BrowserRouter, Router } from 'react-router-dom';
 import { mount } from 'enzyme';
 import { createMemoryHistory } from "history";
 import { act } from 'react-dom/test-utils';
-
+import { CSSTransition } from 'react-transition-group';
 
 import  { Screen, Route, Link, Navigation } from '../src';
-import BoolCSSTransition from '../src/BoolCSSTransition';
 
 jest.useFakeTimers();
 
@@ -126,26 +125,27 @@ describe('Route', () => {
 
     });
 
-    it('forceTransition should take over transition', () => {
+    it('transitionProps should take over globalTransitionProps', () => {
 
       const forcedCallback = jest.fn(args => null);
 
       const wrapper = mount(
         <Router history={history}>
-          <Navigation>
+          <Navigation
+            globalTransitionProps={{
+              onEnter: node => {
+                callback('onEnter')
+              },
+            }}
+          >
             <Route path='/'>
-              <Link to='/second'
-                transition={{
-                  onEnter: node => {
-                    callback('onEnter')
-                  },
-                }}>
+              <Link to='/second' transition='fade'>
                 Second
               </Link>
             </Route>
             <Route
               path='/second'
-              forceTransition={{
+              transitionProps={{
                 onEnter: node => {
                   forcedCallback('onEnter')
                 },
@@ -167,19 +167,20 @@ describe('Route', () => {
 
     });
 
-    it('froceTransition fallback to globalTransitionProps.timeout', () => {
+    it('fallback to globalTransitionProps.timeout', () => {
 
       const wrapper = mount(
         <Router history={history}>
-          <Navigation globalTransitionProps={{timeout: 1000}}>
+          <Navigation
+            globalTransitionProps={{timeout: 1000}}
+          >
             <Route path='/'>
-              <Link to='/second'>
+              <Link to='/second' transition="fade">
                 Second
               </Link>
             </Route>
             <Route
               path='/second'
-              forceTransition='custom-transition'
             >
               <div />
             </Route>
@@ -190,12 +191,12 @@ describe('Route', () => {
       const secondLink = wrapper.find('Link');
       secondLink.simulate('click', { button: 0 });
       wrapper.update();
-      const transitionComponent = wrapper.find('BoolCSSTransition').last();
+      const transitionComponent = wrapper.find('CSSTransition').last();
       expect(transitionComponent.props().timeout).toBe(1000)
 
     });
 
-    it('froceTransition fallback to transitionProps.timeout', () => {
+    it('fallback to transitionProps.timeout', () => {
 
       const wrapper = mount(
         <Router history={history}>
@@ -207,7 +208,6 @@ describe('Route', () => {
             </Route>
             <Route
               path='/second'
-              forceTransition='custom-transition'
               transitionProps={{timeout: 1200}}
             >
               <div />
@@ -219,7 +219,7 @@ describe('Route', () => {
       const secondLink = wrapper.find('Link');
       secondLink.simulate('click', { button: 0 });
       wrapper.update();
-      const transitionComponent = wrapper.find('BoolCSSTransition').last();
+      const transitionComponent = wrapper.find('CSSTransition').last();
       expect(transitionComponent.props().timeout).toBe(1200)
 
     });

@@ -1,72 +1,52 @@
-import { buildTransitionOut } from './buildTransition';
-
-import { InjectStyle, getEasing } from '../../utils';
+import { getEasing } from '../../utils';
 
 export default ({
+  name = 'room',
   direction = 'left',
   duration = 700,
   easing = 'ease-in',
   opacity = 0.3,
-  replaceBackground = null,
   zIndex = 2,
   angle = 90,
+  delay = 0,
 } = {}) => {
 
-  /* eslint-disable no-param-reassign */
-  if (angle > 90) angle = 90;
-  else if (angle < 0) angle = 0;
-  /* eslint-enable */
-
   const config = {
-    left: ['100% 50%', `translateX(-100%) rotateY(${angle}deg)`],
-    right: ['0% 50%', `translateX(100%) rotateY(${-angle}deg)`],
-    top: ['50% 100%', `translateY(-100%) rotateX(${-angle}deg)`],
-    bottom: ['50% 0%', `translateY(100%) rotateX(${angle}deg)`],
+    left: {
+      origin: '100% 50%',
+      transformActive: `translateX(-100%) rotateY(${angle}deg)`,
+    },
+    right: {
+      origin: '0% 50%',
+      transformActive: `translateX(100%) rotateY(${-angle}deg)`,
+    },
+    top: {
+      origin: '50% 100%',
+      transformActive: `translateY(-100%) rotateX(${-angle}deg)`,
+    },
+    bottom: {
+      origin: '50% 0%',
+      transformActive: `translateY(100%) rotateX(${angle}deg)`,
+    },
   };
 
-  const animationName = `${direction}ReactTigerTransitionRoomOut`;
-  const transformOrigin = config[direction][0];
-  const animationCss = `${animationName} ${duration}ms both ${getEasing(easing)}`;
+  const transition = `transform, opacity`;
 
   const style = `
-  .react-tiger-transition-room-out-${direction} {
-    -webkit-transform-origin: ${transformOrigin};
-    -ms-transform-origin: ${transformOrigin};
-    transform-origin: ${transformOrigin};
-    -webkit-animation: ${animationCss};
-    animation: ${animationCss};
+  .${name}-exit {
+    transform-origin: ${config[direction].origin};
     z-index: ${zIndex};
-    opacity: 1;
+  }
+  .${name}-exit-active {
+    transform: ${config[direction].transformActive};
+    opacity: ${opacity};
+    transition: ${transition};
+    transition-delay: ${delay}ms;
+    transition-duration: ${duration}ms;
+    transition-timing-function: ${getEasing(easing)};
   }
   `;
 
-  const transform = config[direction][1];
+  return style;
 
-  const animation = `
-    @-webkit-keyframes ${animationName} {
-      to {
-        opacity: ${opacity};
-        -webkit-transform: ${transform};
-        transform: ${transform};
-      }
-    }
-    @keyframes ${animationName} {
-      to {
-        opacity: ${opacity};
-        -webkit-transform: ${transform};
-        transform: ${transform};
-      }
-    }
-  `;
-
-  const rules = {
-    style: new InjectStyle(style),
-    animation: new InjectStyle(animation),
-  };
-
-  return buildTransitionOut({
-    rules,
-    replaceBackground,
-    className: `react-tiger-transition-room-out-${direction}`,
-  });
 };

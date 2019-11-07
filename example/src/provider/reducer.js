@@ -1,10 +1,5 @@
 import { stringify } from "javascript-stringify";
-
 import { getArgs, tigersArr } from '../utils';
-
-// tigersArr.map(tiger => {
-//   tiger.args = extractArgs(tiger.raw);
-// })
 
 export const initialState = {
   tiger: tigersArr[0],
@@ -12,6 +7,7 @@ export const initialState = {
 
   // values used on demo transitions
   args: tigersArr[0].args,
+  timeout: 600,
 
   // code-mirror editor text
   strArgs: `// ${tigersArr[0].name}\n` + stringify(tigersArr[0].args, null, '\t'),
@@ -35,11 +31,21 @@ export function reducer(state, action) {
     // editor
     case 'onChange':
       args = getArgs(action.value);
+      if (args) {
+        try {
+          state.tiger.func({
+            name: state.tiger.name + '-demo',
+            ...args
+          })
+        }
+        catch (e) {
+          console.log(e);
+        }
+      }
       return args ? { ...state, args } : { ...state }
 
-    case 'onChangeFromObj':
-      args = action.value;
-      return args ? { ...state, args } : { ...state }
+    case 'updateDemoTimeout':
+      return { ...state, timeout: action.value };
 
     default:
       throw new Error();

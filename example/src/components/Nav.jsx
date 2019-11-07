@@ -95,7 +95,6 @@ const Nav = ({match, location, history}) => {
                   'glide-left' :
                   'glide-right'
                 }
-                timeout={600}
                 label={p.text}
               />
           ))}

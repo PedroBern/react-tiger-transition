@@ -8,6 +8,8 @@ export {
   glide,
   glideIn,
   glideOut,
+  drop,
+  rise,
   fold,
   unfold,
   push,

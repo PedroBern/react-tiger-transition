@@ -4,19 +4,21 @@
       "name": "glide",
       "args": {
         "direction": "left",
-        "backgroundColor": null,
         "enter": {
-          "duration": 700,
+          "duration": 600,
           "easing": "easeOutQuad",
           "opacity": 1,
           "zIndex": 2,
+          "scale": 1,
           "delay": 0
         },
         "exit": {
-          "duration": 700,
+          "duration": 600,
           "easing": "easeOutQuad",
           "opacity": 0.3,
-          "zIndex": 1
+          "zIndex": 1,
+          "scale": 1,
+          "delay": 0
         }
       }
     },
@@ -24,20 +26,20 @@
       "name": "glideIn",
       "args": {
         "direction": "left",
-        "backgroundColor": null,
         "enter": {
-          "duration": 700,
-          "easing": "easeOutQuad",
+          "duration": 600,
+          "easing": "ease",
           "opacity": 1,
           "zIndex": 2,
           "delay": 0
         },
         "exit": {
-          "duration": 700,
-          "easing": "easeOutQuad",
+          "duration": 600,
+          "easing": "ease",
           "opacity": 0.3,
           "zIndex": 1,
-          "scale": 1
+          "scale": 1,
+          "delay": 0
         }
       }
     },
@@ -45,9 +47,8 @@
       "name": "glideOut",
       "args": {
         "direction": "left",
-        "backgroundColor": null,
         "enter": {
-          "duration": 700,
+          "duration": 600,
           "easing": "ease",
           "opacity": 0.3,
           "zIndex": 1,
@@ -55,32 +56,75 @@
           "scale": 1
         },
         "exit": {
-          "duration": 700,
+          "duration": 600,
           "easing": "ease",
           "opacity": 1,
-          "zIndex": 2
+          "zIndex": 2,
+          "delay": 0
+        }
+      }
+    },
+    {
+      "name": "rise",
+      "args": {
+        "direction": "left",
+        "enter": {
+          "duration": 600,
+          "easing": "ease",
+          "opacity": 0.3,
+          "zIndex": 1,
+          "delay": 0,
+          "scale": 0.6
+        },
+        "exit": {
+          "duration": 600,
+          "easing": "ease",
+          "opacity": 1,
+          "zIndex": 2,
+          "delay": 0
+        }
+      }
+    },
+    {
+      "name": "drop",
+      "args": {
+        "direction": "left",
+        "enter": {
+          "duration": 600,
+          "easing": "ease",
+          "opacity": 1,
+          "zIndex": 2,
+          "delay": 0
+        },
+        "exit": {
+          "duration": 600,
+          "easing": "ease",
+          "opacity": 0.3,
+          "zIndex": 1,
+          "scale": 0.6,
+          "delay": 0
         }
       }
     },
     {
       "name": "shuffle",
       "args": {
-        "direction": "top",
-        "backgroundColor": null,
+        "direction": "left",
         "enter": {
-          "duration": 700,
+          "duration": 600,
           "easing": "easeOutQuad",
           "opacity": 1,
-          "scale": 1,
           "zIndex": 2,
+          "scale": 1,
           "delay": 0
         },
         "exit": {
-          "duration": 700,
+          "duration": 600,
           "easing": "easeOutQuad",
           "opacity": 0.3,
+          "zIndex": 1,
           "scale": 1,
-          "zIndex": 1
+          "delay": 0
         }
       }
     },
@@ -88,19 +132,20 @@
       "name": "fold",
       "args": {
         "direction": "left",
-        "backgroundColor": null,
-        "easing": "easeInOutCubic",
         "enter": {
-          "duration": 700,
+          "duration": 600,
+          "easing": "ease",
           "opacity": 0.3,
           "zIndex": 2,
           "delay": 0
         },
         "exit": {
-          "duration": 700,
+          "duration": 600,
+          "easing": "ease",
           "opacity": 0.3,
           "zIndex": 1,
-          "angle": 90
+          "angle": 90,
+          "delay": 0
         }
       }
     },
@@ -108,18 +153,20 @@
       "name": "unfold",
       "args": {
         "direction": "left",
-        "backgroundColor": null,
-        "easing": "easeInOutCubic",
         "enter": {
-          "duration": 700,
+          "duration": 600,
+          "easing": "ease",
           "opacity": 0.3,
           "zIndex": 1,
+          "angle": 90,
           "delay": 0
         },
         "exit": {
-          "duration": 700,
+          "duration": 600,
+          "easing": "ease",
           "opacity": 1,
-          "zIndex": 2
+          "zIndex": 2,
+          "delay": 0
         }
       }
     },
@@ -127,20 +174,20 @@
       "name": "push",
       "args": {
         "direction": "left",
-        "backgroundColor": null,
         "enter": {
-          "duration": 700,
+          "duration": 600,
           "easing": "easeInBack",
           "opacity": 1,
           "zIndex": 2,
           "delay": 0
         },
         "exit": {
-          "duration": 700,
+          "duration": 600,
           "easing": "easeInBack",
           "opacity": 0.3,
           "zIndex": 1,
-          "angle": 90
+          "angle": 90,
+          "delay": 0
         }
       }
     },
@@ -148,9 +195,8 @@
       "name": "pull",
       "args": {
         "direction": "left",
-        "backgroundColor": null,
         "enter": {
-          "duration": 700,
+          "duration": 600,
           "easing": "easeOutBack",
           "opacity": 0.3,
           "zIndex": 1,
@@ -158,10 +204,11 @@
           "angle": 90
         },
         "exit": {
-          "duration": 700,
+          "duration": 600,
           "easing": "easeOutBack",
           "opacity": 1,
-          "zIndex": 2
+          "zIndex": 2,
+          "delay": 0
         }
       }
     },
@@ -169,17 +216,16 @@
       "name": "pushPull",
       "args": {
         "direction": "left",
-        "backgroundColor": null,
         "enter": {
-          "duration": 700,
+          "duration": 500,
           "easing": "easeInOutBack",
           "opacity": 0,
           "zIndex": 1,
           "angle": 90,
-          "delay": 150
+          "delay": 100
         },
         "exit": {
-          "duration": 700,
+          "duration": 500,
           "easing": "easeInOutBack",
           "opacity": 0,
           "zIndex": 2,
@@ -190,39 +236,41 @@
     {
       "name": "fade",
       "args": {
-        "backgroundColor": "white",
         "enter": {
-          "duration": 700,
-          "easing": "easeOutQuad",
-          "opacity": 0.3,
-          "zIndex": 2
+          "duration": 600,
+          "easing": "ease-in",
+          "zIndex": 1,
+          "opacity": 0,
+          "scale": 1
         },
         "exit": {
-          "duration": 700,
-          "easing": "easeOutQuad",
-          "opacity": 0.3,
-          "zIndex": 1
+          "duration": 600,
+          "easing": "ease-in",
+          "opacity": 0,
+          "zIndex": 2,
+          "delay": 0,
+          "scale": 1
         }
       }
     },
     {
       "name": "scale",
       "args": {
-        "backgroundColor": null,
         "enter": {
-          "duration": 400,
-          "easing": "easeOutQuad",
+          "duration": 300,
+          "easing": "ease",
+          "zIndex": 2,
+          "delay": 300,
           "opacity": 0,
-          "zIndex": 1,
-          "scale": 0.7,
-          "delay": 400
+          "scale": 0.8
         },
         "exit": {
-          "duration": 400,
-          "easing": "easeOutQuad",
+          "duration": 300,
+          "easing": "ease",
           "opacity": 0,
-          "zIndex": 2,
-          "scale": 0.7
+          "zIndex": 1,
+          "delay": 0,
+          "scale": 0.8
         }
       }
     },
@@ -230,18 +278,18 @@
       "name": "flip",
       "args": {
         "direction": "left",
-        "backgroundColor": null,
-        "duration": 500,
-        "depth": 500,
+        "duration": 300,
         "enter": {
           "easing": "easeOutQuad",
           "opacity": 0.2,
-          "zIndex": 1
+          "zIndex": 1,
+          "depth": 1000
         },
         "exit": {
           "easing": "easeInQuad",
           "opacity": 0.2,
-          "zIndex": 2
+          "zIndex": 2,
+          "depth": 1000
         }
       }
     },
@@ -249,18 +297,18 @@
       "name": "slide",
       "args": {
         "direction": "left",
-        "backgroundColor": null,
         "depth": 500,
         "offset": 200,
-        "easing": "easeInOutCubic",
         "enter": {
-          "duration": 700,
+          "duration": 600,
+          "easing": "ease",
           "opacity": 0.5,
           "zIndex": 1,
           "delay": 0
         },
         "exit": {
-          "duration": 700,
+          "duration": 600,
+          "easing": "ease",
           "opacity": 0.5,
           "zIndex": 2
         }
@@ -271,16 +319,20 @@
       "args": {
         "direction": "left",
         "backgroundColor": null,
-        "depth": 300,
-        "easing": "ease-in",
-        "duration": 700,
+        "depth": 1000,
         "enter": {
+          "duration": 600,
+          "easing": "easeInOutQuad",
           "opacity": 0.3,
-          "zIndex": 1
+          "zIndex": 1,
+          "delay": 0
         },
         "exit": {
+          "duration": 600,
+          "easing": "easeInOutQuad",
           "opacity": 0.3,
-          "zIndex": 2
+          "zIndex": 2,
+          "delay": 0
         }
       }
     },
@@ -288,18 +340,20 @@
       "name": "room",
       "args": {
         "direction": "left",
-        "backgroundColor": null,
         "angle": 90,
-        "easing": "easeInOutCubic",
         "enter": {
-          "duration": 700,
+          "duration": 600,
+          "easing": "ease",
           "opacity": 0.3,
-          "zIndex": 1
+          "zIndex": 1,
+          "delay": 0
         },
         "exit": {
-          "duration": 700,
+          "duration": 600,
+          "easing": "ease",
           "opacity": 0.3,
-          "zIndex": 2
+          "zIndex": 2,
+          "delay": 0
         }
       }
     },
@@ -307,11 +361,10 @@
       "name": "carousel",
       "args": {
         "direction": "left",
-        "backgroundColor": null,
-        "easing": "easeInOutCubic",
         "enter": {
-          "duration": 700,
+          "duration": 600,
           "opacity": 0.3,
+          "easing": "easeInOutCubic",
           "zIndex": 1,
           "delay": 0,
           "scale": 0.4,
@@ -319,9 +372,11 @@
           "angle": 65
         },
         "exit": {
-          "duration": 700,
+          "duration": 600,
           "opacity": 0.3,
+          "easing": "easeInOutCubic",
           "zIndex": 2,
+          "delay": 0,
           "scale": 0.4,
           "offset": 300,
           "angle": 65
@@ -332,25 +387,25 @@
       "name": "side",
       "args": {
         "direction": "left",
-        "backgroundColor": null,
         "enter": {
-          "duration": 500,
-          "easing": "easeOutCubic",
+          "duration": 400,
+          "easing": "ease-out",
           "opacity": 0,
           "zIndex": 1,
-          "delay": 300,
+          "delay": 200,
           "depth": 500,
           "angle": 90,
           "offset": 100
         },
         "exit": {
-          "duration": 500,
-          "easing": "easeInCubic",
+          "duration": 400,
+          "easing": "ease-in",
           "opacity": 0,
           "zIndex": 2,
           "depth": 500,
           "angle": 90,
-          "offset": 100
+          "offset": 100,
+          "delay": 0
         }
       }
     },
@@ -360,15 +415,15 @@
         "direction": "left",
         "backgroundColor": null,
         "enter": {
-          "duration": 600,
-          "easing": "easeInOutQuad",
+          "duration": 400,
+          "easing": "ease",
           "opacity": 1,
           "zIndex": 2,
           "delay": 200
         },
         "exit": {
-          "duration": 800,
-          "easing": "easeOutQuad",
+          "duration": 600,
+          "easing": "ease-in",
           "opacity": 0,
           "zIndex": 1,
           "depth": 200,
@@ -380,9 +435,8 @@
       "name": "glueIn",
       "args": {
         "direction": "left",
-        "backgroundColor": null,
         "enter": {
-          "duration": 800,
+          "duration": 600,
           "easing": "ease-in",
           "opacity": 0,
           "zIndex": 1,
@@ -391,7 +445,7 @@
           "delay": 0
         },
         "exit": {
-          "duration": 600,
+          "duration": 400,
           "easing": "ease",
           "opacity": 1,
           "zIndex": 2

@@ -111,7 +111,7 @@ describe('Screen', () => {
 
     const wrapper = mount(
       <Router history={history}>
-        <Navigation>
+        <Navigation defaultTransition='fade'>
           <Route path={['/', '/valid']}>
             <Screen display>
               <FakeComponent key='child' className='child'/>
@@ -143,7 +143,7 @@ describe('Screen', () => {
     });
 
     it('renders only children with key', () => {
-      expect(() => shallow(
+      expect(() => mount(
         <BrowserRouter>
           <Screen display>
             <div className='child' />
@@ -153,7 +153,7 @@ describe('Screen', () => {
     });
 
     it('renders only children with unique keys', () => {
-      expect(() => shallow(
+      expect(() => mount(
         <BrowserRouter>
           <Screen display>
             <div key='a' className='child' />

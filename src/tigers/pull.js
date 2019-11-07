@@ -1,16 +1,16 @@
-import { glideOutRules, pullRules } from './transitions';
-import { buildTiger } from './buildTiger';
+import buildTiger from './buildTiger';
+import pullRules from './transitions/pull';
+import glideOut from './transitions/glideOut';
 
 export const pull = buildTiger(
   // common
   {
     direction: 'left',
-    backgroundColor: null,
   },
 
   // enter
   {
-    duration: 700,
+    duration: 600,
     easing: 'easeOutBack',
     opacity: 0.3,
     zIndex: 1,
@@ -21,10 +21,11 @@ export const pull = buildTiger(
 
   // exit
   {
-    duration: 700,
+    duration: 600,
     easing: 'easeOutBack',
     opacity: 1,
     zIndex: 2,
+    delay: 0,
   },
-  glideOutRules,
+  glideOut,
 );

@@ -56,7 +56,6 @@ describe('Navigation', () => {
       .toStrictEqual({
         timeout: 600,
         classNames: 'some-transition',
-        css: true
       });
     });
 
@@ -76,7 +75,6 @@ describe('Navigation', () => {
       })).toStrictEqual({
         timeout: 100,
         a: 1,
-        css: false
       });
     });
 
@@ -87,7 +85,6 @@ describe('Navigation', () => {
       })).toStrictEqual({
         timeout: 100,
         a: 1,
-        css: false
       });
     });
 
@@ -98,7 +95,6 @@ describe('Navigation', () => {
       })).toStrictEqual({
         timeout: 100,
         classNames: 'class',
-        css: true
       });
     });
 
@@ -122,7 +118,7 @@ describe('Navigation', () => {
 
     const wrapper = mount(
       <Router history={history}>
-        <Navigation>
+        <Navigation defaultTransition='fade'>
           <Route exact path='/'>
             <div />
           </Route>
@@ -169,7 +165,10 @@ describe('Navigation', () => {
 
     const wrapper = mount(
       <Router history={history}>
-        <Navigation defaultRoute={<Redirect to='/default-route' />}>
+        <Navigation
+          defaultTransition='fade'
+          defaultRoute={<Redirect to='/default-route' />}
+        >
           <Route exact path='/'>
             <div />
           </Route>

@@ -1,8 +1,8 @@
 import buildTiger from './buildTiger';
-import glideIn from './transitions/glideIn';
-import glideOut from './transitions/glideOut';
+import glideInRules from './transitions/glideIn';
+import scaleOut from './transitions/scaleOut';
 
-export const glide = buildTiger(
+export const drop = buildTiger(
   // common
   {
     direction: 'left',
@@ -11,22 +11,21 @@ export const glide = buildTiger(
   // enter
   {
     duration: 600,
-    easing: 'easeOutQuad',
+    easing: 'ease',
     opacity: 1,
     zIndex: 2,
-    scale: 1,
     delay: 0,
   },
-  glideIn,
+  glideInRules,
 
   // exit
   {
     duration: 600,
-    easing: 'easeOutQuad',
+    easing: 'ease',
     opacity: 0.3,
     zIndex: 1,
-    scale: 1,
+    scale: 0.6,
     delay: 0,
   },
-  glideOut
+  scaleOut,
 );

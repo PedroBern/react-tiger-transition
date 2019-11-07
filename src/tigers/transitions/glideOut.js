@@ -1,14 +1,14 @@
-import { buildTransitionOut } from './buildTransition';
-
-import { InjectStyle, getEasing } from '../../utils';
+import { getEasing } from '../../utils';
 
 export default ({
+  name = 'glide',
   direction = 'left',
-  duration = 700,
+  duration = 600,
   easing = 'ease',
   opacity = 1,
-  replaceBackground = null,
   zIndex = 1,
+  delay = 0,
+  scale = 1,
 } = {}) => {
 
   const config = {
@@ -18,45 +18,22 @@ export default ({
     bottom: [100, 'Y'],
   };
 
-  const animationName = `${direction}ReactTigerTransitionGlideOut`;
-  const animationCss = `${animationName} ${duration}ms ${getEasing(easing)} both`;
+  const transformActive = `scale(${scale}) translate${config[direction][1]}(${config[direction][0]}%)`;
+  const transition = `transform, opacity`;
 
   const style = `
-  .react-tiger-transition-glide-out-${direction} {
-    -webkit-animation: ${animationCss};
-    animation: ${animationCss};
+  .${name}-exit {
     z-index: ${zIndex};
-    opacity: 1;
+  }
+  .${name}-exit-active {
+    transform: ${transformActive};
+    opacity: ${opacity};
+    transition: ${transition};
+    transition-delay: ${delay}ms;
+    transition-duration: ${duration}ms;
+    transition-timing-function: ${getEasing(easing)};
   }
   `;
 
-  const transform = `translate${config[direction][1]}(${config[direction][0]}%)`;
-
-  const animation = `
-  @-webkit-keyframes ${animationName} {
-    to {
-      opacity: ${opacity};
-      -webkit-transform: ${transform};
-      transform: ${transform};
-    }
-  }
-  @keyframes ${animationName} {
-    to {
-      opacity: ${opacity};
-      -webkit-transform: ${transform};
-      transform: ${transform};
-    }
-  }
-  `;
-
-  const rules = {
-    style: new InjectStyle(style),
-    animation: new InjectStyle(animation),
-  };
-
-  return buildTransitionOut({
-    rules,
-    replaceBackground,
-    className: `react-tiger-transition-glide-out-${direction}`,
-  });
+  return style;
 };

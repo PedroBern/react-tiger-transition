@@ -28,7 +28,7 @@ describe('Link', () => {
 
     const wrapper = mount(
       <Router history={history}>
-        <Navigation>
+        <Navigation defaultTransition='fade'>
           <Route path='/'>
             <Link to='/second' onClick={callback}>
               Second
@@ -91,7 +91,7 @@ describe('Link', () => {
 
     const wrapper = mount(
       <Router history={history}>
-        <Navigation>
+        <Navigation defaultTransition='fade'>
           <Route path='/'>
             <Link to='/second' transition='foo'>
               Second

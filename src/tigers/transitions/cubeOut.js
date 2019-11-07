@@ -1,15 +1,15 @@
-import { buildTransitionOut } from './buildTransition';
+import { getEasing } from '../../utils';
 
-import { InjectStyle, getEasing } from '../../utils';
 
 export default ({
+  name = 'cube',
   direction = 'left',
   duration = 700,
   easing = 'ease-in',
   opacity = 0.3,
-  replaceBackground = null,
   zIndex = 2,
   depth = 200,
+  delay = 0,
 } = {}) => {
 
   const config = {
@@ -19,66 +19,36 @@ export default ({
     bottom: ['50% 0%', 'Y(50%)', 'X(-45deg)', 'Y(100%)', 'X(-90deg)'],
   };
 
-  const animationName = `${direction}ReactTigerTransitionCubeOut`;
+  const animationName = `${name}--react-tiger-transition-cube-out`;
   const transformOrigin = config[direction][0];
   const animationCss = `${animationName} ${duration}ms both ${getEasing(easing)}`;
-
-  const style = `
-  .react-tiger-transition-cube-out-${direction} {
-    -webkit-transform-origin: ${transformOrigin};
-    -ms-transform-origin: ${transformOrigin};
-    transform-origin: ${transformOrigin};
-    -webkit-animation: ${animationCss};
-    animation: ${animationCss};
-    z-index: ${zIndex};
-    opacity: 1;
-  }
-  `;
-
   const transform50 = `translate${config[direction][1]} translateZ(${-depth}px) rotate${config[direction][2]}`;
   const transform100 = `translate${config[direction][3]} rotate${config[direction][4]}`;
 
-  const animation = `
-  @-webkit-keyframes ${animationName} {
-    0% {
-      opacity: 1;
-    }
-    50% {
-      animation-timing-function: ease-out;
-      -webkit-transform: ${transform50};
-      transform: ${transform50};
-    }
-    100% {
-      opacity: ${opacity};
-      -webkit-transform: ${transform100};
-      transform: ${transform100};
-    }
+  const style = `
+  .${name}-exit {
+    transform-origin: ${transformOrigin};
+    z-index: ${zIndex};
+    opacity: 1;
+  }
+  .${name}-exit-active {
+    animation: ${animationCss};
+    animation-delay: ${delay}ms;
   }
   @keyframes ${animationName} {
     0% {
       opacity: 1;
     }
     50% {
-      animation-timing-function: ease-out;
-      -webkit-transform: ${transform50};
       transform: ${transform50};
     }
     100% {
       opacity: ${opacity};
-      -webkit-transform: ${transform100};
       transform: ${transform100};
     }
   }
   `;
 
-  const rules = {
-    style: new InjectStyle(style),
-    animation: new InjectStyle(animation),
-  };
+  return style;
 
-  return buildTransitionOut({
-    rules,
-    replaceBackground,
-    className: `react-tiger-transition-cube-out-${direction}`,
-  });
 };

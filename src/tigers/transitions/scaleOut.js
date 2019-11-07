@@ -1,55 +1,29 @@
-import { buildTransitionOut } from './buildTransition';
-
-import { InjectStyle, getEasing } from '../../utils';
+import { getEasing } from '../../utils';
 
 export default ({
-  duration = 700,
+  name = 'scale',
+  duration = 600,
   easing = 'ease',
   opacity = 1,
   scale = 0.8,
-  replaceBackground = null,
   zIndex = 1,
+  delay = 0,
 } = {}) => {
 
-  const animationName = 'ReactTigerTransitionScaleOut';
-
   const style = `
-  .react-tiger-transition-scale-out {
-    -webkit-transform: scale(1);
-    -ms-transform: scale(1);
-    transform: scale(1);
-    -webkit-animation: ${animationName} ${duration}ms ${getEasing(easing)} both;
-    animation: ${animationName} ${duration}ms ${getEasing(easing)} both;
+  .${name}-exit {
     z-index: ${zIndex};
-    opacity: 1;
+  }
+  .${name}-exit-active {
+    opacity: ${opacity};
+    transform: scale(${scale});
+    transition: opacity, transform;
+    transition-delay: ${delay}ms;
+    transition-duration: ${duration}ms;
+    transition-timing-function: ${getEasing(easing)};
   }
   `;
 
-  const animation = `
-  @-webkit-keyframes ${animationName} {
-    to {
-      opacity: ${opacity};
-      -webkit-transform: scale(${scale});
-      transform: scale(${scale});
-    }
-  }
-  @keyframes ${animationName} {
-    to {
-      opacity: ${opacity};
-      -webkit-transform: scale(${scale});
-      transform: scale(${scale});
-    }
-  }
-  `;
+  return style;
 
-  const rules = {
-    style: new InjectStyle(style),
-    animation: new InjectStyle(animation),
-  };
-
-  return buildTransitionOut({
-    rules,
-    replaceBackground,
-    className: `react-tiger-transition-scale-out`,
-  });
 };

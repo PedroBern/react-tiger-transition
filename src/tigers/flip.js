@@ -1,14 +1,12 @@
-import { flipInRules, flipOutRules } from './transitions';
-import { buildTiger } from './buildTiger';
+import buildTiger from './buildTiger';
+import flipIn from './transitions/flipIn';
+import flipOut from './transitions/flipOut';
 
 export const flip = buildTiger(
   // common
   {
     direction: 'left',
-    backgroundColor: null,
-    duration: 500,
-    depth: 500,
-    timeout: duration => duration * 2,
+    duration: 300,
   },
 
   // enter
@@ -16,14 +14,16 @@ export const flip = buildTiger(
     easing: 'easeOutQuad',
     opacity: 0.2,
     zIndex: 1,
+    depth: 1000,
   },
-  flipInRules,
+  flipIn,
 
   // exit
   {
     easing: 'easeInQuad',
     opacity: 0.2,
     zIndex: 2,
+    depth: 1000,
   },
-  flipOutRules,
+  flipOut,
 );

@@ -67,14 +67,14 @@ const Docs = ({
             path={d.path}
           >
             <RenderDoc doc={d.doc} />
-            {d.path === '/docs/quick-start' && !loading && (
+            {d.path === '/docs/quickstart' && !loading && (
 
               <SandboxExample
-                label='Quick Start'
+                label='Quickstart'
                 path='documentation/examples/Basic.jsx'
                 dependencies={{
                   "react-router-dom": "latest",
-                  "react-tiger-transition": "^3.0.2",
+                  "react-tiger-transition": "^4.0.0",
                   "react-transition-group": "latest",
                 }}
                 code=''

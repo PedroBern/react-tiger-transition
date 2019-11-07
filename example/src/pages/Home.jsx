@@ -106,11 +106,10 @@ const Home = props => {
                   :
                   <Button
                     component={Link}
-                    transition={glide}
+                    transition="glide-left"
                     size='large'
                     to={b.to}
                     variant={b.variant}
-
                   >
                     {b.text}
                   </Button>

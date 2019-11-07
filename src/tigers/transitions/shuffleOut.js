@@ -1,67 +1,39 @@
-import { buildTransitionOut } from './buildTransition';
-
-import { InjectStyle, getEasing } from '../../utils';
+import { getEasing } from '../../utils';
 
 export default ({
-  direction = 'top',
-  duration = 700,
+  name = 'glide',
+  direction = 'left',
+  duration = 600,
   easing = 'ease',
   opacity = 1,
-  replaceBackground = null,
-  scale = 1,
   zIndex = 1,
+  delay = 0,
+  scale = 1,
 } = {}) => {
 
   const config = {
-    right: [-100, 'X'],
     left: [100, 'X'],
-    bottom: [-100, 'Y'],
+    right: [-100, 'X'],
     top: [100, 'Y'],
+    bottom: [-100, 'Y'],
   };
 
-  const animationName = `${direction}ReactTigerTransitionShuffleOut`;
-  const animationCss = `${animationName} ${duration}ms ${getEasing(easing)} both`;
-  let transform = 'scale(1)';
+  const transformActive = `scale(${scale}) translate${config[direction][1]}(${config[direction][0]}%)`;
+  const transition = `transform, opacity`;
 
   const style = `
-  .react-tiger-transition-glide-shuffle-out-${direction} {
-    -webkit-transform: ${transform};
-    -ms-transform: ${transform};
-    transform: ${transform};
-    -webkit-animation: ${animationCss};
-    animation: ${animationCss};
+  .${name}-exit {
     z-index: ${zIndex};
-    opacity: 1;
+  }
+  .${name}-exit-active {
+    transform: ${transformActive};
+    opacity: ${opacity};
+    transition: ${transition};
+    transition-delay: ${delay}ms;
+    transition-duration: ${duration}ms;
+    transition-timing-function: ${getEasing(easing)};
   }
   `;
 
-  transform = `translate${config[direction][1]}(${config[direction][0]}%) scale(${scale})`;
-
-  const animation = `
-  @-webkit-keyframes ${animationName} {
-    to {
-      opacity: ${opacity};
-      -webkit-transform: ${transform};
-      transform: ${transform};
-    }
-  }
-  @keyframes ${animationName} {
-    to {
-      opacity: ${opacity};
-      -webkit-transform: ${transform};
-      transform: ${transform};
-    }
-  }
-  `;
-
-  const rules = {
-    style: new InjectStyle(style),
-    animation: new InjectStyle(animation),
-  };
-
-  return buildTransitionOut({
-    rules,
-    replaceBackground,
-    className: `react-tiger-transition-glide-shuffle-out-${direction}`,
-  });
+  return style;
 };

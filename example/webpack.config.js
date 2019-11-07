@@ -70,7 +70,7 @@ module.exports = (env, argv) => ({
          node_modules,
        ],
        extensions: ['*', '.js', '.jsx'],
-       alias: argv.mode === 'production'
+       alias: argv.mode === 'production'  && !argv.local
         ? {
           "docsAssets": docsAssets,
          }

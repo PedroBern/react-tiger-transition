@@ -1,35 +1,36 @@
-import { sideInRules, sideOutRules } from './transitions';
-import { buildTiger } from './buildTiger';
+import buildTiger from './buildTiger';
+import sideIn from './transitions/sideIn';
+import sideOut from './transitions/sideOut';
 
 export const side = buildTiger(
   // common
   {
     direction: 'left',
-    backgroundColor: null,
   },
 
   // enter
   {
-    duration: 500,
-    easing: 'easeOutCubic',
+    duration: 400,
+    easing: 'ease-out',
     opacity: 0,
     zIndex: 1,
-    delay: 300,
+    delay: 200,
     depth: 500,
     angle: 90,
     offset: 100,
   },
-  sideInRules,
+  sideIn,
 
   // exit
   {
-    duration: 500,
-    easing: 'easeInCubic',
+    duration: 400,
+    easing: 'ease-in',
     opacity: 0,
     zIndex: 2,
     depth: 500,
     angle: 90,
     offset: 100,
+    delay: 0,
   },
-  sideOutRules,
+  sideOut,
 );

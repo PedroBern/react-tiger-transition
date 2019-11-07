@@ -9,6 +9,7 @@ import MuiLink from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import { Screen, Link, glide } from 'react-tiger-transition';
 import { DemoContext } from '../provider';
+import Slider from '@material-ui/core/Slider';
 
 const useStyles = makeStyles({
   screen: {
@@ -30,6 +31,9 @@ const useStyles = makeStyles({
   grid: {
     height: '100%',
   },
+  api: {
+    marginTop: 24
+  }
 });
 
 const codeMirrorOptions = {
@@ -45,11 +49,11 @@ const Demo = props => {
   const {
     tiger,
     tigers,
-    args,
     strArgs,
-    updateTiger,
     onBeforeChange,
     onChange,
+    updateDemoTimeout,
+    timeout
   } = useContext(DemoContext)
 
   return (
@@ -71,7 +75,8 @@ const Demo = props => {
                 fullWidth
                 component={Link}
                 to='/demo-a'
-                transition={() => tiger.func({...args})}
+                transition={`${tiger.name}-demo`}
+                timeout={timeout}
               >
                 Start demo!
               </Button>
@@ -88,12 +93,30 @@ const Demo = props => {
                 }}
               />
 
-              <Typography>
+              <Typography id="timeout" gutterBottom>
+                Timeout
+              </Typography>
+
+              <Slider
+                defaultValue={timeout}
+                getAriaValueText={(value) => `${value} ms`}
+                aria-labelledby="timeout"
+                valueLabelDisplay="auto"
+                step={100}
+                marks
+                min={100}
+                max={2000}
+                onChangeCommitted={(e, value) => {
+                  updateDemoTimeout(value);
+                }}
+              />
+
+              <Typography className={classes.api}>
                 Check out the {
                   <MuiLink
                     component={Link}
                     to='/docs/transitions'
-                    transition={() => glide({direction: 'right'})}
+                    transition='glide-right'
                   >
                     Transitions API
                   </MuiLink>

@@ -6,14 +6,26 @@ import {
   Route,
   Navigation,
   Screen,
-  shuffle,
-  fade
 } from 'react-tiger-transition';
 
 import "react-tiger-transition/styles/main.min.css";
 
-import { Home, Docs, Demo, DemoNext, Guides } from './pages';
-import { Nav, DemoNav, DocsNav } from './components';
+import "./registerTransitions";
+
+import {
+  Home,
+  Docs,
+  Demo,
+  DemoNext,
+  Guides
+} from './pages';
+
+import {
+  Nav,
+  DemoNav,
+  DocsNav
+} from './components';
+
 import { DemoProvider } from './provider';
 
 import { makeStyles } from '@material-ui/styles';
@@ -49,7 +61,7 @@ const navs = [
     component: <Nav />,
     navClass: 'nav',
     zIndex: 200,
-    transition: "shuffle-bottom"
+    transition: 'shuffle-bottom'
   },
   {
     key: 'demo',
@@ -57,7 +69,7 @@ const navs = [
     component: <DemoNav />,
     navClass: 'scondaryNav',
     zIndex: 100,
-    transition: "shuffle-bottom-secondary"
+    transition: 'shuffle-secondary-bottom'
   },
   {
     key: 'docs',
@@ -65,7 +77,7 @@ const navs = [
     component: <DocsNav />,
     navClass: 'scondaryNav',
     zIndex: 100,
-    transition: "shuffle-bottom-secondary"
+    transition: 'shuffle-secondary-bottom'
   }
 ]
 
@@ -77,7 +89,7 @@ const App = () => {
     <Router basename="/react-tiger-transition">
       <DemoProvider>
         <Navigation
-          defaultTransition={fade}
+          defaultTransition='fade'
           globalTransitionProps={{
             appear: true,
           }}
@@ -112,18 +124,9 @@ const App = () => {
               key={nav.key || nav.path}
               path={nav.path}
               className={classes[nav.navClass]}
-              forceTransition={nav.transition}
               transitionProps={{
-                timeout: 600
+                classNames: nav.transition,
               }}
-              // forceTransition={() => shuffle({
-              //   direction: 'bottom',
-              //   duration: 500,
-              //   opacity: 1,
-              //   zIndex: nav.zIndex,
-              //   delay: nav.key ? 0 : 100,
-              //   easing: 'easeOutCubic'
-              // })}
             >
               {nav.component}
             </Route>
