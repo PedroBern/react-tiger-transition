@@ -3,7 +3,6 @@ import * as transitions from '../../src/tigers/transitions';
 describe('transition', () => {
 
   Object.keys(transitions).map(key => {
-    if (key.indexOf('Rules') > -1){
 
       describe(key, () => {
 
@@ -11,28 +10,31 @@ describe('transition', () => {
           expect(typeof transitions[key]).toBe('function');
         });
 
-        test('return object', () => {
-          expect(Object.prototype.toString.call({...transitions[key]()}))
-          .toBe('[object Object]');
+        test('return string', () => {
+          expect(typeof transitions[key]())
+          .toBe('string');
         });
 
-        if (key.indexOf('InRules') > -1) {
-          test('return buildTransitionIn', () => {
-            expect(transitions[key]().toString())
-            .toStrictEqual(transitions.buildTransitionIn().toString());
-          });
-        }
+        test('return string containing classNames', () => {
 
-        else if (key.indexOf('OutRules') > -1) {
-          test('return buildTransitionOut', () => {
-            expect(transitions[key]().toString())
-            .toStrictEqual(transitions.buildTransitionOut().toString());
-          });
-        }
+          const style = transitions[key]();
+
+          expect(
+            (
+              style.indexOf('-enter') > -1 &&
+              style.indexOf('-enter-active') > -1
+            )
+            ||
+            (
+              style.indexOf('-exit') > -1 &&
+              style.indexOf('-exit-active') > -1
+            )
+          )
+          .toBe(true);
+        });
 
       });
 
-    }
   })
 
 });
