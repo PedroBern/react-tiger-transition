@@ -9,8 +9,8 @@ import tigersAPI from 'docsAssets/tigersAPI.md';
 
 export const docs = [
   {
-    path: '/docs/quick-start',
-    text: 'Quick Start',
+    path: '/docs/quickstart',
+    text: 'Quickstart',
     doc: quickStartDocs,
   },
   {

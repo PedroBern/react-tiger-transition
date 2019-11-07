@@ -34,7 +34,7 @@ const DocsNav = ({
 
   return (
     match && !docsPaths.includes(match.params.doc) ?
-    <Redirect to='/docs/quick-start'/>
+    <Redirect to='/docs/quickstart'/>
     :
     <AppBar position="fixed" className={classes.appBar}>
       <Container maxWidth='lg'>
