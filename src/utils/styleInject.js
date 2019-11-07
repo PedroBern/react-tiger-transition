@@ -1,6 +1,6 @@
 // postcss injectStyle function
 
-import prefixer from './prefixer';
+import { prefixer } from './prefixer';
 
 export function styleInject(css, name, ref = {}) {
 

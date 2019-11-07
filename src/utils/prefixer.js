@@ -40,7 +40,7 @@ const prefixes = [
 ];
 
 
-export default (string, sep = '\n') => {
+export const prefixer = (string, sep = '\n') => {
   let prefixedString = string;
   let regex = /(?<property>[a-z-]+) *:(?<value>[^:;]+;)/gm;
   let match;
