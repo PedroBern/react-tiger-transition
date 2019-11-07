@@ -143,7 +143,7 @@ describe('Screen', () => {
     });
 
     it('renders only children with key', () => {
-      expect(() => shallow(
+      expect(() => mount(
         <BrowserRouter>
           <Screen display>
             <div className='child' />
@@ -153,7 +153,7 @@ describe('Screen', () => {
     });
 
     it('renders only children with unique keys', () => {
-      expect(() => shallow(
+      expect(() => mount(
         <BrowserRouter>
           <Screen display>
             <div key='a' className='child' />
