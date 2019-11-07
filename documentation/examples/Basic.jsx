@@ -9,7 +9,16 @@ import "react-tiger-transition/styles/main.min.css"; // eslint-disable-line
 
 import { Navigation, Route, Screen, Link, glide } from "react-tiger-transition";
 
-// basic styling to not hurt eyes
+// inject glide styles
+glide({
+  name: 'glide-left'
+});
+glide({
+  name: 'glide-right',
+  direction: 'right'
+});
+
+// basic styling
 const linkStyle = {
   fontSize: 30,
   textDecoration: "none",
@@ -49,7 +58,7 @@ export default () => {
             {/* Use Link the same way you use
                   react-router Link, but
                   add transition */}
-            <Link to="/a" transition={glide} style={{ ...linkStyle }}>
+            <Link to="/a" transition='glide-left' style={{ ...linkStyle }}>
               Check out the page A
             </Link>
           </Screen>
@@ -68,7 +77,7 @@ export default () => {
         >
           <Link
             to="/"
-            transition={() => glide({ direction: "right" })}
+            transition='glide-right'
             style={{ ...linkStyle }}
           >
             Back to home page
