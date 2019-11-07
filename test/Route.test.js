@@ -17,7 +17,7 @@ describe('Route', () => {
     test('screen prop', () => {
       const component = renderer.create(
         <BrowserRouter>
-          <Navigation defaultTransition='fade'>
+          <Navigation>
             <Route path='/' screen>
               <div />
             </Route>
@@ -31,7 +31,7 @@ describe('Route', () => {
     test('screen with screen props', () => {
       const component = renderer.create(
         <BrowserRouter>
-          <Navigation defaultTransition='fade'>
+          <Navigation>
             <Route path='/' screen screenProps={{id: 'my-screen'}}>
               <div />
             </Route>
@@ -45,7 +45,7 @@ describe('Route', () => {
     test('custom className', () => {
       const component = renderer.create(
         <BrowserRouter>
-          <Navigation defaultTransition='fade'>
+          <Navigation>
             <Route path='/' className='custom'>
               <div />
             </Route>
@@ -59,7 +59,7 @@ describe('Route', () => {
     test('disableStyle', () => {
       const component = renderer.create(
         <BrowserRouter>
-          <Navigation defaultTransition='fade'>
+          <Navigation>
             <Route path='/' disableStyle>
               <div />
             </Route>
@@ -89,7 +89,7 @@ describe('Route', () => {
 
       const wrapper = mount(
         <Router history={history}>
-          <Navigation defaultTransition='fade'>
+          <Navigation>
             <Route path='/'>
               <Link to='/second'>
                 Second
@@ -137,7 +137,6 @@ describe('Route', () => {
                 callback('onEnter')
               },
             }}
-            defaultTransition='fade'
           >
             <Route path='/'>
               <Link to='/second' transition='fade'>
@@ -173,11 +172,10 @@ describe('Route', () => {
       const wrapper = mount(
         <Router history={history}>
           <Navigation
-            defaultTransition='fade'
             globalTransitionProps={{timeout: 1000}}
           >
             <Route path='/'>
-              <Link to='/second'>
+              <Link to='/second' transition="fade">
                 Second
               </Link>
             </Route>
@@ -202,7 +200,7 @@ describe('Route', () => {
 
       const wrapper = mount(
         <Router history={history}>
-          <Navigation defaultTransition='fade'>
+          <Navigation>
             <Route path='/'>
               <Link to='/second'>
                 Second

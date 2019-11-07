@@ -5,15 +5,16 @@ import Screen from './Screen';
 
 export const NavigationContext = React.createContext();
 
-export const evalTransition = ({ transition, timeout }) => (
-  typeof (transition) === 'function'
-    ? { timeout, ...transition() }
+export const evalTransition = ({ transition, timeout }) => {
+  const computeTimeout = timeout ? { timeout } : {};
+  return typeof (transition) === 'function'
+    ? { ...computeTimeout, ...transition() }
     : Object.prototype.toString.call(transition) === '[object Object]'
-      ? { timeout, ...transition }
+      ? { ...computeTimeout, ...transition }
       : typeof (transition) === 'string'
-        ? { timeout, classNames: transition }
-        : { timeout: 0, classNames: '' }
-);
+        ? { ...computeTimeout, classNames: transition }
+        : { timeout: 0, classNames: '' };
+};
 
 export function reducer(state, action) {
   switch (action.type) {

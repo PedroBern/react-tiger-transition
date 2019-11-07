@@ -45,7 +45,7 @@ const Link = React.forwardRef(({
         if (!onTransition) {
           setTransition(
             transition || globalTransitionProps.classNames,
-            timeout || globalTransitionProps.timeout
+            timeout
           );
           if (typeof onClick === 'function') onClick();
         }
