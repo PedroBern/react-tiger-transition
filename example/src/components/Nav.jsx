@@ -27,11 +27,11 @@ const paths = [
     text: 'home',
   },
   {
-    path: '/docs',
+    path: path => path.indexOf('docs') !== -1 ? path : '/docs/quickstart',
     text: 'docs',
   },
   {
-    path: path => path.indexOf('demo') !== -1 ? path : '/demo',
+    path: path => path.indexOf('demo') !== -1 ? path : '/demo/glide',
     text: 'demo',
   },
   {
@@ -45,7 +45,7 @@ const paths = [
   },
 ]
 
-const pathsAbs = ['/', '/docs', '/demo', '/guides']
+const pathsAbs = ['/', '/docs/:doc?', '/demo/:tiger', '/guides']
 
 const Nav = ({match, location, history}) => {
 
@@ -60,7 +60,9 @@ const Nav = ({match, location, history}) => {
           value={
             match ?
               match.path.indexOf('demo') > -1 ?
-              pathsAbs.indexOf('/demo') :
+              pathsAbs.indexOf('/demo/:tiger') :
+              match.path.indexOf('docs') > -1 ?
+              pathsAbs.indexOf('/docs/:doc?') :
               pathsAbs.indexOf(match.path)
             : 0
           }
@@ -83,14 +85,10 @@ const Nav = ({match, location, history}) => {
                 key={p.text}
                 to={
                   typeof p.path === 'function' ?
-                  match ? p.path(match.path) : '/demo' :
+                  match ? p.path(match.url) :
+                  p.text === 'docs' ? '/docs/quickstart': '/demo/glide' :
                   p.path
                 }
-                // transition={() => glide({
-                //   direction: pathsAbs.indexOf(match.path) < index ?
-                //   'left' :
-                //   'right',
-                // })}
                 transition={match && pathsAbs.indexOf(match.path) < index ?
                   'glide-left' :
                   'glide-right'

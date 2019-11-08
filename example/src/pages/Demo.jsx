@@ -74,7 +74,7 @@ const Demo = props => {
                 variant='outlined'
                 fullWidth
                 component={Link}
-                to='/demo-a'
+                to={`/demo/${tiger.name}/a`}
                 transition={`${tiger.name}-demo`}
                 timeout={timeout}
               >

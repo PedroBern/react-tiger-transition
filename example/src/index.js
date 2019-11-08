@@ -57,7 +57,7 @@ const useStyles = makeStyles({
 const navs = [
   {
     key: 'main',
-    path: ['/docs', '/demo', '/guides'],
+    path: ['/docs/:doc?', '/demo/:tiger', '/guides'],
     component: <Nav />,
     navClass: 'nav',
     zIndex: 200,
@@ -65,7 +65,7 @@ const navs = [
   },
   {
     key: 'demo',
-    path: '/demo',
+    path: '/demo/:tiger',
     component: <DemoNav />,
     navClass: 'scondaryNav',
     zIndex: 100,
@@ -102,15 +102,15 @@ const App = () => {
             <Docs />
           </Route>
 
-          <Route exact path="/demo" className={classes.route}>
+          <Route exact path="/demo/:tiger" className={classes.route}>
             <Demo />
           </Route>
 
-          <Route exact path="/demo-a">
+          <Route exact path="/demo/:tiger/a">
             <DemoNext a />
           </Route>
 
-          <Route exact path="/demo-b">
+          <Route exact path="/demo/:tiger/b">
             <DemoNext b />
           </Route>
 
@@ -120,6 +120,7 @@ const App = () => {
 
           {navs.map(nav => (
             <Route
+              exact
               key={nav.key || nav.path}
               path={nav.path}
               className={classes[nav.navClass]}

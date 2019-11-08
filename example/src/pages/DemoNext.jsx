@@ -94,18 +94,18 @@ const DemoNext = ({a, b, location, ...other}) => {
 
   const [localState, setLocalState] = useState(state && state.loop ? state : {loop: 0})
 
-  const [to, setTo] = useState({
-    pathname: `/demo-${a ? 'b' : 'a'}`,
-    state: { loop: localState.loop + 1 < 19 ? localState.loop + 1 : 0},
-  })
-
-  const classes = useStyles({color: to.state.loop});
-
   const {
     tiger,
     args,
     timeout,
   } = useContext(DemoContext)
+
+  const [to, setTo] = useState({
+    pathname: `/demo/${tiger.name}/${a ? 'b' : 'a'}`,
+    state: { loop: localState.loop + 1 < 19 ? localState.loop + 1 : 0},
+  })
+
+  const classes = useStyles({color: to.state.loop});
 
   const hasDirection = tiger.args.direction !== undefined;
 
@@ -155,7 +155,7 @@ const DemoNext = ({a, b, location, ...other}) => {
           className={classes.button}
           variant='outlined'
           component={Link}
-          to='/demo'
+          to={`/demo/${tiger.name}`}
           transition={`${tiger.name}-demo`}
           timeout={timeout}
         >

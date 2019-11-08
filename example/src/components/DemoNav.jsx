@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { withRouter } from "react-router-dom";
 
 import { makeStyles } from '@material-ui/styles';
@@ -9,6 +9,8 @@ import AppBar from './AppBar';
 import Tabs from './Tabs';
 import { DemoContext } from '../provider';
 
+import { Link } from 'react-tiger-transition';
+
 const useStyles = makeStyles({
   appBar: {
     top: 'auto',
@@ -16,7 +18,10 @@ const useStyles = makeStyles({
   }
 });
 
-const DemoNav = () => {
+const DemoNav = ({
+  match,
+  history
+}) => {
 
   const classes = useStyles();
 
@@ -26,22 +31,35 @@ const DemoNav = () => {
     updateTiger,
   } = useContext(DemoContext)
 
+  useEffect(() => {
+    if (match && match.params.tiger !== tiger.name){
+      if (tigers.filter(t => t.name === match.params.tiger).length > 0){
+        updateTiger(match.params.tiger);
+      }
+      else {
+        history.push('/demo/glide')
+      }
+    };
+  }, [])
+
   return (
     <AppBar position="fixed" className={classes.appBar}>
       <Container maxWidth='lg'>
 
         <Tabs
           secondary
-          value={tiger.name}
+          value={match ? match.params.tiger : 'glide'}
           variant="scrollable"
           scrollButtons="auto"
           onChange={(event, value) => updateTiger(value)}
         >
           {tigers.map(t => (
             <Tab
+              component={Link}
               key={t.name}
               label={t.name}
               value={t.name}
+              to={`/demo/${t.name}`}
             />
           ))}
         </Tabs>
@@ -50,4 +68,4 @@ const DemoNav = () => {
   )
 }
 
-export default DemoNav;
+export default withRouter(DemoNav);

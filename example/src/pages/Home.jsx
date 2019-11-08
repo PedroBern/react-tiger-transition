@@ -41,12 +41,12 @@ const useStyles = makeStyles({
 
 const buttons = [
   {
-    to: '/docs',
+    to: '/docs/quickstart',
     text: 'Docs',
     variant: 'contained',
   },
   {
-    to: '/demo',
+    to: '/demo/glide',
     text: 'Demo',
     variant: 'contained',
   },

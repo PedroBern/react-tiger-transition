@@ -9,7 +9,7 @@ import AppBar from './AppBar';
 import Tabs from './Tabs';
 
 import { docs, docsPaths } from '../utils';
-import { Link, flip } from 'react-tiger-transition';
+import { Link } from 'react-tiger-transition';
 
 
 const useStyles = makeStyles({
