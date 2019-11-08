@@ -36,7 +36,6 @@ const carouselDefault = () => carousel({...carouselDefaultArgs});
 // cube
 const cubeDefaultArgs = {
 	direction: 'left',
-	backgroundColor: null,
 	depth: 1000,
 	enter: {
 		duration: 600,
@@ -260,7 +259,6 @@ const glueInDefault = () => glueIn({...glueInDefaultArgs});
 // glueOut
 const glueOutDefaultArgs = {
 	direction: 'left',
-	backgroundColor: null,
 	enter: {
 		duration: 400,
 		easing: 'ease',

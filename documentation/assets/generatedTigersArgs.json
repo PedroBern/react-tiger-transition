@@ -318,7 +318,6 @@
       "name": "cube",
       "args": {
         "direction": "left",
-        "backgroundColor": null,
         "depth": 1000,
         "enter": {
           "duration": 600,
@@ -413,7 +412,6 @@
       "name": "glueOut",
       "args": {
         "direction": "left",
-        "backgroundColor": null,
         "enter": {
           "duration": 400,
           "easing": "ease",
