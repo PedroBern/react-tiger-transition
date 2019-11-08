@@ -24,7 +24,7 @@
     "components-doc": "react-docgen src/ | node documentation/buildDocs.js",
     "doc": "npm run components-doc && npm run tigers-doc",
     "prepublishOnly": "npm run clean && npm run build",
-    "deploy": "cd example && npm run deploy",
+    "deploy": "cd website && npm run deploy",
     "clean": "rimraf cjs umd esm styles",
     "clean-empty-js": "rimraf styles/main.js styles/main.min.js",
     "build": "npm run clean && rollup -c && npm run clean-empty-js",
