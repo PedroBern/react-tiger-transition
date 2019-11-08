@@ -41,7 +41,7 @@ export function reducer(state, action) {
       const tiger = state.tigers.filter(t => t.name == action.value)[0];
       const strArgs = `// ${tiger.name}\n` + stringify(tiger.args, null, '\t');
       args = tiger.args;
-      timeout = computeTimeout(args, args.enter, args.exit);
+      timeout = computeTimeout(state.tiger.name, args, args.enter, args.exit);
       return { ...state, tiger, args, strArgs, timeout };
 
     // editor
@@ -58,7 +58,7 @@ export function reducer(state, action) {
             name: state.tiger.name + '-demo',
             ...args
           });
-          timeout = computeTimeout(args, args.enter, args.exit);
+          timeout = computeTimeout(state.tiger.name, args, args.enter, args.exit);
         }
         catch (e) {
           // console.log(e);
