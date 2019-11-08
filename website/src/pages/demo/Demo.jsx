@@ -30,9 +30,6 @@ const useStyles = makeStyles({
   },
   grid: {
     height: '100%',
-  },
-  api: {
-    marginTop: 24
   }
 });
 
@@ -93,25 +90,7 @@ const Demo = props => {
                 }}
               />
 
-              <Typography id="timeout" gutterBottom>
-                Timeout
-              </Typography>
-
-              <Slider
-                defaultValue={timeout}
-                getAriaValueText={(value) => `${value} ms`}
-                aria-labelledby="timeout"
-                valueLabelDisplay="auto"
-                step={100}
-                marks
-                min={100}
-                max={2000}
-                onChangeCommitted={(e, value) => {
-                  updateDemoTimeout(value);
-                }}
-              />
-
-              <Typography className={classes.api}>
+              <Typography>
                 Check out the {
                   <MuiLink
                     component={Link}

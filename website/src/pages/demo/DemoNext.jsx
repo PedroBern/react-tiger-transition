@@ -100,6 +100,7 @@ const DemoNext = ({
     timeout,
     updateTiger,
     tigers,
+    updateDemoTimeout
   } = useContext(DemoContext);
 
   useEffect(() => {
@@ -143,6 +144,23 @@ const DemoNext = ({
   const tigersLen = tigers.length - 1;
   const nextTiger = tigerIndex + 1 > tigersLen ? 0 : tigerIndex + 1;
   const previousTiger = tigerIndex - 1 < 0 ? tigersLen : tigerIndex - 1;
+
+  // useEffect(() => {
+  //   const { args } = tiger;
+  //   const { enter, exit } = args;
+  //   const computeArgsTimeout = args.duration && args.delay ? args.duration + args.delay :
+  //      args.duration && enter.delay ? args.duration + enter.delay :
+  //      args.duration ? args.duration :
+  //      enter.duration >= exit.duration ? enter.duration + enter.delay :
+  //      enter.duration + enter.delay >= exit.duration ? enter.duration + enter.delay :
+  //      exit.duration;
+  //
+  //   console.log(tiger);
+  //   console.log(timeout, computeArgsTimeout);
+  //   if (computeArgsTimeout !== timeout){
+  //     updateDemoTimeout(computeArgsTimeout);
+  //   }
+  // }, [tiger]);
 
   return (
     <Screen className={classes.screen}>

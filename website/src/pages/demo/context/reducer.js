@@ -1,5 +1,6 @@
 import { stringify } from "javascript-stringify";
 import tigers from './tigers';
+import computeTimeout from './computeTimeout';
 
 export const initialState = {
   tiger: tigers[0],
@@ -27,7 +28,7 @@ function getArgs(code) {
 }
 
 export function reducer(state, action) {
-  let args;
+  let args, timeout;
 
   switch (action.type) {
 
@@ -35,7 +36,8 @@ export function reducer(state, action) {
       const tiger = state.tigers.filter(t => t.name == action.value)[0];
       const strArgs = `// ${tiger.name}\n` + stringify(tiger.args, null, '\t');
       args = tiger.args;
-      return { ...state, tiger, args, strArgs };
+      timeout = computeTimeout(args, args.enter, args.exit);
+      return { ...state, tiger, args, strArgs, timeout };
 
     // editor
     case 'onBeforeChange':
@@ -44,6 +46,8 @@ export function reducer(state, action) {
     // editor
     case 'onChange':
       args = getArgs(action.value);
+      timeout = computeTimeout(args, args.enter, args.exit);
+
       if (args) {
         try {
           state.tiger.func({
@@ -55,7 +59,7 @@ export function reducer(state, action) {
           console.log(e);
         }
       }
-      return args ? { ...state, args } : { ...state }
+      return args ? { ...state, args, timeout } : { ...state }
 
     case 'updateDemoTimeout':
       return { ...state, timeout: action.value };
