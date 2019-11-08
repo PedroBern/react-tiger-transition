@@ -33,13 +33,22 @@ module.exports = (env, argv) => ({
             },
             {
               test : /\.css$/,
-              loader:argv.mode === 'production' ?[
-                'style-loader',
-                'css-loader',
-                'postcss-loader'
-              ] : [
-                'style-loader',
-                'css-loader',
+              use: [
+                {
+                  loader: 'style-loader'
+                },
+                {
+                  loader: 'css-loader'
+                },
+                {
+                  loader: 'postcss-loader',
+                   options: {
+                     plugins: () => [
+                       require('autoprefixer'),
+                       require('cssnano')
+                     ]
+                   }
+                }
               ],
               include: [
                 src,
