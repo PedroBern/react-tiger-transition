@@ -144,8 +144,6 @@ const DemoNext = ({
   const nextTiger = tigerIndex + 1 > tigersLen ? 0 : tigerIndex + 1;
   const previousTiger = tigerIndex - 1 < 0 ? tigersLen : tigerIndex - 1;
 
-  console.log(timeout);
-
   return (
     <Screen className={classes.screen}>
 
