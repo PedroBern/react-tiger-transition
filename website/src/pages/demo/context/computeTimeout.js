@@ -1,6 +1,6 @@
 export default (tiger, args, enter, exit) => {
   if (tiger === 'flip') {
-    enter.delay = args.duration * 2
+    enter.delay = args.duration;
   }
   args.duration && args.delay ? args.duration + args.delay :
   args.duration && enter.delay ? args.duration + enter.delay :
