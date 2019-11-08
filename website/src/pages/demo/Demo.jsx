@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {Controlled as CodeMirror} from 'react-codemirror2';
 import 'codemirror/mode/javascript/javascript';
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,7 +9,9 @@ import MuiLink from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import { Screen, Link } from 'react-tiger-transition';
 import { DemoContext } from './context';
-import Slider from '@material-ui/core/Slider';
+import Snackbar from '@material-ui/core/Snackbar';
+import { SnackbarContent } from '../../components';
+
 
 const useStyles = makeStyles({
   screen: {
@@ -43,6 +45,8 @@ const Demo = props => {
 
   const classes = useStyles();
 
+  const [open, setOpen] = useState(null);
+
   const {
     tiger,
     tigers,
@@ -50,8 +54,19 @@ const Demo = props => {
     onBeforeChange,
     onChange,
     updateDemoTimeout,
-    timeout
+    timeout,
+    newArgs,
+    failArgs,
   } = useContext(DemoContext)
+
+  useEffect(() => {
+    if (open !== null && newArgs > 1){
+      setOpen(true);
+    }
+    else if (open === null){
+      setOpen(false);
+    }
+  }, [newArgs]);
 
   return (
 
@@ -106,6 +121,23 @@ const Demo = props => {
           </Container>
         </Grid>
       </Grid>
+
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        open={open}
+        autoHideDuration={1000}
+        onClose={() => setOpen(false)}
+      >
+        <SnackbarContent
+          onClose={() => setOpen(false)}
+          variant={failArgs ? 'error' : 'success'}
+          message={failArgs ? "Invalid arguments" : "Successfully updated"}
+        />
+      </Snackbar>
+
     </Screen>
   )
 }
