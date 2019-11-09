@@ -42,7 +42,7 @@ export function reducer(state, action) {
       const strArgs = `// ${tiger.name}\n` + stringify(tiger.args, null, '\t');
       args = tiger.args;
       timeout = computeTimeout(tiger.name, args, args.enter, args.exit);
-      return { ...state, tiger, args, strArgs, timeout };
+      return { ...state, tiger, args, strArgs, timeout, newArgs: 0 };
 
     // editor
     case 'onBeforeChange':
