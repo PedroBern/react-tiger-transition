@@ -22,11 +22,11 @@ export default ({
       origin: `${50 + offset}% 50%`,
       transformActive: `translateZ(${-depth}px) rotateY(${-angle}deg)`,
     },
-    top: {
+    bottom: {
       origin: `50% ${50 - offset}%`,
       transformActive: `translateZ(${-depth}px) rotateX(${-angle}deg)`,
     },
-    bottom: {
+    top: {
       origin: `50% ${50 + offset}%`,
       transformActive: `translateZ(${-depth}px) rotateX(${angle}deg)`,
     },

@@ -20,7 +20,7 @@ export default ({
     right: {
       origin: '100% 50%',
       transform: `translateX(-100%) rotateY(${angle}deg)`,
-      transformActive: `translateX(0px) rotate$Y(0deg)`,
+      transformActive: `translateX(0px) rotateY(0deg)`,
     },
     top: {
       origin: '50% 0%',
@@ -30,7 +30,7 @@ export default ({
     bottom: {
       origin: '50% 100%',
       transform: `translateY(-100%) rotateX(${-angle}deg)`,
-      transformActive: `translateY(0px) rotate$X(0deg)`,
+      transformActive: `translateY(0px) rotateX(0deg)`,
     }
   };
 
