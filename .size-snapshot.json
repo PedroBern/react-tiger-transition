@@ -10,37 +10,37 @@
     "gzipped": 7936
   },
   "cjs/react-tiger-transition.js": {
-    "bundled": 73946,
-    "minified": 39374,
-    "gzipped": 6872
+    "bundled": 73894,
+    "minified": 39330,
+    "gzipped": 6849
   },
   "cjs/react-tiger-transition.min.js": {
-    "bundled": 39374,
-    "minified": 39319,
-    "gzipped": 6881
+    "bundled": 39330,
+    "minified": 39275,
+    "gzipped": 6858
   },
   "esm/react-tiger-transition.js": {
-    "bundled": 72810,
-    "minified": 38527,
-    "gzipped": 6757,
+    "bundled": 72758,
+    "minified": 38483,
+    "gzipped": 6736,
     "treeshaked": {
       "rollup": {
         "code": 4210,
         "import_statements": 212
       },
       "webpack": {
-        "code": 36572
+        "code": 36528
       }
     }
   },
   "umd/react-tiger-transition.js": {
-    "bundled": 77996,
-    "minified": 36536,
-    "gzipped": 6646
+    "bundled": 77940,
+    "minified": 36492,
+    "gzipped": 6622
   },
   "umd/react-tiger-transition.min.js": {
-    "bundled": 36353,
-    "minified": 36419,
-    "gzipped": 6622
+    "bundled": 36309,
+    "minified": 36375,
+    "gzipped": 6598
   }
 }
