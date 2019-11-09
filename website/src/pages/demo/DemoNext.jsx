@@ -102,20 +102,9 @@ const DemoNext = ({
     tigers,
   } = useContext(DemoContext);
 
-  useEffect(() => {
-    if (match && match.params.tiger !== tiger.name){
-      if (tigers.filter(t => t.name === match.params.tiger).length > 0){
-        updateTiger(match.params.tiger);
-      }
-      else {
-        history.push('/demo/glide')
-      }
-    };
-  }, []);
+  const [demoTiger, setDemoTiger] = useState(tiger);
 
   const { state } = location;
-
-  const [demoTiger, setDemoTiger] = useState(tiger);
 
   const [localState, setLocalState] = useState(
     state && state.loop
@@ -131,6 +120,23 @@ const DemoNext = ({
       : 0,
     }
   })
+
+  useEffect(() => {
+    if (match && match.params.tiger !== tiger.name){
+      const paramTiger = tigers.filter(t => t.name === match.params.tiger);
+      if (paramTiger.length === 1){
+        updateTiger(match.params.tiger);
+        setDemoTiger(paramTiger[0]);
+        setTo({
+          ...to,
+          pathname: `/demo/${paramTiger[0].name}/${a ? 'b' : 'a'}`
+        })
+      }
+      else {
+        history.push('/demo/glide')
+      }
+    };
+  }, []);
 
   const classes = useStyles({color: to.state.loop});
 
