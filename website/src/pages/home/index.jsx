@@ -33,6 +33,9 @@ const useStyles = makeStyles(theme => ({
       paddingLeft: 16,
       paddingRight: 16,
     },
+    [theme.breakpoints.down('sm')]: {
+      alignItems: 'center'
+    },
   },
   gridContainer3: {
     paddingTop: 32,
@@ -47,7 +50,6 @@ const useStyles = makeStyles(theme => ({
   },
   gridContainer4: {
     height: '100%',
-
     '& .MuiGrid-item': {
       [theme.breakpoints.up('md')]: {
         height: '100%'
@@ -59,6 +61,9 @@ const useStyles = makeStyles(theme => ({
     background: theme.custom.gradient,
     WebkitBackgroundClip: 'text',
     textFillColor: 'transparent',
+    [theme.breakpoints.down('sm')]: {
+      textAlign: 'center',
+    },
   },
 }));
 
