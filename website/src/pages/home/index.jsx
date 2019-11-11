@@ -100,7 +100,7 @@ const cards = [
   },
   {
     title: 'Transitions',
-    link: '/demo',
+    link: '/demo/glide',
     linkText: 'Play with the demo',
     component: <DemoCardContent />
   },
