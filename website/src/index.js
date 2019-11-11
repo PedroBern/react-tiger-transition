@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import {
   BrowserRouter as Router,
   Route as RegularRoute
@@ -32,12 +33,14 @@ import {
   navRoutePath,
 } from './components';
 
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles, ThemeProvider } from '@material-ui/styles';
 
 import './style/style.css';
 import './style/markdown.css';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
+
+import { theme } from './style/theme';
 
 const useStyles = makeStyles({
   nav: {
@@ -89,54 +92,56 @@ const App = () => {
   const classes = useStyles();
 
   return (
-    <Router basename="/react-tiger-transition">
-      <DemoProvider>
-        <Navigation
-          globalTransitionProps={{
-            classNames: "fade"
-          }}
-        >
+    <ThemeProvider theme={theme}>
+      <Router basename="/react-tiger-transition">
+        <DemoProvider>
+          <Navigation
+            globalTransitionProps={{
+              classNames: "fade"
+            }}
+          >
 
-          <Route exact path="/" >
-            <Home />
-          </Route>
-
-          <Route {...docsRoutePath} className={classes.route}>
-            <Docs />
-          </Route>
-
-          <Route exact path="/demo/:tiger" className={classes.route}>
-            <Demo />
-          </Route>
-
-          <Route exact path="/demo/:tiger/a">
-            <DemoNext a />
-          </Route>
-
-          <Route exact path="/demo/:tiger/b">
-            <DemoNext b />
-          </Route>
-
-          <Route exact path="/examples" className={classes.route}>
-            <Examples />
-          </Route>
-
-          {navs.map(nav => (
-            <Route
-              key={nav.key || nav.path}
-              {...nav.path}
-              className={classes[nav.navClass]}
-              transitionProps={{
-                classNames: nav.transition,
-              }}
-            >
-              {nav.component}
+            <Route exact path="/">
+              <Home />
             </Route>
-          ))}
 
-        </Navigation>
-      </DemoProvider>
-    </Router>
+            <Route {...docsRoutePath} className={classes.route}>
+              <Docs />
+            </Route>
+
+            <Route exact path="/demo/:tiger" className={classes.route}>
+              <Demo />
+            </Route>
+
+            <Route exact path="/demo/:tiger/a">
+              <DemoNext a />
+            </Route>
+
+            <Route exact path="/demo/:tiger/b">
+              <DemoNext b />
+            </Route>
+
+            <Route exact path="/examples" className={classes.route}>
+              <Examples />
+            </Route>
+
+            {navs.map(nav => (
+              <Route
+                key={nav.key || nav.path}
+                {...nav.path}
+                className={classes[nav.navClass]}
+                transitionProps={{
+                  classNames: nav.transition,
+                }}
+              >
+                {nav.component}
+              </Route>
+            ))}
+
+          </Navigation>
+        </DemoProvider>
+      </Router>
+    </ThemeProvider>
   )
 };
 

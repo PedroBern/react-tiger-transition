@@ -8,6 +8,7 @@ import { AppBar, Tabs } from '../components';
 import { Screen, Link } from 'react-tiger-transition';
 import { docsRoutePath } from '../pages/docs';
 import { demoNavRoutePath } from '../pages/demo';
+import Logo from './Logo';
 
 const useStyles = makeStyles({
   appBar: {
@@ -27,6 +28,7 @@ const paths = [
   {
     path: '/',
     text: 'home',
+    icon: <Logo  width='24' height='24'/>,
     config: { exact: true }
   },
   {
@@ -99,7 +101,8 @@ const Nav = ({match, location, history}) => {
                   ? 'glide-left'
                   : 'glide-right'
                 }
-                label={p.text}
+                label={p.icon ? '' : p.text}
+                icon={p.icon ? p.icon : null}
               />
           ))}
         </Tabs>
@@ -110,6 +113,7 @@ const Nav = ({match, location, history}) => {
 
 export const navRoutePath = {
   path: [
+    '/',
     docsRoutePath.path,
     demoNavRoutePath.path,
     '/examples'

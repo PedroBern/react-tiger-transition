@@ -3,18 +3,16 @@ import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
-import { color, gradient } from '../style/theme';
-
-
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
-    background: props => props.variant === 'outlined' ? 'none' : gradient
+    background: props => props.variant === 'contained'
+      ? theme.custom.gradient : 'none',
   },
   outlined: {
-    borderColor: color,
-    color: color,
+    borderColor: theme.custom.color,
+    color: theme.custom.color,
   }
-});
+}));
 
 function MyButton(props) {
   const {variant, className, ...other} = props;

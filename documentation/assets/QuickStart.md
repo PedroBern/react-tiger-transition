@@ -3,7 +3,7 @@
 `react-tiger-transition` is ready to take your navigation animations to the next level.
 
 - Zero dependencies.
-- 19 built-in transitions (the tigers).
+- 20+ built-in transitions (the tigers).
 - Minimum to zero configuration.
 - Fully customizable (raise your own tigers!).
 - Based on [react-transition-group](https://github.com/reactjs/react-transition-group) and [react-router-dom](https://github.com/ReactTraining/react-router).
@@ -11,10 +11,14 @@
 
 ## Installation
 
-`npm i react-tiger-transition`
+```
+npm i react-tiger-transition
+```
 
 You need to install peerDependencies:
 
-`npm i react-router-dom react-transition-group`
+```
+npm i react-router-dom react-transition-group
+```
 
 ## Basic Example

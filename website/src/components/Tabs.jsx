@@ -2,13 +2,11 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 
-import { color } from '../style/theme';
-
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   indicator: props => ({
-    backgroundColor: props.secondary ? 'black' : color
+    backgroundColor: props.secondary ? 'black' : theme.custom.color
   })
-});
+}));
 
 function MyTabs({classes, secondary, ...other}) {
   const styles = useStyles({secondary});

@@ -66,11 +66,25 @@ module.exports = (env, argv) => ({
               // ],
             },
             {
-              test: /\.(gif)$/i,
+              test: /\.svg$/,
               use: [
-                'url-loader',
-              ],
+                {
+                  loader: "babel-loader"
+                },
+                {
+                  loader: "react-svg-loader",
+                  options: {
+                    jsx: true // true outputs JSX tags
+                  }
+                }
+              ]
             }
+            // {
+            //   test: /\.(gif)$/i,
+            //   use: [
+            //     'url-loader',
+            //   ],
+            // }
         ]
     },
     resolve: {
