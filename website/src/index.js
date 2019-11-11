@@ -51,9 +51,9 @@ const useStyles = makeStyles({
   },
   scondaryNav: {
     zIndex: 100,
-    top: 48,
+    top: 0,
     bottom: 'auto',
-    height: 64,
+    height: 112,
   },
   route: {
     backgroundColor: '#fafafa',

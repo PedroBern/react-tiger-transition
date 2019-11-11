@@ -10,8 +10,8 @@ import { Link } from 'react-tiger-transition';
 
 const useStyles = makeStyles({
   appBar: {
-    top: 0,
-    bottom: 'auto',
+    top: 'auto',
+    bottom: 16,
   },
   tabsFlexContainer: {
     '@media (min-width: 960px)': {
