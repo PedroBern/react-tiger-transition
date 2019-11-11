@@ -4,7 +4,8 @@ import { makeStyles } from '@material-ui/styles';
 import Container from '@material-ui/core/Container';
 import Tab from '@material-ui/core/Tab';
 import MuiLink from '@material-ui/core/Link';
-import { AppBar, Tabs } from '../components';
+import { AppBar } from '../components';
+import Tabs from '@material-ui/core/Tabs';
 import { Screen, Link } from 'react-tiger-transition';
 import { docsRoutePath } from '../pages/docs';
 import { demoNavRoutePath } from '../pages/demo';
@@ -74,6 +75,7 @@ const Nav = ({match, location, history}) => {
           variant="scrollable"
           scrollButtons="auto"
           value={value}
+          indicatorColor='primary'
           textColor="inherit"
           classes={{
             flexContainer: classes.tabsFlexContainer,

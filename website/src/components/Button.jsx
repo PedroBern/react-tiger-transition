@@ -4,27 +4,19 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    background: props => props.variant === 'contained'
-      ? theme.custom.gradient : 'none',
-  },
-  outlined: {
-    borderColor: theme.custom.color,
-    color: theme.custom.color,
+  contained: {
+    background: theme.custom.gradient,
   }
 }));
 
 function MyButton(props) {
-  const {variant, className, ...other} = props;
-  const classes = useStyles({variant});
+  const classes = useStyles();
   return (
     <Button
-      className={classNames(classes.root, className)}
-      variant={variant}
       classes={{
-        outlined: classes.outlined
+        contained: classes.contained
       }}
-      {...other}
+      {...props}
     />
   );
 }

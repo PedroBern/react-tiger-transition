@@ -2,8 +2,9 @@ import React, { useContext, useEffect } from 'react';
 import { withRouter } from "react-router-dom";
 import { makeStyles } from '@material-ui/styles';
 import Container from '@material-ui/core/Container';
+import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { AppBar, Tabs } from '../../components';
+import { AppBar } from '../../components';
 import { DemoContext } from './context';
 
 import { Link } from 'react-tiger-transition';
@@ -49,7 +50,7 @@ const DemoNav = ({
       <Container maxWidth='lg'>
 
         <Tabs
-          secondary
+          indicatorColor='secondary'
           value={match ? match.params.tiger : 'glide'}
           variant="scrollable"
           scrollButtons="auto"

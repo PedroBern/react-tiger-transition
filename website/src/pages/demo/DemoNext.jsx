@@ -160,6 +160,7 @@ const DemoNext = ({
           <Button
             className={classes.button}
             variant='contained'
+            color='primary'
             component={Link}
             to={to}
             transition={`${demoTiger.name}-demo`}
@@ -176,6 +177,7 @@ const DemoNext = ({
                 key={direction}
                 className={classes.button}
                 variant='contained'
+                color='primary'
                 component={Link}
                 to={to}
                 onClick={() => demoTiger.func({
@@ -195,6 +197,7 @@ const DemoNext = ({
         <Button
           className={classes.button}
           variant='outlined'
+          color='primary'
           component={Link}
           to={{
             ...to,
@@ -213,6 +216,7 @@ const DemoNext = ({
           className={classes.button}
           variant='outlined'
           component={Link}
+          color='primary'
           to={{
             ...to,
             pathname: `/demo/${tigers[previousTiger].name}/${a ? 'b' : 'a'}`
@@ -229,6 +233,7 @@ const DemoNext = ({
         <Button
           className={classes.button}
           variant='outlined'
+          color='primary'
           component={Link}
           to={`/demo/${tiger.name}`}
           transition={`${tiger.name}-demo`}

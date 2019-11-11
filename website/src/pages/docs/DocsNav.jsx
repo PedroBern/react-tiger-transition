@@ -2,8 +2,9 @@ import React, { useContext } from 'react';
 import { withRouter, Redirect } from "react-router-dom";
 import { makeStyles } from '@material-ui/styles';
 import Container from '@material-ui/core/Container';
+import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { AppBar, Tabs } from '../../components';
+import { AppBar } from '../../components';
 import { assets, docsPaths } from './assets';
 import { Link } from 'react-tiger-transition';
 
@@ -36,7 +37,7 @@ const DocsNav = ({
       <Container maxWidth='lg'>
 
         <Tabs
-          secondary
+          indicatorColor='secondary'
           value={match ? docsPaths.indexOf(match.params.doc) : 0}
           variant="scrollable"
           scrollButtons="auto"
