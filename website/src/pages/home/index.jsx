@@ -143,9 +143,9 @@ const Home = props => {
                     h5: classes.text
                   }}
                 >
-                  Ease page transitions for react-router.
+                  Easy page transitions for react-router.
                   Built with react-transition-group.
-                  Use the provided tranisitions or create your own.
+                  Use the provided transitions or create your own.
                 </Typography>
               </Grid>
             </Grid>
