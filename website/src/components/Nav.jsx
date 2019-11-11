@@ -12,8 +12,8 @@ import Logo from './Logo';
 
 const useStyles = makeStyles({
   appBar: {
-    top: 'auto',
-    bottom: 0,
+    top: 0,
+    bottom: 'auto',
   },
   tabsFlexContainer: {
     justifyContent: 'center',

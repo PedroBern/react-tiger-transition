@@ -47,13 +47,13 @@ const useStyles = makeStyles({
     zIndex: 200,
     top: 0,
     bottom: 'auto',
-    height: 48,
+    height: 64,
   },
   scondaryNav: {
     zIndex: 100,
-    top: 0,
+    top: 48,
     bottom: 'auto',
-    height: 96,
+    height: 64,
   },
   route: {
     backgroundColor: '#fafafa',
