@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   gridContainer4: {
-    height: '100%',
+    height: 'calc(100% - 16px)',
     '& .MuiGrid-item': {
       [theme.breakpoints.up('md')]: {
         height: '100%'
