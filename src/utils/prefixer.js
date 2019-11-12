@@ -37,6 +37,10 @@ const prefixes = [
     name: 'animation-delay',
     prefixes: ['-webkit-']
   },
+  {
+    name: 'animation-timing-function',
+    prefixes: ['-webkit-']
+  }
 ];
 
 

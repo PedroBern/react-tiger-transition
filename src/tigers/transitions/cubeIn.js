@@ -41,6 +41,7 @@ export default ({
     }
     50% {
       transform: ${transform50};
+      animation-timing-function: ease-out;
     }
     100% {
       opacity: 1;

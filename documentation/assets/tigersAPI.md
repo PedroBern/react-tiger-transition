@@ -38,14 +38,14 @@ const cubeDefaultArgs = {
 	depth: 1000,
 	enter: {
 		duration: 600,
-		easing: 'easeInOutQuad',
+		easing: 'ease-in',
 		opacity: 0.3,
 		zIndex: 1,
 		delay: 0
 	},
 	exit: {
 		duration: 600,
-		easing: 'easeInOutQuad',
+		easing: 'ease-in',
 		opacity: 0.3,
 		zIndex: 2,
 		delay: 0

@@ -12,7 +12,7 @@ export const cube = buildTiger(
   // enter
   {
     duration: 600,
-    easing: 'easeInOutQuad',
+    easing: 'ease-in',
     opacity: 0.3,
     zIndex: 1,
     delay: 0,
@@ -22,7 +22,7 @@ export const cube = buildTiger(
   // exit
   {
     duration: 600,
-    easing: 'easeInOutQuad',
+    easing: 'ease-in',
     opacity: 0.3,
     zIndex: 2,
     delay: 0,

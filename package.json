@@ -1,6 +1,6 @@
 {
   "name": "react-tiger-transition",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "Animated page transitions for react.",
   "main": "index.js",
   "module": "esm/index.js",
