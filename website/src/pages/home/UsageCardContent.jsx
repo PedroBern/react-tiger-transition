@@ -33,7 +33,7 @@ const DemoCardContent = () => {
     <React.Fragment>
       <Typography gutterBottom className={classes.text}>
         After quick initial configuration,
-        it is almost the same usage as <Link href='https://github.com/ReactTraining/react-router'>react-router-dom</Link> with
+        it's almost the same usage as <Link href='https://github.com/ReactTraining/react-router'>react-router-dom</Link> with
         css transitions from <Link href='https://github.com/reactjs/react-transition-group'>react-transition-group</Link>.
       </Typography>
       <SyntaxHighlighter language='js' style={okaidia}>

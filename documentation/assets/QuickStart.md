@@ -73,4 +73,6 @@ glide({
 
 It's important to set an unique name for the transition, otherwise the function will override other inject css with the same name.
 
+Check the [transitions api](/docs/transitions).
+
 ## Basic Example

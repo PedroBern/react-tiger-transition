@@ -106,7 +106,7 @@ const Demo = props => {
               />
 
               <Typography>
-                Check out the {
+                Check the {
                   <MuiLink
                     component={Link}
                     to='/docs/transitions'
