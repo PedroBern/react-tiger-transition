@@ -1,3 +1,14 @@
+// Basic transitions with react-tiger-transition
+//
+// Check the docs and demo:
+// https://pedrobern.github.io/react-tiger-transition/
+//
+// This example illustrates:
+// - default transitions
+// - transitions on <Link /> (on login and menu component)
+// - transiitons on <Route /> (on menu component)
+// - reaching a path with different transitions (the home path),
+//   based from which path did you come from.
 
 import React from "react";
 
@@ -10,15 +21,29 @@ import {
   Route as TigerRoute,
   Link as TigerLink,
   Navigation,
-  shuffle
+  shuffle,
+  fade,
 } from "react-tiger-transition";
 
 import "react-tiger-transition/styles/main.min.css";
 
+// inject transitions css
+shuffle({
+  name: 'shuffle-top',
+  direction: 'top'
+});
+shuffle({
+  name: 'shuffle-bottom',
+  direction: 'bottom'
+});
+fade({
+  name: 'fade'
+});
 
-const menuContainerStyle = {style: {height: 100}};
-const loginContainerStyle = {style: {backgroundColor: '#9e9e9e'}};
-const pagesContainerStyle = (color) => ({
+
+const menuStyle = {style: {height: 100}};
+const loginStyle = {style: {backgroundColor: '#9e9e9e'}};
+const pagesStyle = (color) => ({
   style: {
     top: 100,
     backgroundColor: color
@@ -43,7 +68,6 @@ const pages = [
   },
   {
     path: "/login",
-    backgroundColor: "white",
     component: <Login />
   }
 ]
@@ -52,13 +76,20 @@ export default function BasicExample() {
   document.getElementById("root").style.height = "100vh";
   return (
     <Router>
-      <Navigation>
+      <Navigation
+        globalTransitionProps={{
+          classNames: 'fade' // defining default transition
+          // default timeout is 600ms
+        }}
+      >
         <TigerRoute
           path={["/","/about", "/dashboard"]}
           exact
           screen
-          containerProps={{...menuContainerStyle}}
-          forceTransition={() => shuffle({direction: 'bottom'})}
+          containerProps={{...menuStyle}}
+          transitionProps={{
+            classNames: "shuffle-bottom"
+          }}
         >
           <Menu />
         </TigerRoute>
@@ -71,8 +102,8 @@ export default function BasicExample() {
               screen
               containerProps={
                 page.path === '/login' ?
-                { ...loginContainerStyle } :
-                pagesContainerStyle(page.backgroundColor)
+                { ...loginStyle } :
+                pagesStyle(page.backgroundColor)
               }
             >
               {page.component}
@@ -100,7 +131,7 @@ function Menu() {
         <li>
           <TigerLink
             to="/login"
-            transition={() => shuffle({direction: 'top'})}
+            transition="shuffle-top"
           >
             Login*
           </TigerLink>
@@ -142,9 +173,7 @@ function Login() {
       <h2>Login</h2>
       <TigerLink
         to="/"
-        transition={() => shuffle({
-          direction: 'top'
-        })}
+        transition="shuffle-top"
       >
         Home
       </TigerLink>
