@@ -13,7 +13,7 @@ const defaultDependencies = {
   "react-dom": "^16.9.0",
   "react-router-dom": "^5.0.1",
   "react-transition-group": "^4.3.0",
-  "react-tiger-transition": "^4.0.1",
+  "react-tiger-transition": "latest",
 };
 
 export default function SandboxExample({

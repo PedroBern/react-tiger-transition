@@ -72,8 +72,10 @@ const pages = [
   }
 ]
 
+// set the height of <Navigation /> (better to do this on your stylesheet)
+document.getElementById("root").style.height = "100vh";
+
 export default function BasicExample() {
-  document.getElementById("root").style.height = "100vh";
   return (
     <Router>
       <Navigation
