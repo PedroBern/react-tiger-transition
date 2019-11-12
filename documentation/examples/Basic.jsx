@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 // one of:
 // styles/main.css
 // styles/main.min.css
-import "react-tiger-transition/styles/main.min.css"; // eslint-disable-line
+import "react-tiger-transition/styles/main.min.css";
 
 import { Navigation, Route, Screen, Link, glide } from "react-tiger-transition";
 
@@ -18,14 +18,6 @@ glide({
   direction: 'right'
 });
 
-// basic styling
-const linkStyle = {
-  fontSize: 30,
-  textDecoration: "none",
-  color: "black",
-  fontFamily: "Arial"
-};
-
 const screenStyle = {
   display: "flex",
   alignItems: "center",
@@ -35,7 +27,6 @@ const screenStyle = {
 export default () => {
   // you will need to set the height of  <Navigation /> wrapper,
   // in this case, it is the root node,
-  // you'd probably want to do this on a different way.
   document.getElementById("root").style.height = "100vh";
 
   return (
@@ -51,14 +42,14 @@ export default () => {
                 with some basic style */}
           <Screen
             style={{
-              backgroundColor: "#4EDC9F",
+              backgroundColor: "#ffa000",
               ...screenStyle
             }}
           >
             {/* Use Link the same way you use
                   react-router Link, but
                   add transition */}
-            <Link to="/a" transition='glide-left' style={{ ...linkStyle }}>
+            <Link to="/a" transition='glide-left'>
               Check out the page A
             </Link>
           </Screen>
@@ -70,16 +61,12 @@ export default () => {
           screen // shorthand to wrap children with screen
           screenProps={{
             style: {
-              backgroundColor: "#D4429F",
+              backgroundColor: "#607d8b",
               ...screenStyle
             }
           }}
         >
-          <Link
-            to="/"
-            transition='glide-right'
-            style={{ ...linkStyle }}
-          >
+          <Link to="/" transition='glide-right'>
             Back to home page
           </Link>
         </Route>
