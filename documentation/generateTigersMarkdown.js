@@ -114,9 +114,7 @@ const generateTigersMarkdown = transitions => {
     "\n" +
     `const ${t.name}DefaultArgs = ` +
     stringify(t.args, null, '\t') +
-    "\n" +
-    `const ${t.name}Default = () => ${t.name}({...${t.name}DefaultArgs});` +
-    "\n```" +
+    ";\n```" +
     "\n\n"
 
     markdownString += tigerString;

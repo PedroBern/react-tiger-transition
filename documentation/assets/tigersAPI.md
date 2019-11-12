@@ -26,8 +26,7 @@ const carouselDefaultArgs = {
 		offset: 300,
 		angle: 65
 	}
-}
-const carouselDefault = () => carousel({...carouselDefaultArgs});
+};
 ```
 
 ## cube
@@ -51,8 +50,7 @@ const cubeDefaultArgs = {
 		zIndex: 2,
 		delay: 0
 	}
-}
-const cubeDefault = () => cube({...cubeDefaultArgs});
+};
 ```
 
 ## drop
@@ -76,8 +74,7 @@ const dropDefaultArgs = {
 		scale: 0.6,
 		delay: 0
 	}
-}
-const dropDefault = () => drop({...dropDefaultArgs});
+};
 ```
 
 ## fade
@@ -100,8 +97,7 @@ const fadeDefaultArgs = {
 		delay: 0,
 		scale: 1
 	}
-}
-const fadeDefault = () => fade({...fadeDefaultArgs});
+};
 ```
 
 ## flip
@@ -123,8 +119,7 @@ const flipDefaultArgs = {
 		zIndex: 2,
 		depth: 1000
 	}
-}
-const flipDefault = () => flip({...flipDefaultArgs});
+};
 ```
 
 ## fold
@@ -148,8 +143,7 @@ const foldDefaultArgs = {
 		angle: 90,
 		delay: 0
 	}
-}
-const foldDefault = () => fold({...foldDefaultArgs});
+};
 ```
 
 ## glide
@@ -174,8 +168,7 @@ const glideDefaultArgs = {
 		scale: 1,
 		delay: 0
 	}
-}
-const glideDefault = () => glide({...glideDefaultArgs});
+};
 ```
 
 ## glideIn
@@ -199,8 +192,7 @@ const glideInDefaultArgs = {
 		scale: 1,
 		delay: 0
 	}
-}
-const glideInDefault = () => glideIn({...glideInDefaultArgs});
+};
 ```
 
 ## glideOut
@@ -224,8 +216,7 @@ const glideOutDefaultArgs = {
 		zIndex: 2,
 		delay: 0
 	}
-}
-const glideOutDefault = () => glideOut({...glideOutDefaultArgs});
+};
 ```
 
 ## glueIn
@@ -249,8 +240,7 @@ const glueInDefaultArgs = {
 		opacity: 1,
 		zIndex: 2
 	}
-}
-const glueInDefault = () => glueIn({...glueInDefaultArgs});
+};
 ```
 
 ## glueOut
@@ -274,8 +264,7 @@ const glueOutDefaultArgs = {
 		depth: 200,
 		angle: 15
 	}
-}
-const glueOutDefault = () => glueOut({...glueOutDefaultArgs});
+};
 ```
 
 ## pull
@@ -299,8 +288,7 @@ const pullDefaultArgs = {
 		zIndex: 2,
 		delay: 0
 	}
-}
-const pullDefault = () => pull({...pullDefaultArgs});
+};
 ```
 
 ## push
@@ -324,8 +312,7 @@ const pushDefaultArgs = {
 		angle: 90,
 		delay: 0
 	}
-}
-const pushDefault = () => push({...pushDefaultArgs});
+};
 ```
 
 ## pushPull
@@ -349,8 +336,7 @@ const pushPullDefaultArgs = {
 		zIndex: 2,
 		angle: 90
 	}
-}
-const pushPullDefault = () => pushPull({...pushPullDefaultArgs});
+};
 ```
 
 ## rise
@@ -374,8 +360,7 @@ const riseDefaultArgs = {
 		zIndex: 2,
 		delay: 0
 	}
-}
-const riseDefault = () => rise({...riseDefaultArgs});
+};
 ```
 
 ## room
@@ -399,8 +384,7 @@ const roomDefaultArgs = {
 		zIndex: 2,
 		delay: 0
 	}
-}
-const roomDefault = () => room({...roomDefaultArgs});
+};
 ```
 
 ## scale
@@ -424,8 +408,7 @@ const scaleDefaultArgs = {
 		delay: 0,
 		scale: 0.8
 	}
-}
-const scaleDefault = () => scale({...scaleDefaultArgs});
+};
 ```
 
 ## shuffle
@@ -450,8 +433,7 @@ const shuffleDefaultArgs = {
 		scale: 1,
 		delay: 0
 	}
-}
-const shuffleDefault = () => shuffle({...shuffleDefaultArgs});
+};
 ```
 
 ## side
@@ -480,8 +462,7 @@ const sideDefaultArgs = {
 		offset: 100,
 		delay: 0
 	}
-}
-const sideDefault = () => side({...sideDefaultArgs});
+};
 ```
 
 ## slide
@@ -505,8 +486,7 @@ const slideDefaultArgs = {
 		opacity: 0.5,
 		zIndex: 2
 	}
-}
-const slideDefault = () => slide({...slideDefaultArgs});
+};
 ```
 
 ## unfold
@@ -530,7 +510,6 @@ const unfoldDefaultArgs = {
 		zIndex: 2,
 		delay: 0
 	}
-}
-const unfoldDefault = () => unfold({...unfoldDefaultArgs});
+};
 ```
 
