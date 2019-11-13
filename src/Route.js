@@ -4,7 +4,7 @@ import { Route as RouterRoute } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
 import { computeClassName } from './utils';
 import Screen from './Screen';
-import { NavigationContext } from './Navigation';
+import { NavigationContext } from './context';
 
 /**
  *

@@ -1,7 +1,7 @@
+export { default as Navigation } from './Navigation';
 export { default as Screen } from './Screen';
 export { default as Route } from './Route';
 export { default as Link } from './Link';
-export { default as Navigation } from './Navigation';
 
 export {
   buildTiger,

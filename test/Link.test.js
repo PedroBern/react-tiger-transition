@@ -6,7 +6,7 @@ import { act } from 'react-dom/test-utils';
 
 
 import  { Screen, Route, Link, Navigation } from '../src';
-import { NavigationContext } from '../src/Navigation';
+import { NavigationContext } from '../src/context';
 
 
 jest.useFakeTimers();

@@ -3,8 +3,7 @@ import { withRouter, matchPath, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types'; // eslint-disable-line import/no-extraneous-dependencies
 import Screen from './Screen';
 import Route from './Route';
-
-export const NavigationContext = React.createContext();
+import { NavigationContext } from './context';
 
 export const evalTransition = ({ transition, timeout }) => {
   const computeTimeout = timeout ? { timeout } : {};
@@ -142,8 +141,8 @@ const Navigation = ({
 );
 
 const DefaultRouteWrapper = ({
-  transitionProps,
-  children
+  transitionProps, // eslint-disable-line react/prop-types
+  children // eslint-disable-line react/prop-types
 }) => (
   <Route screen transitionProps={transitionProps}>
     {children}
@@ -154,7 +153,7 @@ Navigation.defaultProps = {
   defaultRoute: <Redirect to='/' />,
   globalTransitionProps: globalTransitionPropsDefaultValues,
   disableDefaultRoute: false,
-  DefaultRouteWrapper: DefaultRouteWrapper
+  DefaultRouteWrapper
 };
 
 Navigation.propTypes = {
