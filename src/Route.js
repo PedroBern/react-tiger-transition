@@ -35,6 +35,7 @@ const Route = ({
   screen,
   screenProps,
   cancelAnimation,
+  skip,
   ...other
 }) => {
 
@@ -222,7 +223,12 @@ Route.propTypes = {
   /**
    *  Cancel animation.
    */
-  cancelAnimation: PropTypes.bool
+  cancelAnimation: PropTypes.bool,
+
+  /**
+   *  Allow to match route together with defaultRoute from [`<Navigation />`](/docs/navigation).
+   */
+  skip: PropTypes.bool
 };
 
 export default Route;
