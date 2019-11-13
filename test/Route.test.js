@@ -208,7 +208,10 @@ describe('Route', () => {
             </Route>
             <Route
               path='/second'
-              transitionProps={{timeout: 1200}}
+              transitionProps={{
+                timeout: 1200,
+                classNames: 'here'
+              }}
             >
               <div />
             </Route>
@@ -219,7 +222,7 @@ describe('Route', () => {
       const secondLink = wrapper.find('Link');
       secondLink.simulate('click', { button: 0 });
       wrapper.update();
-      const transitionComponent = wrapper.find('CSSTransition').last();
+      const transitionComponent = wrapper.find('CSSTransition').at(1);
       expect(transitionComponent.props().timeout).toBe(1200)
 
     });

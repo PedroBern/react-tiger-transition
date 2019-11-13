@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import  { Navigation, Route, Link } from '../src';
-import { evalTransition, reducer, NavigationContext } from '../src/Navigation';
+import { evalTransition, reducer } from '../src/Navigation';
+import { NavigationContext } from '../src/context';
 import { mount } from 'enzyme';
 import { Router, Redirect } from 'react-router-dom';
 import { createMemoryHistory } from "history";

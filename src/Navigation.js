@@ -2,8 +2,8 @@ import React, { useMemo, useReducer } from 'react';
 import { withRouter, matchPath, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types'; // eslint-disable-line import/no-extraneous-dependencies
 import Screen from './Screen';
-
-export const NavigationContext = React.createContext();
+import Route from './Route';
+import { NavigationContext } from './context';
 
 export const evalTransition = ({ transition, timeout }) => {
   const computeTimeout = timeout ? { timeout } : {};
@@ -47,6 +47,7 @@ export function reducer(state, action) {
 const NavigationProvider = withRouter(({
   children,
   defaultRoute,
+  DefaultRouteWrapper,
   initialState,
   disableDefaultRoute,
 
@@ -73,7 +74,7 @@ const NavigationProvider = withRouter(({
     React.Children.forEach(children, child => {
       if (computeMatch == null && React.isValidElement(child)) {
         const path = child.props.path || child.props.from || null;
-        computeMatch = path
+        computeMatch = path && !child.props.skip
           ? matchPath(location.pathname, { ...child.props, path })
           : null;
       }
@@ -85,7 +86,15 @@ const NavigationProvider = withRouter(({
   return (
     <NavigationContext.Provider value={{ ...state }}>
       {children}
-      {!disableDefaultRoute && !matched && defaultRoute}
+      {!disableDefaultRoute && defaultRoute && DefaultRouteWrapper && (
+        <DefaultRouteWrapper
+          transitionProps={{
+            in: !matched,
+          }}
+        >
+          {defaultRoute}
+        </DefaultRouteWrapper>
+      )}
     </NavigationContext.Provider>
   );
 });
@@ -131,10 +140,20 @@ const Navigation = ({
   </Screen>
 );
 
+const DefaultRouteWrapper = ({
+  transitionProps, // eslint-disable-line react/prop-types
+  children // eslint-disable-line react/prop-types
+}) => (
+  <Route screen transitionProps={transitionProps}>
+    {children}
+  </Route>
+);
+
 Navigation.defaultProps = {
   defaultRoute: <Redirect to='/' />,
   globalTransitionProps: globalTransitionPropsDefaultValues,
   disableDefaultRoute: false,
+  DefaultRouteWrapper
 };
 
 Navigation.propTypes = {
@@ -176,7 +195,7 @@ Navigation.propTypes = {
   globalTransitionProps: PropTypes.object,
 
   /**
-   * A route that matches when all routes do not. Default is
+   * The children of the route that matches when all routes do not. Default is
    * [`<Redirect to='/' />`](https://reacttraining.com/react-router/web/api/Redirect).
    *
    * ```javascript
@@ -184,6 +203,29 @@ Navigation.propTypes = {
    * ```
    */
   defaultRoute: PropTypes.element,
+
+
+  /**
+   * The children wrapper of the route that matches when all routes do not.
+   * Default is:
+   *
+   * ```javascript
+   * const DefaultRouteWrapper = ({
+   *    transitionProps,
+   *    children
+   * }) => (
+   *    <Route screen transitionProps={transitionProps}>
+   *       {children}  // defaultRoute is the children
+   *    </Route>
+   * );
+   * ```
+   *
+   *  The `defaultRoute` prop is the children. Good when you want a customized
+   *  not found 404 page.
+   *
+   *  The transitionProps will pass the correct in state for [`<CSSTransition />`](https://reactcommunity.org/react-transition-group/css-transition).
+   */
+  DefaultRouteWrapper: PropTypes.elementType,
 
   /**
    * Disable default route.

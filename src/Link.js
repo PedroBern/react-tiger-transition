@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types'; // eslint-disable-line import/no-extraneous-dependencies
 import { Link as RouterLink } from 'react-router-dom';
 
-import { NavigationContext } from './Navigation';
+import { NavigationContext } from './context';
 
 import { withRouterAndRef } from './utils';
 
