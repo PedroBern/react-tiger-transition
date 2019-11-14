@@ -9,14 +9,7 @@ on the fly.
 ### `DefaultRouteWrapper`
 
 type: `elementType`
-defaultValue: `({
-  transitionProps, // eslint-disable-line react/prop-types
-  children // eslint-disable-line react/prop-types
-}) => (
-  <Route screen transitionProps={transitionProps}>
-    {children}
-  </Route>
-)`
+defaultValue: `DefaultRouteWrapper`
 
 
 The children wrapper of the route that matches when all routes do not.
@@ -107,7 +100,3 @@ Use it to define a default transition:
 ```
 
 `transitionProps` defined in [`<Route>`](/docs/route) have higher priority.
-
-
-
-
