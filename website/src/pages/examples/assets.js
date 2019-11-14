@@ -10,6 +10,14 @@ export const assets = [
     src: 'documentation/examples/Basic.jsx',
   },
   {
+    path: '/examples/material-tabs',
+    label: 'Material Tabs',
+    src: 'documentation/examples/MaterialTabs.jsx',
+    dependencies: {
+      "@material-ui/core" : "^4.6.1"
+    }
+  },
+  {
     path: '/examples/not-found-page',
     label: 'Not Found Page',
     src: 'documentation/examples/DefaultRoute.jsx',

@@ -30,6 +30,7 @@ const Examples = () => {
             <SandboxExample
               path={example.src}
               label={example.label}
+              dependencies={example.dependencies || {}}
             />
 
           </Route>
