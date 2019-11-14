@@ -1,6 +1,6 @@
 export { default as Home } from './home';
 export { Docs, DocsNav, docsRoutePath } from './docs';
-export { default as Examples } from './examples';
+export { Examples, ExamplesNav, examplesRoutePath } from './examples';
 export {
   DemoNav,
   demoNavRoutePath,

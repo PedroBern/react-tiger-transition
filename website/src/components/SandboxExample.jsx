@@ -52,13 +52,13 @@ export default function SandboxExample({
         runonclick: true,
         ...extraEmbedOptions
       }}
-      height="calc(100% - 8px)"
-      width="calc(100% - 8px)"
+      height="calc(100% - 4px)"
+      width="calc(100% - 4px)"
     >
       <div
         style={{
-          width: "calc(100% - 8px)",
-          height: "calc(100% - 8px)",
+          width: "calc(100% - 4px)",
+          height: "calc(100% - 4px)",
           backgroundColor: "#FFF",
         }}
       />

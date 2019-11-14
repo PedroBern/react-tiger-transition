@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { assets } from './assets';
+import { assets, examplesPaths } from './assets';
 import Container from '@material-ui/core/Container';
 import { Screen, Route } from 'react-tiger-transition';
 import { SandboxExample } from '../../components';
-import RenderDoc from './RenderDoc';
 
 const useStyles = makeStyles({
   screen: {
@@ -13,32 +12,25 @@ const useStyles = makeStyles({
   },
 });
 
-const Docs = () => {
+const Examples = () => {
   const classes = useStyles();
-
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setLoading(false);
-  }, [])
 
   return (
     <Screen className={classes.screen}>
 
       <Screen display>
-        {assets.map(doc => (
+        {assets.map(example => (
           <Route
             className={classes.screen}
             screen
-            key={doc.path}
-            path={doc.path}
+            key={example.label}
+            path={example.path}
           >
 
-            <RenderDoc md={doc.md} />
-
-            {doc.sandbox && !loading && (
-              <SandboxExample {...doc.sandbox} />
-            )}
+            <SandboxExample
+              path={example.src}
+              label={example.label}
+            />
 
           </Route>
         ))}
@@ -49,4 +41,4 @@ const Docs = () => {
 }
 
 
-export default Docs
+export default Examples

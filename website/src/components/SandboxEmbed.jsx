@@ -2,6 +2,20 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import CodeSandboxer from 'react-codesandboxer';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(theme => ({
+  spinner: {
+    position: 'absolute',
+    zIndex: -1,
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+}));
 
 const Sandbox = ({
   embedOptions,
@@ -100,30 +114,38 @@ const Sandbox = ({
 
   const usedSandboxId = payload.sandboxId || payload.oldSandboxId;
 
+  const classes = useStyles();
+
   return (
     <React.Fragment>
-      {usedSandboxId && (
-        <iframe
-          name="codesandbox"
-          style={style}
-          src={generateEmbedURL(usedSandboxId)}
-        />
-      )}
-      {!payload.sandboxId && (
-        <CodeSandboxer
-          {...sandboxOptions}
-          autoDeploy
-          skipRedirect
-          afterDeploy={afterDeploy}
-          onLoadComplete={onLoadComplete}
-        >
-          {() =>
-            payload.oldSandboxId
-              ? null
-              : children || 'Loading Sandbox...'
-          }
-        </CodeSandboxer>
-      )}
+      <div style={style}>
+        {/* fake spinner */}
+        <div className={classes.spinner}>
+          <CircularProgress />
+        </div>
+        {usedSandboxId && (
+          <iframe
+            name="codesandbox"
+            style={style}
+            src={generateEmbedURL(usedSandboxId)}
+          />
+        )}
+        {!payload.sandboxId && (
+          <CodeSandboxer
+            {...sandboxOptions}
+            autoDeploy
+            skipRedirect
+            afterDeploy={afterDeploy}
+            onLoadComplete={onLoadComplete}
+          >
+            {() =>
+              payload.oldSandboxId
+                ? null
+                : children || 'Loading Sandbox...'
+            }
+          </CodeSandboxer>
+        )}
+      </div>
     </React.Fragment>
   );
 }

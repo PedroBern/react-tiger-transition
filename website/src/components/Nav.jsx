@@ -9,6 +9,7 @@ import Tabs from '@material-ui/core/Tabs';
 import { Screen, Link } from 'react-tiger-transition';
 import { docsRoutePath } from '../pages/docs';
 import { demoNavRoutePath } from '../pages/demo';
+import { examplesRoutePath } from '../pages/examples';
 import Logo from './Logo';
 
 const useStyles = makeStyles({
@@ -39,15 +40,16 @@ const paths = [
     to: '/docs/quickstart'
   },
   {
-    path: path => evalPath(path,'demo', '/demo/glide'),
+    path: path => evalPath(path, 'demo', '/demo/glide'),
     text: 'demo',
     config: demoNavRoutePath,
     to: '/demo/glide'
   },
   {
-    path: '/examples',
+    path: path => evalPath(path, 'examples', '/examples/101'),
     text: 'examples',
-    config: { exact: true }
+    config: examplesRoutePath,
+    to: '/examples/101'
   },
   {
     external: true,
@@ -118,7 +120,7 @@ export const navRoutePath = {
     '/',
     docsRoutePath.path,
     demoNavRoutePath.path,
-    '/examples'
+    examplesRoutePath.path
   ],
   exact: true
 };

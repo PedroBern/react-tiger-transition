@@ -21,6 +21,8 @@ import {
   DocsNav,
   docsRoutePath,
   Examples,
+  ExamplesNav,
+  examplesRoutePath,
   Demo,
   DemoNext,
   DemoProvider,
@@ -60,6 +62,12 @@ const useStyles = makeStyles({
   }
 });
 
+const basicNavConfig = {
+  navClass: 'scondaryNav',
+  zIndex: 100,
+  transition: 'shuffle-secondary-bottom'
+};
+
 const navs = [
   {
     key: 'main',
@@ -73,17 +81,19 @@ const navs = [
     key: 'demo',
     path: demoNavRoutePath,
     component: <DemoNav />,
-    navClass: 'scondaryNav',
-    zIndex: 100,
-    transition: 'shuffle-secondary-bottom'
+    ...basicNavConfig
   },
   {
     key: 'docs',
     path: docsRoutePath,
     component: <DocsNav />,
-    navClass: 'scondaryNav',
-    zIndex: 100,
-    transition: 'shuffle-secondary-bottom',
+    ...basicNavConfig
+  },
+  {
+    key: 'examples',
+    path: examplesRoutePath,
+    component: <ExamplesNav />,
+    ...basicNavConfig
   }
 ]
 
@@ -121,7 +131,7 @@ const App = () => {
               <DemoNext b />
             </Route>
 
-            <Route exact path="/examples" className={classes.route}>
+            <Route {...examplesRoutePath} className={classes.route}>
               <Examples />
             </Route>
 
