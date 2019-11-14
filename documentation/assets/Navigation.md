@@ -6,6 +6,39 @@ many different transitions for the same route as possible, all evaluated
 on the fly.
 
 ## Props
+### `DefaultRouteWrapper`
+
+type: `elementType`
+defaultValue: `({
+  transitionProps, // eslint-disable-line react/prop-types
+  children // eslint-disable-line react/prop-types
+}) => (
+  <Route screen transitionProps={transitionProps}>
+    {children}
+  </Route>
+)`
+
+
+The children wrapper of the route that matches when all routes do not.
+Default is:
+
+```javascript
+const DefaultRouteWrapper = ({
+   transitionProps,
+   children
+}) => (
+   <Route screen transitionProps={transitionProps}>
+      {children}  // defaultRoute is the children
+   </Route>
+);
+```
+
+ The `defaultRoute` prop is the children. Good when you want a customized
+ not found 404 page.
+
+ The transitionProps will pass the correct in state for [`<CSSTransition />`](https://reactcommunity.org/react-transition-group/css-transition).
+
+
 ### `containerProps`
 
 type: `object`
@@ -31,7 +64,7 @@ type: `element`
 defaultValue: `<Redirect to='/' />`
 
 
-A route that matches when all routes do not. Default is
+The children of the route that matches when all routes do not. Default is
 [`<Redirect to='/' />`](https://reacttraining.com/react-router/web/api/Redirect).
 
 ```javascript

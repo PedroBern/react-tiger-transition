@@ -138,6 +138,14 @@ Is shorthand for:
 ```
 
 
+### `skip`
+
+type: `bool`
+
+
+Allow to match route together with defaultRoute from [`<Navigation />`](/docs/navigation).
+
+
 ### `transitionProps`
 
 type: `object`
