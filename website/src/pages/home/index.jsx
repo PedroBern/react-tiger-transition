@@ -94,7 +94,7 @@ const cards = [
   },
   {
     title: 'Usage',
-    link: '/examples',
+    link: '/examples/basic',
     linkText: 'Explore the examples',
     component: <UsageCardContent />
   },
