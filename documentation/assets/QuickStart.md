@@ -1,10 +1,10 @@
 # Quickstart
 
-`react-tiger-transition` is ready to take your navigation animations to the next level.
+`react-tiger-transition` is great to build page transitions!
 
 - Zero dependencies.
 - 20+ built-in transitions (the tigers).
-- Minimum to zero configuration.
+- Minimum configuration.
 - Fully customizable (raise your own tigers!).
 - Based on [react-transition-group](https://github.com/reactjs/react-transition-group) and [react-router-dom](https://github.com/ReactTraining/react-router).
 - Inspired by [react-router-transition](https://github.com/maisano/react-router-transition) and [this transitions collection](https://tympanus.net/codrops/2013/05/07/a-collection-of-page-transitions/).
