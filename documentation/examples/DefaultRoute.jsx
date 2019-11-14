@@ -59,7 +59,7 @@ const Home = () => {
     <Screen style={{...screenStyle}}>
       {location.state && location.state.referrer ?
         <P>
-          You were redirected from {location.state.referrer}
+          <b>You were redirected from {location.state.referrer}</b>
         </P>
         :
         <P>
@@ -74,11 +74,6 @@ const Home = () => {
         but it is useful for cases where the user can reach
         your app by one. An invalid path is a path that is
         not match by any route children of navigation.
-      </P>
-      <P>
-        The transition will be the same as the used to reach the
-        invalid path, or the default transition defined in navigation
-        component.
       </P>
       <P>
         <b>Try starting this example with any path you want!</b>
@@ -107,7 +102,10 @@ const DefaultRouteComponent = () => {
   }, []);
 
   useEffect(() => {
-    if (redirect) alert('The route you are looking for does not exist!');
+    if (redirect) alert(`
+      The route you are looking for does not exist!
+      You will be redirected to '/'.`
+    );
   }, [redirect])
 
   return (
