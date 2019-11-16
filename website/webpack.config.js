@@ -1,6 +1,6 @@
 var path = require('path');
 
-var HtmlWebpackPlugin =  require('html-webpack-plugin');
+const HtmlWebpackPlugin =  require('html-webpack-plugin');
 
 const node_modules = path.join(__dirname, './node_modules');
 const src = path.join(__dirname, './src');
@@ -119,9 +119,11 @@ module.exports = (env, argv) => ({
     plugins : [
         new HtmlWebpackPlugin ({
             template : path.resolve(__dirname , 'public/index.html'),
+            favicon: path.resolve(__dirname , 'public/favicon.ico'),
         }),
         new HtmlWebpackPlugin ({
             template : path.resolve(__dirname , 'public/index.html'),
+            favicon: path.resolve(__dirname , 'public/favicon.ico'),
             filename: '404.html'
         }),
     ]

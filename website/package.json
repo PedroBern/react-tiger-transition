@@ -11,7 +11,7 @@
     "build": "rimraf dist && webpack -p --mode=production",
     "deploy": "npm run build && npx gh-pages -d dist",
     "build-server": "npx http-server ./dist",
-    "build:server": "npm run build-local && build-server",
+    "build:server": "npm run build-local && npm run build-server",
     "add": "npm i react-tiger-transition",
     "remove": "npm uninstall react-tiger-transition"
   },
