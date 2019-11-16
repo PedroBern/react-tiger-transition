@@ -14,7 +14,7 @@ export const assets = [
     md: quickStartDocs,
     sandbox: {
       label: 'Quickstart',
-      path: 'documentation/examples/101.jsx',
+      path: 'documentation/examples/Quickstart.jsx',
     }
   },
   {

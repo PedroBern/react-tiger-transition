@@ -1,8 +1,8 @@
 export const assets = [
   {
-    path: '/examples/101',
-    label: '101',
-    src: 'documentation/examples/101.jsx',
+    path: '/examples/quickstart',
+    label: 'Quickstart',
+    src: 'documentation/examples/Quickstart.jsx',
   },
   {
     path: '/examples/basic',
@@ -14,7 +14,8 @@ export const assets = [
     label: 'Material Tabs',
     src: 'documentation/examples/MaterialTabs.jsx',
     dependencies: {
-      "@material-ui/core" : "^4.6.1"
+      "@material-ui/core" : "^4.6.1",
+      "classnames": "^2.2.6",
     }
   },
   {

@@ -46,10 +46,10 @@ const paths = [
     to: '/demo/glide'
   },
   {
-    path: path => evalPath(path, 'examples', '/examples/101'),
+    path: path => evalPath(path, 'examples', '/examples/quickstart'),
     text: 'examples',
     config: examplesRoutePath,
-    to: '/examples/101'
+    to: '/examples/quickstart'
   },
   {
     external: true,

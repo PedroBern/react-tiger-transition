@@ -1,109 +1,190 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import AppBar from "@material-ui/core/AppBar";
-import  Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
+import React from 'react';
+import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
+import { amber, purple, cyan, brown } from '@material-ui/core/colors';
+import Typography from '@material-ui/core/Typography';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import { CSSTransition } from 'react-transition-group';
 import {
-  Navigation,
-  Route,
-  Screen,
-  Link,
-  slide
-} from "react-tiger-transition";
-import "react-tiger-transition/styles/main.min.css";
+  flip,
+  glide,
+  shuffle,
+  fade,
+  scale,
+  carousel,
+  cube,
+  fold,
+  unfold,
+  glideIn,
+  glideOut,
+  drop,
+  rise,
+  room,
+  pull,
+  push,
+  pushPull,
+  side,
+  slide,
+  glueIn,
+  glueOut,
+} from 'react-tiger-transition';
 
-slide({
-  name: 'slide-left',
-});
-slide({
-  name: 'slide-right',
-  direction: 'right'
-});
-
-const tabs = ["a", "b", "c", "d"];
-
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
-    height: '100vh',
-    backgroundColor: 'white'
+    flexGrow: 1,
+    display: 'flex',
+    flexDirection: 'column',
   },
-  appbar: {
-    zIndex: 1000,
-    height: 64,
-    top: 0
+  formControl: {
+    margin: theme.spacing(0, 0, 2, 2),
+    width: 120,
   },
-  views: {
-    height: "calc(100% - 48px)",
-    top: 'auto',
-    bottom: 0
+  transitionContainer: {
+    position: 'relative',
+    width: '100%',
+    height: 160,
+    perspective: 1200,
+    overflow: 'hidden',
+    backgroundColor: 'white',
+  },
+  transitionLayout: {
+    height: '100%',
+    width: '100%',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    transform: `translate3d(0, 0, 0)`,
+    transformStyle: 'preserve-3d',
+    backfaceVisibility: 'hidden',
+    overflow: 'hidden',
+  },
+  transitionScreen: {
+    width: '100%',
+    height: '100%',
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   a: {
-    backgroundColor: '#ffc107'
+    backgroundColor: amber[500],
   },
   b: {
-    backgroundColor: '#9c27b0'
+    backgroundColor: purple[500],
   },
   c: {
-    backgroundColor: '#00bcd4'
+    backgroundColor: cyan[500],
   },
   d: {
-    backgroundColor: '#ff784e'
+    backgroundColor: brown[500],
   },
-});
+}));
 
-export default () => {
+const tabs = ['a', 'b', 'c', 'd'];
+
+const animations = [
+  { label: 'slide', func: slide },
+  { label: 'flip', func: flip },
+  { label: 'glide', func: glide },
+  { label: 'glideIn', func: glideIn },
+  { label: 'glideOut', func: glideOut },
+  { label: 'fade', func: fade },
+  { label: 'scale', func: scale },
+  { label: 'carousel', func: carousel },
+  { label: 'cube', func: cube },
+  { label: 'fold', func: fold },
+  { label: 'unfold', func: unfold },
+  { label: 'drop', func: drop },
+  { label: 'rise', func: rise },
+  { label: 'room', func: room },
+  { label: 'pull', func: pull },
+  { label: 'push', func: push },
+  { label: 'pushPull', func: pushPull },
+  { label: 'side', func: side },
+  { label: 'shuffle', func: shuffle },
+  { label: 'glueIn', func: glueIn },
+  { label: 'glueOut', func: glueOut },
+];
+
+export default function() {
   const classes = useStyles();
-  const [value, setValue] = useState(tabs[0]);
+  const [value, setValue] = React.useState(tabs[0]);
+  const [transition, setTransition] = React.useState('transition-left');
+  const [animation, setAnimation] = React.useState('slide');
 
-  const handleChange = (event, newValue) => {
+  function handleTabChange(event, newValue) {
+    setTransition(value > newValue ? 'transition-right' : 'transition-left');
     setValue(newValue);
-  };
+  }
+
+  function handleSelectChange(event) {
+    setAnimation(event.target.value);
+  }
+
+  React.useEffect(() => {
+    const nextAnimation = animations.find(el => el.label === animation);
+    if (nextAnimation) {
+      nextAnimation.func({
+        name: 'transition-left',
+      });
+
+      nextAnimation.func({
+        name: 'transition-right',
+        direction: 'right',
+      });
+    }
+  }, [animation]);
 
   return (
     <div className={classes.root}>
-      <Router>
-        <Navigation>
-
-          <Route screen className={classes.appbar}>
-            <AppBar>
-              <Tabs
-                value={value}
-                onChange={handleChange}
-                centered
-              >
-                {tabs.map(tab => (
-                  <Tab
-                    key={tab}
-                    label={tab}
-                    component={Link}
-                    value={tab}
-                    to='/'
-                    transition={
-                      value < tab
-                      ? 'slide-left'
-                      : 'slide-right'
-                    }
-                  />
-                ))}
-              </Tabs>
-            </AppBar>
-          </Route>
-
-          {tabs.map(tab => (
-            <Route
-              key={tab}
-              className={classes.views}
-              transitionProps={{
-                in: tab === value,
-              }}
-            >
-              <Screen className={classes[tab]}/>
-            </Route>
+      <FormControl className={classes.formControl}>
+        <InputLabel htmlFor="animation-select">Animation</InputLabel>
+        <Select
+          value={animation}
+          onChange={handleSelectChange}
+          inputProps={{
+            name: 'animation',
+            id: 'animations-select',
+          }}
+        >
+          {animations.map(el => (
+            <MenuItem key={el.label} value={el.label}>
+              {el.label}
+            </MenuItem>
           ))}
-
-        </Navigation>
-      </Router>
+        </Select>
+      </FormControl>
+      <AppBar position="static">
+        <Tabs value={value} onChange={handleTabChange} centered>
+          {tabs.map(tab => (
+            <Tab key={tab} label={tab} value={tab} />
+          ))}
+        </Tabs>
+      </AppBar>
+      <div className={classes.transitionContainer}>
+        {tabs.map(tab => (
+          <CSSTransition
+            key={tab}
+            mountOnEnter
+            unmountOnExit
+            in={tab === value}
+            timeout={600}
+            classNames={transition}
+          >
+            <div className={classes.transitionLayout}>
+              <div className={classNames(classes.transitionScreen, classes[tab])}>
+                <Typography variant="h1">{tab}</Typography>
+              </div>
+            </div>
+          </CSSTransition>
+        ))}
+      </div>
     </div>
-  )
+  );
 }
