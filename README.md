@@ -3,6 +3,8 @@
 [![Codecov Coverage](https://img.shields.io/codecov/c/github/pedrobern/react-tiger-transition/master.svg?style=flat-square)](https://codecov.io/gh/pedrobern/react-tiger-transition/)
 [![Build Status](https://travis-ci.com/PedroBern/react-tiger-transition.svg?branch=master)](https://travis-ci.com/PedroBern/react-tiger-transition)
 [![dependencies](https://david-dm.org/pedrobern/react-tiger-transition.svg)](https://github.com/PedroBern/react-tiger-transition)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/PedroBern/react-tiger-transition/issues)
+
 
 Page transitions for [react router dom](https://www.npmjs.com/package/react-router-dom). Animate your routes programmatically during navigation. Instead of defining the animation inside `<Route />`, this module defines inside `<Link />`, allowing to easily reach and leave the same url with different transitions.
 
