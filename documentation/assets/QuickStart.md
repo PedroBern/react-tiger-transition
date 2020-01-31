@@ -2,6 +2,8 @@
 
 `react-tiger-transition` is great to build page transitions!
 
+- Create dynamic transitions on the fly.
+- No need to load a bunch of CSS!
 - Zero dependencies.
 - 20+ built-in transitions (the tigers).
 - Minimum configuration.

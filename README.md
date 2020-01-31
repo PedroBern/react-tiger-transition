@@ -17,7 +17,8 @@ ___
 
 ## Features
 
-- Create dynamic transitions on the fly
+- Create dynamic transitions on the fly.
+- No need to load a bunch of CSS!
 - Zero dependencies.
 - 20+ built-in transitions (the tigers).
 - Minimum configuration.
