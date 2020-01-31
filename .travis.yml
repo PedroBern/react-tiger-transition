@@ -14,4 +14,4 @@ jobs:
       node_js: "6"
       script:
       - npm run cover
-      - ./node_modules/.bin/codecov
+      - codecov
