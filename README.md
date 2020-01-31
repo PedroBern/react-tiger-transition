@@ -17,6 +17,7 @@ ___
 
 ## Features
 
+- Create dynamic transitions on the fly
 - Zero dependencies.
 - 20+ built-in transitions (the tigers).
 - Minimum configuration.
