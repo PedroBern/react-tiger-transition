@@ -68,7 +68,7 @@ glide({
     name: "glide-right"
     direction: 'right',
     duration: 1000, // you will need to handle timeout, default is 600 ms
-    easing: 'easeInOutQuad', // checkout https://easings.net/
+    easing: 'easeInOutQuad', // see https://easings.net/
     opacity: 1,
   })
 ```
@@ -88,7 +88,7 @@ glide({
       opacity: 0.8
     }
     exit: {
-      easing: 'easeInOutQuad', // checkout https://easings.net/
+      easing: 'easeInOutQuad', // see https://easings.net/
       opacity: 0,
     }
   })

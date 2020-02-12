@@ -115,7 +115,7 @@ const DemoNext = ({
   const [to, setTo] = useState({
     pathname: `/demo/${tiger.name}/${a ? 'b' : 'a'}`,
     state: {
-      loop: localState.loop + 1 < 19
+      loop: localState.loop + 1 < 19 // colors length
       ? localState.loop + 1
       : 0,
     }
@@ -227,7 +227,7 @@ const DemoNext = ({
             updateTiger(tigers[previousTiger].name)
           }}
         >
-          Previus transition
+          Previous transition
         </Button>
 
         <Button
