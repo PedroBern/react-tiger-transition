@@ -83,6 +83,11 @@ const badges = [
     alt: 'Dependencies',
     src: 'https://david-dm.org/pedrobern/react-tiger-transition.svg',
   },
+  {
+    href: 'https://github.com/pedrobern/react-tiger-transition/blob/master/CONTRIBUTING.md',
+    alt: 'Contributing',
+    src: 'https://img.shields.io/badge/contributions-welcome-brightgreen.svg'
+  }
 ];
 
 const cards = [
