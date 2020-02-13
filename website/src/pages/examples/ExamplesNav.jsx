@@ -31,7 +31,7 @@ const ExamplesNav = ({
 
   return (
     match && !examplesPaths.includes(match.params.example) ?
-    <Redirect to='/examples/101'/>
+    <Redirect to='/examples/quickstart'/>
     :
     <AppBar position="fixed" className={classes.appBar}>
       <Container maxWidth='lg'>

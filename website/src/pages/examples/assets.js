@@ -8,6 +8,10 @@ export const assets = [
     path: '/examples/basic',
     label: 'Basic',
     src: 'documentation/examples/Basic.jsx',
+    dependencies: {
+      "@material-ui/core" : "^4.9.2",
+      "@material-ui/icons" : "^4.9.1",
+    }
   },
   {
     path: '/examples/material-tabs',

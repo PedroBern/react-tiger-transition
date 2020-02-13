@@ -1,185 +1,490 @@
-// Basic transitions with react-tiger-transition
-//
-// Check the docs and demo:
-// https://pedrobern.github.io/react-tiger-transition/
-//
-// This example illustrates:
-// - default transitions
-// - transitions on <Link /> (on login and menu component)
-// - transiitons on <Route /> (on menu component)
-// - reaching a path with different transitions (the home path),
-//   based from which path did you come from.
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, useParams } from "react-router-dom";
 
-import React from "react";
-
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import Divider from "@material-ui/core/Divider";
+import Paper from "@material-ui/core/Paper";
+import HomeIcon from "@material-ui/icons/Home";
+import InfoIcon from "@material-ui/icons/Info";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import CloseIcon from "@material-ui/icons/Close";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 import {
-  BrowserRouter as Router,
-  Switch,
-} from "react-router-dom";
-
-import {
-  Route as TigerRoute,
-  Link as TigerLink,
-  Navigation,
-  shuffle,
-  fade,
-} from "react-tiger-transition";
+  red,
+  pink,
+  purple,
+  deepPurple,
+  indigo,
+  blue,
+  lightBlue,
+  cyan,
+  teal,
+  green,
+  lightGreen,
+  lime,
+  yellow,
+  amber,
+  orange,
+  deepOrange,
+  brown,
+  grey,
+  blueGrey
+} from "@material-ui/core/colors";
 
 import "react-tiger-transition/styles/main.min.css";
+import {
+  Navigation,
+  Route,
+  Screen,
+  Link,
+  scale,
+  glideIn,
+  glideOut,
+  drop,
+  flip
+} from "react-tiger-transition";
 
-// inject transitions css
-shuffle({
-  name: 'shuffle-top',
-  direction: 'top'
-});
-shuffle({
-  name: 'shuffle-bottom',
-  direction: 'bottom',
-  easing: 'easeInOutCubic'
-});
-fade({
-  name: 'fade'
-});
-
-
-const menuStyle = {style: {height: 100}};
-const loginStyle = {style: {backgroundColor: '#9e9e9e'}};
-const pagesStyle = (color) => ({
-  style: {
-    top: 100,
-    backgroundColor: color
+// inject styles
+scale({
+  name: "scale",
+  scale: 1.2,
+  exit: {
+    delay: 100
   }
 });
+glideIn({
+  name: "glideIn-left",
+  direction: "left"
+});
+glideIn({
+  name: "glideIn-top",
+  direction: "top"
+});
+glideOut({
+  name: "glideOut-bottom",
+  direction: "bottom"
+});
+glideOut({
+  name: "glideOut-right",
+  direction: "right"
+});
+flip({
+  name: "flip-right",
+  direction: "right"
+});
+flip({
+  name: "flip-left",
+  direction: "left"
+});
+drop({
+  name: "drop-right",
+  direction: "right"
+});
 
-const pages = [
-  {
-    path: "/",
-    backgroundColor: "#2196f3",
-    component: <Home />
+const colors = [
+  { color: lime[500], name: "lime", id: 0 },
+  { color: red[500], name: "red", id: 1 },
+  { color: blue[500], name: "blue", id: 2 },
+  { color: purple[500], name: "purple", id: 3 },
+  { color: deepOrange[500], name: "deep-orange", id: 4 },
+  { color: grey[500], name: "grey", id: 5 },
+  { color: indigo[500], name: "indigo", id: 6 },
+  { color: pink[500], name: "pink", id: 7 },
+  { color: brown[500], name: "brown", id: 8 },
+  { color: cyan[500], name: "cyan", id: 9 },
+  { color: lightBlue[500], name: "light-blue", id: 10 },
+  { color: green[500], name: "green", id: 11 },
+  { color: deepPurple[500], name: "deep-purple", id: 12 },
+  { color: yellow[500], name: "yellow", id: 13 },
+  { color: orange[500], name: "orange", id: 14 },
+  { color: amber[500], name: "amber", id: 15 },
+  { color: teal[500], name: "teal", id: 16 },
+  { color: blueGrey[500], name: "blue-grey", id: 17 },
+  { color: lightGreen[500], name: "light-green", id: 18 }
+];
+
+const useStyles = makeStyles(theme => ({
+  screen: {
+    backgroundColor: "white"
   },
-  {
-    path: "/about",
-    backgroundColor: "#8bc34a",
-    component: <About />
+  loginScreen: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "column",
+    backgroundColor: "white"
   },
-  {
-    path: "/dashboard",
-    backgroundColor: "#ff9800",
-    component: <Dashboard />
+  margin: {
+    margin: theme.spacing(2)
   },
-  {
-    path: "/login",
-    component: <Login />
+  menuButton: {
+    marginRight: theme.spacing(2)
+  },
+  title: {
+    flexGrow: 1
+  },
+  menu: {
+    width: "100%",
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper
+  },
+  feedItemRoot: {
+    margin: theme.spacing(2)
+  },
+  cancelAuth: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    margin: theme.spacing(2)
+  },
+  feedExited: {
+    opacity: 0
   }
-]
+}));
 
-// set the height of <Navigation /> (better to do this on your stylesheet)
 document.getElementById("root").style.height = "100vh";
+document.getElementById("root").style.backgroundColor = "#333";
 
-export default function BasicExample() {
+const App = () => {
+  const classes = useStyles();
   return (
     <Router>
-      <Navigation
-        globalTransitionProps={{
-          classNames: 'fade' // defining default transition
-          // default timeout is 600ms
-        }}
-      >
-        <TigerRoute
-          path={["/","/about", "/dashboard"]}
+      <Navigation>
+        <Route
           exact
-          screen
-          containerProps={{...menuStyle}}
+          path="/"
           transitionProps={{
-            classNames: "shuffle-bottom"
+            unmountOnExit: false,
+            onExited: node => node.classList.add(classes.feedExited),
+            onEnter: node => node.classList.remove(classes.feedExited)
           }}
         >
-          <Menu />
-        </TigerRoute>
-        {
-          pages.map(page => (
-            <TigerRoute
-              key={page.path}
-              exact
-              path={page.path}
-              screen
-              containerProps={
-                page.path === '/login' ?
-                { ...loginStyle } :
-                pagesStyle(page.backgroundColor)
-              }
-            >
-              {page.component}
-            </TigerRoute>
-          ))
-        }
+          <FeedScreen />
+        </Route>
+
+        <Route exact path="/login">
+          <LoginScreen />
+        </Route>
+
+        <Route exact path="/Register">
+          <RegisterScreen />
+        </Route>
+
+        <Route exact path="/menu">
+          <MenuScreen />
+        </Route>
+
+        <Route exact path="/about">
+          <AboutScreen />
+        </Route>
+
+        <Route exact path="/detail/:color?">
+          <DetailScreen />
+        </Route>
       </Navigation>
     </Router>
   );
-}
+};
 
-function Menu() {
+export default App;
+
+// screens
+
+const FeedScreen = () => {
+  const classes = useStyles();
   return (
-    <div>
-      <ul>
-        <li>
-          <TigerLink to="/">Home</TigerLink>
-        </li>
-        <li>
-          <TigerLink to="/about">About</TigerLink>
-        </li>
-        <li>
-          <TigerLink to="/dashboard">Dashboard</TigerLink>
-        </li>
-        <li>
-          <TigerLink
-            to="/login"
-            transition="shuffle-top"
-          >
-            Login*
-          </TigerLink>
-        </li>
-      </ul>
-
-      <hr />
-    </div>
-  )
-}
-
-function Home() {
-  return (
-    <div>
-      <h2>Home</h2>
-    </div>
+    <Screen className={classes.screen}>
+      <MainHeader />
+      <Toolbar />
+      <FeedList />
+    </Screen>
   );
-}
+};
 
-function About() {
+const AboutScreen = () => {
+  const classes = useStyles();
   return (
-    <div>
-      <h2>About</h2>
-    </div>
+    <Screen className={classes.screen}>
+      <AboutHeader />
+    </Screen>
   );
-}
+};
 
-function Dashboard() {
+const LoginScreen = () => {
+  const classes = useStyles();
   return (
-    <div>
-      <h2>Dashboard</h2>
-    </div>
-  );
-}
-
-function Login() {
-  return (
-    <div>
-      <h2>Login</h2>
-      <TigerLink
+    <Screen className={classes.loginScreen}>
+      <AuthCancel />
+      <TextField className={classes.margin} defaultValue="Username or email" />
+      <TextField
+        className={classes.margin}
+        type="password"
+        defaultValue="Password"
+      />
+      <Button
+        className={classes.margin}
+        color="primary"
+        variant="contained"
+        component={Link}
         to="/"
-        transition="shuffle-top"
+        transition="scale"
       >
-        Home
-      </TigerLink>
+        Login
+      </Button>
+      <Typography className={classes.margin}>
+        New here?{" "}
+        <Link to="/register" transition="flip-left">
+          Register
+        </Link>
+        .
+      </Typography>
+    </Screen>
+  );
+};
+
+const RegisterScreen = () => {
+  const classes = useStyles();
+  return (
+    <Screen className={classes.loginScreen}>
+      <AuthCancel />
+      <TextField className={classes.margin} defaultValue="Username" />
+      <TextField className={classes.margin} defaultValue="Email" />
+      <TextField
+        className={classes.margin}
+        type="password"
+        defaultValue="Password"
+      />
+      <TextField
+        className={classes.margin}
+        type="password"
+        defaultValue="Password"
+      />
+      <Button
+        className={classes.margin}
+        color="primary"
+        variant="contained"
+        component={Link}
+        to="/"
+        transition="scale"
+      >
+        Register
+      </Button>
+      <Typography className={classes.margin}>
+        Old here?{" "}
+        <Link to="/login" transition="flip-right">
+          Login
+        </Link>
+        .
+      </Typography>
+    </Screen>
+  );
+};
+
+const MenuScreen = () => {
+  const classes = useStyles();
+  return (
+    <Screen className={classes.screen}>
+      <Menu />
+    </Screen>
+  );
+};
+
+const DetailScreen = () => {
+  const classes = useStyles();
+  const { color } = useParams();
+  const [colorValue, setColorValue] = useState("");
+
+  useEffect(() => {
+    // need to handle error if there is not color from param
+    const _color = colors.filter(c => c.name === color)[0];
+    setColorValue(_color.color);
+  }, []);
+
+  return (
+    <Screen className={classes.screen} style={{ backgroundColor: colorValue }}>
+      <DetailHeader color={color} />
+    </Screen>
+  );
+};
+
+// components
+
+// copy from
+// https://material-ui.com/components/app-bar/#simple-app-bar
+const MainHeader = () => {
+  const classes = useStyles();
+  return (
+    <div>
+      <AppBar position="fixed">
+        <Toolbar>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+          >
+            <Link
+              to="/menu"
+              transition="glideIn-top"
+              style={{ color: "white" }}
+            >
+              <MenuIcon />
+            </Link>
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            Feed
+          </Typography>
+          <Button
+            component={Link}
+            color="inherit"
+            to="/login"
+            transition="scale"
+          >
+            Login
+          </Button>
+        </Toolbar>
+      </AppBar>
     </div>
   );
-}
+};
+
+const AboutHeader = () => {
+  const classes = useStyles();
+  return (
+    <div>
+      <AppBar position="static" color="default">
+        <Toolbar>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+          >
+            <Link to="/" transition="drop-right">
+              <ArrowBackIcon />
+            </Link>
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            About
+          </Typography>
+          <Button
+            component={Link}
+            color="inherit"
+            to="/login"
+            transition="scale"
+          >
+            Login
+          </Button>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
+};
+
+const DetailHeader = ({ color }) => {
+  const classes = useStyles();
+  return (
+    <div>
+      <AppBar position="static" color="default">
+        <Toolbar>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+          >
+            <Link to="/" transition="glideOut-right">
+              <ArrowBackIcon />
+            </Link>
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            {color}
+          </Typography>
+          <IconButton>
+            <MoreVertIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
+};
+
+const AuthCancel = () => {
+  const classes = useStyles();
+
+  return (
+    <Link className={classes.cancelAuth} to="/" transition="scale">
+      <CloseIcon />
+    </Link>
+  );
+};
+
+const Menu = () => {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.root}>
+      <List component="nav" aria-label="main mailbox folders">
+        <ListItem button component={Link} to="/" transition="glideOut-bottom">
+          <ListItemIcon>
+            <HomeIcon />
+          </ListItemIcon>
+          <ListItemText primary="Feed" />
+        </ListItem>
+        <ListItem
+          button
+          component={Link}
+          to="/about"
+          transition="glideOut-bottom"
+        >
+          <ListItemIcon>
+            <InfoIcon />
+          </ListItemIcon>
+          <ListItemText primary="About" />
+        </ListItem>
+      </List>
+      <Divider />
+      <ListItem button component={Link} to="/login" transition="scale">
+        <ListItemIcon>
+          <ExitToAppIcon />
+        </ListItemIcon>
+        <ListItemText primary="Login" />
+      </ListItem>
+    </div>
+  );
+};
+
+const FeedItem = ({ color }) => {
+  const classes = useStyles();
+  return (
+    <Paper className={classes.feedItemRoot}>
+      <Link to={`/detail/${color.name}`} transition="glideIn-left">
+        <div
+          style={{ backgroundColor: color.color, width: "100%", height: 200 }}
+        />
+      </Link>
+    </Paper>
+  );
+};
+
+const FeedList = () => {
+  return (
+    <React.Fragment>
+      {colors.map(color => (
+        <FeedItem key={color.id} color={color} />
+      ))}
+    </React.Fragment>
+  );
+};
