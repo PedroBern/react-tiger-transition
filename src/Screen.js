@@ -44,11 +44,11 @@ const Display = withRouter(({
             if (!child.key
               || children.filter(c => !c).filter(c => c.key === child.key).length > 0
             ) {
-              throw new Error('Each child of <Screen display /> should have an unique key.');
+              throw new Error('Each child of <Screen display /> should have a unique key.');
             }
           }
           else if (!child.key) {
-            throw new Error('Each child of <Screen display /> should have an unique key.');
+            throw new Error('Each child of <Screen display /> should have a unique key.');
           }
         }
       });
