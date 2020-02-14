@@ -258,6 +258,7 @@ const AboutScreen = () => {
   return (
     <Screen className={classes.screen}>
       <AboutHeader />
+      <Toolbar />
       <Typography className={classes.margin}>
         1 - The <Code>transitionProps</Code> on the route of the <Code>FeedScreen</Code> ensure that this route don't get unmounted, but at the same time remains hidden when you are on other routes. For example, try deleting the <Code>onEnter</Code> and <Code>onExited</Code> properties and then navigating to <Code>/login</Code> and clincking on the <Code>/register</Code> link.
       </Typography>
@@ -471,7 +472,7 @@ const AboutHeader = () => {
   const classes = useStyles();
   return (
     <div>
-      <AppBar position="static" color="default">
+      <AppBar position="fixed" color="default">
         <Toolbar>
           <IconButton
             edge="start"
