@@ -53,7 +53,8 @@ import {
   glideIn,
   glideOut,
   drop,
-  flip
+  flip,
+  glide
 } from "react-tiger-transition";
 
 // inject styles
@@ -63,6 +64,16 @@ scale({
   exit: {
     delay: 100
   }
+});
+glide({
+  name: "glide-left",
+  direction: "left",
+  opacity: 0.3
+});
+glide({
+  name: "glide-right",
+  direction: "right",
+  opacity: 0.3
 });
 glideIn({
   name: "glideIn-left",
@@ -82,11 +93,13 @@ glideOut({
 });
 flip({
   name: "flip-right",
-  direction: "right"
+  direction: "right",
+  duration: 200
 });
 flip({
   name: "flip-left",
-  direction: "left"
+  direction: "left",
+  duration: 200
 });
 drop({
   name: "drop-right",
@@ -151,6 +164,30 @@ const useStyles = makeStyles(theme => ({
   },
   feedExited: {
     opacity: 0
+  },
+  previous: {
+    height: "100%",
+    position: "absolute",
+    width: 100,
+    top: 60,
+    left: 0,
+    zIndex: 3
+  },
+  next: {
+    height: "100%",
+    position: "absolute",
+    width: 100,
+    top: 60,
+    right: 0,
+    zIndex: 3
+  },
+  code: {
+    color: deepOrange[500],
+    fontSize: 14,
+    fontFamily: "monospace",
+    backgroundColor: grey[100],
+    borderRadius: 5,
+    padding: theme.spacing(0.4, 0.6, 0.4, 0.6)
   }
 }));
 
@@ -166,6 +203,7 @@ const App = () => {
           exact
           path="/"
           transitionProps={{
+            mountOnEnter: true,
             unmountOnExit: false,
             onExited: node => node.classList.add(classes.feedExited),
             onEnter: node => node.classList.remove(classes.feedExited)
@@ -190,8 +228,10 @@ const App = () => {
           <AboutScreen />
         </Route>
 
-        <Route exact path="/detail/:color?">
-          <DetailScreen />
+        <Route exact path="/detail/:color" screen>
+          <Screen display>
+            <DetailScreen />
+          </Screen>
         </Route>
       </Navigation>
     </Router>
@@ -201,6 +241,82 @@ const App = () => {
 export default App;
 
 // screens
+
+const DetailScreen = () => {
+  const classes = useStyles();
+  const { color } = useParams();
+  const [colorObj, setColorObj] = useState({});
+
+  useEffect(() => {
+    // need to handle error if there is not color from param
+    if (color) {
+      const current = colors.filter(c => c.name === color)[0];
+      const next = current.id < 18 ? colors[current.id + 1] : colors[0];
+      const previous = current.id > 0 ? colors[current.id - 1] : colors[18];
+      setColorObj({
+        previous,
+        current,
+        next
+      });
+    }
+  }, [color]);
+
+  const { current, next, previous } = colorObj;
+
+  if (!current) return <div />;
+
+  return (
+    <React.Fragment>
+      <Route
+        key={current.id}
+        exact
+        path={`/detail/${current.name}`}
+        screen
+        screenProps={{
+          style: {
+            backgroundColor: current.color
+          }
+        }}
+      >
+        <DetailHeader color={current.name} />
+        <Link to={`/detail/${previous.name}`} transition="glide-right">
+          <div className={classes.previous} />
+        </Link>
+        <Link to={`/detail/${next.name}`} transition="glide-left">
+          <div className={classes.next} />
+        </Link>
+      </Route>
+
+      <Route
+        key={next.id}
+        exact
+        path={`/detail/${next.name}`}
+        screen
+        screenProps={{
+          style: {
+            backgroundColor: next.color
+          }
+        }}
+      >
+        <DetailHeader color={next.name} />
+      </Route>
+
+      <Route
+        key={previous.id}
+        exact
+        path={`/detail/${previous.name}`}
+        screen
+        screenProps={{
+          style: {
+            backgroundColor: previous.color
+          }
+        }}
+      >
+        <DetailHeader color={previous.name} />
+      </Route>
+    </React.Fragment>
+  );
+};
 
 const FeedScreen = () => {
   const classes = useStyles();
@@ -218,6 +334,15 @@ const AboutScreen = () => {
   return (
     <Screen className={classes.screen}>
       <AboutHeader />
+      <Typography className={classes.margin}>
+        1 - The <Code>transitionProps</Code> on the route of the <Code>FeedScreen</Code> ensure that this route don't get unmounted, but at the same time remains hidden when you are on other routes. For example, try deleting the <Code>onEnter</Code> and <Code>onExited</Code> properties and then navigating to <Code>/login</Code> and clincking on the <Code>/register</Code> link.
+      </Typography>
+      <Typography className={classes.margin}>
+        2 - As the <Code>FeedScreen</Code> do not get unmounted, it will keep around and remember scroll position when you open a <Code>/detail/:color</Code> page and come back.
+      </Typography>
+      <Typography className={classes.margin}>
+        3 - The most complex screen is the <Code>DetailScreen</Code>. It has the <Code>display</Code> prop to allow transitioning between routes on the same <Code>path</Code>, that is important. Notice how it is rendering 3 routes every time, this is useful because despite we know the lenght of the colors, it is suppossing we don't, like a real case where we are fetching the previous and next links every time we are on a different <Code>path</Code>.
+      </Typography>
     </Screen>
   );
 };
@@ -297,24 +422,6 @@ const MenuScreen = () => {
   return (
     <Screen className={classes.screen}>
       <Menu />
-    </Screen>
-  );
-};
-
-const DetailScreen = () => {
-  const classes = useStyles();
-  const { color } = useParams();
-  const [colorValue, setColorValue] = useState("");
-
-  useEffect(() => {
-    // need to handle error if there is not color from param
-    const _color = colors.filter(c => c.name === color)[0];
-    setColorValue(_color.color);
-  }, []);
-
-  return (
-    <Screen className={classes.screen} style={{ backgroundColor: colorValue }}>
-      <DetailHeader color={color} />
     </Screen>
   );
 };
@@ -488,3 +595,13 @@ const FeedList = () => {
     </React.Fragment>
   );
 };
+
+
+const Code = ({children}) => {
+  const classes = useStyles();
+  return (
+    <text className={classes.code}>
+      {children}
+    </text>
+  )
+}
