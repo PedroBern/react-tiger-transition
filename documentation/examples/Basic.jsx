@@ -265,7 +265,7 @@ const AboutScreen = () => {
         2 - As the <Code>FeedScreen</Code> do not get unmounted, it will keep around and remember scroll position when you open a <Code>/detail/:color</Code> page and come back.
       </Typography>
       <Typography className={classes.margin}>
-        3 - The most complex screen is the <Code>DetailScreen</Code>. It has the <Code>display</Code> prop to allow transitioning between routes on the same <Code>path</Code>, that is important. Notice how it is rendering 3 routes every time, this is useful because despite we know the lenght of the colors, it is suppossing we don't, like a real case where we are fetching the previous and next links every time we are on a different <Code>path</Code>.
+        3 - The most complex screen is the <Code>DetailScreen</Code>. It has the <Code>display</Code> prop to allow transitioning between routes on the same <Code>path</Code>. Notice how it is rendering 3 routes every time, this is useful because despite we know the lenght of the colors, it is suppossing we don't, like a real case where we are fetching the previous and next links every time we are on a different <Code>path</Code>.
       </Typography>
     </Screen>
   );
