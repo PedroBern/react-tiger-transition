@@ -166,18 +166,18 @@ const useStyles = makeStyles(theme => ({
     opacity: 0
   },
   previous: {
-    height: "100%",
+     height: `calc(100% - 64px)`,
     position: "absolute",
     width: 100,
-    top: 60,
+    top: 64,
     left: 0,
     zIndex: 3
   },
   next: {
-    height: "100%",
+    height: `calc(100% - 64px)`,
     position: "absolute",
     width: 100,
-    top: 60,
+    top: 64,
     right: 0,
     zIndex: 3
   },
