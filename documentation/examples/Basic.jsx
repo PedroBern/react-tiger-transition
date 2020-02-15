@@ -224,7 +224,7 @@ const App = () => {
           <AboutScreen />
         </Route>
 
-        <Route exact path="/detail/:color" screen>
+        <Route exact path="/detail/:color">
           <DetailScreen />
         </Route>
       </Navigation>
@@ -254,13 +254,16 @@ const AboutScreen = () => {
       <SimpleHeader title="About" />
       <Toolbar />
       <Typography className={classes.margin}>
+        This is a simple example of how to use this package, here are some points to notice:
+      </Typography>
+      <Typography className={classes.margin}>
         1 - The <Code>transitionProps</Code> on the route of the <Code>FeedScreen</Code> ensure that this route don't get unmounted, but at the same time remains hidden when you are on other routes. For example, try deleting the <Code>onEnter</Code> and <Code>onExited</Code> properties and then navigating to <Code>/login</Code> and clincking on the <Code>/register</Code> link.
       </Typography>
       <Typography className={classes.margin}>
         2 - As the <Code>FeedScreen</Code> do not get unmounted, it will keep around and remember scroll position when you open a <Code>/detail/:color</Code> page and come back.
       </Typography>
       <Typography className={classes.margin}>
-        3 - The most complex screen is the <Code>DetailScreen</Code>. It has the <Code>display</Code> prop to allow transitioning between routes on the same <Code>path</Code>. Notice how it is rendering 3 routes every time, this is useful because despite we know the lenght of the colors, it is suppossing we don't, like a real case where we are fetching the previous and next links every time we are on a different <Code>path</Code>.
+        3 - The most complex screen is the <Code>DetailScreen</Code>. It has the <Code>display</Code> prop to allow transitioning between routes on the same <Code>path</Code>. Notice how it is rendering 3 routes every time, this is useful because despite we know the lenght of the colors, it is pretending we don't, like a real case where we are fetching the previous and next links every time we are on a different <Code>path</Code>.
       </Typography>
     </Screen>
   );
@@ -369,54 +372,56 @@ const DetailScreen = () => {
   if (!current) return <div key="fake-key"/>;
 
   return (
-    <Screen display>
-      <Route
-        key={current.id}
-        exact
-        path={`/detail/${current.name}`}
-        screen
-        screenProps={{
-          style: {
-            backgroundColor: current.color
-          }
-        }}
-      >
-        <DetailHeader color={current.name} />
-        <Link to={`/detail/${previous.name}`} transition="glide-right">
-          <div className={classes.previous} />
-        </Link>
-        <Link to={`/detail/${next.name}`} transition="glide-left">
-          <div className={classes.next} />
-        </Link>
-      </Route>
+    <Screen>
+      <Screen display>
+        <Route
+          key={current.id}
+          exact
+          path={`/detail/${current.name}`}
+          screen
+          screenProps={{
+            style: {
+              backgroundColor: current.color
+            }
+          }}
+        >
+          <DetailHeader color={current.name} />
+          <Link to={`/detail/${previous.name}`} transition="glide-right">
+            <div className={classes.previous} />
+          </Link>
+          <Link to={`/detail/${next.name}`} transition="glide-left">
+            <div className={classes.next} />
+          </Link>
+        </Route>
 
-      <Route
-        key={next.id}
-        exact
-        path={`/detail/${next.name}`}
-        screen
-        screenProps={{
-          style: {
-            backgroundColor: next.color
-          }
-        }}
-      >
-        <DetailHeader color={next.name} />
-      </Route>
+        <Route
+          key={next.id}
+          exact
+          path={`/detail/${next.name}`}
+          screen
+          screenProps={{
+            style: {
+              backgroundColor: next.color
+            }
+          }}
+        >
+          <DetailHeader color={next.name} />
+        </Route>
 
-      <Route
-        key={previous.id}
-        exact
-        path={`/detail/${previous.name}`}
-        screen
-        screenProps={{
-          style: {
-            backgroundColor: previous.color
-          }
-        }}
-      >
-        <DetailHeader color={previous.name} />
-      </Route>
+        <Route
+          key={previous.id}
+          exact
+          path={`/detail/${previous.name}`}
+          screen
+          screenProps={{
+            style: {
+              backgroundColor: previous.color
+            }
+          }}
+        >
+          <DetailHeader color={previous.name} />
+        </Route>
+      </Screen>
     </Screen>
   );
 };
