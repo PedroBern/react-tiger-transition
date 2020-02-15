@@ -101,10 +101,6 @@ flip({
   direction: "left",
   duration: 200
 });
-drop({
-  name: "drop-right",
-  direction: "right"
-});
 
 const colors = [
   { color: lime[500], name: "lime", id: 0 },
@@ -168,7 +164,7 @@ const useStyles = makeStyles(theme => ({
   previous: {
      height: `calc(100% - 64px)`,
     position: "absolute",
-    width: 100,
+    width: "50%",
     top: 64,
     left: 0,
     zIndex: 3
@@ -176,7 +172,7 @@ const useStyles = makeStyles(theme => ({
   next: {
     height: `calc(100% - 64px)`,
     position: "absolute",
-    width: 100,
+    width: "50%",
     top: 64,
     right: 0,
     zIndex: 3
@@ -229,9 +225,7 @@ const App = () => {
         </Route>
 
         <Route exact path="/detail/:color" screen>
-          <Screen display>
-            <DetailScreen />
-          </Screen>
+          <DetailScreen />
         </Route>
       </Navigation>
     </Router>
@@ -246,7 +240,7 @@ const FeedScreen = () => {
   const classes = useStyles();
   return (
     <Screen className={classes.screen}>
-      <MainHeader />
+      <SimpleHeader title="Feed" />
       <Toolbar />
       <FeedList />
     </Screen>
@@ -257,7 +251,7 @@ const AboutScreen = () => {
   const classes = useStyles();
   return (
     <Screen className={classes.screen}>
-      <AboutHeader />
+      <SimpleHeader title="About" />
       <Toolbar />
       <Typography className={classes.margin}>
         1 - The <Code>transitionProps</Code> on the route of the <Code>FeedScreen</Code> ensure that this route don't get unmounted, but at the same time remains hidden when you are on other routes. For example, try deleting the <Code>onEnter</Code> and <Code>onExited</Code> properties and then navigating to <Code>/login</Code> and clincking on the <Code>/register</Code> link.
@@ -375,7 +369,7 @@ const DetailScreen = () => {
   if (!current) return <div key="fake-key"/>;
 
   return (
-    <React.Fragment>
+    <Screen display>
       <Route
         key={current.id}
         exact
@@ -423,7 +417,7 @@ const DetailScreen = () => {
       >
         <DetailHeader color={previous.name} />
       </Route>
-    </React.Fragment>
+    </Screen>
   );
 };
 
@@ -431,7 +425,7 @@ const DetailScreen = () => {
 
 // copy from
 // https://material-ui.com/components/app-bar/#simple-app-bar
-const MainHeader = () => {
+const SimpleHeader = ({title}) => {
   const classes = useStyles();
   return (
     <div>
@@ -452,40 +446,7 @@ const MainHeader = () => {
             </Link>
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Feed
-          </Typography>
-          <Button
-            component={Link}
-            color="inherit"
-            to="/login"
-            transition="scale"
-          >
-            Login
-          </Button>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
-};
-
-const AboutHeader = () => {
-  const classes = useStyles();
-  return (
-    <div>
-      <AppBar position="fixed" color="default">
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <Link to="/" transition="drop-right">
-              <ArrowBackIcon />
-            </Link>
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            About
+            {title}
           </Typography>
           <Button
             component={Link}
@@ -601,8 +562,8 @@ const FeedList = () => {
 const Code = ({children}) => {
   const classes = useStyles();
   return (
-    <text className={classes.code}>
+    <Typography className={classes.code} display="inline">
       {children}
-    </text>
+    </Typography>
   )
 }

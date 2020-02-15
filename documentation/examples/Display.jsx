@@ -94,8 +94,13 @@ export default () => (
             transition='glide-left'
             style={{ ...linkStyle }}
           >
-            Check out the display!
+            See the display page.
           </Link>
+          <p style={{...pStyle}}>
+            The display allow to transition between the
+            same route path. For a full page example, see the
+            Basic Example tab.
+          </p>
           <p style={{...pStyle}}>
             Note how the display will not transition
             when arriving the next route.
