@@ -562,8 +562,8 @@ const FeedList = () => {
 const Code = ({children}) => {
   const classes = useStyles();
   return (
-    <Typography className={classes.code} display="inline">
+    <span className={classes.code}>
       {children}
-    </Typography>
+    </span>
   )
 }
