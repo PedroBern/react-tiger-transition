@@ -159,7 +159,8 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(2)
   },
   feedExited: {
-    opacity: 0
+    opacity: 0,
+    visibility: "hidden"
   },
   previous: {
      height: `calc(100% - 64px)`,
