@@ -59,6 +59,11 @@ const useStyles = makeStyles({
   },
   route: {
     backgroundColor: '#fafafa',
+  },
+  hide: {
+    visibility: "hidden",
+    opacity: 0,
+    zIndex: 0
   }
 });
 
@@ -100,6 +105,12 @@ const navs = [
 const App = () => {
 
   const classes = useStyles();
+  const hideInsteadOfUnmount = {
+    mountOnEnter: true,
+    unmountOnExit: false,
+    onExited: node => node.classList.add(classes.hide),
+    onEnter: node => node.classList.remove(classes.hide)
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -142,6 +153,7 @@ const App = () => {
                 className={classes[nav.navClass]}
                 transitionProps={{
                   classNames: nav.transition,
+                  ...hideInsteadOfUnmount
                 }}
               >
                 {nav.component}
