@@ -8,7 +8,7 @@
 
 Page transitions for [react router dom](https://www.npmjs.com/package/react-router-dom). Animate your routes programmatically during navigation. Instead of defining the animation inside `<Route />`, this module defines inside `<Link />`, allowing to easily reach and leave the same url with different transitions.
 
-![demo-gif](https://github.com/PedroBern/react-tiger-transition/raw/master/demo1.gif)
+![demo-gif](https://github.com/PedroBern/react-tiger-transition/raw/master/demo2.gif)
 ___
 
 ## Documentation
