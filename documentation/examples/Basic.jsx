@@ -220,7 +220,7 @@ const App = () => {
           <RegisterScreen />
         </Route>
 
-        <Route exact path="/menu" transitionProps={{...hideInsteadOfUnmount}}>
+        <Route exact path="/menu">
           <MenuScreen />
         </Route>
 
