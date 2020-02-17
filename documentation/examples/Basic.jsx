@@ -158,9 +158,10 @@ const useStyles = makeStyles(theme => ({
     right: 0,
     margin: theme.spacing(2)
   },
-  feedExited: {
+  hide: {
     opacity: 0,
-    visibility: "hidden"
+    visibility: "hidden",
+    zIndex: -1
   },
   previous: {
      height: `calc(100% - 64px)`,
@@ -193,18 +194,20 @@ document.getElementById("root").style.backgroundColor = "#333";
 
 const App = () => {
   const classes = useStyles();
+  const hideInsteadOfUnmount = {
+    mountOnEnter: true,
+    unmountOnExit: false,
+    onExited: node => node.classList.add(classes.hide),
+    onEnter: node => node.classList.remove(classes.hide)
+  }
+
   return (
     <Router>
       <Navigation>
         <Route
           exact
           path="/"
-          transitionProps={{
-            mountOnEnter: true,
-            unmountOnExit: false,
-            onExited: node => node.classList.add(classes.feedExited),
-            onEnter: node => node.classList.remove(classes.feedExited)
-          }}
+          transitionProps={{...hideInsteadOfUnmount}}
         >
           <FeedScreen />
         </Route>
@@ -217,7 +220,7 @@ const App = () => {
           <RegisterScreen />
         </Route>
 
-        <Route exact path="/menu">
+        <Route exact path="/menu" transitionProps={{...hideInsteadOfUnmount}}>
           <MenuScreen />
         </Route>
 
@@ -266,6 +269,10 @@ const AboutScreen = () => {
       <Typography className={classes.margin}>
         3 - The most complex screen is the <Code>DetailScreen</Code>. It has the <Code>display</Code> prop to allow transitioning between routes on the same <Code>path</Code>. Notice how it is rendering 3 routes every time, this is useful because despite we know the lenght of the colors, it is pretending we don't, like a real case where we are fetching the previous and next links every time we are on a different <Code>path</Code>.
       </Typography>
+      <Typography className={classes.margin}>
+        4 - Unlike if we were defining transitions in the routes, it is very simple to arrive on the same route with different transitions, for example in the <Code>/login</Code> path, you can arrive with 2 different transitions, coming from the paths <Code>/regitser</Code> and <Code>/</Code> or <Code>/about</Code> or <Code>/menu</Code>.
+      </Typography>
+      <Toolbar />
     </Screen>
   );
 };
