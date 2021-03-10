@@ -2,11 +2,13 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { BrowserRouter, Router } from 'react-router-dom';
 import { mount } from 'enzyme';
-import { createMemoryHistory } from "history";
+import { createMemoryHistory } from 'history';
 import { act } from 'react-dom/test-utils';
 import { CSSTransition } from 'react-transition-group';
 
-import  { Screen, Route, Link, Navigation } from '../src';
+import {
+  Screen, Route, Link, Navigation
+} from '../src';
 
 jest.useFakeTimers();
 
@@ -24,7 +26,7 @@ describe('Route', () => {
           </Navigation>
         </BrowserRouter>
       );
-      let tree = component.toJSON();
+      const tree = component.toJSON();
       expect(tree).toMatchSnapshot();
     });
 
@@ -32,13 +34,13 @@ describe('Route', () => {
       const component = renderer.create(
         <BrowserRouter>
           <Navigation>
-            <Route path='/' screen screenProps={{id: 'my-screen'}}>
+            <Route path='/' screen screenProps={{ id: 'my-screen' }}>
               <div />
             </Route>
           </Navigation>
         </BrowserRouter>
       );
-      let tree = component.toJSON();
+      const tree = component.toJSON();
       expect(tree).toMatchSnapshot();
     });
 
@@ -52,7 +54,7 @@ describe('Route', () => {
           </Navigation>
         </BrowserRouter>
       );
-      let tree = component.toJSON();
+      const tree = component.toJSON();
       expect(tree).toMatchSnapshot();
     });
 
@@ -66,7 +68,7 @@ describe('Route', () => {
           </Navigation>
         </BrowserRouter>
       );
-      let tree = component.toJSON();
+      const tree = component.toJSON();
       expect(tree).toMatchSnapshot();
     });
 
@@ -74,12 +76,13 @@ describe('Route', () => {
 
   describe('on navigation', () => {
 
-    let history, callback;
+    let history; let
+      callback;
 
     beforeEach(() => {
       history = createMemoryHistory();
       callback = jest.fn(args => null);
-    })
+    });
 
     afterEach(() => {
       jest.clearAllTimers();
@@ -100,13 +103,13 @@ describe('Route', () => {
               cancelAnimation
               transitionProps={{
                 onEnter: node => {
-                  callback('onEnter')
+                  callback('onEnter');
                 },
-                onEntering: node =>{
-                  callback('onEntering')
+                onEntering: node => {
+                  callback('onEntering');
                 },
-                onEntered: node =>{
-                  callback('onEntered')
+                onEntered: node => {
+                  callback('onEntered');
                 }
               }}
             >
@@ -134,7 +137,7 @@ describe('Route', () => {
           <Navigation
             globalTransitionProps={{
               onEnter: node => {
-                callback('onEnter')
+                callback('onEnter');
               },
             }}
           >
@@ -147,7 +150,7 @@ describe('Route', () => {
               path='/second'
               transitionProps={{
                 onEnter: node => {
-                  forcedCallback('onEnter')
+                  forcedCallback('onEnter');
                 },
               }}
             >
@@ -172,7 +175,7 @@ describe('Route', () => {
       const wrapper = mount(
         <Router history={history}>
           <Navigation
-            globalTransitionProps={{timeout: 1000}}
+            globalTransitionProps={{ timeout: 1000 }}
           >
             <Route path='/'>
               <Link to='/second' transition="fade">
@@ -192,7 +195,7 @@ describe('Route', () => {
       secondLink.simulate('click', { button: 0 });
       wrapper.update();
       const transitionComponent = wrapper.find('CSSTransition').last();
-      expect(transitionComponent.props().timeout).toBe(1000)
+      expect(transitionComponent.props().timeout).toBe(1000);
 
     });
 
@@ -223,7 +226,7 @@ describe('Route', () => {
       secondLink.simulate('click', { button: 0 });
       wrapper.update();
       const transitionComponent = wrapper.find('CSSTransition').at(1);
-      expect(transitionComponent.props().timeout).toBe(1200)
+      expect(transitionComponent.props().timeout).toBe(1200);
 
     });
 
