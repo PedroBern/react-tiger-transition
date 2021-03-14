@@ -1,5 +1,6 @@
 # react-tiger-transition
 
+[![downloads](https://img.shields.io/npm/dm/react-tiger-transition)](https://www.npmjs.com/package/react-tiger-transition)
 [![Codecov Coverage](https://img.shields.io/codecov/c/github/pedrobern/react-tiger-transition/master.svg?style=flat-square)](https://codecov.io/gh/pedrobern/react-tiger-transition/)
 [![Build Status](https://travis-ci.com/PedroBern/react-tiger-transition.svg?branch=master)](https://travis-ci.com/PedroBern/react-tiger-transition)
 [![dependencies](https://david-dm.org/pedrobern/react-tiger-transition.svg)](https://github.com/PedroBern/react-tiger-transition)
