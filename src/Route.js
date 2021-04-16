@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import PropTypes from 'prop-types'; // eslint-disable-line import/no-extraneous-dependencies
 import { Route as RouterRoute } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
@@ -60,17 +60,19 @@ const Route = ({
     globalTransitionProps,
   } = useContext(NavigationContext);
 
+  const nodeRef = useRef(null);
   return (
     <RouterRoute {...other}>
       {props => (
         <CSSTransition
           in={props.match != null} // eslint-disable-line react/prop-types
+          nodeRef={nodeRef}
           {...globalTransitionProps}
           {...transition}
           {...transitionProps}
           {...cancelTransition}
         >
-          <div className={_className} {...containerProps}>
+          <div className={_className} ref={nodeRef} {...containerProps}>
             {
               screen
                 ? <Screen {...screenProps}>
