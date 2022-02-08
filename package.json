@@ -2,7 +2,7 @@
   "name": "react-tiger-transition",
   "version": "4.1.2",
   "description": "Animated page transitions for react.",
-  "main": "index.js",
+  "main": "react-tiger-transition.js",
   "module": "esm/react-tiger-transition.js",
   "jsnext:main": "esm/react-tiger-transition.js",
   "files": [
