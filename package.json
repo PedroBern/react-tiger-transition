@@ -3,8 +3,8 @@
   "version": "4.1.2",
   "description": "Animated page transitions for react.",
   "main": "index.js",
-  "module": "esm/index.js",
-  "jsnext:main": "esm/index.js",
+  "module": "esm/react-tiger-transition.js",
+  "jsnext:main": "esm/react-tiger-transition.js",
   "files": [
     "umd",
     "cjs",
